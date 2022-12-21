@@ -1,4 +1,4 @@
-import CustomeErrorHandler from "./CustomErrorHandler";
+import CustomErrorHandler from "./CustomErrorHandler";
 import TokenService from "./TokenService";
 
-export { CustomeErrorHandler, TokenService };
+export { CustomErrorHandler, TokenService };
