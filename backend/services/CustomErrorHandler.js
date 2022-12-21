@@ -1,4 +1,4 @@
-class CustomeErrorHandler extends Error {
+class CustomErrorHandler extends Error {
   constructor(status, message) {
     super();
     this.status = status;
@@ -6,8 +6,12 @@ class CustomeErrorHandler extends Error {
   }
 
   static userAlreadyExists(message) {
-    return new CustomeErrorHandler(409, message);
+    return new CustomErrorHandler(409, message);
+  }
+
+  static wrongCredentials(message) {
+    return new CustomErrorHandler(401, message);
   }
 }
 
-export default CustomeErrorHandler;
+export default CustomErrorHandler;
