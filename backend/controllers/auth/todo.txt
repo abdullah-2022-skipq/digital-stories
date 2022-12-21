@@ -1,0 +1,8 @@
+[x] validate the request => Yup + React
+[] authorize the request
+[x] check if user already exists in db
+[x] prepare model
+[x] hash the password
+[x] store in db
+[x] generate jwt
+[] send token
