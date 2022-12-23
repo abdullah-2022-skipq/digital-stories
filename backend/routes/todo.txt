@@ -1,2 +1,31 @@
-[x] register a user 
-[x] login a user
+[x] POST register a user 
+
+    - name
+    - username
+    - email
+    - password
+    - profile picture MIME type
+
+[x] POST login a user
+
+    - username and password
+    x redirect to homepage
+
+[] POST create a story
+
+    x some sort of an image editor maybe? {FORM IS MENTIONED} - DISCUSSED
+
+[] GET get a story [by id] 
+
+[] GET get all stories
+
+[] GET get trending stories -> sort
+
+[] GET get top users in the leaderboard
+
+[] GET engagement
+
+[] UPDATE
+[] DELETE
+
+[] MISC. proper error handling for invalid or unauthorized routes
