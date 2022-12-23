@@ -13,7 +13,8 @@ const registerController = {
       password: Joi.string()
         .pattern(new RegExp("^[a-zA-Z0-9]{8,25}$"))
         .required(),
-      confirm_password: Joi.ref("password"),
+      confirmPassword: Joi.ref("password"),
+      avatarPath: Joi.string().default("default"),
     });
 
     const { error } = registerSchema.validate(req.body);
@@ -51,7 +52,7 @@ const registerController = {
       return next(error);
     }
 
-    const { name, username, email, password } = req.body;
+    const { name, username, email, password, avatarPath } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 20);
 
@@ -60,6 +61,7 @@ const registerController = {
       email,
       username,
       password: hashedPassword,
+      avatarPath,
     });
 
     let accessToken;
