@@ -9,7 +9,7 @@ const userSchema = new Schema(
     email: { type: String, required: true },
     password: { type: String, required: true },
     //! multer -> save -> name allot -> path -> TODO middleware
-    displayPicPath: { type: String, default: "" },
+    avatarPath: { type: String, default: "" },
   },
   { timestamps: true }
 );
