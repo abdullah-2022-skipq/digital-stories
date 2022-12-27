@@ -1,4 +1,8 @@
-[x] POST register a user 
+Route: USER
+
+1. register a user
+
+[x] POST
 
     - name
     - username
@@ -6,26 +10,52 @@
     - password
     - profile picture MIME type
 
-[x] POST login a user
+2. login a user
+
+[x] POST
 
     - username and password
     x redirect to homepage
 
-[] POST create a story
+3. get user details
+
+[x] 
+    - protected route
+
+Route: STORY/ TRENDING
+
+* should be protected
+
+1. create a story
+
+
+[] POST 
 
     x some sort of an image editor maybe? {FORM IS MENTIONED} - DISCUSSED
 
-[] GET get a story [by id] 
+2. get all stories
 
-[] GET get all stories
+[] GET 
 
-[] GET get trending stories -> sort
+3. get a story by id
 
-[] GET get top users in the leaderboard
+[] GET
 
-[] GET engagement
+4. get trending stories -> sort
 
-[] UPDATE
-[] DELETE
+[] GET
 
-[] MISC. proper error handling for invalid or unauthorized routes
+Route: LEADERBOARD
+
+1. get top users in the leaderboard
+
+[] GET 
+
+Route: ENGAGEMENT
+
+1. get engagements by byUser
+
+[] GET
+
+2. get engagements by forUser
+[] GET
