@@ -1,0 +1,25 @@
+.cardWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.description {
+  font-size: 22px;
+  line-height: 1.6;
+  color: #c4c5c5;
+  margin-bottom: 30px;
+}
+
+.hasInviteWrapper {
+  margin-top: 20px;
+}
+
+.hasInvite {
+  color: #0077ff;
+}
+
+.tagLine {
+  font-weight: bold;
+}
