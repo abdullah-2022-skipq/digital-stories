@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const storySchema = new Schema(
   {
-    caption: { type: String, required: true, default: "" },
+    caption: { type: String, default: "" },
     image: { type: String, default: "" },
     video: { type: String, default: "" },
     bgColor: { type: Number, required: true, default: 0 },
@@ -21,6 +21,7 @@ storySchema.virtual("trendingScore").get(function () {
   return `${this.upVotes} + ${this.downVotes} + ${this.commentCount}`;
 });
 
+// leaderboard => aggreage stories by postedBy etc
 // post
 
 export default mongoose.model("Story", storySchema, "stories");
