@@ -54,7 +54,7 @@ const registerController = {
 
     const { name, username, email, password, avatarPath } = req.body;
 
-    const hashedPassword = await bcrypt.hash(password, 20);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
       name,
