@@ -1,0 +1,11 @@
+.textInput {
+  background-color: #323232;
+  border: none;
+  width: 240px;
+  padding: 10px 20px; /* top-bottom left right */
+  color: #fff;
+  font-size: 18px;
+  border-radius: 10px;
+  outline: none;
+  margin: 15px auto;
+}
