@@ -12,7 +12,7 @@ const StepUsername = ({ onNext }) => {
           cardHeading="What should we call you?"
           cardLogo="username_sign_up"
         >
-          <div className="cardFlex">
+          <div className={`cardFlex ${styles.cardF}`}>
             <TextInput type="text" placeholder="username" />
             <div className={styles.button}>
               <Button onClick={onNext} buttonTitle="Next" />

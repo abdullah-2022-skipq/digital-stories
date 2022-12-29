@@ -24,8 +24,8 @@ const Home = () => {
           <Button onClick={getStartedHandler} buttonTitle="Let's Get Started" />
         </div>
 
-        <div className="hasInviteWrapper">
-          <span className="hasInvite">Have an account already?</span>
+        <div className="hasAccountAlreadyWrapper">
+          <span className="hasAccountAlready">Have an account already?</span>
           <Link style={signInStyle} to="/sign-in">
             Sign in
           </Link>

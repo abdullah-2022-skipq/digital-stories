@@ -64,16 +64,15 @@ body {
   min-height: calc(100vh - 140px);
 }
 
-.hasInviteWrapper {
-  margin-top: 50px;
+.hasAccountAlreadyWrapper {
+  margin-top: 25px;
 }
 
-.hasInvite {
+.hasAccountAlready {
   color: #0077ff;
 }
 
 .cardFlex {
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center; /* horizontal */
