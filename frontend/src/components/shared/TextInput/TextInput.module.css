@@ -3,9 +3,21 @@
   border: none;
   width: 240px;
   padding: 10px 20px; /* top-bottom left right */
-  color: #fff;
+  color: #bebcc0;
   font-size: 18px;
   border-radius: 10px;
   outline: none;
   margin: 15px auto;
+  margin-bottom: 10px;
+}
+
+.formFieldErrorStyle {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #fc8181;
+}
+
+.fieldErrorMessage {
+  color: #fc8181;
+  text-align: left;
 }
