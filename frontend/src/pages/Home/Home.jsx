@@ -22,13 +22,12 @@ const Home = () => {
 
         <div>
           <Button onClick={getStartedHandler} buttonTitle="Let's Get Started" />
-        </div>
-
-        <div className="hasAccountAlreadyWrapper">
-          <span className="hasAccountAlready">Have an account already?</span>
-          <Link style={signInStyle} to="/sign-in">
-            Sign in
-          </Link>
+          <div className="hasAccountAlreadyWrapper">
+            <span className="hasAccountAlready">Have an account already?</span>
+            <Link style={signInStyle} to="/sign-in">
+              Sign in
+            </Link>
+          </div>
         </div>
       </Card>
     </div>
