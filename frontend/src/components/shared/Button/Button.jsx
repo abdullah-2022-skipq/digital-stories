@@ -1,9 +1,9 @@
 import styles from "./Button.module.css";
 
-const Button = ({ buttonTitle, onClick }) => {
+const Button = (props) => {
   return (
-    <button onClick={onClick} className={styles.button}>
-      <span>{buttonTitle}</span>
+    <button onClick={props.onClick} className={styles.button} {...props}>
+      <span>{props.buttonTitle}</span>
       <img
         className={styles.arrow}
         src="/images/arrow_right.png"
