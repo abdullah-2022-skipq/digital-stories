@@ -14,10 +14,10 @@
 .formFieldErrorStyle {
   border-width: 2px;
   border-style: solid;
-  border-color: #fc8181;
+  border-color: #de1b55;
 }
 
 .fieldErrorMessage {
-  color: #fc8181;
+  color: #de1b55;
   text-align: left;
 }
