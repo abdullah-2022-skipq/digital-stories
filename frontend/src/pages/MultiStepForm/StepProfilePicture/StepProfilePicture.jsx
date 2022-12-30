@@ -11,6 +11,16 @@ const StepProfilePicture = ({ onNext }) => {
           <div className="cardFlex">
             <p className={styles.avatarPromptHeading}>
               How’s this as your profile picture?
+              <div className={styles.avatarLabelWrapper}>
+                <input
+                  className={styles.avatarSelection}
+                  id="avatarSelection"
+                  type="file"
+                />
+                <label className={styles.avatarLabel} htmlFor="avatarSelection">
+                  Choose another photo
+                </label>
+              </div>
             </p>
             <div className={styles.avatarWrapper}>
               <img
@@ -18,16 +28,6 @@ const StepProfilePicture = ({ onNext }) => {
                 src="/images/avatar.png"
                 alt="avatar"
               />
-            </div>
-            <div>
-              <input
-                className={styles.avatarSelection}
-                id="avatarSelection"
-                type="file"
-              />
-              <label className={styles.avatarLabel} htmlFor="avatarSelection">
-                Choose another photo
-              </label>
             </div>
             <Button onClick={onNext} buttonTitle="Create Account" />
           </div>

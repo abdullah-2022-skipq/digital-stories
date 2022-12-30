@@ -1,7 +1,7 @@
 .avatarPromptHeading {
   color: #c4c5c5;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .avatarWrapper {
@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .avatarImage {
