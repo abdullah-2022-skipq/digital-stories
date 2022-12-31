@@ -6,8 +6,7 @@ import Landing from "./pages/Landing/Landing";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 import Home from "./pages/Home/Home";
-
-const isAuth = false;
+import { useSelector } from "react-redux";
 
 function App() {
   return (
@@ -49,6 +48,8 @@ function App() {
 
 // render: a function that returns the JSX to render when the route matches the current location.
 const PublicRoute = ({ children, ...rest }) => {
+  const isAuth = useSelector((state) => state.auth.isAuth);
+
   return (
     <Route
       {...rest}
@@ -70,11 +71,15 @@ const PublicRoute = ({ children, ...rest }) => {
 };
 
 const ProtectedRoute = ({ children, ...rest }) => {
+  const isAuth = useSelector((state) => state.auth.isAuth);
+
   return (
     <Route
       {...rest}
       render={({ location }) => {
-        return !isAuth ? (
+        return isAuth ? (
+          children
+        ) : (
           <Redirect
             to={{
               pathname: "/",
@@ -82,8 +87,6 @@ const ProtectedRoute = ({ children, ...rest }) => {
               state: { from: location },
             }}
           />
-        ) : (
-          children
         );
       }}
     ></Route>

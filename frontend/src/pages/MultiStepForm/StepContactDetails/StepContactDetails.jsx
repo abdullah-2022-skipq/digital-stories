@@ -3,7 +3,9 @@ import Card from "../../../components/shared/Card/Card";
 import TextInput from "../../../components/shared/TextInput/TextInput";
 import Button from "../../../components/shared/Button/Button";
 import { useFormik } from "formik";
-import { contactDetailsSchema } from "../../../../schemas";
+import { contactDetailsSchema } from "../../../schemas";
+import { useDispatch } from "react-redux";
+import { setName, setEmail } from "../../../store/userRegistrationSlice";
 
 const StepContactDetails = ({ onNext }) => {
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
@@ -14,6 +16,14 @@ const StepContactDetails = ({ onNext }) => {
     },
     validationSchema: contactDetailsSchema,
   });
+
+  const dispatch = useDispatch();
+
+  const onClickNextHandler = () => {
+    dispatch(setName(values.name));
+    dispatch(setEmail(values.email));
+    onNext();
+  };
 
   return (
     <>
@@ -45,7 +55,7 @@ const StepContactDetails = ({ onNext }) => {
               errormessage={errors.email}
             />
             <Button
-              onClick={onNext}
+              onClick={onClickNextHandler}
               buttontitle="Next"
               disabled={
                 !values.email || !values.email || errors.email || errors.name

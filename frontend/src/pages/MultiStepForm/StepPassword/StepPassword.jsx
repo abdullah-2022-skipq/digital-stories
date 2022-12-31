@@ -3,7 +3,9 @@ import Card from "../../../components/shared/Card/Card";
 import TextInput from "../../../components/shared/TextInput/TextInput";
 import Button from "../../../components/shared/Button/Button";
 import { useFormik } from "formik";
-import { passwordSchema } from "../../../../schemas";
+import { passwordSchema } from "../../../schemas";
+import { useDispatch } from "react-redux";
+import { setPassword } from "../../../store/userRegistrationSlice";
 
 const StepPassword = ({ onNext }) => {
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
@@ -14,6 +16,13 @@ const StepPassword = ({ onNext }) => {
 
     validationSchema: passwordSchema,
   });
+
+  const dispatch = useDispatch();
+
+  const onClickNextHandler = () => {
+    dispatch(setPassword(values.password));
+    onNext();
+  };
 
   return (
     <>
@@ -49,7 +58,7 @@ const StepPassword = ({ onNext }) => {
               errormessage={errors.confirmPassword}
             />
             <Button
-              onClick={onNext}
+              onClick={onClickNextHandler}
               buttontitle="Next"
               disabled={
                 !values.password ||
