@@ -1,18 +1,18 @@
 import { User } from "../../models";
 import { CustomErrorHandler } from "../../services";
+import { UserDetailsDTO } from "../../dtos/user-details-dto";
 
 const userController = {
   async myDetails(req, res, next) {
     try {
-      const user = await User.findOne({ _id: req.user._id }).select(
-        "-password -email -avatarPath -createdAt -updatedAt -__v"
-      );
+      const user = await User.findOne({ _id: req.user._id });
+      const responseDto = new UserDetailsDTO(user);
 
       if (!user) {
         return next(CustomErrorHandler.notFound());
       }
 
-      res.json(user);
+      res.json(responseDto);
     } catch (error) {
       return next(error);
     }
