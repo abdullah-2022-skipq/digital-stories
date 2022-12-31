@@ -2,7 +2,7 @@ import React from "react";
 import Card from "../../components/shared/Card/Card";
 import Button from "../../components/shared/Button/Button";
 import TextInput from "../../components/shared/TextInput/TextInput";
-import { signInSchema } from "../../../schemas";
+import { signInSchema } from "../../schemas";
 import { useFormik } from "formik";
 
 const SignIn = ({}) => {
