@@ -46,7 +46,7 @@ const StepContactDetails = ({ onNext }) => {
             />
             <Button
               onClick={onNext}
-              buttonTitle="Next"
+              buttontitle="Next"
               disabled={
                 !values.email || !values.email || errors.email || errors.name
               }

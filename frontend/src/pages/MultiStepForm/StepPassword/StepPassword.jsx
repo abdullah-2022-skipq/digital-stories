@@ -50,7 +50,7 @@ const StepPassword = ({ onNext }) => {
             />
             <Button
               onClick={onNext}
-              buttonTitle="Next"
+              buttontitle="Next"
               disabled={
                 !values.password ||
                 !values.confirmPassword ||

@@ -33,7 +33,7 @@ const StepUsername = ({ onNext }) => {
             />
             <Button
               onClick={onNext}
-              buttonTitle="Next"
+              buttontitle="Next"
               disabled={!values.username || errors.username}
             />
           </div>

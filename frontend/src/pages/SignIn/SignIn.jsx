@@ -42,7 +42,7 @@ const SignIn = ({}) => {
             />
             <Button
               onClick={() => {}}
-              buttonTitle="Sign In"
+              buttontitle="Sign In"
               disabled={
                 !values.password ||
                 !values.username ||

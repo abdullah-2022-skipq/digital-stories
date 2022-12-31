@@ -29,7 +29,7 @@ const StepProfilePicture = ({ onNext }) => {
                 alt="avatar"
               />
             </div>
-            <Button onClick={onNext} buttonTitle="Create Account" />
+            <Button onClick={onNext} buttontitle="Create Account" />
           </div>
         </Card>
       </div>
