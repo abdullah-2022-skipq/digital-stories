@@ -11,7 +11,7 @@ const registerController = {
       username: Joi.string().min(5).max(15).required(),
       email: Joi.string().email().required(),
       password: Joi.string()
-        .pattern(new RegExp("/^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd]{8,}$/;"))
+        .pattern(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/))
         .required(),
       confirmPassword: Joi.ref("password"),
       avatarPath: Joi.string().default("default"),
