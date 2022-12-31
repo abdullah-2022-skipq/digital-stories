@@ -11,8 +11,8 @@ const auth = async (req, res, next) => {
   const token = authHeader.split(" ")[1];
 
   try {
-    console.log(token);
     const { _id, name, username } = await TokenService.verify(token);
+
     const user = {
       _id,
       name,
@@ -20,6 +20,7 @@ const auth = async (req, res, next) => {
     };
 
     req.user = user;
+
     next();
   } catch (error) {
     return next(error);
