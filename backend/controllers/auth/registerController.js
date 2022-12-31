@@ -7,8 +7,8 @@ const registerController = {
   async register(req, res, next) {
     // validation
     const registerSchema = Joi.object({
-      name: Joi.string().min(5).max(30).required(),
-      username: Joi.string().min(5).max(15).required(),
+      name: Joi.string().max(30).required(),
+      username: Joi.string().max(20).required(),
       email: Joi.string().email().required(),
       password: Joi.string()
         .pattern(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/))
