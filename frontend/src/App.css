@@ -71,9 +71,3 @@ body {
 .hasAccountAlready {
   color: #0077ff;
 }
-
-.cardFlex {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* horizontal */
-}

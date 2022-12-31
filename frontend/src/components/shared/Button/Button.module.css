@@ -14,7 +14,8 @@
   transition: all 0.3s ease-in-out;
 }
 
-.button:hover {
+.button:hover,
+.button:disabled {
   background-color: #014a9c;
 }
 

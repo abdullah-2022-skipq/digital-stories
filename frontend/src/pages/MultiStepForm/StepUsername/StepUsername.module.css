@@ -1,12 +1,7 @@
-.button {
-  margin-top: 10px;
+.textInputWrapper {
+  margin-top: 30px;
 }
 
-.cardF {
-  height: 210px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: space-between;
-  justify-content: center;
+.buttonWrapper {
+  margin-top: 30px;
 }
