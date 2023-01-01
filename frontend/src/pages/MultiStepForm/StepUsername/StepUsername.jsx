@@ -7,8 +7,9 @@ import { usernameSchema } from "../../../schemas";
 import styles from "./StepUsername.module.css";
 import { useDispatch } from "react-redux";
 import { setUsername } from "../../../store/userRegistrationSlice";
+import { setStep } from "../../../store/multiStepFormSlice";
 
-const StepUsername = ({ onNext }) => {
+const StepUsername = () => {
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
     initialValues: {
       username: "",
@@ -20,7 +21,7 @@ const StepUsername = ({ onNext }) => {
 
   const onClickNextHandler = () => {
     dispatch(setUsername(values.username));
-    onNext();
+    dispatch(setStep());
   };
 
   return (

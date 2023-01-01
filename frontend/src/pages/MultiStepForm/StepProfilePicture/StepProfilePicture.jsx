@@ -10,6 +10,7 @@ const StepProfilePicture = () => {
   const dispatch = useDispatch();
 
   const dataFromStore = useSelector((state) => state.userRegistration);
+
   const onCreateAccountHandler = async () => {
     const response = await registerUser(dataFromStore);
     // console.log(response);

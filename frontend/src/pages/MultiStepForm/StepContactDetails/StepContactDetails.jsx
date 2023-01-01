@@ -6,8 +6,9 @@ import { useFormik } from "formik";
 import { contactDetailsSchema } from "../../../schemas";
 import { useDispatch } from "react-redux";
 import { setName, setEmail } from "../../../store/userRegistrationSlice";
+import { setStep } from "../../../store/multiStepFormSlice";
 
-const StepContactDetails = ({ onNext }) => {
+const StepContactDetails = () => {
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
     // handleBlur will validate the field once its out of focus
     initialValues: {
@@ -22,7 +23,7 @@ const StepContactDetails = ({ onNext }) => {
   const onClickNextHandler = () => {
     dispatch(setName(values.name));
     dispatch(setEmail(values.email));
-    onNext();
+    dispatch(setStep());
   };
 
   return (

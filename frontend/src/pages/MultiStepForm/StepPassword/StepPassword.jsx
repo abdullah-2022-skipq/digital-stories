@@ -6,8 +6,9 @@ import { useFormik } from "formik";
 import { passwordSchema } from "../../../schemas";
 import { useDispatch } from "react-redux";
 import { setPassword } from "../../../store/userRegistrationSlice";
+import { setStep } from "../../../store/multiStepFormSlice";
 
-const StepPassword = ({ onNext }) => {
+const StepPassword = () => {
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
     initialValues: {
       password: "",
@@ -21,7 +22,7 @@ const StepPassword = ({ onNext }) => {
 
   const onClickNextHandler = () => {
     dispatch(setPassword(values.password));
-    onNext();
+    dispatch(setStep());
   };
 
   return (
