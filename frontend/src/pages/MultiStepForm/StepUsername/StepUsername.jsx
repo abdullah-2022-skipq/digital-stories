@@ -7,7 +7,8 @@ import { usernameSchema } from "../../../schemas";
 import styles from "./StepUsername.module.css";
 import { useDispatch } from "react-redux";
 import { setUsername } from "../../../store/userRegistrationSlice";
-import { setStep } from "../../../store/multiStepFormSlice";
+import { setStep, delStep } from "../../../store/multiStepFormSlice";
+import formStyles from "../MultiStepForm.module.css";
 
 const StepUsername = () => {
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
@@ -24,33 +25,43 @@ const StepUsername = () => {
     dispatch(setStep());
   };
 
+  const onClickBackHandler = () => {
+    dispatch(delStep());
+  };
+
   return (
     <>
       <div className="cardWrapper">
-        <Card
-          cardHeading="What should we call you?"
-          cardLogo="username_sign_up"
-        >
-          <div className={styles.textInputWrapper}>
-            <TextInput
-              type="text"
-              placeholder="username"
-              value={values.name}
-              onChange={handleChange}
-              name="username"
-              onBlur={handleBlur}
-              error={errors.username && touched.username ? 1 : undefined}
-              errormessage={errors.username}
-            />
-          </div>
-          <div className={styles.buttonWrapper}>
-            <Button
-              onClick={onClickNextHandler}
-              buttontitle="Next"
-              disabled={!values.username || errors.username}
-            />
-          </div>
-        </Card>
+        <div>
+          <button className={formStyles.backArrow} onClick={onClickBackHandler}>
+            <img src="/images/arrow_back.png" alt="arrow back" />
+          </button>
+
+          <Card
+            cardHeading="What should we call you?"
+            cardLogo="username_sign_up"
+          >
+            <div className={styles.textInputWrapper}>
+              <TextInput
+                type="text"
+                placeholder="username"
+                value={values.name}
+                onChange={handleChange}
+                name="username"
+                onBlur={handleBlur}
+                error={errors.username && touched.username ? 1 : undefined}
+                errormessage={errors.username}
+              />
+            </div>
+            <div className={styles.buttonWrapper}>
+              <Button
+                onClick={onClickNextHandler}
+                buttontitle="Next"
+                disabled={!values.username || errors.username}
+              />
+            </div>
+          </Card>
+        </div>
       </div>
     </>
   );
