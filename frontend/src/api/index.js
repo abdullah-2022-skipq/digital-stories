@@ -25,4 +25,11 @@ export const registerUser = async (data) => {
   }
 };
 
+export const getCurrentUser = async () => {
+  try {
+    const response = await api.get("/api/me");
+    return response;
+  } catch (error) {}
+};
+
 export default api;
