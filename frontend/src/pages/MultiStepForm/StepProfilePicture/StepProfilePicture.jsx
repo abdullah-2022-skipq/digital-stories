@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../../../components/shared/Card/Card";
 import Button from "../../../components/shared/Button/Button";
 import styles from "./StepProfilePicture.module.css";
@@ -7,16 +7,34 @@ import { registerUser } from "../../../api";
 import { setAuth } from "../../../store/authSlice";
 import formStyles from "../MultiStepForm.module.css";
 import { delStep } from "../../../store/multiStepFormSlice";
+import { setAvatar } from "../../../store/userRegistrationSlice";
 
 const StepProfilePicture = () => {
+  const [picture, setPicture] = useState("/images/avatar.png");
+  const [error, setError] = useState("");
+
   const dispatch = useDispatch();
 
   const dataFromStore = useSelector((state) => state.userRegistration);
 
   const onCreateAccountHandler = async () => {
     const response = await registerUser(dataFromStore);
-    // console.log(response);
-    if (response != undefined) dispatch(setAuth());
+    console.log(response);
+    if (response.status == 201) {
+      dispatch(setAuth());
+    } else if (response.code === "ERR_BAD_REQUEST") {
+      setError(response.response.data.message);
+    }
+  };
+
+  const getUserImage = (e) => {
+    const imgFile = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(imgFile);
+    reader.onloadend = function () {
+      setPicture(reader.result);
+      dispatch(setAvatar(reader.result));
+    };
   };
 
   const onClickBackHandler = () => {
@@ -43,6 +61,7 @@ const StepProfilePicture = () => {
                     className={styles.avatarSelection}
                     id="avatarSelection"
                     type="file"
+                    onChange={getUserImage}
                   />
                   <label
                     className={styles.avatarLabel}
@@ -55,7 +74,7 @@ const StepProfilePicture = () => {
               <div className={styles.avatarWrapper}>
                 <img
                   className={styles.avatarImage}
-                  src="/images/avatar.png"
+                  src={picture}
                   alt="avatar"
                 />
               </div>
@@ -63,6 +82,11 @@ const StepProfilePicture = () => {
                 onClick={onCreateAccountHandler}
                 buttontitle="Create Account"
               />
+              {error != "" ? (
+                <div className={styles.errorWrapper}>{error}</div>
+              ) : (
+                <></>
+              )}
             </div>
           </Card>
         </div>

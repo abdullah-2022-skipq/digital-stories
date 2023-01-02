@@ -45,3 +45,8 @@
   flex-direction: column;
   align-items: center;
 }
+
+.errorWrapper {
+  font-weight: bold;
+  color: #de1b55;
+}
