@@ -1,13 +1,21 @@
+import { BASE_URL } from "../config";
+
 export class UserDetailsDTO {
   id_;
   name;
   username;
   createdAt;
 
+  DEFAULTAVATAR = "http://localhost:5544/storage/default.png";
+
   constructor(user) {
     this._id = user._id;
     this.name = user.name;
     this.username = user.username;
+    this.avatar =
+      user.avatarPath == this.DEFAULTAVATAR
+        ? user.avatarPath
+        : `${BASE_URL}${user.avatarPath}`;
     this.memberSince = this.getmemberSince(user.createdAt);
   }
 

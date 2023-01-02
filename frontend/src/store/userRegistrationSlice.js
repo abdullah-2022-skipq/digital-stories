@@ -5,6 +5,7 @@ const initialState = {
   username: "",
   email: "",
   password: "",
+  avatar: "http://localhost:5544/storage/default.png",
 };
 
 export const userRegistrationSlice = createSlice({
@@ -23,11 +24,14 @@ export const userRegistrationSlice = createSlice({
     setPassword: (state, action) => {
       state.password = action.payload;
     },
+    setAvatar: (state, action) => {
+      state.avatar = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setName, setUsername, setEmail, setPassword } =
+export const { setName, setUsername, setEmail, setPassword, setAvatar } =
   userRegistrationSlice.actions;
 
 export default userRegistrationSlice.reducer;

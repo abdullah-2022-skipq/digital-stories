@@ -5,4 +5,4 @@
 [x] hash the password
 [x] store in db
 [x] generate jwt
-[] send token
+[x] send token
