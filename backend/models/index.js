@@ -2,6 +2,6 @@ import User from "./user";
 import Engagement from "./engagement";
 import Comment from "./comment";
 import Story from "./story";
-import Token from "./token";
+import RefreshToken from "./token";
 
-export { User, Engagement, Comment, Story, Token };
+export { User, Engagement, Comment, Story, RefreshToken };
