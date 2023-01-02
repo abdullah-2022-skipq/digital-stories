@@ -98,11 +98,11 @@ const registerController = {
     let accessToken;
     let refreshToken;
 
-    try {
-      const result = await newUser.save();
-      // //console.log("checkpoint 6", result);
+    let result;
 
-      // //console.log("ham yahan hain");
+    try {
+      result = await newUser.save();
+
       // return token to client
       accessToken = TokenService.sign({
         _id: result._id,
@@ -116,12 +116,12 @@ const registerController = {
         "1y",
         REFRESH_TOKEN_SECRET
       );
-      // //console.log("checkpoint 7");
-      // //console.log(refreshToken);
     } catch (error) {
-      // //console.log("ERORORORORO", error);
       return next(error);
     }
+
+    // save refresh token to database
+    await TokenService.storeRefreshToken(result._id, refreshToken);
 
     res.cookie("accessToken", accessToken, {
       maxAge: 1000 * 60 * 60 * 24 * 30,
@@ -133,7 +133,6 @@ const registerController = {
       httpOnly: true,
     });
 
-    // //console.log("checkpoint 8");
     const user = new UserDetailsDTO(newUser);
 
     res.status(201).json({ user, auth: true });
