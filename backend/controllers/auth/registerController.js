@@ -2,6 +2,10 @@ import Joi from "joi";
 import { CustomErrorHandler, TokenService } from "../../services";
 import { User } from "../../models";
 import bcrypt from "bcrypt";
+import { UserDetailsDTO } from "../../dtos/user-details-dto";
+import Jimp from "jimp";
+import path from "path";
+import { REFRESH_TOKEN_SECRET } from "../../config";
 
 const registerController = {
   async register(req, res, next) {
@@ -56,30 +60,83 @@ const registerController = {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const DEFAULTAVATAR = "http://localhost:5544/storage/default.png";
+
+    let imgPath = DEFAULTAVATAR;
+
+    if (avatarPath != DEFAULTAVATAR) {
+      const buffer = Buffer.from(
+        avatarPath.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
+        "base64"
+      );
+
+      imgPath = `${Date.now()}-${Math.round(Math.random() * 100000)}.png`;
+
+      try {
+        const jimpRes = await Jimp.read(buffer);
+
+        jimpRes
+          .resize(200, Jimp.AUTO)
+          .write(path.resolve(__dirname, `../../storage/${imgPath}`));
+      } catch (error) {
+        return next(
+          CustomErrorHandler.failedImageProcessing(
+            "Could not process the image"
+          )
+        );
+      }
+    }
+
     const newUser = new User({
       name,
       email,
       username,
       password: hashedPassword,
-      avatarPath,
+      avatarPath: imgPath == DEFAULTAVATAR ? imgPath : `/storage/${imgPath}`,
     });
 
     let accessToken;
+    let refreshToken;
 
     try {
       const result = await newUser.save();
+      // //console.log("checkpoint 6", result);
 
+      // //console.log("ham yahan hain");
       // return token to client
       accessToken = TokenService.sign({
         _id: result._id,
-        name: result.name,
-        username: result.username,
       });
+
+      //console.log(accessToken);
+      refreshToken = TokenService.sign(
+        {
+          _id: result._id,
+        },
+        "1y",
+        REFRESH_TOKEN_SECRET
+      );
+      // //console.log("checkpoint 7");
+      // //console.log(refreshToken);
     } catch (error) {
+      // //console.log("ERORORORORO", error);
       return next(error);
     }
 
-    res.json({ access_token: accessToken });
+    res.cookie("accessToken", accessToken, {
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+      httpOnly: true,
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+      httpOnly: true,
+    });
+
+    // //console.log("checkpoint 8");
+    const user = new UserDetailsDTO(newUser);
+
+    res.status(201).json({ user, auth: true });
   },
 };
 
