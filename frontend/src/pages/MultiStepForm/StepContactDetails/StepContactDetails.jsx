@@ -44,7 +44,6 @@ const StepContactDetails = () => {
               error={errors.name && touched.name ? 1 : undefined}
               errormessage={errors.name}
             />
-
             <TextInput
               type="email"
               placeholder="email"
