@@ -4,6 +4,7 @@ import { router } from "./routes/index";
 import { errorHandler } from "./middlewares/";
 import { dbConnect } from "./database";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 dbConnect();
 
@@ -14,9 +15,13 @@ const corsOptions = {
   origin: ["http://localhost:5173"],
 };
 
+app.use(cookieParser());
+
 app.use(cors(corsOptions));
 
-app.use(express.json());
+app.use(express.json({ limit: "5mb" }));
+
+app.use("/storage", express.static("storage"));
 
 app.use("/api", router);
 
