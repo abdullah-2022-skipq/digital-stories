@@ -1,7 +1,9 @@
 import Joi from "joi";
-import { User } from "../../models";
+import { RefreshToken, User } from "../../models";
 import { CustomErrorHandler, TokenService } from "../../services";
 import bcrypt from "bcrypt";
+import { REFRESH_TOKEN_SECRET } from "../../config";
+import { UserDetailsDTO } from "../../dtos/user-details-dto";
 
 const loginController = {
   async login(req, res, next) {
@@ -36,13 +38,32 @@ const loginController = {
       }
 
       // generate token
-      const access_token = TokenService.sign({
+      const accessToken = TokenService.sign({
         _id: user._id,
-        name: user.name,
-        username: user.username,
       });
 
-      res.json({ access_token: access_token });
+      const refreshToken = TokenService.sign(
+        { _id: user._id },
+        "1y",
+        REFRESH_TOKEN_SECRET
+      );
+
+      // update user's refresh token
+      await RefreshToken.updateOne({ userId: user._id }, { refreshToken });
+
+      res.cookie("accessToken", accessToken, {
+        maxAge: 1000 * 60 * 60 * 24 * 30,
+        httpOnly: true,
+      });
+
+      res.cookie("refreshToken", refreshToken, {
+        maxAge: 1000 * 60 * 60 * 24 * 30,
+        httpOnly: true,
+      });
+
+      const userDto = new UserDetailsDTO(user);
+
+      res.status(200).json({ userDto, auth: true });
     } catch (error) {
       return next(error);
     }
