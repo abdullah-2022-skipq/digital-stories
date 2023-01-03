@@ -55,11 +55,10 @@ api.interceptors.response.use(
             withCredentials: true,
           }
         );
-        console.log("yo", response);
 
         return api.request(originalRequest);
       } catch (error) {
-        console.log("error in refresh: ", error);
+        //
       }
     }
   }
