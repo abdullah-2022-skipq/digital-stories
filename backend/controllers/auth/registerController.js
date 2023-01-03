@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import { UserDetailsDTO } from "../../dtos/user-details-dto";
 import Jimp from "jimp";
 import path from "path";
-import { REFRESH_TOKEN_SECRET } from "../../config";
+import { REFRESH_TOKEN_SECRET, DEFAULTAVATAR } from "../../config";
 
 const registerController = {
   async register(req, res, next) {
@@ -59,8 +59,6 @@ const registerController = {
     const { name, username, email, password, avatarPath } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    const DEFAULTAVATAR = "http://localhost:5544/storage/default.png";
 
     let imgPath = DEFAULTAVATAR;
 
@@ -133,9 +131,9 @@ const registerController = {
       httpOnly: true,
     });
 
-    const user = new UserDetailsDTO(newUser);
+    const userDto = new UserDetailsDTO(newUser);
 
-    res.status(201).json({ user, auth: true });
+    res.status(201).json({ userDto, auth: true });
   },
 };
 

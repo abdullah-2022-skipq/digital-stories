@@ -10,4 +10,5 @@ export const {
   ACCESS_TOKEN_EXPIRY_TIME_DEBUG,
   REFRESH_TOKEN_SECRET,
   BASE_URL,
+  DEFAULTAVATAR,
 } = process.env;
