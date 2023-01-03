@@ -4,6 +4,7 @@ import {
   loginController,
   userController,
   refreshController,
+  logoutController,
 } from "../controllers/";
 
 import { auth } from "../middlewares";
@@ -14,5 +15,6 @@ router.post("/register", registerController.register);
 router.post("/login", loginController.login);
 router.get("/me", auth, userController.myDetails);
 router.get("/refresh", refreshController.refresh);
+router.post("/logout", auth, logoutController.logout);
 
 export default router;
