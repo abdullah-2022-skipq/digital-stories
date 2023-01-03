@@ -48,9 +48,15 @@ const loginController = {
         REFRESH_TOKEN_SECRET
       );
 
-      // update user's refresh token
-      await RefreshToken.updateOne({ userId: user._id }, { refreshToken });
+      // create user's refresh token
+      // if no token not found then create one
 
+      await RefreshToken.updateOne(
+        { userId: user._id },
+        { refreshToken },
+        { upsert: true }
+      );
+      // console.log(response);
       res.cookie("accessToken", accessToken, {
         maxAge: 1000 * 60 * 60 * 24 * 30,
         httpOnly: true,
@@ -63,7 +69,7 @@ const loginController = {
 
       const userDto = new UserDetailsDTO(user);
 
-      res.status(200).json({ userDto, auth: true });
+      res.status(200).json({ user: userDto, auth: true });
     } catch (error) {
       return next(error);
     }
