@@ -1,0 +1,9 @@
+[x] store refresh token in db when use registers
+[] implement log out 
+[] implement auto log in
+[x] implement auto token refresh
+[] delete refresh token when user logs out
+[x] refactor database code
+[x] update auth middleware to use cookie based auth
+[] loading card after register and login
+[] show error message when login fails 

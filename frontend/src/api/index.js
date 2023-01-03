@@ -32,4 +32,30 @@ export const getCurrentUser = async () => {
   } catch (error) {}
 };
 
+// interceptor for auto token refresh
+api.interceptors.response.use(
+  (config) => {
+    return config;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (
+      error.response.status == 401 &&
+      originalRequest &&
+      !originalRequest.isRetry
+    ) {
+      originalRequest.isRetry = true;
+
+      try {
+        await axios.get(`${VITE_REACT_APP_API_PATH}/api/refresh`, {
+          withCredentials: true,
+        });
+      } catch (error) {
+        console.log("error in refresh: ", error);
+      }
+    }
+  }
+);
+
 export default api;
