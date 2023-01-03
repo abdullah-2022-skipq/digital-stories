@@ -4,6 +4,9 @@ import Button from "../../components/shared/Button/Button";
 import TextInput from "../../components/shared/TextInput/TextInput";
 import { signInSchema } from "../../schemas";
 import { useFormik } from "formik";
+import { login } from "../../api";
+import { useDispatch } from "react-redux";
+import { setAuth } from "../../store/authSlice";
 
 const SignIn = ({}) => {
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
@@ -14,6 +17,18 @@ const SignIn = ({}) => {
 
     validationSchema: signInSchema,
   });
+
+  const dispatch = useDispatch();
+
+  const loginHandler = async () => {
+    const response = await login({
+      username: values.username,
+      password: values.password,
+    });
+    if (response.status == 200) {
+      dispatch(setAuth(response.data.auth));
+    }
+  };
   return (
     <>
       <div className="cardWrapper">
@@ -41,7 +56,7 @@ const SignIn = ({}) => {
               errormessage={errors.password}
             />
             <Button
-              onClick={() => {}}
+              onClick={loginHandler}
               buttontitle="Sign In"
               disabled={
                 !values.password ||

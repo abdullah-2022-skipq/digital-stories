@@ -19,9 +19,9 @@ const StepProfilePicture = () => {
 
   const onCreateAccountHandler = async () => {
     const response = await registerUser(dataFromStore);
-    console.log(response);
+    // console.log(response);
     if (response.status == 201) {
-      dispatch(setAuth());
+      dispatch(setAuth(response.data.auth));
     } else if (response.code === "ERR_BAD_REQUEST") {
       setError(response.response.data.message);
     }

@@ -11,12 +11,12 @@ export const usePersistentSession = () => {
   useEffect(() => {
     (async () => {
       try {
-        await axios.get(
+        const response = await axios.get(
           `${import.meta.env.VITE_REACT_APP_API_PATH}/api/refresh`,
           { withCredentials: true }
         );
 
-        dispatch(setAuth());
+        dispatch(setAuth(response.data.auth));
       } catch (error) {
         console.log(error);
       } finally {
