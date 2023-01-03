@@ -133,7 +133,7 @@ const registerController = {
 
     const userDto = new UserDetailsDTO(newUser);
 
-    res.status(201).json({ userDto, auth: true });
+    res.status(201).json({ user: userDto, auth: true });
   },
 };
 
