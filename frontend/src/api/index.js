@@ -41,16 +41,23 @@ api.interceptors.response.use(
     const originalRequest = error.config;
 
     if (
-      error.response.status == 401 &&
+      error.response.status === 401 &&
       originalRequest &&
-      !originalRequest.isRetry
+      !originalRequest._isRetry
     ) {
       originalRequest.isRetry = true;
 
       try {
-        await axios.get(`${VITE_REACT_APP_API_PATH}/api/refresh`, {
-          withCredentials: true,
-        });
+        console.log("here");
+        const response = await axios.get(
+          `${import.meta.env.VITE_REACT_APP_API_PATH}/api/refresh`,
+          {
+            withCredentials: true,
+          }
+        );
+        console.log("yo", response);
+
+        return api.request(originalRequest);
       } catch (error) {
         console.log("error in refresh: ", error);
       }

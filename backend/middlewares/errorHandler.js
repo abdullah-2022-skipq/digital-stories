@@ -23,6 +23,9 @@ const errorHandler = (err, req, res, next) => {
     };
   }
 
+  if (err.message === "jwt expired") {
+    statusCode = 401;
+  }
   return res.status(statusCode).json(data);
 };
 
