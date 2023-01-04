@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { login } from "../../api";
 import { useDispatch } from "react-redux";
 import { setAuth } from "../../store/authSlice";
+import { setUser } from "../../store/userSlice";
 
 const SignIn = ({}) => {
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
@@ -26,7 +27,8 @@ const SignIn = ({}) => {
       password: values.password,
     });
     if (response.status == 200) {
-      dispatch(setAuth(response.data.auth));
+      dispatch(setAuth(response.data));
+      dispatch(setUser(response.data));
     }
   };
   return (

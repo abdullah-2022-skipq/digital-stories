@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setAuth } from "../store/authSlice";
+import { setUser } from "../store/userSlice";
 
 export const usePersistentSession = () => {
   const [loading, setLoading] = useState(false);
@@ -16,9 +17,10 @@ export const usePersistentSession = () => {
           { withCredentials: true }
         );
 
-        dispatch(setAuth(response.data.auth));
+        dispatch(setAuth(response.data));
+        dispatch(setUser(response.data));
       } catch (error) {
-        console.log(error);
+        //
       } finally {
         setLoading(false);
       }
