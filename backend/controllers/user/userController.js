@@ -6,6 +6,7 @@ const userController = {
   async myDetails(req, res, next) {
     try {
       const user = await User.findOne({ _id: req.user._id });
+
       const responseDto = new UserDetailsDTO(user);
 
       if (!user) {
