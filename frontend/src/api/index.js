@@ -32,6 +32,21 @@ export const getCurrentUser = async () => {
   } catch (error) {}
 };
 
+export const login = async (data) => {
+  try {
+    const response = await api.post("/api/login", {
+      username: data.username,
+      password: data.password,
+    });
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const logout = async () => await api.post("/api/logout");
+
 // interceptor for auto token refresh
 api.interceptors.response.use(
   (config) => {
@@ -48,7 +63,6 @@ api.interceptors.response.use(
       originalRequest.isRetry = true;
 
       try {
-        console.log("here");
         const response = await axios.get(
           `${import.meta.env.VITE_REACT_APP_API_PATH}/api/refresh`,
           {
