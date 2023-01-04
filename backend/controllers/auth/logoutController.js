@@ -13,7 +13,7 @@ const logoutController = {
       res.clearCookie("refreshToken");
       res.clearCookie("accessToken");
 
-      res.json({ user: null, false: null });
+      res.json({ user: null, auth: false });
     } catch (error) {
       next(error);
     }
