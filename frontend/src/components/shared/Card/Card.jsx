@@ -4,12 +4,14 @@ const Card = ({ cardHeading, cardLogo, children }) => {
   return (
     <div className={styles.card}>
       <div className={styles.headingWrapper}>
-        <img
-          className={styles.logoImg}
-          src={`/images/${cardLogo}.png`}
-          alt="waving hand"
-        />
-        <h1 className={styles.heading}>{cardHeading}</h1>
+        {cardLogo && (
+          <img
+            className={styles.logoImg}
+            src={`/images/${cardLogo}.png`}
+            alt="waving hand"
+          />
+        )}
+        {cardHeading && <h1 className={styles.heading}>{cardHeading}</h1>}
       </div>
       {children}
     </div>
