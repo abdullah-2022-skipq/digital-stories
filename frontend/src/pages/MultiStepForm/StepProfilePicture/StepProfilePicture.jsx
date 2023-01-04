@@ -8,23 +8,32 @@ import { setAuth } from "../../../store/authSlice";
 import formStyles from "../MultiStepForm.module.css";
 import { delStep } from "../../../store/multiStepFormSlice";
 import { setAvatar } from "../../../store/userRegistrationSlice";
+import { setUser } from "../../../store/userSlice";
+import Spinner from "../../../components/shared/Spinner/Spinner";
 
 const StepProfilePicture = () => {
-  const [picture, setPicture] = useState("/images/avatar.png");
+  const [picture, setPicture] = useState(
+    "http://localhost:5544/storage/default.png"
+  );
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   const dataFromStore = useSelector((state) => state.userRegistration);
 
   const onCreateAccountHandler = async () => {
+    setLoading(true);
     const response = await registerUser(dataFromStore);
     // console.log(response);
     if (response.status == 201) {
-      dispatch(setAuth(response.data.auth));
+      dispatch(setAuth(response.data));
+      dispatch(setUser(response.data));
     } else if (response.code === "ERR_BAD_REQUEST") {
       setError(response.response.data.message);
     }
+
+    setLoading(false);
   };
 
   const getUserImage = (e) => {
@@ -40,6 +49,8 @@ const StepProfilePicture = () => {
   const onClickBackHandler = () => {
     dispatch(delStep());
   };
+
+  if (loading) return <Spinner message="Registering your account!" />;
 
   return (
     <>

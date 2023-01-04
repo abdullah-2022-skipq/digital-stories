@@ -7,9 +7,14 @@ import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 import Home from "./pages/Home/Home";
 import { useSelector } from "react-redux";
+import { usePersistentSession } from "./hooks/usePersistentSession";
+import Spinner from "./components/shared/Spinner/Spinner";
 
 function App() {
-  return (
+  const { loading } = usePersistentSession();
+  return loading ? (
+    <Spinner message="Loading, please wait" />
+  ) : (
     <div className="">
       <BrowserRouter>
         <div className="layout">
