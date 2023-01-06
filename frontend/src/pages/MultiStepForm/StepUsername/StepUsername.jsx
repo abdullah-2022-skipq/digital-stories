@@ -57,6 +57,7 @@ const StepUsername = () => {
               <Button
                 onClick={onClickNextHandler}
                 buttontitle="Next"
+                buttonimage="arrow_right"
                 disabled={!values.username || errors.username}
               />
             </div>

@@ -75,6 +75,7 @@ const StepPassword = () => {
               <Button
                 onClick={onClickNextHandler}
                 buttontitle="Next"
+                buttonimage="arrow_right"
                 disabled={
                   !values.password ||
                   !values.confirmPassword ||
