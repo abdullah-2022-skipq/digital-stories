@@ -1,0 +1,91 @@
+.storiesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.heading {
+  font-weight: bold;
+  font-size: 20px;
+  position: relative;
+}
+
+.searchBox {
+  background-color: #262625;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  padding: 3px 10px;
+  min-width: 300px;
+  border-radius: 20px;
+}
+
+.searchBox img {
+  width: 20px;
+  height: 20px;
+}
+
+.searchInput {
+  background: transparent;
+  outline: none;
+  border: none;
+  color: #e9e9ea;
+  padding: 5px;
+  width: 100%; /* Take 100% of its parent's width */
+}
+
+/* nice way to learn css pseudo selectors */
+.heading::after {
+  content: "";
+  position: absolute;
+  background-color: #0077ff;
+  bottom: -5px;
+  left: 0;
+  width: 60%;
+  height: 4px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.createStoryButton {
+  display: flex;
+  align-items: center;
+  background-color: #20bd5f;
+  padding: 3px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.createStoryButton:hover {
+  background: #0f6632;
+}
+
+.createStoryButton img {
+  width: 25px;
+  height: 25px;
+}
+
+.createStoryButton span {
+  margin-left: 5px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* grid gives some issues so moving back to flex */
+.storyGrid {
+  margin: 50px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}

@@ -19,6 +19,7 @@ const refreshController = {
     try {
       userDetails = await TokenService.verifyRefreshToken(originalRefreshToken);
     } catch (error) {
+      console.log("target 1", originalRefreshToken);
       return res.status(401).json({ message: "Invalid token" });
     }
 
@@ -29,6 +30,7 @@ const refreshController = {
       });
 
       if (!token) {
+        console.log("target");
         return res.status(401).json({ message: "Invalid token" });
       }
     } catch (error) {
@@ -65,7 +67,7 @@ const refreshController = {
 
       const userDto = new UserDetailsDTO(user);
 
-      res.status(200).json({ userDto, auth: true });
+      res.status(200).json({ user: userDto, auth: true });
     } catch (error) {
       return next(error);
     }

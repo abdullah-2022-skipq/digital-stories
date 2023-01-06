@@ -43,17 +43,12 @@ const Navigation = () => {
       {isAuth && (
         <div className={styles.navRight}>
           <Link to="/">
-            <img
-              className={styles.avatar}
-              src={user.avatar}
-              alt="avatar"
-              width={30}
-              height={30}
-            />
+            <img className={styles.avatar} src={user.avatar} alt="avatar" />
           </Link>
-          <button className={styles.logoutButton} onClick={logoutHandler}>
+          {/* todo [] this should be in profile modal */}
+          {/* <button className={styles.logoutButton} onClick={logoutHandler}>
             <img src="/images/log_out.png" alt="logout" />
-          </button>
+          </button> */}
         </div>
       )}
     </nav>

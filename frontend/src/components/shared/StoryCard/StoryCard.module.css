@@ -1,0 +1,45 @@
+.card {
+  background: #1d1d1d;
+  padding: 10px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 400px;
+}
+
+.caption {
+  width: 300px;
+}
+
+.mediaWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.createdBy {
+  font-weight: bolder;
+  margin-top: 5px;
+}
+
+.storyImg {
+  margin-top: 5px;
+  border-radius: 10px;
+}
+
+.storyStats {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  justify-content: center;
+}
+
+.statBlock {
+  margin: 3px 0;
+  display: flex;
+  font-weight: bold;
+}
+
+.statBlock img {
+  margin-right: 3px;
+  width: 20px;
+  height: 20px;
+}

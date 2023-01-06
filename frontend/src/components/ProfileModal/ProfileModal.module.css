@@ -1,0 +1,17 @@
+.modalMask {
+  position: fixed; /* take full screen */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalBody {
+  width: 50%;
+  max-width: 500px; /* for huge screens*/
+  background-color: #1d1d1d;
+}
