@@ -1,8 +1,11 @@
 /* global styles 
 [] dark mode is deafult, make it dynamic
 */
-html {
+* {
   box-sizing: border-box;
+}
+
+html {
   font-size: 16px;
 }
 
