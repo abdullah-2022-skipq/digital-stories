@@ -6,7 +6,7 @@ const Button = (props) => {
       <span>{props.buttonTitle}</span>
       <img
         className={styles.btnImg}
-        src={`/images/${props.buttonImage}.png` || "/images/arrow_right.png"}
+        src={`/images/${props.buttonImage}.png`}
         alt="right arrow"
       />
     </button>
