@@ -15,6 +15,7 @@ const StepProfilePicture = () => {
   const [picture, setPicture] = useState(
     "http://localhost:5544/storage/default.png"
   );
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
