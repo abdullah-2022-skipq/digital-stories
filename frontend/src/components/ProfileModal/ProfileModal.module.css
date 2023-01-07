@@ -12,7 +12,7 @@
 
 .modalBody {
   width: 50%;
-  max-width: 500px; /* for huge screens*/
+  max-width: 600px; /* for huge screens*/
   background-color: #1d1d1d;
   border-radius: 20px;
   position: relative;
@@ -68,12 +68,8 @@
   color: #c8c8c8;
   font-size: 16px;
   margin-top: 20px;
-  display: flex;
-}
-
-.memberSince strong,
-image {
-  margin: 0 8px;
+  text-align: center;
+  width: 100%;
 }
 
 .signOutButton {
