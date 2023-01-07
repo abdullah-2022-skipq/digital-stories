@@ -1,56 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Card from "../../../components/shared/Card/Card";
 import styles from "./StepStoryContent.module.css";
+import Button from "../../../components/shared/Button/Button";
+import TextStory from "../../../components/TextStory/TextStory";
+import { globalContext } from "../../../App";
 
-const StepStoryContent = ({ mediaType }) => {
-  const [fontType, setFontType] = useState("Font 1");
+const StepStoryContent = () => {
+  const [hover, setHover] = useState(false);
+
+  const { mediaType, onPrevHandler } = useContext(globalContext);
 
   return (
-    <div className="cardWrapper">
-      <Card cardHeading="Create a story" cardLogo="create-story">
-        <textarea id="w3review" name="w3review" rows="4" cols="50">
-          At w3schools.com you will learn how to make a website. They offer free
-          tutorials in all web development technologies.
-        </textarea>
+    <>
+      <div className="cardWrapper">
         <div>
-          <div className={styles.selectWrapper}>
-            <div>Choose font</div>
-            <select
-              value={fontType}
-              onChange={(e) => setFontType(e.target.value)}
-            >
-              <option value="Font 1">Font 1</option>
-              <option value="Font 2">Font 2</option>
-              <option value="Font 3">Font 3</option>
-            </select>
-          </div>
-
-          <div>
-            <div
-              style={{
-                backgroundColor: "red",
-                width: "100px",
-                height: "100px",
-              }}
+          <button className={styles.backArrow}>
+            <img
+              src="/images/arrow_back.png"
+              alt="arrow back"
+              onClick={onPrevHandler}
             />
-            <div
-              style={{
-                backgroundColor: "green",
-                width: "100px",
-                height: "100px",
-              }}
+          </button>
+          <Card cardHeading="Create a story" cardLogo="create-story">
+            {mediaType == "Text" && <TextStory />}
+            {mediaType == "Image" && "asdsad"}
+            {mediaType == "Video" && ";s;s"}
+            <Button
+              buttontitle="Post"
+              buttonimage="party_popper"
+              onClick={() => {}}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              style={{ backgroundColor: hover ? "#0f6632" : "#20BD5F" }}
             />
-            <div
-              style={{
-                backgroundColor: "blue",
-                width: "100px",
-                height: "100px",
-              }}
-            />
-          </div>
+          </Card>
         </div>
-      </Card>
-    </div>
+      </div>
+    </>
   );
 };
 
