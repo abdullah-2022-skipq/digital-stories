@@ -4,6 +4,7 @@ import styles from "./StepStoryContent.module.css";
 import Button from "../../../components/shared/Button/Button";
 import TextStory from "../../../components/TextStory/TextStory";
 import { globalContext } from "../../../App";
+import ImageStory from "../../../components/ImageStory/ImageStory";
 
 const StepStoryContent = () => {
   const [hover, setHover] = useState(false);
@@ -23,7 +24,7 @@ const StepStoryContent = () => {
           </button>
           <Card cardHeading="Create a story" cardLogo="create-story">
             {mediaType == "Text" && <TextStory />}
-            {mediaType == "Image" && "asdsad"}
+            {mediaType == "Image" && <ImageStory />}
             {mediaType == "Video" && ";s;s"}
             <Button
               buttontitle="Post"
