@@ -53,6 +53,8 @@ const Navigation = () => {
     dispatch(setActiveRoute(route));
   };
 
+  const activeRouteStyle = "3px solid #0077ff";
+
   return (
     <>
       <nav className={`${styles.navbar} container`}>
@@ -73,7 +75,7 @@ const Navigation = () => {
             <span
               style={{
                 ...navElementText,
-                borderBottom: active == "home" ? "3px solid #0077ff" : "",
+                borderBottom: active == "home" ? activeRouteStyle : "",
               }}
             >
               Home
@@ -90,7 +92,7 @@ const Navigation = () => {
             <span
               style={{
                 ...navElementText,
-                borderBottom: active == "trending" ? "3px solid #0077ff" : "",
+                borderBottom: active == "trending" ? activeRouteStyle : "",
               }}
             >
               Trending
@@ -107,8 +109,7 @@ const Navigation = () => {
             <span
               style={{
                 ...navElementText,
-                borderBottom:
-                  active == "leaderboard" ? "3px solid #0077ff" : "",
+                borderBottom: active == "leaderboard" ? activeRouteStyle : "",
               }}
             >
               Leaderboard
@@ -125,8 +126,7 @@ const Navigation = () => {
             <span
               style={{
                 ...navElementText,
-                borderBottom:
-                  active == "engagements" ? "3px solid #0077ff" : "",
+                borderBottom: active == "engagements" ? activeRouteStyle : "",
               }}
             >
               Engagements
