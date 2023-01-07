@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Card from "../../../components/shared/Card/Card";
 import styles from "./StepChooseMediaType.module.css";
 import Button from "../../../components/shared/Button/Button";
+import { globalContext } from "../../../App";
 
-const StepChooseMediaType = ({ onNext }) => {
-  const [mediaType, setMediaType] = useState("Text");
+const StepChooseMediaType = () => {
+  const { mediaType, setMediaType, onNextHandler } = useContext(globalContext);
 
   return (
     <div className="cardWrapper">
@@ -21,7 +22,7 @@ const StepChooseMediaType = ({ onNext }) => {
           <Button
             buttontitle="Next"
             buttonimage="arrow_right"
-            onClick={onNext}
+            onClick={onNextHandler}
           />
         </div>
       </Card>
