@@ -3,7 +3,6 @@
   padding: 10px 20px;
   border: none;
   border-radius: 30px;
-  color: #fff;
   outline: none;
   display: flex;
   align-items: center;
@@ -17,6 +16,10 @@
 .button:hover,
 .button:disabled {
   background-color: #014a9c;
+}
+
+.buttonTitle {
+  color: #e9e9ea;
 }
 
 .btnImg {
