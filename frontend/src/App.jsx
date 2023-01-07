@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { usePersistentSession } from "./hooks/usePersistentSession";
 import Spinner from "./components/shared/Spinner/Spinner";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
+import StepChooseMediaType from "./pages/MultiStepCreateStoryForm/StepChooseMediaType/StepChooseMediaType";
 
 function App() {
   const { loading } = usePersistentSession();
@@ -37,6 +38,12 @@ function App() {
             <ProtectedRoute path="/leaderboard">
               <div className="main">
                 <Leaderboard />
+              </div>
+            </ProtectedRoute>
+
+            <ProtectedRoute path="/create-story">
+              <div className="main">
+                <StepChooseMediaType />
               </div>
             </ProtectedRoute>
 
