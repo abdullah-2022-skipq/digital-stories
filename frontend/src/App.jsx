@@ -11,58 +11,89 @@ import { usePersistentSession } from "./hooks/usePersistentSession";
 import Spinner from "./components/shared/Spinner/Spinner";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
 import MultiStepCreateStoryEntry from "./pages/MultiStepCreateStoryForm/MultiStepCreatStoryEntry";
+import { createContext, useState } from "react";
+import StepChooseMediaType from "./pages/MultiStepCreateStoryForm/StepChooseMediaType/StepChooseMediaType";
+import StepStoryContent from "./pages/MultiStepCreateStoryForm/StepStoryContent/StepStoryContent";
+
+export const globalContext = createContext();
 
 function App() {
   const { loading } = usePersistentSession();
 
+  // for context use in MultiStepCreateStoryForm
+  const [mediaType, setMediaType] = useState("Text");
+  const steps = {
+    1: StepChooseMediaType,
+    2: StepStoryContent,
+  };
+  const [step, setStep] = useState(1);
+  const onNextHandler = () => {
+    setStep(step + 1);
+  };
+  const onPrevHandler = () => {
+    setStep(step - 1);
+  };
+
   return loading ? (
     <Spinner message="Loading, please wait" />
   ) : (
-    <div className="">
-      <BrowserRouter>
-        <div className="layout">
-          <Navigation />
-          <Switch>
-            <PublicRoute exact path="/">
-              <div className="main">
-                <Landing />
-              </div>
-            </PublicRoute>
+    <globalContext.Provider
+      value={{
+        mediaType: mediaType,
+        setMediaType: setMediaType,
+        steps: steps,
+        step: step,
+        setStep: setStep,
+        onNextHandler: onNextHandler,
+        onPrevHandler: onPrevHandler,
+      }}
+    >
+      <div className="">
+        <BrowserRouter>
+          <div className="layout">
+            <Navigation />
+            <Switch>
+              <PublicRoute exact path="/">
+                <div className="main">
+                  <Landing />
+                </div>
+              </PublicRoute>
 
-            <ProtectedRoute path="/home">
-              <div className="main">
-                <Home />
-              </div>
-            </ProtectedRoute>
+              <ProtectedRoute path="/home">
+                <div className="main">
+                  <Home />
+                </div>
+              </ProtectedRoute>
 
-            <ProtectedRoute path="/leaderboard">
-              <div className="main">
-                <Leaderboard />
-              </div>
-            </ProtectedRoute>
+              <ProtectedRoute path="/leaderboard">
+                <div className="main">
+                  <Leaderboard />
+                </div>
+              </ProtectedRoute>
 
-            <ProtectedRoute path="/create-story">
-              <div className="main">
-                <MultiStepCreateStoryEntry />
-              </div>
-            </ProtectedRoute>
+              <ProtectedRoute path="/create-story">
+                <div className="main">
+                  <MultiStepCreateStoryEntry />
+                </div>
+              </ProtectedRoute>
 
-            <PublicRoute exact path="/get-started">
-              <div className="main">
-                <SignUp />
-              </div>
-            </PublicRoute>
+              <PublicRoute exact path="/get-started">
+                <div className="main">
+                  <SignUp />
+                </div>
+              </PublicRoute>
 
-            <PublicRoute exact path="/sign-in">
-              <div className="main">
-                <SignIn />
-              </div>
-            </PublicRoute>
-          </Switch>
-          <Footer />
-        </div>
-      </BrowserRouter>
-    </div>
+              <PublicRoute exact path="/sign-in">
+                <div className="main">
+                  <SignIn />
+                </div>
+              </PublicRoute>
+            </Switch>
+            <Footer />
+          </div>
+        </BrowserRouter>
+      </div>
+    </globalContext.Provider>
   );
 }
 
