@@ -29,11 +29,10 @@ const ProfileModal = ({ closeModalHandler }) => {
             <img className={styles.avatar} src={user.avatar} alt="avatar" />
             <h3 className={styles.name}>{user.name}</h3>
             <h5 className={styles.username}>@{user.username}</h5>
-            <span className={styles.memberSince}>
+            <div className={styles.memberSince}>
               You've been a part of our community since:
-              <strong>{user.memberSince}</strong>
-              <img src="/images/party_popper.png" alt="party popper" />
-            </span>
+              {" " + user.memberSince + " ❤️‍🔥"}
+            </div>
             <div className={styles.signOutButton}>
               <Button
                 buttontitle="Sign Out"
@@ -41,7 +40,7 @@ const ProfileModal = ({ closeModalHandler }) => {
                 buttonimage="sign_out"
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
-                style={{ backgroundColor: hover ? "#af1543" : "#DE1B55" }}
+                style={{ backgroundColor: hover ? "#a60938" : "#DE1B55" }}
               />
             </div>
           </div>
