@@ -1,13 +1,11 @@
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import styles from "./Home.module.css";
 import { mockData } from "./mock-data";
 import StoryCard from "../../components/shared/StoryCard/StoryCard";
+import StepChooseMediaType from "../MultiStepCreateStoryForm/StepChooseMediaType/StepChooseMediaType";
 
 const Home = () => {
-  const createStoryHandler = () => {
-    //
-  };
-
   return (
     <>
       <div className="container">
@@ -24,11 +22,13 @@ const Home = () => {
           </div>
 
           <div className={styles.right}>
-            <button className={styles.createStoryButton}>
-              <img src="/images/create_story.png" alt="create story" />
+            <Link to="/create-story" style={{ textDecoration: "none" }}>
+              <button className={styles.createStoryButton}>
+                <img src="/images/create_story.png" alt="create story" />
 
-              <span>Create a story</span>
-            </button>
+                <span>Create a story</span>
+              </button>
+            </Link>
           </div>
         </div>
 
