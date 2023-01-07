@@ -12,7 +12,7 @@ import formStyles from "../MultiStepForm.module.css";
 const StepPassword = () => {
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
     initialValues: {
-      password: "myPassword1",
+      password: "myPassword1", // todo []
       confirmPassword: "myPassword1",
     },
 
