@@ -8,7 +8,7 @@ const StepChooseMediaType = ({ onNext }) => {
 
   return (
     <div className="cardWrapper">
-      <Card cardHeading="What do you want to post?">
+      <Card cardHeading="What do you want to post?" cardLogo="media-type">
         <div className={styles.selectWrapper}>
           <select
             value={mediaType}

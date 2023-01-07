@@ -1,4 +1,4 @@
-select {
+.selectWrapper select {
   background-color: #2a292a;
   width: 240px;
   outline: none;
@@ -21,7 +21,7 @@ select {
   background-position-y: 50%;
 }
 
-select option {
+.selectWrapper option {
   border: 1px solid #2a292a;
   background: #2a292a;
   width: 150px;
@@ -30,6 +30,6 @@ select option {
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
 
-select option:hover {
+.selectWrapper option:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
