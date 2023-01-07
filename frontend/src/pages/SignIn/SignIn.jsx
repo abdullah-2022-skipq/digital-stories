@@ -60,6 +60,7 @@ const SignIn = ({}) => {
             <Button
               onClick={loginHandler}
               buttontitle="Sign In"
+              buttonimage="arrow_right"
               disabled={
                 !values.password ||
                 !values.username ||

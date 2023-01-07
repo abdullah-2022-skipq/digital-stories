@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "./Navigation.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../api";
-import { setAuth } from "../../../store/authSlice";
+import { useState } from "react";
+import ProfileModal from "../../ProfileModal/ProfileModal";
+import { useSelector, useDispatch } from "react-redux";
+import { setActiveRoute } from "../../../store/navbarSlice";
 
 const Navigation = () => {
   const logoStyle = {
@@ -14,44 +15,135 @@ const Navigation = () => {
     alignItems: "center",
   };
 
+  const navElementStyle = {
+    color: "#fff",
+    textDecoration: "none",
+    fontSize: "16px",
+    display: "flex",
+    alignItems: "center",
+  };
+
   const logoText = {
     marginLeft: "10px",
   };
 
-  const logoImg = {
-    flexGrow: 0,
-    flexShrink: 0,
+  const navElementText = {
+    marginLeft: "5px",
   };
+
+  const active = useSelector((state) => state.navbar.activeRoute);
 
   const dispatch = useDispatch();
 
-  const logoutHandler = async () => {
-    const response = await logout();
-    dispatch(setAuth(response.data));
+  const [modal, setModal] = useState(false);
+
+  const showModalHandler = () => {
+    setModal(true);
+  };
+
+  const closeModalHandler = () => {
+    setModal(false);
   };
 
   const { isAuth } = useSelector((state) => state.auth);
+
   const user = useSelector((state) => state.user);
 
-  return (
-    <nav className={`${styles.navbar} container`}>
-      <Link style={logoStyle} to="/">
-        {/* <img style={logoImg} src="/images/navbar_snap.png" alt="logo" /> */}
-        <span style={logoText}>Digital Stories</span>
-      </Link>
+  const activeRouteHandler = (route) => {
+    dispatch(setActiveRoute(route));
+  };
 
-      {isAuth && (
-        <div className={styles.navRight}>
-          <Link to="/">
-            <img className={styles.avatar} src={user.avatar} alt="avatar" />
+  return (
+    <>
+      <nav className={`${styles.navbar} container`}>
+        <Link
+          style={logoStyle}
+          to="/"
+          onClick={() => activeRouteHandler("home")}
+        >
+          <span style={logoText}>Digital Stories</span>
+        </Link>
+
+        {isAuth && (
+          <Link
+            style={navElementStyle}
+            to="/home"
+            onClick={() => activeRouteHandler("home")}
+          >
+            <span
+              style={{
+                ...navElementText,
+                borderBottom: active == "home" ? "3px solid #0077ff" : "",
+              }}
+            >
+              Home
+            </span>
           </Link>
-          {/* todo [] this should be in profile modal */}
-          {/* <button className={styles.logoutButton} onClick={logoutHandler}>
-            <img src="/images/log_out.png" alt="logout" />
-          </button> */}
-        </div>
-      )}
-    </nav>
+        )}
+
+        {isAuth && (
+          <Link
+            style={navElementStyle}
+            to="/trending"
+            onClick={() => activeRouteHandler("trending")}
+          >
+            <span
+              style={{
+                ...navElementText,
+                borderBottom: active == "trending" ? "3px solid #0077ff" : "",
+              }}
+            >
+              Trending
+            </span>
+          </Link>
+        )}
+
+        {isAuth && (
+          <Link
+            style={navElementStyle}
+            to="/leaderboard"
+            onClick={() => activeRouteHandler("leaderboard")}
+          >
+            <span
+              style={{
+                ...navElementText,
+                borderBottom:
+                  active == "leaderboard" ? "3px solid #0077ff" : "",
+              }}
+            >
+              Leaderboard
+            </span>
+          </Link>
+        )}
+
+        {isAuth && (
+          <Link
+            style={navElementStyle}
+            to="/engagements"
+            onClick={() => activeRouteHandler("engagements")}
+          >
+            <span
+              style={{
+                ...navElementText,
+                borderBottom:
+                  active == "engagements" ? "3px solid #0077ff" : "",
+              }}
+            >
+              Engagements
+            </span>
+          </Link>
+        )}
+
+        {isAuth && (
+          <div className={styles.navRight}>
+            <button className={styles.avatarWrapper} onClick={showModalHandler}>
+              <img className={styles.avatar} src={user.avatar} alt="avatar" />
+            </button>
+          </div>
+        )}
+      </nav>
+      {modal && <ProfileModal closeModalHandler={closeModalHandler} />}
+    </>
   );
 };
 

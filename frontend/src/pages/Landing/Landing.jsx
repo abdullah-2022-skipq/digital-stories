@@ -21,7 +21,11 @@ const Landing = () => {
         </p>
 
         <div>
-          <Button onClick={getStartedHandler} buttontitle="Let's Get Started" />
+          <Button
+            onClick={getStartedHandler}
+            buttontitle="Let's Get Started"
+            buttonimage="arrow_right"
+          />
           <div className="hasAccountAlreadyWrapper">
             <span className="hasAccountAlready">Have an account already?</span>
             <Link style={signInStyle} to="/sign-in">

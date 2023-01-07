@@ -92,6 +92,7 @@ const StepProfilePicture = () => {
               <Button
                 onClick={onCreateAccountHandler}
                 buttontitle="Create Account"
+                buttonimage="arrow_right"
               />
               {error != "" ? (
                 <div className={styles.errorWrapper}>{error}</div>

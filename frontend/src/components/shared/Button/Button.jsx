@@ -5,8 +5,8 @@ const Button = (props) => {
     <button onClick={props.onClick} className={styles.button} {...props}>
       <span>{props.buttontitle}</span>
       <img
-        className={styles.arrow}
-        src="/images/arrow_right.png"
+        className={styles.btnImg}
+        src={`/images/${props.buttonimage}.png`}
         alt="right arrow"
       />
     </button>

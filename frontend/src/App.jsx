@@ -9,9 +9,11 @@ import Home from "./pages/Home/Home";
 import { useSelector } from "react-redux";
 import { usePersistentSession } from "./hooks/usePersistentSession";
 import Spinner from "./components/shared/Spinner/Spinner";
+import Leaderboard from "./pages/Leaderboard/Leaderboard";
 
 function App() {
   const { loading } = usePersistentSession();
+
   return loading ? (
     <Spinner message="Loading, please wait" />
   ) : (
@@ -27,7 +29,15 @@ function App() {
             </PublicRoute>
 
             <ProtectedRoute path="/home">
-              <Home />
+              <div className="main">
+                <Home />
+              </div>
+            </ProtectedRoute>
+
+            <ProtectedRoute path="/leaderboard">
+              <div className="main">
+                <Leaderboard />
+              </div>
             </ProtectedRoute>
 
             <PublicRoute exact path="/get-started">
