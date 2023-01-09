@@ -1,11 +1,47 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Home.module.css";
-import { mockData } from "./mock-data";
+import { mockData } from "../../mock/mock-data";
 import StoryCard from "../../components/shared/StoryCard/StoryCard";
-import StepChooseMediaType from "../MultiStepCreateStoryForm/StepChooseMediaType/StepChooseMediaType";
+import Spinner from "../../components/shared/Spinner/Spinner";
+import { getAllStories } from "../../api";
 
 const Home = () => {
+  useEffect(() => {
+    (async () => {
+      const response = await getAllStories();
+
+      // dirty fix
+      let dataFromApi = response.data.stories;
+      let targetData = [];
+
+      dataFromApi.forEach((story) => {
+        let postedBy = story.postedBy;
+        delete story.postedBy;
+
+        const postedBySource = { ...postedBy };
+        let postedByCleaned = {};
+
+        for (let key in postedBySource) {
+          if (postedBySource.hasOwnProperty(key)) {
+            postedByCleaned["postedBy_" + key] = postedBySource[key];
+          }
+        }
+
+        const parsedData = { ...story, ...postedByCleaned };
+        targetData.push(parsedData);
+      });
+
+      setData(targetData);
+      return;
+    })();
+  }, []);
+  const [data, setData] = useState(null);
+
+  if (!data) {
+    return <Spinner message="Loading stories, please wait" />;
+  }
+
   return (
     <>
       <div className="container">
@@ -33,7 +69,7 @@ const Home = () => {
         </div>
 
         <div className={styles.storyGrid}>
-          {mockData.map((story) => (
+          {data.map((story) => (
             <StoryCard key={story._id} story={story} />
           ))}
         </div>
