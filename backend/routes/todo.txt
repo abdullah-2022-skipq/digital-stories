@@ -2,7 +2,7 @@ Route: USER
 
 1. register a user
 
-[x] POST
+[x] POST /api/register
 
     - name
     - username
@@ -12,30 +12,34 @@ Route: USER
 
 2. login a user
 
-[x] POST
+[x] POST /api/login
 
     - username and password
-    x redirect to homepage
+    - redirect to homepage
 
 3. get user details
 
-[x] 
+[x] /api/me
     - protected route
+
+4. refresh tokens
+
+[x] /api/refresh
 
 Route: STORY/ TRENDING
 
-* should be protected
+    - protected routes
 
 1. create a story
+    - creates a story document in database, 3 different variants based on media type
 
-
-[] POST 
+[x] POST /api/stories
 
     x some sort of an image editor maybe? {FORM IS MENTIONED} - DISCUSSED
 
 2. get all stories
 
-[] GET 
+[x] GET /api/stories 
 
 3. get a story by id
 
