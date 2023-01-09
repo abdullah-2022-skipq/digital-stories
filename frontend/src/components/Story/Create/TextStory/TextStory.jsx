@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import styles from "./TextStory.module.css";
-import Button from "../../components/shared/Button/Button";
-import { createStory } from "../../api";
+import Button from "../../../shared/Button/Button";
+import { createStory } from "../../../../api";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { globalContext } from "../../App";
+import { globalContext } from "../../../../App";
 
 const TextStory = () => {
   const { onPrevHandler } = useContext(globalContext);

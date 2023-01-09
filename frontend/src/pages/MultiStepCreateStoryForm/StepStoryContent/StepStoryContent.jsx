@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import Card from "../../../components/shared/Card/Card";
 import styles from "./StepStoryContent.module.css";
-import TextStory from "../../../components/TextStory/TextStory";
+import TextStory from "../../../components/Story/Create/TextStory/TextStory";
 import { globalContext } from "../../../App";
-import ImageStory from "../../../components/ImageStory/ImageStory";
-import VideoStory from "../../../components/VideoStory/VideoStory";
+import ImageStory from "../../../components/Story/Create/ImageStory/ImageStory";
+import VideoStory from "../../../components/Story/Create/VideoStory/VideoStory";
 
 const StepStoryContent = () => {
   const { mediaType, onPrevHandler } = useContext(globalContext);

@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import styles from "./VideoStory.module.css";
-import Button from "../shared/Button/Button";
+import Button from "../../../shared/Button/Button";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { globalContext } from "../../App";
-import { createStory } from "../../api";
+import { globalContext } from "../../../../App";
+import { createStory } from "../../../../api";
 
 const VideoStory = () => {
   const [video, setVideo] = useState(
