@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./StoryCardText.module.css";
+import styles from "./TextStoryCard.module.css";
 
 const StoryCardText = ({ caption, font, fontColor }) => {
   const color =

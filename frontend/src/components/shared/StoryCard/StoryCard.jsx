@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./StoryCard.module.css";
 import { useHistory } from "react-router-dom";
-import StoryCardText from "./Text/StoryCardText";
+import TextStoryCard from "./Text/TextStoryCard";
+import ImageStoryCard from "./Image/ImageStoryCard";
 
 // https://source.unsplash.com/random/250×250/?nature
 const StoryCard = ({ story }) => {
@@ -27,11 +28,15 @@ const StoryCard = ({ story }) => {
     <div className={styles.card} onClick={(e) => onStoryClickHandler(e)}>
       <div className={styles.mediaWrapper}>
         {story.mediaType == "text" && (
-          <StoryCardText
+          <TextStoryCard
             caption={story.caption}
             font={story.font}
             fontColor={story.fontColor}
           />
+        )}
+
+        {story.mediaType == "image" && (
+          <ImageStoryCard caption={story.caption} image={story.image} />
         )}
       </div>
       <div
