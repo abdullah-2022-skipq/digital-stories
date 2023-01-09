@@ -80,7 +80,7 @@ const ImageStory = () => {
         onClick={createStoryHandler}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        style={{ backgroundColor: hover ? "#0f6632" : "#20BD5F" }}
+        style={{ backgroundColor: hover ? "#1b8445" : "#20BD5F" }}
         disabled={
           image == "http://localhost:5544/storage/default_image_story.png"
         }
