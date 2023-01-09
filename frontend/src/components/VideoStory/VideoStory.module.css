@@ -1,32 +1,35 @@
-.imagePromptHeading {
+.videoPromptHeading {
   color: #c4c5c5;
   text-align: center;
   margin-bottom: 5px;
 }
 
-.imageWrapper {
-  width: 250px;
-  height: 250px;
+.videoWrapper {
+  /* width: 250px;
+  height: 250px; */
   padding: 15px;
+  border-radius: 10px;
   border: 3px solid #0077ff;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
 }
 
-.imageImage {
-  height: 98%;
-  width: 98%;
+.video {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  display: block;
   object-fit: cover; /* maintain aspect ratio */
 }
 
-.imageSelection {
+.videoSelection {
   display: none;
 }
 
-.imageLabel {
+.videoLabel {
   color: #0077ff;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -35,7 +38,7 @@
   display: inline-block;
 }
 
-.imageLabelWrapper {
+.videoLabelWrapper {
   margin-left: 10px;
   font-size: medium;
 }

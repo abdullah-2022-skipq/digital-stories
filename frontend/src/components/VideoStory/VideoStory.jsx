@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
-import styles from "./ImageStory.module.css";
+import styles from "./VideoStory.module.css";
 import Button from "../shared/Button/Button";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { globalContext } from "../../App";
 import { createStory } from "../../api";
 
-const ImageStory = () => {
-  const [image, setImage] = useState(
-    "http://localhost:5544/storage/default_image_story.png"
+const VideoStory = () => {
+  const [video, setVideo] = useState(
+    "https://www.youtube.com/embed/ScMzIvxBSi4"
   );
 
   const [caption, setCaption] = useState("");
@@ -23,12 +23,12 @@ const ImageStory = () => {
 
   const createStoryHandler = async () => {
     const story = {
-      mediaType: "image",
+      mediaType: "video",
       caption,
-      image,
+      video,
       postedBy,
     };
-
+    console.log("dto", story);
     const response = await createStory(story);
     if (response.status == 201) {
       onPrevHandler(); // reset the create story form to step 1
@@ -36,33 +36,36 @@ const ImageStory = () => {
     }
   };
 
-  const getUserImage = (e) => {
-    const imgFile = e.target.files[0];
+  const getUserVideo = (e) => {
+    const videoFile = e.target.files[0];
+
     const reader = new FileReader();
 
-    reader.readAsDataURL(imgFile);
-
     reader.onloadend = function () {
-      setImage(reader.result);
+      const base64 = reader.result;
+      setVideo(base64);
     };
+
+    reader.readAsDataURL(videoFile);
   };
 
   return (
     <>
       <div className={styles.cardFlex}>
-        <p className={styles.imagePromptHeading}>
-          <span className={styles.imageWrapper}>
-            <img className={styles.imageImage} src={image} alt="image" />
+        <p className={styles.videoPromptHeading}>
+          <span className={styles.videoWrapper}>
+            <iframe className={styles.video} src={video} alt="video" />
           </span>
-          <span className={styles.imageLabelWrapper}>
+
+          <span className={styles.videoLabelWrapper}>
             <input
-              className={styles.imageSelection}
-              id="imageSelection"
+              className={styles.videoSelection}
+              id="videoSelection"
               type="file"
-              onChange={getUserImage}
+              onChange={getUserVideo}
             />
-            <label className={styles.imageLabel} htmlFor="imageSelection">
-              Choose image
+            <label className={styles.videoLabel} htmlFor="videoSelection">
+              Choose video (below 5mb)
             </label>
           </span>
         </p>
@@ -81,12 +84,10 @@ const ImageStory = () => {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         style={{ backgroundColor: hover ? "#0f6632" : "#20BD5F" }}
-        disabled={
-          image == "http://localhost:5544/storage/default_image_story.png"
-        }
+        disabled={video == "https://www.youtube.com/embed/ScMzIvxBSi4"}
       />
     </>
   );
 };
 
-export default ImageStory;
+export default VideoStory;
