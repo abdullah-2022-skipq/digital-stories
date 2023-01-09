@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "./Home.module.css";
 import { mockData } from "../../mock/mock-data";
 import StoryCard from "../../components/shared/StoryCard/StoryCard";
@@ -36,7 +36,24 @@ const Home = () => {
       return;
     })();
   }, []);
+
   const [data, setData] = useState(null);
+
+  const inputRef = useRef();
+
+  const onSearchHandler = () => {
+    // filter the data based on searchQuery
+    // search query -> a string, which should be partially
+    // or completely present in the story's caption
+
+    const searchQuery = inputRef.current.value;
+
+    const filteredData = data.filter((story) =>
+      story.caption.includes(searchQuery)
+    );
+
+    setData(filteredData);
+  };
 
   if (!data) {
     return <Spinner message="Loading stories, please wait" />;
@@ -51,10 +68,17 @@ const Home = () => {
 
             <div className={styles.searchBox}>
               {/* Search icon by Icons8 */}
-              <img src="/images/search.png" alt="search" />
 
-              <input className={styles.searchInput} type="text" />
+              <img src="/images/search.png" alt="search" />
+              <input
+                className={styles.searchInput}
+                type="text"
+                ref={inputRef}
+              />
             </div>
+            <button className={styles.searchButton} onClick={onSearchHandler}>
+              Search
+            </button>
           </div>
 
           <div className={styles.right}>

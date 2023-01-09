@@ -21,6 +21,7 @@
   margin-left: 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 3px 10px;
   min-width: 300px;
   border-radius: 20px;
@@ -38,6 +39,21 @@
   color: #e9e9ea;
   padding: 5px;
   width: 100%; /* Take 100% of its parent's width */
+}
+
+.searchButton {
+  color: #fff;
+  background-color: #0077ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 5px;
+  font-weight: bold;
 }
 
 /* nice way to learn css pseudo selectors */
