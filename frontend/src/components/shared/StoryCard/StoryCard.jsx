@@ -1,38 +1,28 @@
 import React from "react";
 import styles from "./StoryCard.module.css";
+import { useHistory } from "react-router-dom";
+import Story from "../../../pages/Story/Story";
+// import { getStoryById } from "../../../api/";
 
+// https://source.unsplash.com/random/250×250/?nature
 const StoryCard = ({ story }) => {
+  const navigate = useHistory();
+
+  const onStoryClickHandler = async (e) => {
+    navigate.push("/story", story);
+    // console.log("before", story);
+    // const response = await getStoryById(story._id);
+
+    // if (response.status == 200) {
+    //   console.log(response.data);
+    // }
+  };
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={(e) => onStoryClickHandler(e)}>
       <div className={styles.mediaWrapper}>
-        <div>
-          <h3 className={styles.caption}>{story.caption}</h3>
-          <img
-            src="https://source.unsplash.com/random/250×250/?nature"
-            alt="story image"
-            width={300}
-            height={250}
-            className={styles.storyImg}
-          />
-          <p className={styles.createdBy}>{story.created_by}</p>
-        </div>
-
-        <div className={styles.storyStats}>
-          <div className={styles.statBlock}>
-            <img src="/images/like.png" alt="likes" />
-            {story.like_count}
-          </div>
-
-          <div className={styles.statBlock}>
-            <img src="/images/dislike.png" alt="dislikes" />
-            {story.dislike_count}
-          </div>
-
-          <div className={styles.statBlock}>
-            <img src="/images/comment.png" alt="comments" />
-            {story.like_count}
-          </div>
-        </div>
+        {story.image && <img src={story.image} alt="story image" />}
+        {story.caption}@{story.postedBy}
       </div>
       <div></div>
     </div>
