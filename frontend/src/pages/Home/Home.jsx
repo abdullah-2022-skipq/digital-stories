@@ -45,8 +45,11 @@ const Home = () => {
     // filter the data based on searchQuery
     // search query -> a string, which should be partially
     // or completely present in the story's caption
+    console.log("clicked");
 
     const searchQuery = inputRef.current.value;
+
+    if (searchQuery == "") return;
 
     const filteredData = data.filter((story) =>
       story.caption.includes(searchQuery)
