@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./StoryCard.module.css";
 import { useHistory } from "react-router-dom";
-import StoryCardText from "../../StoryCardText/StoryCardText";
+import StoryCardText from "./Text/StoryCardText";
 
 // https://source.unsplash.com/random/250×250/?nature
 const StoryCard = ({ story }) => {
