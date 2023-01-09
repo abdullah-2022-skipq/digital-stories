@@ -47,6 +47,61 @@ export const login = async (data) => {
 
 export const logout = async () => await api.post("/api/logout");
 
+export const getAllStories = async () => await api.get("/api/stories");
+
+export const getStoryById = async (id) => await api.get(`/api/stories/${id}`);
+
+export const createStory = async (story) => {
+  if (story.mediaType == "text") {
+    try {
+      const { mediaType, caption, font, fontColor, postedBy } = story;
+      const response = await api.post("/api/stories", {
+        mediaType,
+        caption,
+        font,
+        fontColor,
+        postedBy,
+      });
+
+      return response;
+    } catch (error) {
+      //
+    }
+  }
+  if (story.mediaType == "image") {
+    try {
+      const { mediaType, caption, image, postedBy } = story;
+      const response = await api.post("/api/stories", {
+        mediaType,
+        caption,
+        image,
+        postedBy,
+      });
+
+      return response;
+    } catch (error) {
+      //
+    }
+  }
+
+  if (story.mediaType == "video") {
+    console.log("im here");
+    try {
+      const { mediaType, caption, video, postedBy } = story;
+      const response = await api.post("/api/stories", {
+        mediaType,
+        caption,
+        video,
+        postedBy,
+      });
+
+      return response;
+    } catch (error) {
+      //
+    }
+  }
+};
+
 // interceptor for auto token refresh
 api.interceptors.response.use(
   (config) => {
