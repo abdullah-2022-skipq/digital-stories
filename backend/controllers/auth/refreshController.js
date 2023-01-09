@@ -19,7 +19,6 @@ const refreshController = {
     try {
       userDetails = await TokenService.verifyRefreshToken(originalRefreshToken);
     } catch (error) {
-      console.log("target 1", originalRefreshToken);
       return res.status(401).json({ message: "Invalid token" });
     }
 
@@ -30,7 +29,6 @@ const refreshController = {
       });
 
       if (!token) {
-        console.log("target");
         return res.status(401).json({ message: "Invalid token" });
       }
     } catch (error) {
