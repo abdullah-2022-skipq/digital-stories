@@ -3,6 +3,7 @@ import styles from "./StoryCard.module.css";
 import { useHistory } from "react-router-dom";
 import TextStoryCard from "./Text/TextStoryCard";
 import ImageStoryCard from "./Image/ImageStoryCard";
+import VideoStoryCard from "./Video/VideoStoryCard";
 
 // https://source.unsplash.com/random/250×250/?nature
 const StoryCard = ({ story }) => {
@@ -37,6 +38,10 @@ const StoryCard = ({ story }) => {
 
         {story.mediaType == "image" && (
           <ImageStoryCard caption={story.caption} image={story.image} />
+        )}
+
+        {story.mediaType == "video" && (
+          <VideoStoryCard caption={story.caption} video={story.video} />
         )}
       </div>
       <div

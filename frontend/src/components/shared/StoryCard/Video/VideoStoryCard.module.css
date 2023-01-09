@@ -1,0 +1,5 @@
+.videoWrapper video {
+  max-height: 240px;
+  max-width: 320px;
+  border-radius: 10px;
+}
