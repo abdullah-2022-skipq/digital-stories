@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "./StoryCard.module.css";
 import { useHistory } from "react-router-dom";
-import Story from "../../../pages/Story/Story";
-// import { getStoryById } from "../../../api/";
+import StoryCardText from "../../StoryCardText/StoryCardText";
 
 // https://source.unsplash.com/random/250×250/?nature
 const StoryCard = ({ story }) => {
@@ -10,21 +9,41 @@ const StoryCard = ({ story }) => {
 
   const onStoryClickHandler = async (e) => {
     navigate.push("/story", story);
-    // console.log("before", story);
-    // const response = await getStoryById(story._id);
-
-    // if (response.status == 200) {
-    //   console.log(response.data);
-    // }
   };
+
+  const avatarWrapperColors = [
+    "#266CFF",
+    "#4B47DB",
+    "#33B357",
+    "#F539",
+    "#DE1B55",
+    "#E9362F",
+  ];
+
+  let randomColor =
+    avatarWrapperColors[Math.floor(Math.random() * avatarWrapperColors.length)];
 
   return (
     <div className={styles.card} onClick={(e) => onStoryClickHandler(e)}>
       <div className={styles.mediaWrapper}>
-        {story.image && <img src={story.image} alt="story image" />}
-        {story.caption}@{story.postedBy}
+        {story.mediaType == "text" && (
+          <StoryCardText
+            caption={story.caption}
+            font={story.font}
+            fontColor={story.fontColor}
+          />
+        )}
       </div>
-      <div></div>
+      <div
+        className={styles.avatarWrapper}
+        style={{ border: `3px solid ${randomColor}` }}
+      >
+        <img
+          className={styles.avatarImage}
+          src={story.postedBy_avatarPath}
+          alt="avatar"
+        />
+      </div>
     </div>
   );
 };
