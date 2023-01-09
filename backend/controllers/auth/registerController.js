@@ -18,6 +18,7 @@ const registerController = {
         .pattern(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/))
         .required(),
       confirmPassword: Joi.ref("password"),
+      // [] todo remove default in path
       avatarPath: Joi.string().default("default"),
     });
 
