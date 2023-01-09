@@ -54,6 +54,11 @@
   cursor: pointer;
   margin-left: 5px;
   font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.searchButton:hover {
+  background-color: #014a9c;
 }
 
 /* nice way to learn css pseudo selectors */
@@ -81,10 +86,11 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 .createStoryButton:hover {
-  background: #0f6632;
+  background: #1b8445;
 }
 
 .createStoryButton img {
