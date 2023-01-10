@@ -1,4 +1,4 @@
-import { User } from "../../models";
+import { User } from "../../models"; // note this aint importing a default exported thing, its destructuring probably
 import { CustomErrorHandler } from "../../services";
 import { UserDetailsDTO } from "../../dtos/user-details-dto";
 
