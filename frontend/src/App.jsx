@@ -14,7 +14,7 @@ import MultiStepCreateStoryEntry from "./pages/MultiStepCreateStoryForm/MultiSte
 import { createContext, useState } from "react";
 import StepChooseMediaType from "./pages/MultiStepCreateStoryForm/StepChooseMediaType/StepChooseMediaType";
 import StepStoryContent from "./pages/MultiStepCreateStoryForm/StepStoryContent/StepStoryContent";
-import Story from "./pages/Story/Story";
+import StoryDetails from "./pages/Story/StoryDetails";
 
 export const globalContext = createContext();
 
@@ -80,7 +80,7 @@ function App() {
 
               <ProtectedRoute exact path="/story">
                 <div className="main">
-                  <Story />
+                  <StoryDetails />
                 </div>
               </ProtectedRoute>
 
