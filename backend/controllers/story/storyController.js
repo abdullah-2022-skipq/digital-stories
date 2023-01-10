@@ -109,7 +109,7 @@ const storyController = {
       await newStory.save();
     }
 
-    res.status(201).json({ umsg: "works" });
+    return res.status(201).json({ message: "story created successfully" });
   },
 
   async getAll(req, res, next) {
@@ -136,7 +136,9 @@ const storyController = {
     }
 
     try {
-      const story = await Story.findOne({ _id: req.params.id });
+      const story = await Story.findOne({ _id: req.params.id }).populate(
+        "postedBy"
+      );
 
       if (!story) {
         return next(CustomErrorHandler.notFound());
@@ -145,6 +147,20 @@ const storyController = {
       return res.status(200).json({ story });
     } catch (error) {
       //
+    }
+  },
+
+  async getTrending(req, res, next) {
+    console.log("called");
+    try {
+      const stories = await Story.find({}).sort({
+        upVoteCount: -1,
+        commentCount: -1,
+      });
+      console.log(stories);
+      return res.status(200).json({ trending: stories });
+    } catch (error) {
+      console.log(error);
     }
   },
 };
