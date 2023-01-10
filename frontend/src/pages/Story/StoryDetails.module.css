@@ -7,6 +7,11 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  width: 50%;
+  margin-top: 20px;
+  justify-content: space-around;
+  border-radius: 10px;
+  background-color: #1d1a1e;
 }
 
 .right {
@@ -17,6 +22,7 @@
   margin: 0 auto;
   margin-top: 20px;
   border-radius: 10px;
+  width: 45%;
 }
 
 .mediaWrapper {
@@ -38,9 +44,11 @@
 
 .commentsWrapper {
   background-color: #3d3b3e;
-  height: 300px;
-  width: 400px;
-  margin: 10px 0;
+  height: 100%;
+  margin: 30px;
+  margin-left: 15px;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .mediaStats {

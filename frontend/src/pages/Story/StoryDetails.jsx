@@ -4,6 +4,8 @@ import styles from "./StoryDetails.module.css";
 import TextStoryDetails from "./Text/TextStoryDetails";
 import VideoStoryDetails from "./Video/VideoStoryDetails";
 import ImageStoryDetails from "./Image/ImageStoryDetails";
+import CommentSection from "../../components/Comments/CommentSection";
+import { mockComments } from "../../mock/mock-data";
 
 const StoryDetails = () => {
   const location = useLocation();
@@ -49,8 +51,9 @@ const StoryDetails = () => {
             </div>
           </div>
           <div className={styles.left}>
-            <div className={styles.commentsWrapper}></div>
-            <input type="text" className={styles.comment} />
+            <div className={styles.commentsWrapper}>
+              <CommentSection comments={mockComments} />
+            </div>
           </div>
         </div>
       </div>
