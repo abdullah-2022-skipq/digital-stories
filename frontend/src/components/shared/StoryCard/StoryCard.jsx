@@ -44,6 +44,7 @@ const StoryCard = ({ story }) => {
           <VideoStoryCard caption={story.caption} video={story.video} />
         )}
       </div>
+
       <div
         className={styles.avatarWrapper}
         style={{ border: `3px solid ${randomColor}` }}
