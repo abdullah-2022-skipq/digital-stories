@@ -10,7 +10,7 @@ const StoryCard = ({ story }) => {
   const navigate = useHistory();
 
   const onStoryClickHandler = async (e) => {
-    navigate.push("/story", story);
+    navigate.push("/story", { story, randomColor: randomColor });
   };
 
   const avatarWrapperColors = [
