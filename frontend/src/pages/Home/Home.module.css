@@ -75,6 +75,11 @@
   align-items: center;
 }
 
+.searchButton:hover,
+.searchButton:disabled {
+  background-color: #014a9c;
+}
+
 .createStoryButton {
   display: flex;
   align-items: center;
