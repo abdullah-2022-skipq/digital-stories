@@ -15,6 +15,7 @@ import { createContext, useState } from "react";
 import StepChooseMediaType from "./pages/MultiStepCreateStoryForm/StepChooseMediaType/StepChooseMediaType";
 import StepStoryContent from "./pages/MultiStepCreateStoryForm/StepStoryContent/StepStoryContent";
 import StoryDetails from "./pages/Story/StoryDetails";
+import Trending from "./pages/Trending/Trending";
 
 export const globalContext = createContext();
 
@@ -81,6 +82,12 @@ function App() {
               <ProtectedRoute exact path="/story">
                 <div className="main">
                   <StoryDetails />
+                </div>
+              </ProtectedRoute>
+
+              <ProtectedRoute exact path="/trending">
+                <div className="main">
+                  <Trending />
                 </div>
               </ProtectedRoute>
 
