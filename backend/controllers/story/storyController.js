@@ -151,13 +151,13 @@ const storyController = {
   },
 
   async getTrending(req, res, next) {
-    console.log("called");
+    // console.log("called");
     try {
       const stories = await Story.find({}).sort({
         upVoteCount: -1,
         commentCount: -1,
       });
-      console.log(stories);
+      // console.log(stories);
       return res.status(200).json({ trending: stories });
     } catch (error) {
       console.log(error);
