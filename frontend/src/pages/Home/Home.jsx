@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState, useRef } from "react";
 import styles from "./Home.module.css";
-import { mockData } from "../../mock/mock-data";
 import StoryCard from "../../components/shared/StoryCard/StoryCard";
 import Spinner from "../../components/shared/Spinner/Spinner";
 import { getAllStories } from "../../api";
@@ -33,29 +32,28 @@ const Home = () => {
       });
 
       setData(targetData);
+      setDataMask(targetData);
       return;
     })();
   }, []);
 
   const [data, setData] = useState(null);
+  const [dataMask, setDataMask] = useState(null);
 
-  const inputRef = useRef();
+  const inputRef = useRef(null);
 
   const onSearchHandler = () => {
-    // filter the data based on searchQuery
-    // search query -> a string, which should be partially
-    // or completely present in the story's caption
-    console.log("clicked");
-
     const searchQuery = inputRef.current.value;
 
-    if (searchQuery == "") return;
+    if (searchQuery == "") {
+      setDataMask(data);
+    }
 
     const filteredData = data.filter((story) =>
       story.caption.includes(searchQuery)
     );
 
-    setData(filteredData);
+    setDataMask(filteredData);
   };
 
   if (!data) {
@@ -71,12 +69,14 @@ const Home = () => {
 
             <div className={styles.searchBox}>
               {/* Search icon by Icons8 */}
-
               <img src="/images/search.png" alt="search" />
               <input
                 className={styles.searchInput}
                 type="text"
                 ref={inputRef}
+                onChange={() =>
+                  inputRef.current.value == "" ? setDataMask(data) : ""
+                }
               />
             </div>
             <button className={styles.searchButton} onClick={onSearchHandler}>
@@ -96,7 +96,7 @@ const Home = () => {
         </div>
 
         <div className={styles.storyGrid}>
-          {data.map((story) => (
+          {dataMask.map((story) => (
             <StoryCard key={story._id} story={story} />
           ))}
         </div>
