@@ -6,6 +6,8 @@ import {
   refreshController,
   logoutController,
   storyController,
+  commentController,
+  votesController,
 } from "../controllers/";
 
 import { auth } from "../middlewares";
@@ -19,6 +21,9 @@ router.get("/refresh", refreshController.refresh);
 router.post("/logout", auth, logoutController.logout);
 router.get("/stories", auth, storyController.getAll);
 router.post("/stories", auth, storyController.create);
+router.get("/stories/trending", auth, storyController.getTrending);
 router.get("/stories/:id", auth, storyController.getById);
+router.post("/comment", auth, commentController.createComment);
+router.post("/like", auth, votesController.upVote);
 
 export default router;
