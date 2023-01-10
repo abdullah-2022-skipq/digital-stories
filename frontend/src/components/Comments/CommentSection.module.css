@@ -1,0 +1,18 @@
+.commentSectionWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: inherit;
+  height: inherit;
+}
+.commentForm {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.commentForm input {
+  margin-right: 10px;
+  padding: 5px;
+}
