@@ -28,7 +28,7 @@ const VideoStory = () => {
       video,
       postedBy,
     };
-    console.log("dto", story);
+
     const response = await createStory(story);
     if (response.status == 201) {
       onPrevHandler(); // reset the create story form to step 1
