@@ -40,17 +40,21 @@ const Home = () => {
   const [data, setData] = useState(null);
   const [dataMask, setDataMask] = useState(null);
 
+  const [activeView, setActiveView] = useState("grid");
+
   const inputRef = useRef(null);
 
   const onSearchHandler = () => {
-    const searchQuery = inputRef.current.value;
+    let searchQuery = inputRef.current.value;
 
     if (searchQuery == "") {
       setDataMask(data);
     }
 
+    searchQuery = searchQuery.toLowerCase();
+
     const filteredData = data.filter((story) =>
-      story.caption.includes(searchQuery)
+      story.caption.toLowerCase().includes(searchQuery)
     );
 
     setDataMask(filteredData);
@@ -77,6 +81,7 @@ const Home = () => {
                 onChange={() =>
                   inputRef.current.value == "" ? setDataMask(data) : ""
                 }
+                onKeyDown={(e) => (e.key == "Enter" ? onSearchHandler() : "")}
               />
             </div>
             <button className={styles.searchButton} onClick={onSearchHandler}>
@@ -94,8 +99,25 @@ const Home = () => {
             </Link>
           </div>
         </div>
-
-        <div className={styles.storyGrid}>
+        <div className={styles.storyCustomization}>
+          <img
+            className={activeView == "grid" ? styles.activeView : ""}
+            src="/images/grid.png"
+            alt="grid"
+            role="button"
+            onClick={() => setActiveView("grid")}
+          />
+          <img
+            className={activeView == "list" ? styles.activeView : ""}
+            src="/images/list.png"
+            alt="list"
+            role="buttton"
+            onClick={() => setActiveView("list")}
+          />
+        </div>
+        <div
+          className={activeView == "grid" ? styles.storyGrid : styles.storyList}
+        >
           {dataMask.map((story) => (
             <StoryCard key={story._id} story={story} />
           ))}
