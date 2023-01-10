@@ -8,6 +8,7 @@ import {
   storyController,
   commentController,
   votesController,
+  engagementController,
 } from "../controllers/";
 
 import { auth } from "../middlewares";
@@ -25,5 +26,6 @@ router.get("/stories/trending", auth, storyController.getTrending);
 router.get("/stories/:id", auth, storyController.getById);
 router.post("/comment", auth, commentController.createComment);
 router.post("/like", auth, votesController.upVote);
+router.get("/engagements", auth, engagementController.getEngagements);
 
 export default router;
