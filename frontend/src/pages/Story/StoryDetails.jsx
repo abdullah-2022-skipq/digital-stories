@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./StoryDetails.module.css";
 import TextStoryDetails from "./Text/TextStoryDetails";
@@ -6,12 +6,54 @@ import VideoStoryDetails from "./Video/VideoStoryDetails";
 import ImageStoryDetails from "./Image/ImageStoryDetails";
 import CommentSection from "../../components/Comments/CommentSection";
 import { mockComments } from "../../mock/mock-data";
+import Spinner from "../../components/shared/Spinner/Spinner";
+import { getStoryById, upVote } from "../../api";
+import { useSelector } from "react-redux";
 
 const StoryDetails = () => {
   const location = useLocation();
-  const story = location.state.story;
+  const id = location.state.id;
   const randomColor = location.state.randomColor;
+  const [story, setStory] = useState(null);
 
+  const user = useSelector((state) => state.user._id);
+
+  const upVoteHandler = async () => {
+    const data = { user, post: id };
+    const response = await upVote(data);
+    console.log(response);
+  };
+
+  useEffect(() => {
+    (async () => {
+      const response = await getStoryById(id);
+
+      // dirty fix
+      let story = response.data.story;
+      let targetData;
+
+      let postedBy = story.postedBy;
+      delete story.postedBy;
+
+      const postedBySource = { ...postedBy };
+      let postedByCleaned = {};
+
+      for (let key in postedBySource) {
+        if (postedBySource.hasOwnProperty(key)) {
+          postedByCleaned["postedBy_" + key] = postedBySource[key];
+        }
+      }
+
+      const parsedData = { ...story, ...postedByCleaned };
+      targetData = parsedData;
+      setStory(targetData);
+      return;
+    })();
+  }, []);
+
+  if (!story) {
+    return <Spinner message="Loading story, please wait" />;
+  }
   return (
     <>
       <div className="container">
@@ -67,8 +109,14 @@ const StoryDetails = () => {
           </div>
           <div className={styles.right}>
             <div className={styles.commentsWrapper}>
-              <CommentSection comments={mockComments} />
+              <CommentSection post={story._id} comments={mockComments} />
             </div>
+            <button onClick={upVoteHandler}>
+              <img src="/images/upvote-filled" alt="" />
+            </button>
+            <button>
+              <img src="/images/downvote-filled" alt="" />
+            </button>
           </div>
         </div>
       </div>
