@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./Comment.module.css";
 
 const Comment = ({ comment }) => {
-  console.log(comment);
   return (
     <div className={styles.comment}>
       <div className={styles.avatarWrapper}>
