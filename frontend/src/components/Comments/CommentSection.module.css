@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   width: inherit;
   height: inherit;
 }
+
 .commentForm {
   display: flex;
   align-items: center;
@@ -14,5 +15,5 @@
 
 .commentForm input {
   margin-right: 10px;
-  padding: 5px;
+  padding: 0 5px;
 }
