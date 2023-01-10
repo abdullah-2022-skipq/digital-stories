@@ -16,7 +16,7 @@ const StoryDetails = () => {
     <>
       <div className="container">
         <div className={styles.storyWrapper}>
-          <div className={styles.right}>
+          <div className={styles.left}>
             <div className={styles.storyHeader}>
               <div
                 className={styles.avatarWrapper}
@@ -28,7 +28,12 @@ const StoryDetails = () => {
                   alt="avatar"
                 />
               </div>
-              <p>@{story.postedBy_username}</p>
+              <div className={styles.storyDataWrapper}>
+                <div>@{story.postedBy_username}</div>
+                <div className={styles.storyCreatedAt}>
+                  {new Date(story.createdAt).toDateString()}
+                </div>
+              </div>
             </div>
             <div className={styles.mediaWrapper}>
               {story.mediaType == "text" && (
@@ -38,8 +43,18 @@ const StoryDetails = () => {
                   fontColor={story.fontColor}
                 />
               )}
-              {story.mediaType == "image" && <ImageStoryDetails />}
-              {story.mediaType == "video" && <VideoStoryDetails />}
+              {story.mediaType == "image" && (
+                <ImageStoryDetails
+                  caption={story.caption}
+                  image={story.image}
+                />
+              )}
+              {story.mediaType == "video" && (
+                <VideoStoryDetails
+                  caption={story.caption}
+                  video={story.video}
+                />
+              )}
             </div>
             <div className={styles.mediaStatsWrapper}>
               <div className={styles.mediaStats}>
@@ -50,7 +65,7 @@ const StoryDetails = () => {
               </div>
             </div>
           </div>
-          <div className={styles.left}>
+          <div className={styles.right}>
             <div className={styles.commentsWrapper}>
               <CommentSection comments={mockComments} />
             </div>
