@@ -49,6 +49,8 @@ export const logout = async () => await api.post("/api/logout");
 
 export const getAllStories = async () => await api.get("/api/stories");
 
+export const getTrendingStories = async () => api.get("/api/stories/trending");
+
 export const getStoryById = async (id) => await api.get(`/api/stories/${id}`);
 
 export const createStory = async (story) => {
@@ -99,6 +101,28 @@ export const createStory = async (story) => {
     } catch (error) {
       //
     }
+  }
+};
+
+export const createComment = async (data) => {
+  try {
+    const { text, user, post } = data;
+    const response = await api.post("/api/comment", { text, user, post });
+
+    return response;
+  } catch (error) {
+    //
+  }
+};
+
+export const upVote = async (data) => {
+  try {
+    const { user, post } = data;
+    const response = await api.post("/api/like", { user, post });
+
+    return response;
+  } catch (error) {
+    //
   }
 };
 
