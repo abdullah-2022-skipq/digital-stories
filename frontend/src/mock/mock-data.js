@@ -100,3 +100,72 @@ export const mockData = [
     image: "",
   },
 ];
+
+export const mockComments = [
+  {
+    avatar: "http://localhost:5544/storage/default.png",
+    username: "John Doe",
+    text: "Great story!",
+    date: "January 1, 2021",
+  },
+  {
+    avatar: "http://localhost:5544/storage/default2.png",
+    username: "Jane Smith",
+    text: "Thanks for sharing. I will definitely try this out.",
+    date: "January 2, 2021",
+  },
+  {
+    avatar: "http://localhost:5544/storage/default2.png",
+    username: "Bob Johnson",
+    text: "Meh",
+    date: "January 3, 2021",
+  },
+  {
+    avatar: "http://localhost:5544/storage/default2.png",
+    username: "Jane Smith",
+    text: "Thanks for sharing. I will definitely try this out.",
+    date: "January 2, 2021",
+  },
+  {
+    avatar: "http://localhost:5544/storage/default2.png",
+    username: "Bob Johnson",
+    text: "Meh",
+    date: "January 3, 2021",
+  },
+  {
+    avatar: "http://localhost:5544/storage/default2.png",
+    username: "Jane Smith",
+    text: "Thanks for sharing. I will definitely try this out.",
+    date: "January 2, 2021",
+  },
+  {
+    avatar: "http://localhost:5544/storage/default2.png",
+    username: "Bob Johnson",
+    text: "Meh",
+    date: "January 3, 2021",
+  },
+  {
+    avatar: "http://localhost:5544/storage/default2.png",
+    username: "Jane Smith",
+    text: "Thanks for sharing. I will definitely try this out.",
+    date: "January 2, 2021",
+  },
+  {
+    avatar: "http://localhost:5544/storage/default2.png",
+    username: "Bob Johnson",
+    text: "Meh",
+    date: "January 3, 2021",
+  },
+  {
+    avatar: "http://localhost:5544/storage/default2.png",
+    username: "Jane Smith",
+    text: "Thanks for sharing. I will definitely try this out.",
+    date: "January 2, 2021",
+  },
+  {
+    avatar: "http://localhost:5544/storage/default2.png",
+    username: "Bob Johnson",
+    text: "Meh",
+    date: "January 3, 2021",
+  },
+];
