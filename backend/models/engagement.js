@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 const engagementSchema = new Schema(
   {
     action: { type: String, required: true },
-    byUser: { type: mongoose.SchemaTypes.ObjectId, ref: "users" },
-    onPost: { type: mongoose.SchemaTypes.ObjectId, ref: "stories" },
-    forUser: { type: mongoose.SchemaTypes.ObjectId, ref: "users" },
+    byUser: { type: mongoose.SchemaTypes.ObjectId, ref: "User" },
+    onPost: { type: mongoose.SchemaTypes.ObjectId, ref: "Story" },
+    forUser: { type: mongoose.SchemaTypes.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );
