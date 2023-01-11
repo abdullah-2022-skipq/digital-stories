@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./Comment.module.css";
 
 const Comment = ({ comment }) => {
+  const date = new Date(comment.postedAt).toDateString();
+
   return (
     <>
       <div className={styles.comment}>
@@ -12,12 +14,10 @@ const Comment = ({ comment }) => {
             alt="avatar"
           />
         </div>
-        <div className={styles.commentContent}>
-          <div className={styles.commentHeader}>
-            <span className={styles.username}>{comment.username}</span>
-            <span className={styles.date}>{comment.postedAt}</span>
-          </div>
-          <p className={styles.commentText}>{comment.text}</p>
+        <div className={styles.commentHeader}>
+          <div className={styles.username}>{comment.username}</div>
+          <div className={styles.date}>{date}</div>
+          <div className={styles.commentText}>{comment.text}</div>
         </div>
       </div>
     </>
