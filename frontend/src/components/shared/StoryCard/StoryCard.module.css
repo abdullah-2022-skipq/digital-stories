@@ -8,6 +8,21 @@
   margin-top: auto;
 }
 
+.cardList {
+  background: #262625;
+  padding: 20px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 70%;
+  height: 40%;
+  margin-bottom: auto;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 30px;
+  align-items: center;
+}
+
 .card img {
   border-radius: 10px;
 }

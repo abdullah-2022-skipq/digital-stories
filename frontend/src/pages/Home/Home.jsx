@@ -100,7 +100,11 @@ const Home = () => {
           className={activeView == "grid" ? styles.storyGrid : styles.storyList}
         >
           {dataMask.map((story) => (
-            <StoryCard key={story._id} story={story} />
+            <StoryCard
+              key={story._id}
+              story={story}
+              grid={activeView == "grid"}
+            />
           ))}
         </div>
       </div>

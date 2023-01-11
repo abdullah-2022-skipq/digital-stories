@@ -6,7 +6,7 @@ import ImageStoryCard from "./Image/ImageStoryCard";
 import VideoStoryCard from "./Video/VideoStoryCard";
 
 // https://source.unsplash.com/random/250×250/?nature
-const StoryCard = ({ story }) => {
+const StoryCard = ({ story, grid }) => {
   const navigate = useHistory();
 
   const onStoryClickHandler = async (e) => {
@@ -26,7 +26,10 @@ const StoryCard = ({ story }) => {
     avatarWrapperColors[Math.floor(Math.random() * avatarWrapperColors.length)];
 
   return (
-    <div className={styles.card} onClick={(e) => onStoryClickHandler(e)}>
+    <div
+      className={`${grid ? styles.card : styles.cardList}`}
+      onClick={(e) => onStoryClickHandler(e)}
+    >
       <div
         className={`${styles.mediaWrapper} ${
           story.mediaType == "text" && styles.mediaWrapperText

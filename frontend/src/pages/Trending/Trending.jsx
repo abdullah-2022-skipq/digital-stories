@@ -26,7 +26,7 @@ const Trending = () => {
       <div className="container">
         <div className={styles.storyGrid}>
           {data.map((story) => (
-            <StoryCard key={story._id} story={story} />
+            <StoryCard key={story._id} story={story} grid={true} />
           ))}
         </div>
       </div>

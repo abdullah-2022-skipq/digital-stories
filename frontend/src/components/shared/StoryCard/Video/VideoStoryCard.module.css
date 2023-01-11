@@ -1,5 +1,11 @@
 .videoWrapper video {
-  max-height: 240px;
-  max-width: 320px;
+  width: 640px;
+  height: 280px;
   border-radius: 10px;
+  object-fit: cover;
+  border-radius: 1px;
+}
+
+.videoWrapper {
+  overflow: hidden;
 }
