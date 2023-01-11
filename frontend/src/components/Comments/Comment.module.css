@@ -10,16 +10,14 @@
   border-radius: 50%;
   object-fit: cover; /*todo*/
   border: 3px solid #0077ff;
-  width: 45px;
-  height: 45px;
-}
-
-.commentHeader {
-  display: flex;
-  align-items: center;
+  min-width: 45px;
+  min-height: 45px;
+  max-width: 45px;
+  max-height: 45px;
 }
 
 .username {
+  color: #c4c5c5;
   font-weight: bold;
   margin-right: 10px;
 }
@@ -27,6 +25,7 @@
 .date {
   font-size: 12px;
   color: #c4c5c5;
+  font-weight: bold;
 }
 
 .avatarWrapper {
@@ -35,6 +34,10 @@
   outline: none;
 }
 
-.commentContent {
-  text-align: left;
+.commentHeader div {
+  margin: 2px 0;
+}
+
+.commentText {
+  font-size: 18px;
 }
