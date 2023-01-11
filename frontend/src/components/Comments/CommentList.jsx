@@ -5,11 +5,14 @@ import Comment from "./Comment";
 const CommentList = ({ comments }) => {
   return (
     <>
+      {console.log(comments)}
       <div className={styles.commentListWrapper}>
         <div className={styles.commentList}>
-          {comments.map((comment, i) => (
-            <Comment key={i} comment={comment} />
-          ))}
+          {comments.length == 0 ? (
+            <div className={styles.noComments}>No comments yet</div>
+          ) : (
+            comments.map((comment, i) => <Comment key={i} comment={comment} />)
+          )}
         </div>
       </div>
     </>
