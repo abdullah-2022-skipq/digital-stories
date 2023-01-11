@@ -64,8 +64,16 @@
   justify-content: space-around;
 }
 
-.mediaStats p {
+.mediaStats div {
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mediaStats img {
+  cursor: pointer;
 }
 
 .avatarWrapper {
