@@ -106,8 +106,8 @@ export const createStory = async (story) => {
 
 export const createComment = async (data) => {
   try {
-    const { text, user, post } = data;
-    const response = await api.post("/api/comment", { text, user, post });
+    const { text, user, story } = data;
+    const response = await api.post("/api/comment", { text, user, story });
 
     return response;
   } catch (error) {
@@ -118,7 +118,7 @@ export const createComment = async (data) => {
 export const upVoteStory = async (data) => {
   try {
     const { user, post } = data;
-    const response = await api.post("/api/like", { user, post });
+    const response = await api.post("/api/upvote", { user, post });
 
     return response;
   } catch (error) {
@@ -126,6 +126,25 @@ export const upVoteStory = async (data) => {
   }
 };
 
+export const downVoteStory = async (data) => {
+  try {
+    const { user, post } = data;
+    const response = await api.post("/api/downvote", { user, post });
+
+    return response;
+  } catch (error) {
+    //
+  }
+};
+
+export const getCommentsByPostId = async (id) => {
+  try {
+    const response = await api.get(`/api/comments/${id}`);
+    return response;
+  } catch (error) {
+    //
+  }
+};
 // interceptor for auto token refresh
 api.interceptors.response.use(
   (config) => {
