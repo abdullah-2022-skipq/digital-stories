@@ -5,6 +5,7 @@ import Jimp from "jimp";
 import path from "path";
 import fs from "fs";
 import { CustomErrorHandler } from "../../services";
+import { StoryDTO } from "../../dtos/story-dto";
 
 const storyController = {
   async create(req, res, next) {
@@ -116,7 +117,14 @@ const storyController = {
     try {
       const stories = await Story.find().populate("postedBy");
 
-      return res.status(200).json({ stories });
+      let storiesDto = [];
+
+      for (let i = 0; i < stories.length; i++) {
+        let obj = new StoryDTO(stories[i]);
+        storiesDto.push(obj);
+      }
+
+      return res.status(200).json({ stories: storiesDto });
     } catch (error) {
       return next(error);
     }
