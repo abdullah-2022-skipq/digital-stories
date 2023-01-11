@@ -51,7 +51,7 @@ const StoryCard = ({ story }) => {
       >
         <img
           className={styles.avatarImage}
-          src={story.postedBy_avatarPath}
+          src={story.avatarPath}
           alt="avatar"
         />
       </div>

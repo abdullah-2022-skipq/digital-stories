@@ -10,29 +10,10 @@ const Home = () => {
     (async () => {
       const response = await getAllStories();
 
-      // dirty fix
       let dataFromApi = response.data.stories;
-      let targetData = [];
 
-      dataFromApi.forEach((story) => {
-        let postedBy = story.postedBy;
-        delete story.postedBy;
-
-        const postedBySource = { ...postedBy };
-        let postedByCleaned = {};
-
-        for (let key in postedBySource) {
-          if (postedBySource.hasOwnProperty(key)) {
-            postedByCleaned["postedBy_" + key] = postedBySource[key];
-          }
-        }
-
-        const parsedData = { ...story, ...postedByCleaned };
-        targetData.push(parsedData);
-      });
-
-      setData(targetData);
-      setDataMask(targetData);
+      setData(dataFromApi);
+      setDataMask(dataFromApi);
       return;
     })();
   }, []);
