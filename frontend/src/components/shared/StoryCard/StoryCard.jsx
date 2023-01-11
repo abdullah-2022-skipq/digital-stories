@@ -28,6 +28,17 @@ const StoryCard = ({ story }) => {
   return (
     <div className={styles.card} onClick={(e) => onStoryClickHandler(e)}>
       <div className={styles.mediaWrapper}>
+        <div
+          className={styles.avatarWrapper}
+          style={{ border: `3px solid ${randomColor}` }}
+        >
+          <img
+            className={styles.avatarImage}
+            src={story.avatarPath}
+            alt="avatar"
+          />
+        </div>
+
         {story.mediaType == "text" && (
           <TextStoryCard
             caption={story.caption}
@@ -43,17 +54,6 @@ const StoryCard = ({ story }) => {
         {story.mediaType == "video" && (
           <VideoStoryCard caption={story.caption} video={story.video} />
         )}
-      </div>
-
-      <div
-        className={styles.avatarWrapper}
-        style={{ border: `3px solid ${randomColor}` }}
-      >
-        <img
-          className={styles.avatarImage}
-          src={story.avatarPath}
-          alt="avatar"
-        />
       </div>
     </div>
   );
