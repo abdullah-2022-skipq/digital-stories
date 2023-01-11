@@ -1,0 +1,1 @@
+[] comment section should have a use effect call for rendering all comments from the api

@@ -54,7 +54,9 @@ const votesController = {
         { new: true }
       );
 
-      return res.status(200).json({ message: "upvoted before, now -1" });
+      console.log("upvoted before, now -1");
+
+      return res.status(200).json({ message: "upvoted before" });
     }
 
     // check already disliked
@@ -78,6 +80,8 @@ const votesController = {
         { new: true }
       );
 
+      console.log("downvoted before");
+
       return res.status(200).json({ message: "downvoted before, now level" });
     }
 
@@ -99,6 +103,8 @@ const votesController = {
     });
 
     await newUpvote.save();
+
+    console.log("nothing before");
 
     return res.status(200).json({ message: "nothing before, now +1" });
   },
@@ -142,7 +148,7 @@ const votesController = {
         { $inc: { downVoteCount: -1 } },
         { new: true }
       );
-
+      console.log("downvoted before DC");
       return res.status(200).json({ message: "downvoted before, now -1" });
     }
 
@@ -167,6 +173,8 @@ const votesController = {
         { new: true }
       );
 
+      console.log("upvoted before DC");
+
       return res.status(200).json({ message: "upvoted before, now level" });
     }
 
@@ -188,6 +196,8 @@ const votesController = {
     });
 
     await newDownvote.save();
+
+    console.log("nothing before DC");
 
     return res.status(200).json({ message: "nothing before, now -1" });
   },

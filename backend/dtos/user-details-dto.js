@@ -1,7 +1,7 @@
 import { BASE_URL, DEFAULTAVATAR } from "../config";
 
 export class UserDetailsDTO {
-  id_;
+  _id;
   name;
   username;
   createdAt;
