@@ -36,3 +36,8 @@
   display: flex;
   gap: 15px;
 }
+
+.mediaWrapperText {
+  align-items: center;
+  justify-content: center;
+}

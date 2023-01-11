@@ -27,7 +27,11 @@ const StoryCard = ({ story }) => {
 
   return (
     <div className={styles.card} onClick={(e) => onStoryClickHandler(e)}>
-      <div className={styles.mediaWrapper}>
+      <div
+        className={`${styles.mediaWrapper} ${
+          story.mediaType == "text" && styles.mediaWrapperText
+        }`}
+      >
         <div
           className={styles.avatarWrapper}
           style={{ border: `3px solid ${randomColor}` }}
