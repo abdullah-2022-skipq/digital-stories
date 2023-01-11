@@ -115,7 +115,7 @@ export const createComment = async (data) => {
   }
 };
 
-export const upVote = async (data) => {
+export const upVoteStory = async (data) => {
   try {
     const { user, post } = data;
     const response = await api.post("/api/like", { user, post });
