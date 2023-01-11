@@ -36,8 +36,9 @@
   background: transparent;
   outline: none;
   border: none;
-  color: #e9e9ea;
-  padding: 5px;
+  color: #bebcc0;
+  padding: 5px 10px;
+  font-size: 18px;
   width: 100%; /* Take 100% of its parent's width */
 }
 
@@ -47,7 +48,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px 20px;
+  padding: 8px 20px;
   border-radius: 20px;
   display: flex;
   align-items: center;
