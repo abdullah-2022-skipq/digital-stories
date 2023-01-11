@@ -1,15 +1,15 @@
 .comment {
   display: flex;
-  align-items: flex-start;
-  padding: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  margin: 10px;
 }
 
 .commentAvatar {
   border-radius: 50%;
   object-fit: cover; /*todo*/
   border: 3px solid #0077ff;
-  margin: 0 20px;
-  margin-right: 10px;
   width: 45px;
   height: 45px;
 }
@@ -33,5 +33,8 @@
   background-color: transparent;
   border: none;
   outline: none;
-  cursor: pointer;
+}
+
+.commentContent {
+  text-align: left;
 }

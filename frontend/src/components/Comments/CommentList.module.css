@@ -1,3 +1,12 @@
+.commentListWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: inherit;
+  height: inherit;
+}
+
 .commentList {
   height: 60vh;
   overflow-y: auto;

@@ -1,28 +1,31 @@
 .storyWrapper {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .left {
   display: flex;
   flex-direction: column;
-  /* margin: 0 auto; */
   width: 50%;
-  margin-top: 20px;
-  justify-content: space-around;
+  margin: 20px auto;
+  justify-content: space-evenly;
   border-radius: 10px;
   background-color: #1d1a1e;
+  gap: 15px;
+  padding: 25px 0;
 }
 
 .right {
   display: flex;
   flex-direction: column;
   background-color: #1d1a1e;
-  justify-content: space-around;
-  margin: 0 auto;
-  margin-top: 20px;
+  justify-content: space-evenly;
+  margin: 20px auto;
   border-radius: 10px;
   width: 45%;
+  gap: 15px;
+  padding: 15px 0;
 }
 
 .mediaWrapper {
@@ -30,7 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px 20px;
+  margin: 0 20px;
   border-radius: 10px;
 }
 
@@ -43,13 +46,14 @@
 
 .commentsWrapper {
   background-color: #3d3b3e;
-  height: 90%;
   margin: 30px;
-  margin-bottom: 5px;
-  margin-left: 15px;
   border-radius: 10px;
   padding: 10px;
-  padding-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
 .mediaStats {
@@ -72,8 +76,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin: 10px 20px;
-  margin-bottom: 0px;
+  margin: 0 20px;
 }
 
 .avatarImage {
@@ -104,4 +107,9 @@
   color: #c4c5c5;
   font-weight: bold;
   font-size: 12px;
+}
+
+.postComment {
+  display: flex;
+  gap: 10px;
 }
