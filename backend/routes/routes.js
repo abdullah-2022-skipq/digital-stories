@@ -25,6 +25,7 @@ router.post("/stories", auth, storyController.create);
 router.get("/stories/trending", auth, storyController.getTrending);
 router.get("/stories/:id", auth, storyController.getById);
 router.post("/comment", auth, commentController.createComment);
+router.get("/comments/:id", auth, commentController.getCommentsByPostId);
 router.post("/like", auth, votesController.upVote);
 router.get("/engagements", auth, engagementController.getEngagements);
 
