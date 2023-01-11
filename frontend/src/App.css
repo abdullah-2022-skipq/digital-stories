@@ -74,3 +74,17 @@ body {
 .hasAccountAlready {
   color: #0077ff;
 }
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 30px;
+  background-color: #5b5b5b;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #2a292a;
+}
