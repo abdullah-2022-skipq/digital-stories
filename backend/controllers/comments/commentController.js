@@ -1,46 +1,46 @@
 import { Comment, Engagement, Story } from "../../models";
 import Joi from "joi";
+import { CustomErrorHandler } from "../../services";
 
 const commentController = {
   async createComment(req, res, next) {
-    try {
-      // notes
-      /* 
+    // notes
+    /* 
         when a user makes a comment then we should
         1. create a doc in comments collection
         2. update count of comments in stories collection
         3. create a doc in engagements section
         */
 
-      const createCommentSchema = Joi.object({
-        text: Joi.string().required(),
-        user: Joi.string()
-          .regex(/^[0-9a-fA-F]{24}$/)
-          .required(),
-        post: Joi.string()
-          .regex(/^[0-9a-fA-F]{24}$/)
-          .required(),
-      });
+    const createCommentSchema = Joi.object({
+      text: Joi.string().required(),
+      user: Joi.string()
+        .regex(/^[0-9a-fA-F]{24}$/)
+        .required(),
+      story: Joi.string()
+        .regex(/^[0-9a-fA-F]{24}$/)
+        .required(),
+    });
 
-      const { error } = createCommentSchema.validate(req.body);
+    const { error } = createCommentSchema.validate(req.body);
 
-      if (error) {
-        return next(error);
-      }
+    if (error) {
+      return next(error);
+    }
 
-      const { text, user, post } = req.body;
-
+    const { text, user, story } = req.body;
+    try {
       const newComment = new Comment({
         text,
         user,
-        post,
+        story,
       });
 
       await newComment.save();
 
       // update count in story
-      const story = await Story.findOneAndUpdate(
-        { _id: post },
+      const storyRes = await Story.findOneAndUpdate(
+        { _id: story },
         { $inc: { commentCount: 1 } },
         { new: true }
       );
@@ -49,14 +49,38 @@ const commentController = {
       const newEngagement = new Engagement({
         action: "comment",
         byUser: user,
-        onPost: post,
-        forUser: story.postedBy,
+        onPost: story,
+        forUser: storyRes.postedBy,
       });
 
       await newEngagement.save();
 
       return res.status(201).json("comment posted successfully");
     } catch (error) {}
+  },
+
+  async getCommentsByPostId(req, res, next) {
+    const getCommentsByPostIdSchema = Joi.object({
+      id: Joi.string()
+        .regex(/^[0-9a-fA-F]{24}$/)
+        .required(),
+    });
+
+    const { error } = getCommentsByPostIdSchema.validate(req.params);
+
+    if (error) return next(error);
+
+    try {
+      const comments = await Comment.find({ story: req.params.id });
+
+      if (!comments) {
+        return next(CustomErrorHandler.notFound());
+      }
+
+      return res.status(200).json({ comments });
+    } catch (error) {
+      //
+    }
   },
 };
 
