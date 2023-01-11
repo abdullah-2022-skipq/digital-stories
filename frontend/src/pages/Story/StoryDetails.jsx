@@ -63,29 +63,13 @@ const StoryDetails = () => {
 
       let story = storyResponse.data.story;
 
-      let postedBy = story.postedBy;
-
-      delete story.postedBy;
-
-      const postedBySource = { ...postedBy };
-
-      let postedByCleaned = {};
-
-      for (let key in postedBySource) {
-        if (postedBySource.hasOwnProperty(key)) {
-          postedByCleaned["postedBy_" + key] = postedBySource[key];
-        }
-      }
-
-      const parsedData = { ...story, ...postedByCleaned };
-
       console.log("called");
 
       const commentsResponse = await getCommentsByPostId(id);
 
       setStoryComments(commentsResponse.data.comments);
 
-      setStory(parsedData);
+      setStory(story);
       return;
     })();
   }, [reload]);
@@ -105,12 +89,12 @@ const StoryDetails = () => {
               >
                 <img
                   className={styles.avatarImage}
-                  src={story.postedBy_avatarPath}
+                  src={story.avatarPath}
                   alt="avatar"
                 />
               </div>
               <div className={styles.storyDataWrapper}>
-                <div>@{story.postedBy_username}</div>
+                <div>@{story.username}</div>
                 <div className={styles.storyCreatedAt}>
                   {new Date(story.createdAt).toDateString()}
                 </div>
