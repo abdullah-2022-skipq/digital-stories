@@ -1,6 +1,7 @@
 import { Comment, Engagement, Story } from "../../models";
 import Joi from "joi";
 import { CustomErrorHandler } from "../../services";
+import { PostCommentsDTO } from "../../dtos/post-comments-dto";
 
 const commentController = {
   async createComment(req, res, next) {
@@ -71,13 +72,22 @@ const commentController = {
     if (error) return next(error);
 
     try {
-      const comments = await Comment.find({ story: req.params.id });
+      const comments = await Comment.find({ story: req.params.id }).populate(
+        "user"
+      );
 
       if (!comments) {
         return next(CustomErrorHandler.notFound());
       }
 
-      return res.status(200).json({ comments });
+      let commentsDto = [];
+
+      for (let i = 0; i < comments.length; i++) {
+        let obj = new PostCommentsDTO(comments[i]);
+        commentsDto.push(obj);
+      }
+
+      return res.status(200).json({ comments: commentsDto });
     } catch (error) {
       //
     }
