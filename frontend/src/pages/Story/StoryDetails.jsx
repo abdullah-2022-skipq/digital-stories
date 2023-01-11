@@ -5,9 +5,14 @@ import TextStoryDetails from "./Text/TextStoryDetails";
 import VideoStoryDetails from "./Video/VideoStoryDetails";
 import ImageStoryDetails from "./Image/ImageStoryDetails";
 import CommentList from "../../components/Comments/CommentList";
-import { mockComments } from "../../mock/mock-data";
 import Spinner from "../../components/shared/Spinner/Spinner";
-import { getStoryById, upVoteStory, createComment } from "../../api";
+import {
+  getStoryById,
+  upVoteStory,
+  createComment,
+  getCommentsByPostId,
+  downVoteStory,
+} from "../../api";
 import { useSelector } from "react-redux";
 import TextInput from "../../components/shared/TextInput/TextInput";
 import Button from "../../components/shared/Button/Button";
@@ -29,35 +34,41 @@ const StoryDetails = () => {
   const upVoteHandler = async () => {
     const data = { user, post: id };
     await upVoteStory(data);
+    setReload(!reload);
     // maybe display a message what backend did but later
   };
 
   const downVoteHandler = async () => {
-    //
+    const data = { user, post: id };
+    await downVoteStory(data);
+    setReload(!reload);
   };
 
   const commentInput = useRef(""); // focuses input when user clicks on comment button
 
   const [newComment, setNewComment] = useState("");
 
+  const [storyComments, setStoryComments] = useState([]);
+
   const postCommentHandler = async () => {
-    const data = { user, text: newComment, post: id };
+    const data = { user, text: newComment, story: id };
     const response = await createComment(data);
-    console.log(response);
     setNewComment("");
     setReload(!reload);
   };
 
   useEffect(() => {
     (async () => {
-      const response = await getStoryById(id);
+      const storyResponse = await getStoryById(id);
 
-      let story = response.data.story;
+      let story = storyResponse.data.story;
 
       let postedBy = story.postedBy;
+
       delete story.postedBy;
 
       const postedBySource = { ...postedBy };
+
       let postedByCleaned = {};
 
       for (let key in postedBySource) {
@@ -69,8 +80,12 @@ const StoryDetails = () => {
       const parsedData = { ...story, ...postedByCleaned };
 
       console.log("called");
-      setStory(parsedData);
 
+      const commentsResponse = await getCommentsByPostId(id);
+
+      setStoryComments(commentsResponse.data.comments);
+
+      setStory(parsedData);
       return;
     })();
   }, [reload]);
@@ -129,6 +144,7 @@ const StoryDetails = () => {
                     src="/images/upvote-filled.png"
                     alt="upvote"
                     role="button"
+                    onClick={upVoteHandler}
                   />
                   {story.upVoteCount}
                 </div>
@@ -138,6 +154,7 @@ const StoryDetails = () => {
                     src="/images/downvote-filled.png"
                     alt="downvote"
                     role="button"
+                    onClick={downVoteHandler}
                   />
                   {story.downVoteCount}
                 </div>
@@ -159,7 +176,7 @@ const StoryDetails = () => {
           </div>
           <div className={styles.right}>
             <div className={styles.commentsWrapper}>
-              <CommentList post={story._id} comments={mockComments} />
+              <CommentList comments={storyComments} />
               <div className={styles.postComment} ref={commentInput}>
                 <TextInput
                   placeholder="Write a comment"
