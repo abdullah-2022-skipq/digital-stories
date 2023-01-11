@@ -185,6 +185,9 @@ const StoryDetails = () => {
                   onChange={(e) => {
                     setNewComment(e.target.value);
                   }}
+                  onKeyDown={(e) =>
+                    e.key == "Enter" ? postCommentHandler() : ""
+                  }
                 />
                 <Button
                   onClick={postCommentHandler}
