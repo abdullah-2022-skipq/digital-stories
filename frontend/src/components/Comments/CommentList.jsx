@@ -5,7 +5,6 @@ import Comment from "./Comment";
 const CommentList = ({ comments }) => {
   return (
     <>
-      {console.log(comments)}
       <div className={styles.commentListWrapper}>
         <div className={styles.commentList}>
           {comments.map((comment, i) => (

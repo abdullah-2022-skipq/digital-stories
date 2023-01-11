@@ -181,6 +181,7 @@ const StoryDetails = () => {
                 <TextInput
                   placeholder="Write a comment"
                   style={{ fontSize: "16px", padding: "8px 20px" }}
+                  value={newComment}
                   onChange={(e) => {
                     setNewComment(e.target.value);
                   }}
