@@ -96,7 +96,12 @@
 .storyHeader {
   display: flex;
   justify-content: space-between;
-  margin: 0 20px;
+  margin: 15px 20px;
+  align-items: center;
+}
+
+.storyHeaderFlex {
+  display: flex;
 }
 
 .storyHeader p {
@@ -118,6 +123,5 @@
 }
 
 .postComment {
-  /* display: flex; */
   gap: 10px;
 }

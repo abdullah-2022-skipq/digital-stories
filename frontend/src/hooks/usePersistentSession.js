@@ -13,7 +13,7 @@ export const usePersistentSession = () => {
     (async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_REACT_APP_API_PATH}/api/refresh`,
+          `${process.env.VITE_REACT_APP_API_PATH}/api/refresh`,
           { withCredentials: true }
         );
 
