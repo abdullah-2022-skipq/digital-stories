@@ -4,17 +4,6 @@ import { Story } from "../../models";
 
 const votesController = {
   async upVote(req, res, next) {
-    /*
-        1. check if already liked
-         -> if yes then delete record and return
-        2. check if already disliked
-         -> if yes then delete dislike record and add like record
-        if no then add like record
-
-        in any case, update story and engagement collection accordingly
-
-        */
-
     const upvoteSchema = Joi.object({
       user: Joi.string()
         .regex(/^[0-9a-fA-F]{24}$/)
@@ -54,9 +43,7 @@ const votesController = {
         { new: true }
       );
 
-      console.log("upvoted before, now -1");
-
-      return res.status(200).json({ message: "upvoted before" });
+      return res.status(200).json({ message: "voted successfully" });
     }
 
     // check already disliked
@@ -73,14 +60,25 @@ const votesController = {
         onPost: post,
       });
 
+      const newUpvote = new Engagement({
+        action: "upvote",
+        byUser: user,
+        onPost: post,
+      });
+
+      await newUpvote.save();
+
       // update story
       await Story.findOneAndUpdate(
         { _id: post },
-        { $inc: { downVoteCount: -1, upVoteCount: 1 } },
+        { $inc: { downVoteCount: -1 } },
         { new: true }
       );
-
-      console.log("downvoted before");
+      await Story.findOneAndUpdate(
+        { _id: post },
+        { $inc: { upVoteCount: 1 } },
+        { new: true }
+      );
 
       return res.status(200).json({ message: "downvoted before, now level" });
     }
@@ -90,9 +88,6 @@ const votesController = {
       { $inc: { upVoteCount: 1 } },
       { new: true }
     );
-
-    // console.log(story);
-    // return;
 
     // if not both then add record for upvote
     const newUpvote = new Engagement({
@@ -104,9 +99,7 @@ const votesController = {
 
     await newUpvote.save();
 
-    console.log("nothing before");
-
-    return res.status(200).json({ message: "nothing before, now +1" });
+    return res.status(200).json({ message: "voted successfully" });
   },
 
   async downVote(req, res, next) {
@@ -148,8 +141,8 @@ const votesController = {
         { $inc: { downVoteCount: -1 } },
         { new: true }
       );
-      console.log("downvoted before DC");
-      return res.status(200).json({ message: "downvoted before, now -1" });
+
+      return res.status(200).json({ message: "voted successfully" });
     }
 
     // check already liked
@@ -166,16 +159,28 @@ const votesController = {
         onPost: post,
       });
 
+      const newDownvote = new Engagement({
+        action: "downvote",
+        byUser: user,
+        onPost: post,
+      });
+
+      await newDownvote.save();
+
       // update story
       await Story.findOneAndUpdate(
         { _id: post },
-        { $inc: { upVoteCount: -1, downVoteCount: 1 } },
+        { $inc: { upVoteCount: -1 } },
         { new: true }
       );
 
-      console.log("upvoted before DC");
+      await Story.findOneAndUpdate(
+        { _id: post },
+        { $inc: { downVoteCount: 1 } },
+        { new: true }
+      );
 
-      return res.status(200).json({ message: "upvoted before, now level" });
+      return res.status(200).json({ message: "voted successfully" });
     }
 
     const story = await Story.findOneAndUpdate(
@@ -183,9 +188,6 @@ const votesController = {
       { $inc: { downVoteCount: 1 } },
       { new: true }
     );
-
-    // console.log(story);
-    // return;
 
     // if not both then add record for upvote
     const newDownvote = new Engagement({
@@ -197,9 +199,7 @@ const votesController = {
 
     await newDownvote.save();
 
-    console.log("nothing before DC");
-
-    return res.status(200).json({ message: "nothing before, now -1" });
+    return res.status(200).json({ message: "voted successfully" });
   },
 };
 export default votesController;

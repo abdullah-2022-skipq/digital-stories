@@ -2,7 +2,7 @@ import Joi from "joi";
 import { CustomErrorHandler, TokenService } from "../../services";
 import { User } from "../../models";
 import bcrypt from "bcrypt";
-import { UserDetailsDTO } from "../../dtos/user-details-dto";
+import { UserDetailsDTO } from "../../dtos/";
 import Jimp from "jimp";
 import path from "path";
 import { REFRESH_TOKEN_SECRET, DEFAULTAVATAR } from "../../config";

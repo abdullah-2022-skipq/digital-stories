@@ -1,7 +1,7 @@
 import { Comment, Engagement, Story } from "../../models";
 import Joi from "joi";
 import { CustomErrorHandler } from "../../services";
-import { PostCommentsDTO } from "../../dtos/post-comments-dto";
+import { PostCommentsDTO } from "../../dtos/";
 
 const commentController = {
   async createComment(req, res, next) {

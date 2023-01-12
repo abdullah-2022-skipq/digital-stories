@@ -1,4 +1,4 @@
-[] index.js for dtos
+[x] index.js for dtos
 [] rename as -
 [] refactor
 [] remove logs

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_REACT_APP_API_PATH,
+  baseURL: process.env.REACT_APP_API_PATH,
   withCredentials: true,
   headers: {
     "Content-type": "application/json",
@@ -145,6 +145,10 @@ export const getCommentsByPostId = async (id) => {
     //
   }
 };
+
+export const deletePostById = async (id) => {
+  return await api.delete(`/api/stories/${id}`);
+};
 // interceptor for auto token refresh
 api.interceptors.response.use(
   (config) => {
@@ -162,7 +166,7 @@ api.interceptors.response.use(
 
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_REACT_APP_API_PATH}/api/refresh`,
+          `${process.env.VITE_REACT_APP_API_PATH}/api/refresh`,
           {
             withCredentials: true,
           }

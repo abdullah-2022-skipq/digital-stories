@@ -30,7 +30,7 @@ const TextStory = () => {
       caption,
       font,
       fontColor:
-        fontColor == "blue"
+        fontColor == "#0077ff"
           ? "blue"
           : fontColor == "#33b357"
           ? "green"
@@ -39,6 +39,7 @@ const TextStory = () => {
     };
 
     const response = await createStory(story);
+
     if (response.status == 201) {
       onPrevHandler(); // reset the create story form to step 1
       navigate.push("/");

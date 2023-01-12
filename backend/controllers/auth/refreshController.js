@@ -1,7 +1,7 @@
 import { TokenService } from "../../services";
 import { REFRESH_TOKEN_SECRET } from "../../config";
 import { RefreshToken, User } from "../../models";
-import { UserDetailsDTO } from "../../dtos/user-details-dto";
+import { UserDetailsDTO } from "../../dtos/";
 
 const refreshController = {
   async refresh(req, res, next) {

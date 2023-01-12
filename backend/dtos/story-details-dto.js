@@ -12,6 +12,7 @@ export class StoryDetailsDTO {
   downVoteCount;
   commentCount;
   username;
+  postedBy;
 
   constructor(story) {
     this._id = story._id;
@@ -27,5 +28,6 @@ export class StoryDetailsDTO {
     this.downVoteCount = story.downVoteCount;
     this.commentCount = story.commentCount;
     this.username = story.postedBy.username;
+    this.postedBy = story.postedBy._id;
   }
 }
