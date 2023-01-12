@@ -145,6 +145,10 @@ export const getCommentsByPostId = async (id) => {
     //
   }
 };
+
+export const deletePostById = async (id) => {
+  return await api.delete(`/api/stories/${id}`);
+};
 // interceptor for auto token refresh
 api.interceptors.response.use(
   (config) => {
