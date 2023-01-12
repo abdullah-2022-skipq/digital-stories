@@ -1,29 +1,28 @@
-import React from "react";
-import styles from "./StoryCard.module.css";
-import { useHistory } from "react-router-dom";
-import TextStoryCard from "./Text/TextStoryCard";
-import ImageStoryCard from "./Image/ImageStoryCard";
-import VideoStoryCard from "./Video/VideoStoryCard";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import styles from './StoryCard.module.css';
+import TextStoryCard from './Text/TextStoryCard';
+import ImageStoryCard from './Image/ImageStoryCard';
+import VideoStoryCard from './Video/VideoStoryCard';
 
 // https://source.unsplash.com/random/250×250/?nature
-const StoryCard = ({ story, grid }) => {
+function StoryCard({ story, grid }) {
   const navigate = useHistory();
 
   const onStoryClickHandler = async (e) => {
-    navigate.push("/story", { id: story._id, randomColor: randomColor });
+    navigate.push('/story', { id: story._id, randomColor });
   };
 
   const avatarWrapperColors = [
-    "#266CFF",
-    "#4B47DB",
-    "#33B357",
-    "#F539",
-    "#DE1B55",
-    "#E9362F",
+    '#266CFF',
+    '#4B47DB',
+    '#33B357',
+    '#F539',
+    '#DE1B55',
+    '#E9362F',
   ];
 
-  let randomColor =
-    avatarWrapperColors[Math.floor(Math.random() * avatarWrapperColors.length)];
+  let randomColor = avatarWrapperColors[Math.floor(Math.random() * avatarWrapperColors.length)];
 
   return (
     <div
@@ -32,7 +31,7 @@ const StoryCard = ({ story, grid }) => {
     >
       <div
         className={`${styles.mediaWrapper} ${
-          story.mediaType == "text" && styles.mediaWrapperText
+          story.mediaType === 'text' && styles.mediaWrapperText
         }`}
       >
         <div
@@ -46,7 +45,7 @@ const StoryCard = ({ story, grid }) => {
           />
         </div>
 
-        {story.mediaType == "text" && (
+        {story.mediaType === 'text' && (
           <TextStoryCard
             caption={story.caption}
             font={story.font}
@@ -54,16 +53,16 @@ const StoryCard = ({ story, grid }) => {
           />
         )}
 
-        {story.mediaType == "image" && (
+        {story.mediaType === 'image' && (
           <ImageStoryCard caption={story.caption} image={story.image} />
         )}
 
-        {story.mediaType == "video" && (
+        {story.mediaType === 'video' && (
           <VideoStoryCard caption={story.caption} video={story.video} />
         )}
       </div>
     </div>
   );
-};
+}
 
 export default StoryCard;

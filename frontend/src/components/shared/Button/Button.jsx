@@ -1,6 +1,6 @@
-import styles from "./Button.module.css";
+import styles from './Button.module.css';
 
-const Button = (props) => {
+function Button(props) {
   return (
     <button onClick={props.onClick} className={styles.button} {...props}>
       <span className={styles.buttonTitle}>{props.buttontitle}</span>
@@ -11,6 +11,6 @@ const Button = (props) => {
       />
     </button>
   );
-};
+}
 
 export default Button;

@@ -1,17 +1,17 @@
-import React, { useState, useContext } from "react";
-import styles from "./VideoStory.module.css";
-import Button from "../../../shared/Button/Button";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { globalContext } from "../../../../App";
-import { createStory } from "../../../../api";
+import React, { useState, useContext } from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import styles from './VideoStory.module.css';
+import Button from '../../../shared/Button/Button';
+import { globalContext } from '../../../../App';
+import { createStory } from '../../../../api';
 
-const VideoStory = () => {
+function VideoStory() {
   const [video, setVideo] = useState(
-    "https://www.youtube.com/embed/ScMzIvxBSi4"
+    'https://www.youtube.com/embed/ScMzIvxBSi4',
   );
 
-  const [caption, setCaption] = useState("");
+  const [caption, setCaption] = useState('');
 
   const [hover, setHover] = useState(false);
 
@@ -23,16 +23,16 @@ const VideoStory = () => {
 
   const createStoryHandler = async () => {
     const story = {
-      mediaType: "video",
+      mediaType: 'video',
       caption,
       video,
       postedBy,
     };
 
     const response = await createStory(story);
-    if (response.status == 201) {
+    if (response.status === 201) {
       onPrevHandler(); // reset the create story form to step 1
-      navigate.push("/");
+      navigate.push('/');
     }
   };
 
@@ -83,11 +83,11 @@ const VideoStory = () => {
         onClick={createStoryHandler}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        style={{ backgroundColor: hover ? "#1b8445" : "#20BD5F" }}
-        disabled={video == "https://www.youtube.com/embed/ScMzIvxBSi4"}
+        style={{ backgroundColor: hover ? '#1b8445' : '#20BD5F' }}
+        disabled={video === 'https://www.youtube.com/embed/ScMzIvxBSi4'}
       />
     </>
   );
-};
+}
 
 export default VideoStory;

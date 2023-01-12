@@ -1,14 +1,14 @@
-import { Link, useHistory } from "react-router-dom";
-import styles from "./Landing.module.css";
-import Card from "../../components/shared/Card/Card";
-import Button from "../../components/shared/Button/Button";
-import { signInStyle } from "../../shared/styles";
+import { Link, useHistory } from 'react-router-dom';
+import styles from './Landing.module.css';
+import Card from '../../components/shared/Card/Card';
+import Button from '../../components/shared/Button/Button';
+import { signInStyle } from '../../shared/styles';
 
-const Landing = () => {
+function Landing() {
   const history = useHistory();
 
   const getStartedHandler = () => {
-    history.push("/get-started");
+    history.push('/get-started');
   };
 
   return (
@@ -36,6 +36,6 @@ const Landing = () => {
       </Card>
     </div>
   );
-};
+}
 
 export default Landing;

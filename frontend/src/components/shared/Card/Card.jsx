@@ -1,6 +1,6 @@
-import styles from "./Card.module.css";
+import styles from './Card.module.css';
 
-const Card = ({ cardHeading, cardLogo, children }) => {
+function Card({ cardHeading, cardLogo, children }) {
   return (
     <div className={styles.card}>
       <div className={styles.headingWrapper}>
@@ -16,6 +16,6 @@ const Card = ({ cardHeading, cardLogo, children }) => {
       {children}
     </div>
   );
-};
+}
 
 export default Card;

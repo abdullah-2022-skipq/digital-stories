@@ -1,7 +1,10 @@
 export class PostCommentsDTO {
   text;
+
   username;
+
   avatarPath;
+
   postedAt;
 
   constructor(comment) {

@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
@@ -9,9 +9,9 @@ const userSchema = new Schema(
     email: { type: String, required: true },
     password: { type: String, required: true },
     //! multer -> save -> name allot -> path -> TODO middleware
-    avatarPath: { type: String, default: "" },
+    avatarPath: { type: String, default: '' },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export default mongoose.model("User", userSchema, "users");
+export default mongoose.model('User', userSchema, 'users');

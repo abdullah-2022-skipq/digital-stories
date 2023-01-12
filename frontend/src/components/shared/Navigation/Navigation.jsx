@@ -1,34 +1,34 @@
-import { Link } from "react-router-dom";
-import styles from "./Navigation.module.css";
-import { useState } from "react";
-import ProfileModal from "../../ProfileModal/ProfileModal";
-import { useSelector, useDispatch } from "react-redux";
-import { setActiveRoute } from "../../../store/navbarSlice";
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import styles from './Navigation.module.css';
+import ProfileModal from '../../ProfileModal/ProfileModal';
+import { setActiveRoute } from '../../../store/navbarSlice';
 
-const Navigation = () => {
+function Navigation() {
   const logoStyle = {
-    color: "#fff",
-    textDecoration: "none",
-    fontWeight: "bold",
-    fontSize: "22px",
-    display: "flex",
-    alignItems: "center",
+    color: '#fff',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    fontSize: '22px',
+    display: 'flex',
+    alignItems: 'center',
   };
 
   const navElementStyle = {
-    color: "#fff",
-    textDecoration: "none",
-    fontSize: "16px",
-    display: "flex",
-    alignItems: "center",
+    color: '#fff',
+    textDecoration: 'none',
+    fontSize: '16px',
+    display: 'flex',
+    alignItems: 'center',
   };
 
   const logoText = {
-    marginLeft: "10px",
+    marginLeft: '10px',
   };
 
   const navElementText = {
-    marginLeft: "5px",
+    marginLeft: '5px',
   };
 
   const active = useSelector((state) => state.navbar.activeRoute);
@@ -53,7 +53,7 @@ const Navigation = () => {
     dispatch(setActiveRoute(route));
   };
 
-  const activeRouteStyle = "3px solid #0077ff";
+  const activeRouteStyle = '3px solid #0077ff';
 
   return (
     <>
@@ -61,7 +61,7 @@ const Navigation = () => {
         <Link
           style={logoStyle}
           to="/"
-          onClick={() => activeRouteHandler("home")}
+          onClick={() => activeRouteHandler('home')}
         >
           <span style={logoText}>Digital Stories</span>
         </Link>
@@ -70,12 +70,12 @@ const Navigation = () => {
           <Link
             style={navElementStyle}
             to="/home"
-            onClick={() => activeRouteHandler("home")}
+            onClick={() => activeRouteHandler('home')}
           >
             <span
               style={{
                 ...navElementText,
-                borderBottom: active == "home" ? activeRouteStyle : "",
+                borderBottom: active === 'home' ? activeRouteStyle : '',
               }}
             >
               Home
@@ -87,12 +87,12 @@ const Navigation = () => {
           <Link
             style={navElementStyle}
             to="/trending"
-            onClick={() => activeRouteHandler("trending")}
+            onClick={() => activeRouteHandler('trending')}
           >
             <span
               style={{
                 ...navElementText,
-                borderBottom: active == "trending" ? activeRouteStyle : "",
+                borderBottom: active === 'trending' ? activeRouteStyle : '',
               }}
             >
               Trending
@@ -104,12 +104,12 @@ const Navigation = () => {
           <Link
             style={navElementStyle}
             to="/leaderboard"
-            onClick={() => activeRouteHandler("leaderboard")}
+            onClick={() => activeRouteHandler('leaderboard')}
           >
             <span
               style={{
                 ...navElementText,
-                borderBottom: active == "leaderboard" ? activeRouteStyle : "",
+                borderBottom: active === 'leaderboard' ? activeRouteStyle : '',
               }}
             >
               Leaderboard
@@ -121,12 +121,12 @@ const Navigation = () => {
           <Link
             style={navElementStyle}
             to="/engagements"
-            onClick={() => activeRouteHandler("engagements")}
+            onClick={() => activeRouteHandler('engagements')}
           >
             <span
               style={{
                 ...navElementText,
-                borderBottom: active == "engagements" ? activeRouteStyle : "",
+                borderBottom: active === 'engagements' ? activeRouteStyle : '',
               }}
             >
               Engagements
@@ -145,6 +145,6 @@ const Navigation = () => {
       {modal && <ProfileModal closeModalHandler={closeModalHandler} />}
     </>
   );
-};
+}
 
 export default Navigation;

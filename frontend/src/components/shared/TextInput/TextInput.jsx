@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./TextInput.module.css";
+import React from 'react';
+import styles from './TextInput.module.css';
 
-const TextInput = (props) => {
+function TextInput(props) {
   return (
     <div>
       <input
@@ -10,12 +10,12 @@ const TextInput = (props) => {
         }`}
         type="text"
         {...props}
-      ></input>
+      />
       {props.error && (
         <p className={styles.fieldErrorMessage}>{props.errormessage}</p>
       )}
     </div>
   );
-};
+}
 
 export default TextInput;

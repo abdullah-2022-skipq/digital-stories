@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
-import Card from "../../../components/shared/Card/Card";
-import styles from "./StepChooseMediaType.module.css";
-import Button from "../../../components/shared/Button/Button";
-import { globalContext } from "../../../App";
+import React, { useContext, useState } from 'react';
+import Card from '../../../components/shared/Card/Card';
+import styles from './StepChooseMediaType.module.css';
+import Button from '../../../components/shared/Button/Button';
+import { globalContext } from '../../../App';
 
-const StepChooseMediaType = () => {
+function StepChooseMediaType() {
   const { mediaType, setMediaType, onNextHandler } = useContext(globalContext);
 
   return (
@@ -28,6 +28,6 @@ const StepChooseMediaType = () => {
       </Card>
     </div>
   );
-};
+}
 
 export default StepChooseMediaType;

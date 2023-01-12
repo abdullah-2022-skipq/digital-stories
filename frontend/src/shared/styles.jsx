@@ -1,8 +1,8 @@
 const signInStyle = {
-  color: "#0077ff",
-  fontWeight: "bold",
-  textDecoration: "none",
-  marginLeft: "10px",
+  color: '#0077ff',
+  fontWeight: 'bold',
+  textDecoration: 'none',
+  marginLeft: '10px',
 };
 
 export { signInStyle };

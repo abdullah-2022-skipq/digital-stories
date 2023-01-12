@@ -1,17 +1,30 @@
 export class StoryDetailsDTO {
   _id;
+
   caption;
+
   font;
+
   fontColor;
+
   mediaType;
+
   image;
+
   video;
+
   avatarPath;
+
   createdAt;
+
   upVoteCount;
+
   downVoteCount;
+
   commentCount;
+
   username;
+
   postedBy;
 
   constructor(story) {

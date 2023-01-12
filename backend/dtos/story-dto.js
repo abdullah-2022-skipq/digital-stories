@@ -1,11 +1,18 @@
 export class StoryDTO {
   _id;
+
   caption;
+
   font;
+
   fontColor;
+
   mediaType;
+
   image;
+
   video;
+
   avatarPath;
 
   constructor(story) {

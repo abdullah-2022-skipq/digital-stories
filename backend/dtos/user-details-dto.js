@@ -1,19 +1,21 @@
-import { BASE_URL, DEFAULTAVATAR } from "../config";
+import { BASE_URL, DEFAULTAVATAR } from '../config';
 
 export class UserDetailsDTO {
   _id;
+
   name;
+
   username;
+
   createdAt;
 
   constructor(user) {
     this._id = user._id;
     this.name = user.name;
     this.username = user.username;
-    this.avatar =
-      user.avatarPath == DEFAULTAVATAR
-        ? user.avatarPath
-        : `${BASE_URL}${user.avatarPath}`;
+    this.avatar = user.avatarPath == DEFAULTAVATAR
+      ? user.avatarPath
+      : `${BASE_URL}${user.avatarPath}`;
     this.memberSince = this.getmemberSince(user.createdAt);
   }
 
@@ -43,18 +45,17 @@ export class UserDetailsDTO {
 
     if (years != 0) {
       return `${years} years`;
-    } else if (months != 0) {
+    } if (months != 0) {
       return `${months} months`;
-    } else if (weeks != 0) {
+    } if (weeks != 0) {
       return `${weeks} weeks`;
-    } else if (days != 0) {
+    } if (days != 0) {
       return `${days} days`;
-    } else if (hours != 0) {
+    } if (hours != 0) {
       return `${hours} hours`;
-    } else if (minutes != 0) {
+    } if (minutes != 0) {
       return `${minutes} minutes`;
-    } else {
-      return `${seconds} seconds`;
     }
+    return `${seconds} seconds`;
   }
 }

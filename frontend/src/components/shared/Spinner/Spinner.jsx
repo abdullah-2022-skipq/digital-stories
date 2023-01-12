@@ -1,8 +1,8 @@
-import React from "react";
-import Card from "../Card/Card";
-import styles from "./Spinner.module.css";
+import React from 'react';
+import Card from '../Card/Card';
+import styles from './Spinner.module.css';
 
-const Spinner = ({ message }) => {
+function Spinner({ message }) {
   return (
     <div className="cardWrapper">
       <Card>
@@ -35,6 +35,6 @@ const Spinner = ({ message }) => {
       </Card>
     </div>
   );
-};
+}
 
 export default Spinner;

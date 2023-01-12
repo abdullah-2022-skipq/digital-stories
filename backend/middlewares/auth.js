@@ -1,11 +1,11 @@
-import CustomErrorHandler from "../services/CustomErrorHandler";
-import { TokenService } from "../services";
-import { User } from "../models";
-import { UserDetailsDTO } from "../dtos/";
+import CustomErrorHandler from '../services/CustomErrorHandler';
+import { TokenService } from '../services';
+import { User } from '../models';
+import { UserDetailsDTO } from '../dtos';
 
 const auth = async (req, res, next) => {
   try {
-    const accessToken = req.cookies.accessToken;
+    const { accessToken } = req.cookies;
 
     if (!accessToken) {
       return next(CustomErrorHandler.unAuthorized());

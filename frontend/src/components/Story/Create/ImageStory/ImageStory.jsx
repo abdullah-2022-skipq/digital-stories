@@ -1,17 +1,17 @@
-import React, { useState, useContext } from "react";
-import styles from "./ImageStory.module.css";
-import Button from "../../../shared/Button/Button";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { createStory } from "../../../../api";
-import { globalContext } from "../../../../App";
+import React, { useState, useContext } from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import styles from './ImageStory.module.css';
+import Button from '../../../shared/Button/Button';
+import { createStory } from '../../../../api';
+import { globalContext } from '../../../../App';
 
-const ImageStory = () => {
+function ImageStory() {
   const [image, setImage] = useState(
-    "http://localhost:5544/storage/default_image_story.png"
+    'http://localhost:5544/storage/default_image_story.png',
   );
 
-  const [caption, setCaption] = useState("");
+  const [caption, setCaption] = useState('');
 
   const [hover, setHover] = useState(false);
 
@@ -23,16 +23,16 @@ const ImageStory = () => {
 
   const createStoryHandler = async () => {
     const story = {
-      mediaType: "image",
+      mediaType: 'image',
       caption,
       image,
       postedBy,
     };
 
     const response = await createStory(story);
-    if (response.status == 201) {
+    if (response.status === 201) {
       onPrevHandler(); // reset the create story form to step 1
-      navigate.push("/");
+      navigate.push('/');
     }
   };
 
@@ -80,13 +80,13 @@ const ImageStory = () => {
         onClick={createStoryHandler}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        style={{ backgroundColor: hover ? "#1b8445" : "#20BD5F" }}
+        style={{ backgroundColor: hover ? '#1b8445' : '#20BD5F' }}
         disabled={
-          image == "http://localhost:5544/storage/default_image_story.png"
+          image === 'http://localhost:5544/storage/default_image_story.png'
         }
       />
     </>
   );
-};
+}
 
 export default ImageStory;

@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-const Leaderboard = () => {
+function Leaderboard() {
   return <div>Leaderboard adsadsad</div>;
-};
+}
 
 export default Leaderboard;

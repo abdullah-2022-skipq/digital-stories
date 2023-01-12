@@ -1,12 +1,12 @@
-import { Comment, Engagement, Story } from "../../models";
-import Joi from "joi";
-import { CustomErrorHandler } from "../../services";
-import { PostCommentsDTO } from "../../dtos/";
+import Joi from 'joi';
+import { Comment, Engagement, Story } from '../../models';
+import { CustomErrorHandler } from '../../services';
+import { PostCommentsDTO } from '../../dtos';
 
 const commentController = {
   async createComment(req, res, next) {
     // notes
-    /* 
+    /*
         when a user makes a comment then we should
         1. create a doc in comments collection
         2. update count of comments in stories collection
@@ -43,12 +43,12 @@ const commentController = {
       const storyRes = await Story.findOneAndUpdate(
         { _id: story },
         { $inc: { commentCount: 1 } },
-        { new: true }
+        { new: true },
       );
 
       // create doc in engagements
       const newEngagement = new Engagement({
-        action: "comment",
+        action: 'comment',
         byUser: user,
         onPost: story,
         forUser: storyRes.postedBy,
@@ -56,7 +56,7 @@ const commentController = {
 
       await newEngagement.save();
 
-      return res.status(201).json("comment posted successfully");
+      return res.status(201).json('comment posted successfully');
     } catch (error) {}
   },
 
@@ -73,17 +73,17 @@ const commentController = {
 
     try {
       const comments = await Comment.find({ story: req.params.id }).populate(
-        "user"
+        'user',
       );
 
       if (!comments) {
         return next(CustomErrorHandler.notFound());
       }
 
-      let commentsDto = [];
+      const commentsDto = [];
 
       for (let i = 0; i < comments.length; i++) {
-        let obj = new PostCommentsDTO(comments[i]);
+        const obj = new PostCommentsDTO(comments[i]);
         commentsDto.push(obj);
       }
 

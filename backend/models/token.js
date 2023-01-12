@@ -1,13 +1,13 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const tokenSchema = new Schema(
   {
     refreshToken: { type: String, required: true },
-    userId: { type: mongoose.SchemaTypes.ObjectId, ref: "users" },
+    userId: { type: mongoose.SchemaTypes.ObjectId, ref: 'users' },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export default mongoose.model("RefreshToken", tokenSchema, "tokens");
+export default mongoose.model('RefreshToken', tokenSchema, 'tokens');
