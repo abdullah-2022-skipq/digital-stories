@@ -30,14 +30,14 @@ const TextStory = () => {
       caption,
       font,
       fontColor:
-        fontColor == "blue"
+        fontColor == "#0077ff"
           ? "blue"
           : fontColor == "#33b357"
           ? "green"
           : "pink",
       postedBy,
     };
-
+    console.log("this is stroy", story, fontColor);
     const response = await createStory(story);
     if (response.status == 201) {
       onPrevHandler(); // reset the create story form to step 1
