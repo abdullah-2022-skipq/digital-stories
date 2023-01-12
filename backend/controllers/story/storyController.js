@@ -215,8 +215,7 @@ const storyController = {
         return next(CustomErrorHandler.notFound());
       }
 
-      // [] todo status code
-      return res.status(200).json({ message: "story deleted successfully" });
+      return res.status(204).json({ message: "story deleted successfully" });
     } catch (error) {
       //
     }
