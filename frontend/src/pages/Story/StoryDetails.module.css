@@ -95,8 +95,8 @@
 
 .storyHeader {
   display: flex;
-  align-content: center;
-  justify-content: flex-start;
+  justify-content: space-between;
+  margin: 0 20px;
 }
 
 .storyHeader p {
