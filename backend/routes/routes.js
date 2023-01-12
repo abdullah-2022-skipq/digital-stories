@@ -24,6 +24,7 @@ router.get("/stories", auth, storyController.getAll);
 router.post("/stories", auth, storyController.create);
 router.get("/stories/trending", auth, storyController.getTrending);
 router.get("/stories/:id", auth, storyController.getById);
+router.delete("/stories/:id", auth, storyController.deleteById);
 router.post("/comment", auth, commentController.createComment);
 router.get("/comments/:id", auth, commentController.getCommentsByPostId);
 router.post("/upvote", auth, votesController.upVote);

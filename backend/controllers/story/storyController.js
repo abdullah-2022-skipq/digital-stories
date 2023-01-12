@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { Story, User } from "../../models";
+import { Comment, Engagement, Story } from "../../models";
 import multer from "multer"; // [] todo
 import Jimp from "jimp";
 import path from "path";
@@ -178,6 +178,47 @@ const storyController = {
       return res.status(200).json({ stories: storiesDto });
     } catch (error) {
       console.log(error);
+    }
+  },
+
+  async deleteById(req, res, next) {
+    const deleteStoryByIdSchema = Joi.object({
+      id: Joi.string()
+        .regex(/^[0-9a-fA-F]{24}$/)
+        .required(),
+    });
+
+    const { error } = deleteStoryByIdSchema.validate(req.params);
+
+    if (error) {
+      return next(error);
+    }
+
+    try {
+      const story = await Story.deleteOne({ _id: req.params.id });
+
+      if (!story) {
+        return next(CustomErrorHandler.notFound());
+      }
+
+      const comments = await Comment.deleteMany({ story: req.params.id });
+
+      if (!comments) {
+        return next(CustomErrorHandler.notFound());
+      }
+
+      const engagements = await Engagement.deleteMany({
+        onPost: req.params.id,
+      });
+
+      if (!engagements) {
+        return next(CustomErrorHandler.notFound());
+      }
+
+      // [] todo status code
+      return res.status(200).json({ message: "story deleted successfully" });
+    } catch (error) {
+      //
     }
   },
 };
