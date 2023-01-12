@@ -3,7 +3,7 @@ import { RefreshToken, User } from "../../models";
 import { CustomErrorHandler, TokenService } from "../../services";
 import bcrypt from "bcrypt";
 import { REFRESH_TOKEN_SECRET } from "../../config";
-import { UserDetailsDTO } from "../../dtos/user-details-dto";
+import { UserDetailsDTO } from "../../dtos/";
 
 const loginController = {
   async login(req, res, next) {

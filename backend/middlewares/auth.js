@@ -1,7 +1,7 @@
 import CustomErrorHandler from "../services/CustomErrorHandler";
 import { TokenService } from "../services";
 import { User } from "../models";
-import { UserDetailsDTO } from "../dtos/user-details-dto";
+import { UserDetailsDTO } from "../dtos/";
 
 const auth = async (req, res, next) => {
   try {

@@ -5,8 +5,7 @@ import Jimp from "jimp";
 import path from "path";
 import fs from "fs";
 import { CustomErrorHandler } from "../../services";
-import { StoryDTO } from "../../dtos/story-dto";
-import { StoryDetailsDTO } from "../../dtos/story-details-dto";
+import { StoryDTO, StoryDetailsDTO } from "../../dtos/";
 
 const storyController = {
   async create(req, res, next) {
