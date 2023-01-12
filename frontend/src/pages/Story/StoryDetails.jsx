@@ -12,10 +12,12 @@ import {
   createComment,
   getCommentsByPostId,
   downVoteStory,
+  deletePostById,
 } from "../../api";
 import { useSelector } from "react-redux";
 import TextInput from "../../components/shared/TextInput/TextInput";
 import Button from "../../components/shared/Button/Button";
+import { useHistory } from "react-router-dom";
 
 const StoryDetails = () => {
   const location = useLocation();
@@ -30,6 +32,8 @@ const StoryDetails = () => {
   const [upVoted, setUpVoted] = useState(false);
   const [downVoted, setDownVoted] = useState(false);
   const [reload, setReload] = useState();
+
+  const navigate = useHistory();
 
   const upVoteHandler = async () => {
     const data = { user, post: id };
@@ -50,6 +54,8 @@ const StoryDetails = () => {
 
   const [storyComments, setStoryComments] = useState([]);
 
+  const [ownsStory, setOwnsStory] = useState(false);
+
   const postCommentHandler = async () => {
     const data = { user, text: newComment, story: id };
     const response = await createComment(data);
@@ -57,11 +63,18 @@ const StoryDetails = () => {
     setReload(!reload);
   };
 
+  const deleteStoryHandler = async () => {
+    const response = await deletePostById(id);
+    console.log(response);
+    // [] check status code of response and then
+    // redirect
+    navigate.push("/");
+  };
   useEffect(() => {
     (async () => {
       const storyResponse = await getStoryById(id);
 
-      let story = storyResponse.data.story;
+      let storyRes = storyResponse.data.story;
 
       console.log("called");
 
@@ -69,7 +82,15 @@ const StoryDetails = () => {
 
       setStoryComments(commentsResponse.data.comments);
 
-      setStory(story);
+      // check if user owns story
+      if (user == storyRes.postedBy) {
+        await setOwnsStory(true);
+        console.log(ownsStory, "owns");
+      } else {
+        console.log(ownsStory, "owns");
+      }
+
+      setStory(storyRes);
       return;
     })();
   }, [reload]);
@@ -83,22 +104,30 @@ const StoryDetails = () => {
         <div className={styles.storyWrapper}>
           <div className={styles.left}>
             <div className={styles.storyHeader}>
-              <div
-                className={styles.avatarWrapper}
-                style={{ border: `3px solid ${randomColor}` }}
-              >
-                <img
-                  className={styles.avatarImage}
-                  src={story.avatarPath}
-                  alt="avatar"
-                />
-              </div>
-              <div className={styles.storyDataWrapper}>
-                <div>@{story.username}</div>
-                <div className={styles.storyCreatedAt}>
-                  {new Date(story.createdAt).toDateString()}
+              <div className={styles.storyHeaderFlex}>
+                <div
+                  className={styles.avatarWrapper}
+                  style={{ border: `3px solid ${randomColor}` }}
+                >
+                  <img
+                    className={styles.avatarImage}
+                    src={story.avatarPath}
+                    alt="avatar"
+                  />
+                </div>
+                <div className={styles.storyDataWrapper}>
+                  <div>@{story.username}</div>
+                  <div className={styles.storyCreatedAt}>
+                    {new Date(story.createdAt).toDateString()}
+                  </div>
                 </div>
               </div>
+              {ownsStory && (
+                <div className={story.updateOrDeleteControls}>
+                  <button>Update</button>
+                  <button onClick={deleteStoryHandler}>Delete</button>
+                </div>
+              )}
             </div>
             <div className={styles.mediaWrapper}>
               {story.mediaType == "text" && (
