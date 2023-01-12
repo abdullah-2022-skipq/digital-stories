@@ -58,7 +58,11 @@ const TextStory = () => {
       />
       <div className={styles.customizationMenuWrapper}>
         <div className={styles.selectWrapper}>
-          <select value={font} onChange={(e) => setFont(e.target.value)}>
+          <select
+            value={font}
+            onChange={(e) => setFont(e.target.value)}
+            style={{ backgroundImage: "url(/images/arrow_down.png)" }}
+          >
             <option value="Times New Roman">Times New Roman</option>
             <option value="Cursive">Cursive</option>
             <option value="Monospace">Monospace</option>
