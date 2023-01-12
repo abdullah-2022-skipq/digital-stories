@@ -14,6 +14,9 @@ const StepChooseMediaType = () => {
           <select
             value={mediaType}
             onChange={(e) => setMediaType(e.target.value)}
+            style={{
+              backgroundImage: "url(/images/arrow_down.png)",
+            }}
           >
             <option value="Text">Text</option>
             <option value="Image">Image</option>

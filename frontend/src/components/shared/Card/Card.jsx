@@ -8,7 +8,7 @@ const Card = ({ cardHeading, cardLogo, children }) => {
           <img
             className={styles.logoImg}
             src={`/images/${cardLogo}.png`}
-            alt="waving hand"
+            alt="card-logo"
           />
         )}
         {cardHeading && <h1 className={styles.heading}>{cardHeading}</h1>}
