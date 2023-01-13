@@ -1,8 +1,8 @@
-import styles from './Footer.module.css';
+import styles from "./Footer.module.css";
 
 function Footer() {
   return (
-    <footer className={`${styles.footer} container`}>
+    <footer className={`${styles.footer} container`} data-testid="footer">
       Made with
       <img
         className={`${styles.footerEmoji} `}
