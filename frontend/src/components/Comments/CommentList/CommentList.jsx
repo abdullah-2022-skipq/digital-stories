@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './CommentList.module.css';
-import Comment from './Comment';
+import Comment from '../Comment/Comment';
 
 function CommentList({ comments }) {
   return (

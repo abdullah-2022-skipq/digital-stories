@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import Button from './Button';
 
 describe('Button component', () => {
-  test('renders button properly', () => {
+  test('renders Button properly', () => {
     render(<Button />);
   });
 

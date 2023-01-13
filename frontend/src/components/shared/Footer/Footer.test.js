@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import Footer from './Footer';
 
 describe('Footer component', () => {
-  test('renders footer properly', () => {
+  test('renders Footer properly', () => {
     const { getByText } = render(<Footer />);
     const linkElement = getByText(/Made with/i);
     expect(linkElement).toBeInTheDocument();

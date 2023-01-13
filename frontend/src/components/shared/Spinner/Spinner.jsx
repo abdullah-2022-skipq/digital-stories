@@ -8,6 +8,7 @@ function Spinner({ message }) {
       <Card>
         <svg
           className={styles.spinner}
+          data-testid="svg"
           xmlns="http://www.w3.org/2000/svg"
           width="138"
           height="138"
@@ -31,7 +32,9 @@ function Spinner({ message }) {
             mask="url(#a)"
           />
         </svg>
-        <span className={styles.message}>{message}</span>
+        <span className={styles.message} data-testid="spinner">
+          {message}
+        </span>
       </Card>
     </div>
   );

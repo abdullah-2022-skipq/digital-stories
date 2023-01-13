@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import Card from './Card';
 
 describe('Card component', () => {
-  test('renders card properly', () => {
+  test('renders Card properly', () => {
     render(<Card />);
   });
 
