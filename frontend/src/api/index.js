@@ -1,17 +1,17 @@
-import axios from "axios";
+import axios from 'axios';
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_PATH,
   withCredentials: true,
   headers: {
-    "Content-type": "application/json",
-    Accept: "application/json",
+    'Content-type': 'application/json',
+    Accept: 'application/json',
   },
 });
 
 export const registerUser = async (data) => {
   try {
-    const response = await api.post("/api/register", {
+    const response = await api.post('/api/register', {
       name: data.name,
       username: data.username,
       password: data.password,
@@ -27,14 +27,14 @@ export const registerUser = async (data) => {
 
 export const getCurrentUser = async () => {
   try {
-    const response = await api.get("/api/me");
+    const response = await api.get('/api/me');
     return response;
   } catch (error) {}
 };
 
 export const login = async (data) => {
   try {
-    const response = await api.post("/api/login", {
+    const response = await api.post('/api/login', {
       username: data.username,
       password: data.password,
     });
@@ -45,19 +45,19 @@ export const login = async (data) => {
   }
 };
 
-export const logout = async () => await api.post("/api/logout");
+export const logout = async () => await api.post('/api/logout');
 
-export const getAllStories = async () => await api.get("/api/stories");
+export const getAllStories = async () => await api.get('/api/stories');
 
-export const getTrendingStories = async () => api.get("/api/stories/trending");
+export const getTrendingStories = async () => api.get('/api/stories/trending');
 
 export const getStoryById = async (id) => await api.get(`/api/stories/${id}`);
 
 export const createStory = async (story) => {
-  if (story.mediaType === "text") {
+  if (story.mediaType === 'text') {
     try {
       const { mediaType, caption, font, fontColor, postedBy } = story;
-      const response = await api.post("/api/stories", {
+      const response = await api.post('/api/stories', {
         mediaType,
         caption,
         font,
@@ -70,10 +70,10 @@ export const createStory = async (story) => {
       //
     }
   }
-  if (story.mediaType === "image") {
+  if (story.mediaType === 'image') {
     try {
       const { mediaType, caption, image, postedBy } = story;
-      const response = await api.post("/api/stories", {
+      const response = await api.post('/api/stories', {
         mediaType,
         caption,
         image,
@@ -86,10 +86,10 @@ export const createStory = async (story) => {
     }
   }
 
-  if (story.mediaType === "video") {
+  if (story.mediaType === 'video') {
     try {
       const { mediaType, caption, video, postedBy } = story;
-      const response = await api.post("/api/stories", {
+      const response = await api.post('/api/stories', {
         mediaType,
         caption,
         video,
@@ -106,7 +106,7 @@ export const createStory = async (story) => {
 export const createComment = async (data) => {
   try {
     const { text, user, story } = data;
-    const response = await api.post("/api/comment", { text, user, story });
+    const response = await api.post('/api/comment', { text, user, story });
 
     return response;
   } catch (error) {
@@ -117,7 +117,7 @@ export const createComment = async (data) => {
 export const upVoteStory = async (data) => {
   try {
     const { user, post } = data;
-    const response = await api.post("/api/upvote", { user, post });
+    const response = await api.post('/api/upvote', { user, post });
 
     return response;
   } catch (error) {
@@ -128,7 +128,7 @@ export const upVoteStory = async (data) => {
 export const downVoteStory = async (data) => {
   try {
     const { user, post } = data;
-    const response = await api.post("/api/downvote", { user, post });
+    const response = await api.post('/api/downvote', { user, post });
 
     return response;
   } catch (error) {
@@ -165,7 +165,7 @@ api.interceptors.response.use(
 
       try {
         const response = await axios.get(
-          `${process.env.VITE_REACT_APP_API_PATH}/api/refresh`,
+          `${process.env.REACT_APP_API_PATH}/api/refresh`,
           {
             withCredentials: true,
           }

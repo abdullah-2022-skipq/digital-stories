@@ -62,7 +62,7 @@
 
 /* nice way to learn css pseudo selectors */
 .heading::after {
-  content: "";
+  content: '';
   position: absolute;
   background-color: #0077ff;
   bottom: -5px;

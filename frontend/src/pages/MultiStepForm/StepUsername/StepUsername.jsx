@@ -11,9 +11,7 @@ import { setStep, delStep } from '../../../store/multiStepFormSlice';
 import formStyles from '../MultiStepForm.module.css';
 
 function StepUsername() {
-  const {
-    values, handleBlur, handleChange, errors, touched,
-  } = useFormik({
+  const { values, handleBlur, handleChange, errors, touched } = useFormik({
     initialValues: {
       username: '',
     },

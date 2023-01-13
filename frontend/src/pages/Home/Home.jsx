@@ -33,7 +33,9 @@ function Home() {
 
     searchQuery = searchQuery.toLowerCase();
 
-    const filteredData = data.filter((story) => story.caption.toLowerCase().includes(searchQuery));
+    const filteredData = data.filter((story) =>
+      story.caption.toLowerCase().includes(searchQuery)
+    );
 
     setDataMask(filteredData);
   };
@@ -55,7 +57,9 @@ function Home() {
               className={styles.searchInput}
               type="text"
               ref={inputRef}
-              onChange={() => (inputRef.current.value === '' ? setDataMask(data) : '')}
+              onChange={() =>
+                inputRef.current.value === '' ? setDataMask(data) : ''
+              }
               onKeyDown={(e) => (e.key === 'Enter' ? onSearchHandler() : '')}
             />
           </div>

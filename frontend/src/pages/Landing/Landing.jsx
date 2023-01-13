@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styles from './Landing.module.css';
 import Card from '../../components/shared/Card/Card';

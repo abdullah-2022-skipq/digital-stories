@@ -9,9 +9,7 @@ import { setName, setEmail } from '../../../store/userRegistrationSlice';
 import { setStep } from '../../../store/multiStepFormSlice';
 
 function StepContactDetails() {
-  const {
-    values, handleBlur, handleChange, errors, touched,
-  } = useFormik({
+  const { values, handleBlur, handleChange, errors, touched } = useFormik({
     // handleBlur will validate the field once its out of focus
     initialValues: {
       name: '',
@@ -60,8 +58,8 @@ function StepContactDetails() {
             buttontitle="Next"
             buttonimage="arrow_right"
             disabled={
-                !values.email || !values.email || errors.email || errors.name
-              }
+              !values.email || !values.email || errors.email || errors.name
+            }
           />
         </div>
       </Card>

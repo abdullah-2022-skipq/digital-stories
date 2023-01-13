@@ -1,5 +1,5 @@
-import * as yup from "yup";
+import * as yup from 'yup';
 
 export const usernameSchema = yup.object().shape({
-  username: yup.string().max(20).required("required"),
+  username: yup.string().max(20).required('required'),
 });

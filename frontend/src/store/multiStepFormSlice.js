@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import StepContactDetails from "../pages/MultiStepForm/StepContactDetails/StepContactDetails";
-import StepPassword from "../pages/MultiStepForm/StepPassword/StepPassword";
-import StepUsername from "../pages/MultiStepForm/StepUsername/StepUsername";
-import StepProfilePicture from "../pages/MultiStepForm/StepProfilePicture/StepProfilePicture";
+import { createSlice } from '@reduxjs/toolkit';
+import StepContactDetails from '../pages/MultiStepForm/StepContactDetails/StepContactDetails';
+import StepPassword from '../pages/MultiStepForm/StepPassword/StepPassword';
+import StepUsername from '../pages/MultiStepForm/StepUsername/StepUsername';
+import StepProfilePicture from '../pages/MultiStepForm/StepProfilePicture/StepProfilePicture';
 
 const initialState = {
   currentStep: 1,
@@ -16,7 +16,7 @@ const initialState = {
 };
 
 export const multiStepFormSlice = createSlice({
-  name: "multiStepForm",
+  name: 'multiStepForm',
   initialState,
   reducers: {
     setStep: (state, action) => {

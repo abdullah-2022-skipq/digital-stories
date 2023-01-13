@@ -13,7 +13,7 @@ import Spinner from '../../../components/shared/Spinner/Spinner';
 
 function StepProfilePicture() {
   const [picture, setPicture] = useState(
-    'http://localhost:5544/storage/default.png',
+    'http://localhost:5544/storage/default.png'
   );
 
   const [error, setError] = useState('');

@@ -3,6 +3,7 @@ import Card from '../../../components/shared/Card/Card';
 import styles from './StepChooseMediaType.module.css';
 import Button from '../../../components/shared/Button/Button';
 import { globalContext } from '../../../App';
+import downArrowImg from '../../../arrow_down.png';
 
 function StepChooseMediaType() {
   const { mediaType, setMediaType, onNextHandler } = useContext(globalContext);
@@ -14,6 +15,9 @@ function StepChooseMediaType() {
           <select
             value={mediaType}
             onChange={(e) => setMediaType(e.target.value)}
+            style={{
+              backgroundImage: downArrowImg,
+            }}
           >
             <option value="Text">Text</option>
             <option value="Image">Image</option>

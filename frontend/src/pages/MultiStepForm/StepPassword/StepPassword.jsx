@@ -10,9 +10,7 @@ import { setStep, delStep } from '../../../store/multiStepFormSlice';
 import formStyles from '../MultiStepForm.module.css';
 
 function StepPassword() {
-  const {
-    values, handleBlur, handleChange, errors, touched,
-  } = useFormik({
+  const { values, handleBlur, handleChange, errors, touched } = useFormik({
     initialValues: {
       password: 'myPassword1', // todo []
       confirmPassword: 'myPassword1',
@@ -67,10 +65,10 @@ function StepPassword() {
               name="confirmPassword"
               onBlur={handleBlur}
               error={
-                  errors.confirmPassword && touched.confirmPassword
-                    ? 1
-                    : undefined
-                }
+                errors.confirmPassword && touched.confirmPassword
+                  ? 1
+                  : undefined
+              }
               errormessage={errors.confirmPassword}
             />
             <Button
@@ -78,11 +76,11 @@ function StepPassword() {
               buttontitle="Next"
               buttonimage="arrow_right"
               disabled={
-                  !values.password
-                  || !values.confirmPassword
-                  || errors.password
-                  || errors.confirmPassword
-                }
+                !values.password ||
+                !values.confirmPassword ||
+                errors.password ||
+                errors.confirmPassword
+              }
             />
           </div>
         </Card>

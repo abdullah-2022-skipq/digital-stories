@@ -1,7 +1,5 @@
 import './App.css';
-import {
-  BrowserRouter, Switch, Route, Redirect,
-} from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { createContext, useState } from 'react';
 import Footer from './components/shared/Footer/Footer';
@@ -122,17 +120,19 @@ function PublicRoute({ children, ...rest }) {
   return (
     <Route
       {...rest}
-      render={({ location }) => (isAuth ? (
-        <Redirect
-          to={{
-            pathname: '/home',
-            // location: current path
-            state: { from: location },
-          }}
-        />
-      ) : (
-        children
-      ))}
+      render={({ location }) =>
+        isAuth ? (
+          <Redirect
+            to={{
+              pathname: '/home',
+              // location: current path
+              state: { from: location },
+            }}
+          />
+        ) : (
+          children
+        )
+      }
     />
   );
 }
@@ -143,17 +143,19 @@ function ProtectedRoute({ children, ...rest }) {
   return (
     <Route
       {...rest}
-      render={({ location }) => (isAuth ? (
-        children
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/',
-            // location: current path
-            state: { from: location },
-          }}
-        />
-      ))}
+      render={({ location }) =>
+        isAuth ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/',
+              // location: current path
+              state: { from: location },
+            }}
+          />
+        )
+      }
     />
   );
 }

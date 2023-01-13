@@ -33,8 +33,8 @@ function TextStory() {
         fontColor === '#0077ff'
           ? 'blue'
           : fontColor === '#33b357'
-            ? 'green'
-            : 'pink',
+          ? 'green'
+          : 'pink',
       postedBy,
     };
 

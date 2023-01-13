@@ -8,7 +8,7 @@ import { globalContext } from '../../../../App';
 
 function ImageStory() {
   const [image, setImage] = useState(
-    'http://localhost:5544/storage/default_image_story.png',
+    'http://localhost:5544/storage/default_image_story.png'
   );
 
   const [caption, setCaption] = useState('');

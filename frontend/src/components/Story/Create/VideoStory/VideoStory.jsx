@@ -8,7 +8,7 @@ import { createStory } from '../../../../api';
 
 function VideoStory() {
   const [video, setVideo] = useState(
-    'https://www.youtube.com/embed/ScMzIvxBSi4',
+    'https://www.youtube.com/embed/ScMzIvxBSi4'
   );
 
   const [caption, setCaption] = useState('');

@@ -10,9 +10,7 @@ import { setAuth } from '../../store/authSlice';
 import { setUser } from '../../store/userSlice';
 
 function SignIn() {
-  const {
-    values, handleBlur, handleChange, errors, touched,
-  } = useFormik({
+  const { values, handleBlur, handleChange, errors, touched } = useFormik({
     initialValues: {
       username: '',
       password: '',
@@ -63,10 +61,10 @@ function SignIn() {
             buttontitle="Sign In"
             buttonimage="arrow_right"
             disabled={
-              !values.password
-              || !values.username
-              || errors.username
-              || errors.password
+              !values.password ||
+              !values.username ||
+              errors.username ||
+              errors.password
             }
           />
         </div>

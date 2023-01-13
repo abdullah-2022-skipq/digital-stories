@@ -1,15 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  name: "",
-  username: "",
-  email: "",
-  password: "",
-  avatar: "http://localhost:5544/storage/default.png",
+  name: '',
+  username: '',
+  email: '',
+  password: '',
+  avatar: 'http://localhost:5544/storage/default.png',
 };
 
 export const userRegistrationSlice = createSlice({
-  name: "userRegistration",
+  name: 'userRegistration',
   initialState,
   reducers: {
     setName: (state, action) => {

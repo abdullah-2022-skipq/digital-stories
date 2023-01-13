@@ -106,10 +106,7 @@ function StoryDetails() {
                 />
               </div>
               <div className={styles.storyDataWrapper}>
-                <div>
-                  @
-                  {story.username}
-                </div>
+                <div>@{story.username}</div>
                 <div className={styles.storyCreatedAt}>
                   {new Date(story.createdAt).toDateString()}
                 </div>
@@ -164,7 +161,9 @@ function StoryDetails() {
                   src="/images/comment.png"
                   alt="comment"
                   role="button"
-                  onClick={() => commentInput.current.childNodes[0].childNodes[0].focus()}
+                  onClick={() =>
+                    commentInput.current.childNodes[0].childNodes[0].focus()
+                  }
                 />
                 {story.commentCount}
               </div>
@@ -183,7 +182,9 @@ function StoryDetails() {
                 onChange={(e) => {
                   setNewComment(e.target.value);
                 }}
-                onKeyDown={(e) => (e.key === 'Enter' ? postCommentHandler() : '')}
+                onKeyDown={(e) =>
+                  e.key === 'Enter' ? postCommentHandler() : ''
+                }
               />
               <Button
                 onClick={postCommentHandler}
