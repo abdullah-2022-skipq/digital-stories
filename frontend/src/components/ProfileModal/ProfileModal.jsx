@@ -33,7 +33,7 @@ function ProfileModal({ closeModalHandler }) {
           <h3 className={styles.name}>{user.name}</h3>
           <h5 className={styles.username}>@{user.username}</h5>
           <div className={styles.memberSince}>
-            You`$apos;`ve been a part of our community since:
+            You&apos;ve been a part of our community since:
             {` ${user.memberSince} ❤️‍🔥`}
           </div>
           <div className={styles.signOutButton}>
