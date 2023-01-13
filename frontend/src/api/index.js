@@ -150,6 +150,10 @@ export const getCommentsByPostId = async (id) => {
 };
 
 export const deletePostById = async (id) => api.delete(`/api/stories/${id}`);
+
+export const getVoteStatus = async (user, post) =>
+  api.post('/api/vote-status', { user, post });
+
 // interceptor for auto token refresh
 api.interceptors.response.use(
   (config) => config,
