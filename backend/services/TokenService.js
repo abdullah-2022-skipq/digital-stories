@@ -1,16 +1,16 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 import {
   ACCESS_TOKEN_SECRET,
   ACCESS_TOKEN_EXPIRY_TIME_DEBUG,
   REFRESH_TOKEN_SECRET,
-} from '../config';
-import { RefreshToken } from '../models';
+} from "../config";
+import { RefreshToken } from "../models";
 
 class TokenService {
   static sign(
     payload,
     expiryTime = ACCESS_TOKEN_EXPIRY_TIME_DEBUG,
-    secret = ACCESS_TOKEN_SECRET,
+    secret = ACCESS_TOKEN_SECRET
   ) {
     return jwt.sign(payload, secret, { expiresIn: expiryTime });
   }

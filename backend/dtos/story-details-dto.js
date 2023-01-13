@@ -1,4 +1,4 @@
-export class StoryDetailsDTO {
+class StoryDetailsDTO {
   _id;
 
   caption;
@@ -44,3 +44,5 @@ export class StoryDetailsDTO {
     this.postedBy = story.postedBy._id;
   }
 }
+
+export default StoryDetailsDTO;

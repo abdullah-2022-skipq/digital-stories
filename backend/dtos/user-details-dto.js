@@ -1,6 +1,6 @@
-import { BASE_URL, DEFAULTAVATAR } from '../config';
+import { BASE_URL, DEFAULTAVATAR } from "../config";
 
-export class UserDetailsDTO {
+class UserDetailsDTO {
   _id;
 
   name;
@@ -13,13 +13,14 @@ export class UserDetailsDTO {
     this._id = user._id;
     this.name = user.name;
     this.username = user.username;
-    this.avatar = user.avatarPath == DEFAULTAVATAR
-      ? user.avatarPath
-      : `${BASE_URL}${user.avatarPath}`;
-    this.memberSince = this.getmemberSince(user.createdAt);
+    this.avatar =
+      user.avatarPath === DEFAULTAVATAR
+        ? user.avatarPath
+        : `${BASE_URL}${user.avatarPath}`;
+    this.memberSince = UserDetailsDTO.getmemberSince(user.createdAt);
   }
 
-  getmemberSince(creationDate) {
+  static getmemberSince(creationDate) {
     const currentTime = Date.now();
     const timeDifference = currentTime - creationDate.getTime();
     // Convert the time difference from milliseconds to seconds
@@ -43,19 +44,26 @@ export class UserDetailsDTO {
     // Convert the time difference from months to years
     const years = Math.round(months / 12);
 
-    if (years != 0) {
+    if (years !== 0) {
       return `${years} years`;
-    } if (months != 0) {
+    }
+    if (months !== 0) {
       return `${months} months`;
-    } if (weeks != 0) {
+    }
+    if (weeks !== 0) {
       return `${weeks} weeks`;
-    } if (days != 0) {
+    }
+    if (days !== 0) {
       return `${days} days`;
-    } if (hours != 0) {
+    }
+    if (hours !== 0) {
       return `${hours} hours`;
-    } if (minutes != 0) {
+    }
+    if (minutes !== 0) {
       return `${minutes} minutes`;
     }
     return `${seconds} seconds`;
   }
 }
+
+export default UserDetailsDTO;

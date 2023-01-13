@@ -1,4 +1,4 @@
-import { Story } from "../../models/";
+import { Story } from "../../models";
 
 const leaderboardController = {
   async getLeaderboard(req, res, next) {
@@ -10,15 +10,12 @@ const leaderboardController = {
           storiesPosted: { $sum: 1 },
         },
       },
-    ]).exec(function (err, result) {
+    ]).exec((err, result) => {
       if (err) {
-        // handle error
-      } else {
-        console.log(result);
+        return next(err);
       }
+      return res.status(200).json({ leaderboard: result });
     });
-
-    console.log("and");
   },
 };
 

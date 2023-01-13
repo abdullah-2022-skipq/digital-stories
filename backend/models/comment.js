@@ -1,14 +1,14 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
 const commentSchema = new Schema(
   {
     text: { type: String },
-    user: { type: mongoose.SchemaTypes.ObjectId, ref: 'User' },
-    story: { type: mongoose.SchemaTypes.ObjectId, ref: 'Story' },
+    user: { type: mongoose.SchemaTypes.ObjectId, ref: "User" },
+    story: { type: mongoose.SchemaTypes.ObjectId, ref: "Story" },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-export default mongoose.model('Comment', commentSchema, 'comments');
+export default mongoose.model("Comment", commentSchema, "comments");

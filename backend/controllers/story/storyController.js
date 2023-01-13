@@ -1,16 +1,14 @@
-import Joi from 'joi';
-import multer from 'multer'; // [] todo
-import Jimp from 'jimp';
-import path from 'path';
-import fs from 'fs';
-import { Comment, Engagement, Story } from '../../models';
-import { CustomErrorHandler } from '../../services';
-import { StoryDTO, StoryDetailsDTO } from '../../dtos';
+import Joi from "joi";
+import Jimp from "jimp";
+import path from "path";
+import fs from "fs";
+import { Comment, Engagement, Story } from "../../models";
+import { CustomErrorHandler } from "../../services";
+import { StoryDTO, StoryDetailsDTO } from "../../dtos";
 
 const storyController = {
   async create(req, res, next) {
     const createStorySchema = Joi.object({
-      // [] multi-conditional data validation
       mediaType: Joi.string().required(),
       font: Joi.string(),
       fontColor: Joi.string(),
@@ -34,10 +32,8 @@ const storyController = {
 
     const { mediaType } = req.body;
 
-    if (mediaType === 'text') {
-      const {
-        font, fontColor, caption, postedBy,
-      } = req.body;
+    if (mediaType === "text") {
+      const { font, fontColor, caption, postedBy } = req.body;
       const newStory = new Story({
         mediaType,
         font,
@@ -49,14 +45,14 @@ const storyController = {
       await newStory.save();
     }
 
-    if (mediaType === 'image') {
+    if (mediaType === "image") {
       const { caption, postedBy, image } = req.body;
 
       // preprocess the image
 
       const buffer = Buffer.from(
-        image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''),
-        'base64',
+        image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
+        "base64"
       );
 
       const imgPath = `${Date.now()}-${Math.round(Math.random() * 100000)}.png`;
@@ -67,8 +63,8 @@ const storyController = {
         jimpRes
           //   .resize(200, Jimp.AUTO) i want to keep original res intact
           .write(path.resolve(__dirname, `../../storage/${imgPath}`));
-      } catch (error) {
-        //
+      } catch (err) {
+        return next(err);
       }
       const newStory = new Story({
         mediaType,
@@ -80,27 +76,27 @@ const storyController = {
       await newStory.save();
     }
 
-    if (mediaType === 'video') {
+    if (mediaType === "video") {
       const { caption, postedBy, video } = req.body;
 
       // preprocess the video
 
       const buffer = Buffer.from(
-        video.replace(/^data:video\/(webm);base64,/, ''),
-        'base64',
+        video.replace(/^data:video\/(webm);base64,/, ""),
+        "base64"
       );
 
       const videoPath = `${Date.now()}-${Math.round(
-        Math.random() * 100000,
+        Math.random() * 100000
       )}.webm`;
 
       try {
         fs.writeFileSync(
           path.resolve(__dirname, `../../storage/${videoPath}`),
-          buffer,
+          buffer
         );
-      } catch (error) {
-        //
+      } catch (err) {
+        return next(err);
       }
       const newStory = new Story({
         mediaType,
@@ -112,17 +108,18 @@ const storyController = {
       await newStory.save();
     }
 
-    return res.status(201).json({ message: 'story created successfully' });
+    return res.status(201).json({ message: "story created successfully" });
   },
 
   async getAll(req, res, next) {
     try {
-      const stories = await Story.find().populate('postedBy');
+      const stories = await Story.find().populate("postedBy");
 
       const storiesDto = [];
 
-      for (let i = 0; i < stories.length; i++) {
+      for (let i = 0; i < stories.length; i += 1) {
         const obj = new StoryDTO(stories[i]);
+
         storiesDto.push(obj);
       }
 
@@ -145,19 +142,18 @@ const storyController = {
       return next(error);
     }
 
+    let story;
+
     try {
-      const story = await Story.findOne({ _id: req.params.id }).populate(
-        'postedBy',
-      );
+      story = await Story.findOne({ _id: req.params.id }).populate("postedBy");
 
       if (!story) {
         return next(CustomErrorHandler.notFound());
       }
-
-      return res.status(200).json({ story: new StoryDetailsDTO(story) });
-    } catch (error) {
-      //
+    } catch (err) {
+      return next(err);
     }
+    return res.status(200).json({ story: new StoryDetailsDTO(story) });
   },
 
   async getTrending(req, res, next) {
@@ -167,18 +163,18 @@ const storyController = {
           upVoteCount: -1,
           commentCount: -1,
         })
-        .populate('postedBy');
+        .populate("postedBy");
 
       const storiesDto = [];
 
-      for (let i = 0; i < stories.length; i++) {
+      for (let i = 0; i < stories.length; i += 1) {
         const obj = new StoryDTO(stories[i]);
         storiesDto.push(obj);
       }
 
       return res.status(200).json({ stories: storiesDto });
     } catch (error) {
-      console.log(error);
+      return next(error);
     }
   },
 
@@ -216,10 +212,9 @@ const storyController = {
         return next(CustomErrorHandler.notFound());
       }
 
-      // [] todo status code
-      return res.status(200).json({ message: 'story deleted successfully' });
-    } catch (error) {
-      //
+      return res.status(200).json({ message: "story deleted successfully" });
+    } catch (err) {
+      return next(err);
     }
   },
 };

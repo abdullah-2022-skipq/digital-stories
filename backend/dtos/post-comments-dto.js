@@ -1,4 +1,4 @@
-export class PostCommentsDTO {
+class PostCommentsDTO {
   text;
 
   username;
@@ -17,3 +17,5 @@ export class PostCommentsDTO {
     this._id = comment._id;
   }
 }
+
+export default PostCommentsDTO;

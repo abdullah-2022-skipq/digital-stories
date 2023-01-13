@@ -1,4 +1,4 @@
-export class StoryDTO {
+class StoryDTO {
   _id;
 
   caption;
@@ -26,3 +26,5 @@ export class StoryDTO {
     this.avatarPath = story.postedBy.avatarPath;
   }
 }
+
+export default StoryDTO;

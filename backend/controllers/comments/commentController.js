@@ -1,7 +1,7 @@
-import Joi from 'joi';
-import { Comment, Engagement, Story } from '../../models';
-import { CustomErrorHandler } from '../../services';
-import { PostCommentsDTO } from '../../dtos';
+import Joi from "joi";
+import { Comment, Engagement, Story } from "../../models";
+import { CustomErrorHandler } from "../../services";
+import { PostCommentsDTO } from "../../dtos";
 
 const commentController = {
   async createComment(req, res, next) {
@@ -43,21 +43,22 @@ const commentController = {
       const storyRes = await Story.findOneAndUpdate(
         { _id: story },
         { $inc: { commentCount: 1 } },
-        { new: true },
+        { new: true }
       );
 
       // create doc in engagements
       const newEngagement = new Engagement({
-        action: 'comment',
+        action: "comment",
         byUser: user,
         onPost: story,
         forUser: storyRes.postedBy,
       });
 
       await newEngagement.save();
-
-      return res.status(201).json('comment posted successfully');
-    } catch (error) {}
+    } catch (err) {
+      return next(err);
+    }
+    return res.status(201).json("comment posted successfully");
   },
 
   async getCommentsByPostId(req, res, next) {
@@ -73,7 +74,7 @@ const commentController = {
 
     try {
       const comments = await Comment.find({ story: req.params.id }).populate(
-        'user',
+        "user"
       );
 
       if (!comments) {
@@ -82,14 +83,15 @@ const commentController = {
 
       const commentsDto = [];
 
-      for (let i = 0; i < comments.length; i++) {
+      for (let i = 0; i < comments.length; i += 1) {
         const obj = new PostCommentsDTO(comments[i]);
+
         commentsDto.push(obj);
       }
 
       return res.status(200).json({ comments: commentsDto });
-    } catch (error) {
-      //
+    } catch (err) {
+      return next(err);
     }
   },
 };
