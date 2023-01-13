@@ -69,7 +69,7 @@ function StoryDetails() {
   const deleteStoryHandler = async () => {
     const response = await deletePostById(id);
 
-    if (response.status === 204) {
+    if (response.status === 200) {
       navigate.push('/');
     }
   };
