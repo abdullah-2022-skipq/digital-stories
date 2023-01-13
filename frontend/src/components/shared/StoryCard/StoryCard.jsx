@@ -22,7 +22,8 @@ function StoryCard({ story, grid }) {
     '#E9362F',
   ];
 
-  let randomColor = avatarWrapperColors[Math.floor(Math.random() * avatarWrapperColors.length)];
+  let randomColor =
+    avatarWrapperColors[Math.floor(Math.random() * avatarWrapperColors.length)];
 
   return (
     <div

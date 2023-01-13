@@ -27,10 +27,7 @@ function ProfileModal({ closeModalHandler }) {
         <div className={styles.modalContent}>
           <img className={styles.avatar} src={user.avatar} alt="avatar" />
           <h3 className={styles.name}>{user.name}</h3>
-          <h5 className={styles.username}>
-            @
-            {user.username}
-          </h5>
+          <h5 className={styles.username}>@{user.username}</h5>
           <div className={styles.memberSince}>
             You've been a part of our community since:
             {` ${user.memberSince} ❤️‍🔥`}

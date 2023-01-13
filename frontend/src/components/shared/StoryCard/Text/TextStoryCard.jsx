@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './TextStoryCard.module.css';
 
 function StoryCardText({ caption, font, fontColor }) {
-  const color = fontColor === 'blue' || fontColor === '#0077ff'
-    ? '#0077ff'
-    : fontColor === 'pink' || fontColor === '#de1b55'
+  const color =
+    fontColor === 'blue' || fontColor === '#0077ff'
+      ? '#0077ff'
+      : fontColor === 'pink' || fontColor === '#de1b55'
       ? '#de1b55'
       : '#33b357';
 
