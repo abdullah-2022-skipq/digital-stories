@@ -14,6 +14,7 @@ import {
   getCommentsByPostId,
   downVoteStory,
   deletePostById,
+  getVoteStatus,
 } from '../../api';
 import TextInput from '../../components/shared/TextInput/TextInput';
 import Button from '../../components/shared/Button/Button';
@@ -28,8 +29,7 @@ function StoryDetails() {
 
   const user = useSelector((state) => state.user._id);
 
-  // const [upVoted, setUpVoted] = useState(false);
-  // const [downVoted, setDownVoted] = useState(false);
+  const [voteStatus, setVoteStatus] = useState('novote');
 
   const [reload, setReload] = useState();
 
@@ -39,7 +39,6 @@ function StoryDetails() {
     const data = { user, post: id };
     await upVoteStory(data);
     setReload(!reload);
-    // maybe display a message what backend did but later
   };
 
   const downVoteHandler = async () => {
@@ -87,9 +86,23 @@ function StoryDetails() {
       if (user === storyRes.postedBy) {
         setOwnsStory(true);
       }
+
+      // check vote status for this post
+      const response = await getVoteStatus(user, id);
+
+      if (response.status === 200) {
+        if (response.data.voteStatus === 'upvote') {
+          setVoteStatus('upvote');
+        } else if (response.data.voteStatus === 'downvote') {
+          setVoteStatus('downvote');
+        } else {
+          setVoteStatus('novote');
+        }
+      }
+
       setStory(storyRes);
     })();
-  }, [reload]);
+  }, [reload, voteStatus]);
 
   if (!story) {
     return <Spinner message="Loading story, please wait" />;
@@ -145,7 +158,11 @@ function StoryDetails() {
             <div className={styles.mediaStats}>
               <div>
                 <img
-                  src="/images/upvote-filled.png"
+                  src={
+                    voteStatus === 'upvote'
+                      ? '/images/upvote-filled.png'
+                      : '/images/upvote.png'
+                  }
                   alt="upvote"
                   role="button"
                   onClick={upVoteHandler}
@@ -155,7 +172,11 @@ function StoryDetails() {
 
               <div>
                 <img
-                  src="/images/downvote-filled.png"
+                  src={
+                    voteStatus === 'downvote'
+                      ? '/images/downvote-filled.png'
+                      : '/images/downvote.png'
+                  }
                   alt="downvote"
                   role="button"
                   onClick={downVoteHandler}
