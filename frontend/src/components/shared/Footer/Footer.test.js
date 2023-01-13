@@ -15,9 +15,15 @@ describe("Footer component", () => {
     expect(emoji).toBeInTheDocument();
   });
 
-  test("has the correct class in footer component", () => {
+  test("has the correct global css class in footer component", () => {
     const { getByTestId } = render(<Footer />);
     const footer = getByTestId("footer");
     expect(footer).toHaveClass("container");
+  });
+
+  test("has the correct local css class in footer component", () => {
+    const { getByTestId } = render(<Footer />);
+    const footer = getByTestId("footer");
+    expect(footer).toHaveClass("footer");
   });
 });
