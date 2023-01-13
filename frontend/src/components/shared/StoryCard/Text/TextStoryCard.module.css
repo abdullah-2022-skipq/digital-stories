@@ -5,4 +5,5 @@
   padding: 10px;
   font-weight: bold;
   font-size: 20px;
+  word-break: break-all;
 }
