@@ -33,5 +33,7 @@ router.post('/downvote', auth, votesController.downVote);
 router.get('/engagements', auth, engagementController.getEngagements);
 router.get('/leaderboard', auth, leaderboardController.getLeaderboard);
 router.post('/vote-status', auth, votesController.getVoteStatus);
+router.get('/num-users', auth, userController.getNumUsers);
+router.put('/stories', auth, storyController.update);
 
 export default router;

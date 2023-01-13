@@ -220,18 +220,24 @@ const votesController = {
     const { user, post } = req.body;
 
     let voteStatus;
+    let upVoted;
+    let downVoted;
 
-    const upVoted = await Engagement.findOne({
-      onPost: post,
-      byUser: user,
-      action: 'upvote',
-    });
+    try {
+      upVoted = await Engagement.findOne({
+        onPost: post,
+        byUser: user,
+        action: 'upvote',
+      });
 
-    const downVoted = await Engagement.findOne({
-      onPost: post,
-      byUser: user,
-      action: 'downvote',
-    });
+      downVoted = await Engagement.findOne({
+        onPost: post,
+        byUser: user,
+        action: 'downvote',
+      });
+    } catch (err) {
+      return next(err);
+    }
 
     if (upVoted) {
       voteStatus = 'upvote';
