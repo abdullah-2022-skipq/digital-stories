@@ -106,6 +106,57 @@ export const createStory = async (story) => {
   return response;
 };
 
+export const updateStory = async (story) => {
+  let response;
+
+  if (story.mediaType === 'text') {
+    try {
+      const { mediaType, caption, font, fontColor, postedBy, storyId } = story;
+      response = await api.put('/api/stories', {
+        mediaType,
+        caption,
+        font,
+        fontColor,
+        postedBy,
+        storyId,
+      });
+    } catch (error) {
+      return error;
+    }
+    return response;
+  }
+
+  if (story.mediaType === 'image') {
+    try {
+      const { mediaType, caption, image, postedBy, storyId } = story;
+      response = await api.put('/api/stories', {
+        mediaType,
+        caption,
+        image,
+        postedBy,
+        storyId,
+      });
+    } catch (error) {
+      return error;
+    }
+    return response;
+  }
+
+  try {
+    const { mediaType, caption, video, postedBy, storyId } = story;
+    response = await api.put('/api/stories', {
+      mediaType,
+      caption,
+      video,
+      postedBy,
+      storyId,
+    });
+  } catch (error) {
+    return error;
+  }
+  return response;
+};
+
 export const createComment = async (data) => {
   let response;
   try {
@@ -153,6 +204,8 @@ export const deletePostById = async (id) => api.delete(`/api/stories/${id}`);
 
 export const getVoteStatus = async (user, post) =>
   api.post('/api/vote-status', { user, post });
+
+export const getNumUsers = async () => api.get('/api/num-users');
 
 // interceptor for auto token refresh
 api.interceptors.response.use(
