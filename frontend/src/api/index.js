@@ -26,133 +26,134 @@ export const registerUser = async (data) => {
 };
 
 export const getCurrentUser = async () => {
+  let response;
   try {
-    const response = await api.get('/api/me');
-    return response;
-  } catch (error) {}
-};
-
-export const login = async (data) => {
-  try {
-    const response = await api.post('/api/login', {
-      username: data.username,
-      password: data.password,
-    });
-
-    return response;
+    response = await api.get('/api/me');
   } catch (error) {
     return error;
   }
+  return response;
 };
 
-export const logout = async () => await api.post('/api/logout');
+export const login = async (data) => {
+  let response;
+  try {
+    response = await api.post('/api/login', {
+      username: data.username,
+      password: data.password,
+    });
+  } catch (error) {
+    return error;
+  }
+  return response;
+};
 
-export const getAllStories = async () => await api.get('/api/stories');
+// https://stackoverflow.com/a/44806250
+
+export const logout = async () => api.post('/api/logout');
+
+export const getAllStories = async () => api.get('/api/stories');
 
 export const getTrendingStories = async () => api.get('/api/stories/trending');
 
-export const getStoryById = async (id) => await api.get(`/api/stories/${id}`);
+export const getStoryById = async (id) => api.get(`/api/stories/${id}`);
 
 export const createStory = async (story) => {
+  let response;
+
   if (story.mediaType === 'text') {
     try {
       const { mediaType, caption, font, fontColor, postedBy } = story;
-      const response = await api.post('/api/stories', {
+      response = await api.post('/api/stories', {
         mediaType,
         caption,
         font,
         fontColor,
         postedBy,
       });
-
-      return response;
     } catch (error) {
-      //
+      return error;
     }
+    return response;
   }
+
   if (story.mediaType === 'image') {
     try {
       const { mediaType, caption, image, postedBy } = story;
-      const response = await api.post('/api/stories', {
+      response = await api.post('/api/stories', {
         mediaType,
         caption,
         image,
         postedBy,
       });
-
-      return response;
     } catch (error) {
-      //
+      return error;
     }
+    return response;
   }
 
-  if (story.mediaType === 'video') {
-    try {
-      const { mediaType, caption, video, postedBy } = story;
-      const response = await api.post('/api/stories', {
-        mediaType,
-        caption,
-        video,
-        postedBy,
-      });
-
-      return response;
-    } catch (error) {
-      //
-    }
+  try {
+    const { mediaType, caption, video, postedBy } = story;
+    response = await api.post('/api/stories', {
+      mediaType,
+      caption,
+      video,
+      postedBy,
+    });
+  } catch (error) {
+    return error;
   }
+  return response;
 };
 
 export const createComment = async (data) => {
+  let response;
   try {
     const { text, user, story } = data;
-    const response = await api.post('/api/comment', { text, user, story });
-
-    return response;
+    response = await api.post('/api/comment', { text, user, story });
   } catch (error) {
-    //
+    return error;
   }
+  return response;
 };
 
 export const upVoteStory = async (data) => {
+  let response;
   try {
     const { user, post } = data;
-    const response = await api.post('/api/upvote', { user, post });
-
-    return response;
+    response = await api.post('/api/upvote', { user, post });
   } catch (error) {
-    //
+    return error;
   }
+  return response;
 };
 
 export const downVoteStory = async (data) => {
+  let response;
   try {
     const { user, post } = data;
-    const response = await api.post('/api/downvote', { user, post });
-
-    return response;
+    response = await api.post('/api/downvote', { user, post });
   } catch (error) {
-    //
+    return error;
   }
+  return response;
 };
 
 export const getCommentsByPostId = async (id) => {
+  let response;
   try {
-    const response = await api.get(`/api/comments/${id}`);
-    return response;
+    response = await api.get(`/api/comments/${id}`);
   } catch (error) {
-    //
+    return error;
   }
+  return response;
 };
 
-export const deletePostById = async (id) => {
-  return await api.delete(`/api/stories/${id}`);
-};
+export const deletePostById = async (id) => api.delete(`/api/stories/${id}`);
 // interceptor for auto token refresh
 api.interceptors.response.use(
-  (config) => {
-    return config;
-  },
+  (config) => config,
+  // eslint-disable-next-line consistent-return
   async (error) => {
     const originalRequest = error.config;
 
@@ -164,16 +165,13 @@ api.interceptors.response.use(
       originalRequest.isRetry = true;
 
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_PATH}/api/refresh`,
-          {
-            withCredentials: true,
-          }
-        );
+        await axios.get(`${process.env.REACT_APP_API_PATH}/api/refresh`, {
+          withCredentials: true,
+        });
 
         return api.request(originalRequest);
-      } catch (error) {
-        //
+      } catch (err) {
+        return err;
       }
     }
   }

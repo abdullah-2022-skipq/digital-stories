@@ -1,4 +1,4 @@
-import React, { createContext, useState, useMemo } from 'react';
+import React, { createContext, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import Landing from './pages/Landing/Landing';
 import SignUp from './pages/SignUp/SignUp';
 import SignIn from './pages/SignIn/SignIn';
 import Home from './pages/Home/Home';
-import { usePersistentSession } from './hooks/usePersistentSession';
+import usePersistentSession from './hooks/usePersistentSession';
 import Spinner from './components/shared/Spinner/Spinner';
 import Leaderboard from './pages/Leaderboard/Leaderboard';
 import MultiStepCreateStoryEntry from './pages/MultiStepCreateStoryForm/MultiStepCreateStoryEntry';
@@ -36,15 +36,16 @@ function App() {
     setStep(step - 1);
   };
 
-  const value = useMemo(
-    () => mediaType,
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
+  const value = {
+    mediaType,
     setMediaType,
     steps,
     step,
     setStep,
     onNextHandler,
-    onPrevHandler
-  );
+    onPrevHandler,
+  };
 
   return loading ? (
     <Spinner message="Loading, please wait" />
