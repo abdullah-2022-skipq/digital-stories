@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setAuth } from '../store/authSlice';
 import { setUser } from '../store/userSlice';
 
-export const usePersistentSession = () => {
+const usePersistentSession = () => {
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -29,3 +29,5 @@ export const usePersistentSession = () => {
 
   return { loading };
 };
+
+export default usePersistentSession;
