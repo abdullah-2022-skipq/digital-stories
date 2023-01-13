@@ -33,11 +33,12 @@ function StepPassword() {
   return (
     <div className="cardWrapper">
       <div>
-        <button className={formStyles.backArrow}>
+        <button className={formStyles.backArrow} type="button">
           <img
             src="/images/arrow_back.png"
             alt="arrow back"
             onClick={onClickBackHandler}
+            role="button"
           />
         </button>
 

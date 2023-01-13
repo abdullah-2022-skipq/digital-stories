@@ -5,9 +5,11 @@ import multiStepForm from './multiStepFormSlice';
 import user from './userSlice';
 import navbar from './navbarSlice';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: { auth, userRegistration, multiStepForm, user, navbar },
 
   middleware: (getDefaultMiddleWare) =>
     getDefaultMiddleWare({ serializableCheck: false }),
 });
+
+export default store;

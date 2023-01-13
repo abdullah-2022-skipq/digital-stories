@@ -6,6 +6,9 @@ import Spinner from '../../components/shared/Spinner/Spinner';
 import { getAllStories } from '../../api';
 
 function Home() {
+  const [data, setData] = useState(null);
+  const [dataMask, setDataMask] = useState(null);
+
   useEffect(() => {
     (async () => {
       const response = await getAllStories();
@@ -16,9 +19,6 @@ function Home() {
       setDataMask(dataFromApi);
     })();
   }, []);
-
-  const [data, setData] = useState(null);
-  const [dataMask, setDataMask] = useState(null);
 
   const [activeView, setActiveView] = useState('grid');
 
@@ -63,14 +63,18 @@ function Home() {
               onKeyDown={(e) => (e.key === 'Enter' ? onSearchHandler() : '')}
             />
           </div>
-          <button className={styles.searchButton} onClick={onSearchHandler}>
+          <button
+            className={styles.searchButton}
+            onClick={onSearchHandler}
+            type="button"
+          >
             Search
           </button>
         </div>
 
         <div className={styles.right}>
           <Link to="/create-story" style={{ textDecoration: 'none' }}>
-            <button className={styles.createStoryButton}>
+            <button className={styles.createStoryButton} type="button">
               <img src="/images/create_story.png" alt="create story" />
 
               <span>Create a story</span>
@@ -90,7 +94,7 @@ function Home() {
           className={activeView === 'list' ? styles.activeView : ''}
           src="/images/list.png"
           alt="list"
-          role="buttton"
+          role="button"
           onClick={() => setActiveView('list')}
         />
       </div>

@@ -5,4 +5,4 @@ const signInStyle = {
   marginLeft: '10px',
 };
 
-export { signInStyle };
+export default { signInStyle };

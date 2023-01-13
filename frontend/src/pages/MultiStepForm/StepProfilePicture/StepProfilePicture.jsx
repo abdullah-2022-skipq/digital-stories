@@ -40,7 +40,7 @@ function StepProfilePicture() {
     const imgFile = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(imgFile);
-    reader.onloadend = function () {
+    reader.onloadend = () => {
       setPicture(reader.result);
       dispatch(setAvatar(reader.result));
     };
@@ -55,7 +55,11 @@ function StepProfilePicture() {
   return (
     <div className="cardWrapper">
       <div>
-        <button className={formStyles.backArrow} onClick={onClickBackHandler}>
+        <button
+          className={formStyles.backArrow}
+          onClick={onClickBackHandler}
+          type="button"
+        >
           <img src="/images/arrow_back.png" alt="arrow back" />
         </button>
 
@@ -86,11 +90,7 @@ function StepProfilePicture() {
               buttontitle="Create Account"
               buttonimage="arrow_right"
             />
-            {error != '' ? (
-              <div className={styles.errorWrapper}>{error}</div>
-            ) : (
-              <></>
-            )}
+            {error !== '' && <div className={styles.errorWrapper}>{error}</div>}
           </div>
         </Card>
       </div>

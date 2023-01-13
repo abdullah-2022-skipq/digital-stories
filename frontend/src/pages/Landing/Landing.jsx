@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import styles from './Landing.module.css';
 import Card from '../../components/shared/Card/Card';
 import Button from '../../components/shared/Button/Button';
-import { signInStyle } from '../../shared/styles';
+import signInStyle from '../../shared/styles';
 
 function Landing() {
   const history = useHistory();

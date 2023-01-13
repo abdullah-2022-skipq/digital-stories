@@ -9,7 +9,9 @@ function CommentList({ comments }) {
         {comments.length === 0 ? (
           <div className={styles.noComments}>No comments yet</div>
         ) : (
-          comments.map((comment, i) => <Comment key={i} comment={comment} />)
+          comments.map((comment) => (
+            <Comment key={comment._id} comment={comment} />
+          ))
         )}
       </div>
     </div>

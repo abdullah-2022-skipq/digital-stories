@@ -41,7 +41,7 @@ function VideoStory() {
 
     const reader = new FileReader();
 
-    reader.onloadend = function () {
+    reader.onloadend = () => {
       const base64 = reader.result;
       setVideo(base64);
     };

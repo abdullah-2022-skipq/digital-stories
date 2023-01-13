@@ -1,5 +1,5 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './Navigation.module.css';
 import ProfileModal from '../../ProfileModal/ProfileModal';
@@ -136,7 +136,11 @@ function Navigation() {
 
         {isAuth && (
           <div className={styles.navRight}>
-            <button className={styles.avatarWrapper} onClick={showModalHandler}>
+            <button
+              className={styles.avatarWrapper}
+              onClick={showModalHandler}
+              type="button"
+            >
               <img className={styles.avatar} src={user.avatar} alt="avatar" />
             </button>
           </div>

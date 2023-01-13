@@ -21,7 +21,11 @@ function ProfileModal({ closeModalHandler }) {
   return (
     <div className={styles.modalMask}>
       <div className={styles.modalBody}>
-        <button onClick={closeModalHandler} className={styles.closeButton}>
+        <button
+          onClick={closeModalHandler}
+          className={styles.closeButton}
+          type="button"
+        >
           <img src="/images/close.png" alt="close" />
         </button>
         <div className={styles.modalContent}>
@@ -29,7 +33,7 @@ function ProfileModal({ closeModalHandler }) {
           <h3 className={styles.name}>{user.name}</h3>
           <h5 className={styles.username}>@{user.username}</h5>
           <div className={styles.memberSince}>
-            You've been a part of our community since:
+            You`$apos;`ve been a part of our community since:
             {` ${user.memberSince} ❤️‍🔥`}
           </div>
           <div className={styles.signOutButton}>

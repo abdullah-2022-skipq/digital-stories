@@ -32,7 +32,11 @@ function StepUsername() {
   return (
     <div className="cardWrapper">
       <div>
-        <button className={formStyles.backArrow} onClick={onClickBackHandler}>
+        <button
+          className={formStyles.backArrow}
+          onClick={onClickBackHandler}
+          type="button"
+        >
           <img src="/images/arrow_back.png" alt="arrow back" />
         </button>
 

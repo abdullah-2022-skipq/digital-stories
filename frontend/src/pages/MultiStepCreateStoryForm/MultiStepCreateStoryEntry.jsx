@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { globalContext } from '../../App';
 
 function MultiStepCreateStoryEntry() {

@@ -4,7 +4,7 @@ import styles from './ImageStoryCard.module.css';
 function ImageStoryCard({ caption, image }) {
   return (
     <div>
-      <img className={styles.image} src={image} alt="story-image" />
+      <img className={styles.image} src={image} alt="story" />
       <p>{caption}</p>
     </div>
   );

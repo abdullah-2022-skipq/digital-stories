@@ -5,7 +5,7 @@ import styles from './StoryDetails.module.css';
 import TextStoryDetails from './Text/TextStoryDetails';
 import VideoStoryDetails from './Video/VideoStoryDetails';
 import ImageStoryDetails from './Image/ImageStoryDetails';
-import CommentList from '../../components/Comments/CommentList';
+import CommentList from '../../components/Comments/CommentList/CommentList';
 import Spinner from '../../components/shared/Spinner/Spinner';
 import {
   getStoryById,
@@ -28,8 +28,9 @@ function StoryDetails() {
 
   const user = useSelector((state) => state.user._id);
 
-  const [upVoted, setUpVoted] = useState(false);
-  const [downVoted, setDownVoted] = useState(false);
+  // const [upVoted, setUpVoted] = useState(false);
+  // const [downVoted, setDownVoted] = useState(false);
+
   const [reload, setReload] = useState();
 
   const navigate = useHistory();
@@ -58,15 +59,19 @@ function StoryDetails() {
   const postCommentHandler = async () => {
     const data = { user, text: newComment, story: id };
     const response = await createComment(data);
-    setNewComment('');
-    setReload(!reload);
+
+    if (response.status === 201) {
+      setNewComment('');
+      setReload(!reload);
+    }
   };
 
   const deleteStoryHandler = async () => {
     const response = await deletePostById(id);
-    // [] check status code of response and then
-    // redirect
-    navigate.push('/');
+
+    if (response.status === 204) {
+      navigate.push('/');
+    }
   };
   useEffect(() => {
     (async () => {
@@ -114,8 +119,10 @@ function StoryDetails() {
             </div>
             {ownsStory && (
               <div className={story.updateOrDeleteControls}>
-                <button>Update</button>
-                <button onClick={deleteStoryHandler}>Delete</button>
+                <button type="button">Update</button>
+                <button type="button" onClick={deleteStoryHandler}>
+                  Delete
+                </button>
               </div>
             )}
           </div>

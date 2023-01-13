@@ -9,10 +9,6 @@ import VideoStoryCard from './Video/VideoStoryCard';
 function StoryCard({ story, grid }) {
   const navigate = useHistory();
 
-  const onStoryClickHandler = async (e) => {
-    navigate.push('/story', { id: story._id, randomColor });
-  };
-
   const avatarWrapperColors = [
     '#266CFF',
     '#4B47DB',
@@ -22,8 +18,12 @@ function StoryCard({ story, grid }) {
     '#E9362F',
   ];
 
-  let randomColor =
+  const randomColor =
     avatarWrapperColors[Math.floor(Math.random() * avatarWrapperColors.length)];
+
+  const onStoryClickHandler = async () => {
+    navigate.push('/story', { id: story._id, randomColor });
+  };
 
   return (
     <div

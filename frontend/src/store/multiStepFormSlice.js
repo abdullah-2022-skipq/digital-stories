@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createSlice } from '@reduxjs/toolkit';
 import StepContactDetails from '../pages/MultiStepForm/StepContactDetails/StepContactDetails';
 import StepPassword from '../pages/MultiStepForm/StepPassword/StepPassword';

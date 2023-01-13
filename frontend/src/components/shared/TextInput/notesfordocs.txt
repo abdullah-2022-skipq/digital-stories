@@ -1,0 +1,5 @@
+https://stackoverflow.com/a/68918177
+
+The Jest library provides the jest. fn() function for creating a “mock” function. An optional implementation function may be passed to jest. fn() to define the mock function's behavior and return value. The mock function's behavior may be further specified using various methods provided to the mock function such as .
+
+https://www.designcise.com/web/tutorial/whats-the-difference-between-findby-getby-and-queryby-in-react-testing-library

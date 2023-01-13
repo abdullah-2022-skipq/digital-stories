@@ -12,11 +12,12 @@ function StepStoryContent() {
   return (
     <div className="cardWrapper">
       <div>
-        <button className={styles.backArrow}>
+        <button className={styles.backArrow} type="button">
           <img
             src="/images/arrow_back.png"
             alt="arrow back"
             onClick={onPrevHandler}
+            role="button"
           />
         </button>
         <Card cardHeading="Create a story" cardLogo="create-story">

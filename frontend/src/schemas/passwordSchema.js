@@ -4,7 +4,7 @@ const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
 const passwordRulesString = 'Use digits, lowercase and uppercase letters';
 
-export const passwordSchema = yup.object().shape({
+const passwordSchema = yup.object().shape({
   password: yup
     .string()
     .min(8)
@@ -16,3 +16,5 @@ export const passwordSchema = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'Passwords must match')
     .required('required'),
 });
+
+export default passwordSchema;

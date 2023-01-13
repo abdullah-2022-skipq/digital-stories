@@ -42,7 +42,7 @@ function ImageStory() {
 
     reader.readAsDataURL(imgFile);
 
-    reader.onloadend = function () {
+    reader.onloadend = () => {
       setImage(reader.result);
     };
   };
@@ -52,7 +52,7 @@ function ImageStory() {
       <div className={styles.cardFlex}>
         <p className={styles.imagePromptHeading}>
           <span className={styles.imageWrapper}>
-            <img className={styles.imageImage} src={image} alt="image" />
+            <img className={styles.imageImage} src={image} alt="story" />
           </span>
           <span className={styles.imageLabelWrapper}>
             <input

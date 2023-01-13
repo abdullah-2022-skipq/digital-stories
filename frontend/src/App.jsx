@@ -1,7 +1,7 @@
+import React, { createContext, useState, useMemo } from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { createContext, useState } from 'react';
 import Footer from './components/shared/Footer/Footer';
 import Navigation from './components/shared/Navigation/Navigation';
 import Landing from './pages/Landing/Landing';
@@ -11,7 +11,7 @@ import Home from './pages/Home/Home';
 import { usePersistentSession } from './hooks/usePersistentSession';
 import Spinner from './components/shared/Spinner/Spinner';
 import Leaderboard from './pages/Leaderboard/Leaderboard';
-import MultiStepCreateStoryEntry from './pages/MultiStepCreateStoryForm/MultiStepCreatStoryEntry';
+import MultiStepCreateStoryEntry from './pages/MultiStepCreateStoryForm/MultiStepCreateStoryEntry';
 import StepChooseMediaType from './pages/MultiStepCreateStoryForm/StepChooseMediaType/StepChooseMediaType';
 import StepStoryContent from './pages/MultiStepCreateStoryForm/StepStoryContent/StepStoryContent';
 import StoryDetails from './pages/Story/StoryDetails';
@@ -36,20 +36,20 @@ function App() {
     setStep(step - 1);
   };
 
+  const value = useMemo(
+    () => mediaType,
+    setMediaType,
+    steps,
+    step,
+    setStep,
+    onNextHandler,
+    onPrevHandler
+  );
+
   return loading ? (
     <Spinner message="Loading, please wait" />
   ) : (
-    <globalContext.Provider
-      value={{
-        mediaType,
-        setMediaType,
-        steps,
-        step,
-        setStep,
-        onNextHandler,
-        onPrevHandler,
-      }}
-    >
+    <globalContext.Provider value={value}>
       <div className="">
         <BrowserRouter>
           <div className="layout">
