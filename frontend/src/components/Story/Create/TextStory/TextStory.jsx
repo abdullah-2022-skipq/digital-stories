@@ -71,11 +71,13 @@ function TextStory() {
             className={`${styles.colorPalette} ${styles.blue}`}
             style={fontColor === blue ? activeColorWrapperStyle : {}}
           />
+
           <div
             onClick={() => setFontColor(green)}
             className={`${styles.colorPalette} ${styles.green}`}
             style={fontColor === green ? activeColorWrapperStyle : {}}
           />
+
           <div
             onClick={() => setFontColor(pink)}
             className={`${styles.colorPalette} ${styles.pink}`}

@@ -15,6 +15,7 @@
   appearance: none;
   -moz-appearance: none; /* mozilla */
   -webkit-appearance: none; /* chrome and safari */
+  background-image: url('~/public/images/arrow_down.png');
   background-repeat: no-repeat;
   background-position-x: 95%;
   background-position-y: 50%;
