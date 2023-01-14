@@ -48,8 +48,6 @@ function Home() {
     <div className="container">
       <div className={styles.storiesHeader}>
         <div className={styles.left}>
-          <span className={styles.heading}>All stories</span>
-
           <div className={styles.searchBox}>
             {/* Search icon by Icons8 */}
             <img src="/images/search.png" alt="search" />

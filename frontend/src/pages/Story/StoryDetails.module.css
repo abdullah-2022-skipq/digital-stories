@@ -88,8 +88,6 @@
 }
 
 .avatarImage {
-  height: 98%;
-  width: 98%;
   object-fit: cover; /* maintain aspect ratio */
 }
 
@@ -124,4 +122,11 @@
 
 .postComment {
   gap: 10px;
+}
+
+.updateOrDeleteControls button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
 }

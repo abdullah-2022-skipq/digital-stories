@@ -10,12 +10,6 @@
   align-items: center;
 }
 
-.heading {
-  font-weight: bold;
-  font-size: 20px;
-  position: relative;
-}
-
 .searchBox {
   background-color: #262625;
   margin-left: 20px;
@@ -58,17 +52,6 @@
   transition: all 0.3s ease-in-out;
   border: none;
   outline: none;
-}
-
-/* nice way to learn css pseudo selectors */
-.heading::after {
-  content: '';
-  position: absolute;
-  background-color: #0077ff;
-  bottom: -5px;
-  left: 0;
-  width: 60%;
-  height: 4px;
 }
 
 .right {
