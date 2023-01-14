@@ -41,9 +41,9 @@
 }
 
 .avatarImage {
-  height: 98%;
-  width: 98%;
-  object-fit: cover; /* maintain aspect ratio */
+  width: inherit;
+  height: inherit;
+  object-fit: fill; /* maintain aspect ratio */
 }
 
 .mediaWrapper {
