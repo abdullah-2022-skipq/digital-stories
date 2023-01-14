@@ -1,10 +1,10 @@
-import Joi from 'joi';
-import Jimp from 'jimp';
-import path from 'path';
-import fs from 'fs';
-import { Comment, Engagement, Story } from '../../models';
-import { CustomErrorHandler } from '../../services';
-import { StoryDTO, StoryDetailsDTO } from '../../dtos';
+import Joi from "joi";
+import Jimp from "jimp";
+import path from "path";
+import fs from "fs";
+import { Comment, Engagement, Story } from "../../models";
+import { CustomErrorHandler } from "../../services";
+import { StoryDTO, StoryDetailsDTO } from "../../dtos";
 
 const storyController = {
   async create(req, res, next) {
@@ -32,7 +32,7 @@ const storyController = {
 
     const { mediaType } = req.body;
 
-    if (mediaType === 'text') {
+    if (mediaType === "text") {
       const { font, fontColor, caption, postedBy } = req.body;
       const newStory = new Story({
         mediaType,
@@ -45,14 +45,14 @@ const storyController = {
       await newStory.save();
     }
 
-    if (mediaType === 'image') {
+    if (mediaType === "image") {
       const { caption, postedBy, image } = req.body;
 
       // preprocess the image
 
       const buffer = Buffer.from(
-        image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''),
-        'base64'
+        image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
+        "base64"
       );
 
       const imgPath = `${Date.now()}-${Math.round(Math.random() * 100000)}.png`;
@@ -76,14 +76,14 @@ const storyController = {
       await newStory.save();
     }
 
-    if (mediaType === 'video') {
+    if (mediaType === "video") {
       const { caption, postedBy, video } = req.body;
 
       // preprocess the video
 
       const buffer = Buffer.from(
-        video.replace(/^data:video\/(webm);base64,/, ''),
-        'base64'
+        video.replace(/^data:video\/(webm);base64,/, ""),
+        "base64"
       );
 
       const videoPath = `${Date.now()}-${Math.round(
@@ -108,12 +108,12 @@ const storyController = {
       await newStory.save();
     }
 
-    return res.status(201).json({ message: 'story created successfully' });
+    return res.status(201).json({ message: "story created successfully" });
   },
 
   async getAll(req, res, next) {
     try {
-      const stories = await Story.find().populate('postedBy');
+      const stories = await Story.find().populate("postedBy");
 
       const storiesDto = [];
 
@@ -145,7 +145,7 @@ const storyController = {
     let story;
 
     try {
-      story = await Story.findOne({ _id: req.params.id }).populate('postedBy');
+      story = await Story.findOne({ _id: req.params.id }).populate("postedBy");
 
       if (!story) {
         return next(CustomErrorHandler.notFound());
@@ -163,7 +163,7 @@ const storyController = {
           upVoteCount: -1,
           commentCount: -1,
         })
-        .populate('postedBy');
+        .populate("postedBy");
 
       const storiesDto = [];
 
@@ -212,7 +212,7 @@ const storyController = {
         return next(CustomErrorHandler.notFound());
       }
 
-      return res.status(200).json({ message: 'story deleted successfully' });
+      return res.status(200).json({ message: "story deleted successfully" });
     } catch (err) {
       return next(err);
     }
@@ -245,7 +245,7 @@ const storyController = {
 
     const { mediaType, storyId } = req.body;
 
-    if (mediaType === 'text') {
+    if (mediaType === "text") {
       const { font, fontColor, caption, postedBy } = req.body;
 
       await Story.updateOne(
@@ -262,14 +262,14 @@ const storyController = {
       );
     }
 
-    if (mediaType === 'image') {
+    if (mediaType === "image") {
       const { caption, postedBy, image } = req.body;
 
       // preprocess the image
 
       const buffer = Buffer.from(
-        image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''),
-        'base64'
+        image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
+        "base64"
       );
 
       const imgPath = `${Date.now()}-${Math.round(Math.random() * 100000)}.png`;
@@ -297,14 +297,14 @@ const storyController = {
       );
     }
 
-    if (mediaType === 'video') {
+    if (mediaType === "video") {
       const { caption, postedBy, video } = req.body;
 
       // preprocess the video
 
       const buffer = Buffer.from(
-        video.replace(/^data:video\/(webm);base64,/, ''),
-        'base64'
+        video.replace(/^data:video\/(webm);base64,/, ""),
+        "base64"
       );
 
       const videoPath = `${Date.now()}-${Math.round(
@@ -333,7 +333,7 @@ const storyController = {
       );
     }
 
-    return res.status(200).json({ message: 'story updated successfully' });
+    return res.status(200).json({ message: "story updated successfully" });
   },
 };
 

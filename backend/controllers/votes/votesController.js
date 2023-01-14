@@ -1,5 +1,5 @@
-import Joi from 'joi';
-import { Engagement, Story } from '../../models';
+import Joi from "joi";
+import { Engagement, Story } from "../../models";
 
 const votesController = {
   async upVote(req, res, next) {
@@ -22,7 +22,7 @@ const votesController = {
 
     // check already liked
     const voted = await Engagement.findOne({
-      action: 'upvote',
+      action: "upvote",
       byUser: user,
       onPost: post,
     });
@@ -30,7 +30,7 @@ const votesController = {
     if (voted) {
       // delete record
       await Engagement.deleteOne({
-        action: 'upvote',
+        action: "upvote",
         byUser: user,
         onPost: post,
       });
@@ -42,25 +42,25 @@ const votesController = {
         { new: true }
       );
 
-      return res.status(200).json({ message: 'voted successfully' });
+      return res.status(200).json({ message: "voted successfully" });
     }
 
     // check already disliked
     const downvoted = await Engagement.findOne({
-      action: 'downvote',
+      action: "downvote",
       byUser: user,
       onPost: post,
     });
 
     if (downvoted) {
       await Engagement.deleteOne({
-        action: 'downvote',
+        action: "downvote",
         byUser: user,
         onPost: post,
       });
 
       const newUpvote = new Engagement({
-        action: 'upvote',
+        action: "upvote",
         byUser: user,
         onPost: post,
       });
@@ -79,7 +79,7 @@ const votesController = {
         { new: true }
       );
 
-      return res.status(200).json({ message: 'downvoted before, now level' });
+      return res.status(200).json({ message: "downvoted before, now level" });
     }
 
     const story = await Story.findOneAndUpdate(
@@ -90,7 +90,7 @@ const votesController = {
 
     // if not both then add record for upvote
     const newUpvote = new Engagement({
-      action: 'upvote',
+      action: "upvote",
       onPost: post,
       byUser: user,
       forUser: story.postedBy,
@@ -98,7 +98,7 @@ const votesController = {
 
     await newUpvote.save();
 
-    return res.status(200).json({ message: 'voted successfully' });
+    return res.status(200).json({ message: "voted successfully" });
   },
 
   async downVote(req, res, next) {
@@ -121,7 +121,7 @@ const votesController = {
 
     // check already disliked
     const downvoted = await Engagement.findOne({
-      action: 'downvote',
+      action: "downvote",
       byUser: user,
       onPost: post,
     });
@@ -129,7 +129,7 @@ const votesController = {
     if (downvoted) {
       // delete record
       await Engagement.deleteOne({
-        action: 'downvote',
+        action: "downvote",
         byUser: user,
         onPost: post,
       });
@@ -141,25 +141,25 @@ const votesController = {
         { new: true }
       );
 
-      return res.status(200).json({ message: 'voted successfully' });
+      return res.status(200).json({ message: "voted successfully" });
     }
 
     // check already liked
     const voted = await Engagement.findOne({
-      action: 'upvote',
+      action: "upvote",
       byUser: user,
       onPost: post,
     });
 
     if (voted) {
       await Engagement.deleteOne({
-        action: 'upvote',
+        action: "upvote",
         byUser: user,
         onPost: post,
       });
 
       const newDownvote = new Engagement({
-        action: 'downvote',
+        action: "downvote",
         byUser: user,
         onPost: post,
       });
@@ -179,7 +179,7 @@ const votesController = {
         { new: true }
       );
 
-      return res.status(200).json({ message: 'voted successfully' });
+      return res.status(200).json({ message: "voted successfully" });
     }
 
     const story = await Story.findOneAndUpdate(
@@ -190,7 +190,7 @@ const votesController = {
 
     // if not both then add record for upvote
     const newDownvote = new Engagement({
-      action: 'downvote',
+      action: "downvote",
       onPost: post,
       byUser: user,
       forUser: story.postedBy,
@@ -198,7 +198,7 @@ const votesController = {
 
     await newDownvote.save();
 
-    return res.status(200).json({ message: 'voted successfully' });
+    return res.status(200).json({ message: "voted successfully" });
   },
 
   async getVoteStatus(req, res, next) {
@@ -227,24 +227,24 @@ const votesController = {
       upVoted = await Engagement.findOne({
         onPost: post,
         byUser: user,
-        action: 'upvote',
+        action: "upvote",
       });
 
       downVoted = await Engagement.findOne({
         onPost: post,
         byUser: user,
-        action: 'downvote',
+        action: "downvote",
       });
     } catch (err) {
       return next(err);
     }
 
     if (upVoted) {
-      voteStatus = 'upvote';
+      voteStatus = "upvote";
     } else if (downVoted) {
-      voteStatus = 'downvote';
+      voteStatus = "downvote";
     } else {
-      voteStatus = 'novote';
+      voteStatus = "novote";
     }
 
     return res.status(200).json({ voteStatus });
