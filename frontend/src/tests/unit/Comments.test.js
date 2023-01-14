@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Comment from './Comment';
+import Comment from '../../components/Comments/Comment/Comment';
 
 describe('Comment component', () => {
   test('renders Comment properly', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import TextInput from './TextInput';
+import TextInput from '../../components/shared/TextInput/TextInput';
 
 describe('TextInput component', () => {
   test('renders TextInput properly', () => {
@@ -25,7 +25,7 @@ describe('TextInput component', () => {
   test('displays error message when error prop is true', () => {
     const errorMessage = 'error test';
     const { getByTestId } = render(
-      <TextInput error={true} errormessage={errorMessage} />
+      <TextInput error={'true'} errormessage={errorMessage} />
     );
     const errorElement = getByTestId('error');
     expect(errorElement).toBeInTheDocument();

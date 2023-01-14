@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Spinner from './Spinner';
+import Spinner from '../../components/shared/Spinner/Spinner';
 
 describe('Spinner component', () => {
   test('renders Spinner properly', () => {

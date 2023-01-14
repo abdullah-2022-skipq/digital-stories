@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Card from './Card';
+import Card from '../../components/shared/Card/Card';
 
 describe('Card component', () => {
   test('renders Card properly', () => {
