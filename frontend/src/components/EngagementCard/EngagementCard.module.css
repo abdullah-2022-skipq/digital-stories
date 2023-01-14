@@ -1,0 +1,28 @@
+.engagementCardWrapper {
+  display: flex;
+  font-size: 25px;
+  border-radius: 10px;
+  background-color: #262625;
+  margin: 30px 10px;
+  padding: 15px;
+  align-items: center;
+  text-align: center;
+  padding-left: 20%;
+  color: #c4c5c5;
+}
+
+.srcUser {
+  color: #4b47db;
+  font-weight: bold;
+}
+
+.goalUser {
+  color: #0077ff;
+}
+
+.story {
+  cursor: pointer;
+  color: #33b357;
+  margin: 0 5px;
+  font-weight: bold;
+}
