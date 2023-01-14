@@ -15,12 +15,22 @@ function EngagementCard({ username, storyId, action, goal, date }) {
     <div className={styles.engagementCardWrapper}>
       <div>
         <span>
-          <span className={styles.srcUser}>{username}</span> {action}{' '}
-          {action === 'commented' && 'on'} a
-          <span className={styles.story} onClick={onStoryClickHandler}>
+          <span className={styles.srcUser} data-testid="user">
+            {username}
+          </span>{' '}
+          {action} {action === 'commented' && 'on'} a
+          <span
+            className={styles.story}
+            onClick={onStoryClickHandler}
+            data-testid="storyId"
+          >
             <u>story</u>
           </span>
-          by <span className={styles.goalUser}>{goal}</span> on {dateFormatted}
+          by{' '}
+          <span className={styles.goalUser} data-testid="goal">
+            {goal}
+          </span>{' '}
+          on {dateFormatted}
         </span>
       </div>
     </div>
