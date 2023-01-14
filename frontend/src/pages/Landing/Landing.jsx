@@ -13,7 +13,7 @@ function Landing() {
   };
 
   return (
-    <div className="cardWrapper">
+    <div className="cardWrapper" data-testid="cardWrapper">
       <Card cardHeading="Welcome" cardLogo="waving_hand">
         <p className={styles.description}>
           Digital Stories – the newest platform for sharing and discovering
@@ -21,13 +21,16 @@ function Landing() {
           <span className={styles.tagLine}> Snap your story now!</span>
         </p>
 
-        <div>
+        <div data-id="button">
           <Button
             onClick={getStartedHandler}
             buttontitle="Let's Get Started"
             buttonimage="arrow_right"
           />
-          <div className="hasAccountAlreadyWrapper">
+          <div
+            className="hasAccountAlreadyWrapper"
+            data-testid="hasAccountAlready"
+          >
             <span className="hasAccountAlready">Have an account already?</span>
             <Link style={sharedStyle.signInStyle} to="/sign-in">
               Sign in
