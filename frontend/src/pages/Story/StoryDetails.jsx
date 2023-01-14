@@ -15,6 +15,7 @@ import {
   downVoteStory,
   deletePostById,
   getVoteStatus,
+  getNumUsers,
 } from '../../api';
 import TextInput from '../../components/shared/TextInput/TextInput';
 import Button from '../../components/shared/Button/Button';
@@ -22,8 +23,11 @@ import Button from '../../components/shared/Button/Button';
 function StoryDetails() {
   const location = useLocation();
   const { id } = location.state;
-  const { randomColor } = location.state;
+  const randomColor = location.state.randomColor || '#4B47DB';
+
   const [story, setStory] = useState(null);
+
+  const [numUsers, setNumUsers] = useState(0);
 
   const [hover, setHover] = useState(false);
 
@@ -72,6 +76,11 @@ function StoryDetails() {
       navigate.push('/');
     }
   };
+
+  const updateStoryHandler = async () => {
+    navigate.push('/update', { storyId: id });
+  };
+
   useEffect(() => {
     (async () => {
       const storyResponse = await getStoryById(id);
@@ -100,6 +109,12 @@ function StoryDetails() {
         }
       }
 
+      const users = await getNumUsers();
+
+      if (users.status === 200) {
+        setNumUsers(users.data.numUsers);
+      }
+
       setStory(storyRes);
     })();
   }, [reload, voteStatus]);
@@ -115,7 +130,7 @@ function StoryDetails() {
             <div className={styles.storyHeaderFlex}>
               <div
                 className={styles.avatarWrapper}
-                style={{ border: `3px solid ${randomColor}` }}
+                style={{ border: `4px solid ${randomColor}` }}
               >
                 <img
                   className={styles.avatarImage}
@@ -131,10 +146,24 @@ function StoryDetails() {
               </div>
             </div>
             {ownsStory && (
-              <div className={story.updateOrDeleteControls}>
-                <button type="button">Update</button>
-                <button type="button" onClick={deleteStoryHandler}>
-                  Delete
+              <div className={styles.updateOrDeleteControls}>
+                <button type="button">
+                  <img
+                    role="button"
+                    src="/images/update-story.png"
+                    alt="update-story"
+                    title="update story"
+                    onClick={updateStoryHandler}
+                  />
+                </button>
+                <button type="button">
+                  <img
+                    role="button"
+                    src="/images/delete-story.png"
+                    alt="delete-story"
+                    title="delete story"
+                    onClick={deleteStoryHandler}
+                  />
                 </button>
               </div>
             )}
@@ -166,6 +195,7 @@ function StoryDetails() {
                   alt="upvote"
                   role="button"
                   onClick={upVoteHandler}
+                  title="upvotes"
                 />
                 {story.upVoteCount}
               </div>
@@ -180,6 +210,7 @@ function StoryDetails() {
                   alt="downvote"
                   role="button"
                   onClick={downVoteHandler}
+                  title="downvotes"
                 />
                 {story.downVoteCount}
               </div>
@@ -192,10 +223,27 @@ function StoryDetails() {
                   onClick={() =>
                     commentInput.current.childNodes[0].childNodes[0].focus()
                   }
+                  title="comments"
                 />
                 {story.commentCount}
               </div>
-              <p>%likes</p>
+              <div>
+                <img
+                  src="/images/percentage-liked.png"
+                  alt="percent-liked"
+                  width={30}
+                  height={30}
+                  style={{ cursor: 'default' }}
+                  title="percent of total users reacted"
+                />
+                {(
+                  (story.upVoteCount +
+                    story.downVoteCount +
+                    story.commentCount) /
+                  numUsers
+                ).toFixed(2)}
+                %
+              </div>
             </div>
           </div>
         </div>
