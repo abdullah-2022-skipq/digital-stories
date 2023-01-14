@@ -4,6 +4,9 @@ import styles from './ProfileModal.module.css';
 import Button from '../shared/Button/Button';
 import { logout } from '../../api';
 import { setAuth } from '../../store/authSlice';
+import { resetStep } from '../../store/multiStepFormSlice';
+import { resetUserReg } from '../../store/userRegistrationSlice';
+import { resetActiveRoute } from '../../store/navbarSlice';
 
 function ProfileModal({ closeModalHandler }) {
   const user = useSelector((state) => state.user);
@@ -13,6 +16,10 @@ function ProfileModal({ closeModalHandler }) {
   const signOutHandler = async () => {
     const response = await logout();
     dispatch(setAuth(response.data));
+    dispatch(resetStep());
+    dispatch(resetActiveRoute());
+    dispatch(resetUserReg());
+
     closeModalHandler();
   };
 
