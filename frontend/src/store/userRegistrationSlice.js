@@ -27,11 +27,25 @@ export const userRegistrationSlice = createSlice({
     setAvatar: (state, action) => {
       state.avatar = action.payload;
     },
+    // eslint-disable-next-line no-unused-vars
+    resetUserReg: (state, action) => {
+      state.name = '';
+      state.username = '';
+      state.email = '';
+      state.password = '';
+      state.avatar = 'http://localhost:5544/storage/default.png';
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setName, setUsername, setEmail, setPassword, setAvatar } =
-  userRegistrationSlice.actions;
+export const {
+  setName,
+  setUsername,
+  setEmail,
+  setPassword,
+  setAvatar,
+  resetUserReg,
+} = userRegistrationSlice.actions;
 
 export default userRegistrationSlice.reducer;

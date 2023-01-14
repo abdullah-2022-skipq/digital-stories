@@ -26,9 +26,12 @@ export const multiStepFormSlice = createSlice({
     delStep: (state, action) => {
       state.currentStep -= 1;
     },
+    resetStep: (state, action) => {
+      state.currentStep = 1;
+    },
   },
 });
 
-export const { setStep, delStep } = multiStepFormSlice.actions;
+export const { setStep, delStep, resetStep } = multiStepFormSlice.actions;
 
 export default multiStepFormSlice.reducer;
