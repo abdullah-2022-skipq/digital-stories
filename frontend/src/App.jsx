@@ -16,6 +16,7 @@ import StepChooseMediaType from './pages/MultiStepCreateStoryForm/StepChooseMedi
 import StepStoryContent from './pages/MultiStepCreateStoryForm/StepStoryContent/StepStoryContent';
 import StoryDetails from './pages/Story/StoryDetails';
 import Trending from './pages/Trending/Trending';
+import Engagements from './pages/Engagements/Engagements';
 
 export const globalContext = createContext();
 
@@ -83,6 +84,12 @@ function App() {
               <ProtectedRoute exact path="/story">
                 <div className="main">
                   <StoryDetails />
+                </div>
+              </ProtectedRoute>
+
+              <ProtectedRoute exact path="/engagements">
+                <div className="main">
+                  <Engagements />
                 </div>
               </ProtectedRoute>
 
