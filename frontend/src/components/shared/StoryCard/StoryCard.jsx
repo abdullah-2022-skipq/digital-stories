@@ -37,7 +37,7 @@ function StoryCard({ story, grid }) {
       >
         <div
           className={styles.avatarWrapper}
-          style={{ border: `3px solid ${randomColor}` }}
+          style={{ border: `4px solid ${randomColor}` }}
         >
           <img
             className={styles.avatarImage}
