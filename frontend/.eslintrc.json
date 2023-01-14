@@ -23,6 +23,7 @@
     "react/jsx-props-no-spreading": "off",
     "react/jsx-filename-extension": "off",
     "jsx-a11y/iframe-has-title": "off",
-    "react/destructuring-assignment": "off"
+    "react/destructuring-assignment": "off",
+    "import/no-extraneous-dependencies": "off"
   }
 }
