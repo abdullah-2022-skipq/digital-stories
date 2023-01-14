@@ -1,15 +1,24 @@
 import React, { useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Lottie from 'react-lottie';
+import videoAnimationData from '../../../../lotties/facetime.json';
 import styles from './VideoStory.module.css';
 import Button from '../../../shared/Button/Button';
 import { globalContext } from '../../../../App';
 import { createStory } from '../../../../api';
 
 function VideoStory() {
-  const [video, setVideo] = useState(
-    'https://www.youtube.com/embed/ScMzIvxBSi4'
-  );
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: videoAnimationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+
+  const [video, setVideo] = useState('');
 
   const [caption, setCaption] = useState('');
 
@@ -54,7 +63,11 @@ function VideoStory() {
       <div className={styles.cardFlex}>
         <p className={styles.videoPromptHeading}>
           <span className={styles.videoWrapper}>
-            <iframe className={styles.video} src={video} alt="video" />
+            {video === '' ? (
+              <Lottie options={defaultOptions} height={400} width={400} />
+            ) : (
+              <iframe className={styles.video} src={video} alt="video" />
+            )}
           </span>
 
           <span className={styles.videoLabelWrapper}>
