@@ -207,6 +207,9 @@ export const getVoteStatus = async (user, post) =>
 
 export const getNumUsers = async () => api.get('/api/num-users');
 
+export const getLeaderboard = async () => api.get('/api/leaderboard');
+
+export const getEngagements = async (id) => api.get(`/api/engagements/${id}`);
 // interceptor for auto token refresh
 api.interceptors.response.use(
   (config) => config,
