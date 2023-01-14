@@ -32,9 +32,9 @@ function SignIn() {
     }
   };
   return (
-    <div className="cardWrapper">
+    <div className="cardWrapper" data-testid="cardWrapper">
       <Card cardHeading="Welcome back" cardLogo="lock_key_sign_in">
-        <div className="cardFlex">
+        <div className="cardFlex" data-testid="cardFlex">
           <TextInput
             type="text"
             placeholder="username"
