@@ -1,11 +1,11 @@
-import Joi from "joi";
-import bcrypt from "bcrypt";
-import Jimp from "jimp";
-import path from "path";
-import { CustomErrorHandler, TokenService } from "../../services";
-import { User } from "../../models";
-import { UserDetailsDTO } from "../../dtos";
-import { REFRESH_TOKEN_SECRET, DEFAULTAVATAR } from "../../config";
+import Joi from 'joi';
+import bcrypt from 'bcrypt';
+import Jimp from 'jimp';
+import path from 'path';
+import { CustomErrorHandler, TokenService } from '../../services';
+import { User } from '../../models';
+import { UserDetailsDTO } from '../../dtos';
+import { REFRESH_TOKEN_SECRET, DEFAULTAVATAR } from '../../config';
 
 const registerController = {
   async register(req, res, next) {
@@ -17,9 +17,9 @@ const registerController = {
       password: Joi.string()
         .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
         .required(),
-      confirmPassword: Joi.ref("password"),
+      confirmPassword: Joi.ref('password'),
       // [] todo remove default in path
-      avatarPath: Joi.string().default("default"),
+      avatarPath: Joi.string().default('default'),
     });
 
     const { error } = registerSchema.validate(req.body);
@@ -41,7 +41,7 @@ const registerController = {
       if (emailTaken) {
         return next(
           CustomErrorHandler.userAlreadyExists(
-            "A user with this email is already registered!"
+            'A user with this email is already registered!'
           )
         );
       }
@@ -49,7 +49,7 @@ const registerController = {
       if (usernameTaken) {
         return next(
           CustomErrorHandler.userAlreadyExists(
-            "Username is already taken, please try with another username!"
+            'Username is already taken, please try with another username!'
           )
         );
       }
@@ -65,8 +65,8 @@ const registerController = {
 
     if (avatarPath !== DEFAULTAVATAR) {
       const buffer = Buffer.from(
-        avatarPath.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
-        "base64"
+        avatarPath.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''),
+        'base64'
       );
 
       imgPath = `${Date.now()}-${Math.round(Math.random() * 100000)}.png`;
@@ -80,7 +80,7 @@ const registerController = {
       } catch (err) {
         return next(
           CustomErrorHandler.failedImageProcessing(
-            "Could not process the image"
+            'Could not process the image'
           )
         );
       }
@@ -91,7 +91,10 @@ const registerController = {
       email,
       username,
       password: hashedPassword,
-      avatarPath: imgPath === DEFAULTAVATAR ? imgPath : `/storage/${imgPath}`,
+      avatarPath:
+        imgPath === DEFAULTAVATAR
+          ? imgPath
+          : `http://localhost:5544/storage/${imgPath}`,
     });
 
     let accessToken;
@@ -111,7 +114,7 @@ const registerController = {
         {
           _id: result._id,
         },
-        "1y",
+        '1y',
         REFRESH_TOKEN_SECRET
       );
     } catch (err) {
@@ -121,12 +124,12 @@ const registerController = {
     // save refresh token to database
     await TokenService.storeRefreshToken(result._id, refreshToken);
 
-    res.cookie("accessToken", accessToken, {
+    res.cookie('accessToken', accessToken, {
       maxAge: 1000 * 60 * 60 * 24 * 30,
       httpOnly: true,
     });
 
-    res.cookie("refreshToken", refreshToken, {
+    res.cookie('refreshToken', refreshToken, {
       maxAge: 1000 * 60 * 60 * 24 * 30,
       httpOnly: true,
     });

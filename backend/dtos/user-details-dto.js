@@ -1,5 +1,3 @@
-import { BASE_URL, DEFAULTAVATAR } from "../config";
-
 class UserDetailsDTO {
   _id;
 
@@ -13,10 +11,7 @@ class UserDetailsDTO {
     this._id = user._id;
     this.name = user.name;
     this.username = user.username;
-    this.avatar =
-      user.avatarPath === DEFAULTAVATAR
-        ? user.avatarPath
-        : `${BASE_URL}${user.avatarPath}`;
+    this.avatar = user.avatarPath;
     this.memberSince = UserDetailsDTO.getmemberSince(user.createdAt);
   }
 
