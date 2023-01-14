@@ -3,13 +3,19 @@ import { Link, useHistory } from 'react-router-dom';
 import styles from './Landing.module.css';
 import Card from '../../components/shared/Card/Card';
 import Button from '../../components/shared/Button/Button';
-import sharedStyle from '../../shared/styles';
 
 function Landing() {
   const history = useHistory();
 
   const getStartedHandler = () => {
     history.push('/get-started');
+  };
+
+  const signInStyle = {
+    color: '#0077ff',
+    fontWeight: 'bold',
+    textDecoration: 'none',
+    marginLeft: '10px',
   };
 
   return (
@@ -32,7 +38,7 @@ function Landing() {
             data-testid="hasAccountAlready"
           >
             <span className="hasAccountAlready">Have an account already?</span>
-            <Link style={sharedStyle.signInStyle} to="/sign-in">
+            <Link style={signInStyle} to="/sign-in">
               Sign in
             </Link>
           </div>
