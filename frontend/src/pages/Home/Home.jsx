@@ -40,6 +40,29 @@ function Home() {
     setDataMask(filteredData);
   };
 
+  // eslint-disable-next-line no-unused-vars
+  const [sortBy, setSortBy] = useState('date');
+
+  const sortData = (by) => {
+    if (by === 'date') {
+      const sortedData = dataMask.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+      setDataMask(sortedData);
+    } else if (by === 'upvotes') {
+      const sortedData = dataMask.sort((a, b) => b.upVotes - a.upVotes);
+      setDataMask(sortedData);
+    } else if (by === 'downvotes') {
+      const sortedData = dataMask.sort((a, b) => b.downVotes - a.downVotes);
+      setDataMask(sortedData);
+    }
+  };
+
+  const handleSortByChange = (event) => {
+    setSortBy(event.target.value);
+    sortData(event.target.value);
+  };
+
   if (!data) {
     return <Spinner message="Loading stories, please wait" />;
   }
@@ -53,6 +76,7 @@ function Home() {
             <img src="/images/search.png" alt="search" />
             <input
               className={styles.searchInput}
+              placeholder="search"
               type="text"
               ref={inputRef}
               onChange={() =>
@@ -81,6 +105,14 @@ function Home() {
         </div>
       </div>
       <div className={styles.storyCustomization}>
+        <div className={styles.selectWrapper}>
+          <select onChange={handleSortByChange}>
+            <option value="date">Sort by date</option>
+            <option value="upvotes">Sort by upvotes</option>
+            <option value="downvotes">Sort by downvotes</option>
+          </select>
+        </div>
+
         <img
           className={activeView === 'grid' ? styles.activeView : ''}
           src="/images/grid.png"
@@ -88,6 +120,7 @@ function Home() {
           role="button"
           onClick={() => setActiveView('grid')}
         />
+
         <img
           className={activeView === 'list' ? styles.activeView : ''}
           src="/images/list.png"
