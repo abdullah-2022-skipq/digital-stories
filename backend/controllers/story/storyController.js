@@ -113,19 +113,32 @@ const storyController = {
 
   async getAll(req, res, next) {
     try {
-      const stories = await Story.find()
-        .populate('postedBy')
-        .sort('-createdAt');
+      const page = parseInt(req.query.page, 10) || 1;
+      const limit = 20;
 
+      const stories = await Story.paginate(
+        {},
+        { page, limit, populate: 'postedBy', sort: { createdAt: -1 } }
+      );
+
+      if (!stories) {
+        return next();
+      }
       const storiesDto = [];
 
-      for (let i = 0; i < stories.length; i += 1) {
-        const obj = new StoryDTO(stories[i]);
+      for (let i = 0; i < stories.docs.length; i += 1) {
+        const obj = new StoryDTO(stories.docs[i]);
 
         storiesDto.push(obj);
       }
 
-      return res.status(200).json({ stories: storiesDto });
+      return res.status(200).json({
+        stories: storiesDto,
+        totalPages: stories.totalPages,
+        page: stories.page,
+        hasNextPage: stories.hasNextPage,
+        hasPrevPage: stories.hasPrevPage,
+      });
     } catch (error) {
       return next(error);
     }
@@ -165,6 +178,7 @@ const storyController = {
           upVoteCount: -1,
           commentCount: -1,
         })
+        .limit(20)
         .populate('postedBy');
 
       const storiesDto = [];

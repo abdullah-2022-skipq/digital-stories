@@ -166,3 +166,32 @@
 .selectWrapper option:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+.paginationWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginationWrapper button {
+  margin: 0 5px;
+  background-color: #0077ff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  display: flex;
+  align-items: center;
+  margin: 15px auto;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: white;
+}
+
+.paginationWrapper button:hover,
+.paginationWrapper button:disabled {
+  background-color: #014a9c;
+  color: #c4c5c5;
+}

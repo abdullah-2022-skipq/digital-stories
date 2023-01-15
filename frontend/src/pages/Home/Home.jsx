@@ -8,17 +8,33 @@ import { getAllStories } from '../../api';
 function Home() {
   const [data, setData] = useState(null);
   const [dataMask, setDataMask] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasNextPage, sethasNextPage] = useState(true);
+  const [hasPrevPage, sethasPrevPage] = useState(false);
 
   useEffect(() => {
     (async () => {
-      const response = await getAllStories();
+      const response = await getAllStories(currentPage);
 
       const dataFromApi = response.data.stories;
+
+      sethasNextPage(response.data.hasNextPage);
+      sethasPrevPage(response.data.hasPrevPage);
 
       setData(dataFromApi);
       setDataMask(dataFromApi);
     })();
-  }, []);
+  }, [currentPage]);
+
+  // pagination
+  const onPreviousPageHandler = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const onNextPageHandler = () => {
+    setCurrentPage(currentPage + 1);
+  };
 
   const [activeView, setActiveView] = useState('grid');
 
@@ -141,6 +157,22 @@ function Home() {
             grid={activeView === 'grid'}
           />
         ))}
+      </div>
+      <div className={styles.paginationWrapper}>
+        <button
+          type="button"
+          onClick={onPreviousPageHandler}
+          disabled={!hasPrevPage}
+        >
+          Previous
+        </button>
+        <button
+          type="button"
+          onClick={onNextPageHandler}
+          disabled={!hasNextPage}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

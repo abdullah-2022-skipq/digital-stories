@@ -52,9 +52,10 @@ export const login = async (data) => {
 
 export const logout = async () => api.post('/api/logout');
 
-export const getAllStories = async () => api.get('/api/stories');
+export const getAllStories = async (page) =>
+  api.get(`/api/stories?page=${page}`);
 
-export const getTrendingStories = async () => api.get('/api/stories/trending');
+export const getTrendingStories = async () => api.get('/api/trending');
 
 export const getStoryById = async (id) => api.get(`/api/stories/${id}`);
 
