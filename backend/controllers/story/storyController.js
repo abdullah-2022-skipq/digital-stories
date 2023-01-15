@@ -226,14 +226,8 @@ const storyController = {
       font: Joi.string(),
       fontColor: Joi.string(),
       caption: Joi.optional(),
-      image: Joi.string(),
-      video: Joi.string(),
-      upVoteCount: Joi.number(),
-      downVoteCount: Joi.number(),
-      commentCount: Joi.number(),
-      postedBy: Joi.string()
-        .regex(/^[0-9a-fA-F]{24}$/)
-        .required(),
+      image: Joi.string().allow(''),
+      video: Joi.string().allow(''),
       storyId: Joi.string()
         .regex(/^[0-9a-fA-F]{24}$/)
         .required(),
@@ -248,7 +242,7 @@ const storyController = {
     const { mediaType, storyId } = req.body;
 
     if (mediaType === 'text') {
-      const { font, fontColor, caption, postedBy } = req.body;
+      const { font, fontColor, caption } = req.body;
 
       await Story.updateOne(
         { _id: storyId },
@@ -258,83 +252,105 @@ const storyController = {
             font,
             caption,
             fontColor,
-            postedBy,
           },
         }
       );
     }
 
     if (mediaType === 'image') {
-      const { caption, postedBy, image } = req.body;
+      const { caption, image } = req.body;
 
-      // preprocess the image
+      if (image === '') {
+        await Story.updateOne(
+          { _id: storyId },
+          {
+            $set: {
+              mediaType,
+              caption,
+            },
+          }
+        );
+      } else {
+        // preprocess the image
 
-      const buffer = Buffer.from(
-        image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''),
-        'base64'
-      );
+        const buffer = Buffer.from(
+          image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''),
+          'base64'
+        );
 
-      const imgPath = `${Date.now()}-${Math.round(Math.random() * 100000)}.png`;
+        const imgPath = `${Date.now()}-${Math.round(
+          Math.random() * 100000
+        )}.png`;
 
-      try {
-        const jimpRes = await Jimp.read(buffer);
+        try {
+          const jimpRes = await Jimp.read(buffer);
 
-        jimpRes
-          //   .resize(200, Jimp.AUTO) i want to keep original res intact
-          .write(path.resolve(__dirname, `../../storage/${imgPath}`));
-      } catch (err) {
-        return next(err);
-      }
-
-      await Story.updateOne(
-        { _id: storyId },
-        {
-          $set: {
-            mediaType,
-            caption,
-            image: `http://localhost:5544/storage/${imgPath}`,
-            postedBy,
-          },
+          jimpRes
+            //   .resize(200, Jimp.AUTO) i want to keep original res intact
+            .write(path.resolve(__dirname, `../../storage/${imgPath}`));
+        } catch (err) {
+          return next(err);
         }
-      );
+
+        await Story.updateOne(
+          { _id: storyId },
+          {
+            $set: {
+              mediaType,
+              caption,
+              image: `http://localhost:5544/storage/${imgPath}`,
+            },
+          }
+        );
+      }
     }
 
     if (mediaType === 'video') {
-      const { caption, postedBy, video } = req.body;
+      const { caption, video } = req.body;
 
-      // preprocess the video
-
-      const buffer = Buffer.from(
-        video.replace(/^data:video\/(webm);base64,/, ''),
-        'base64'
-      );
-
-      const videoPath = `${Date.now()}-${Math.round(
-        Math.random() * 100000
-      )}.webm`;
-
-      try {
-        fs.writeFileSync(
-          path.resolve(__dirname, `../../storage/${videoPath}`),
-          buffer
+      if (video === '') {
+        await Story.updateOne(
+          { _id: storyId },
+          {
+            $set: {
+              mediaType,
+              caption,
+            },
+          }
         );
-      } catch (err) {
-        return next(err);
-      }
+      } else {
+        // preprocess the video
 
-      await Story.updateOne(
-        { _id: storyId },
-        {
-          $set: {
-            mediaType,
-            caption,
-            video: `http://localhost:5544/storage/${videoPath}`,
-            postedBy,
-          },
+        const buffer = Buffer.from(
+          video.replace(/^data:video\/(webm);base64,/, ''),
+          'base64'
+        );
+
+        const videoPath = `${Date.now()}-${Math.round(
+          Math.random() * 100000
+        )}.webm`;
+
+        try {
+          fs.writeFileSync(
+            path.resolve(__dirname, `../../storage/${videoPath}`),
+            buffer
+          );
+        } catch (err) {
+          return next(err);
         }
-      );
-    }
 
+        await Story.updateOne(
+          { _id: storyId },
+          {
+            $set: {
+              mediaType,
+              caption,
+              video: `http://localhost:5544/storage/${videoPath}`,
+            },
+          }
+        );
+      }
+    }
     return res.status(200).json({ message: 'story updated successfully' });
   },
 };
