@@ -78,7 +78,7 @@ function StoryDetails() {
   };
 
   const updateStoryHandler = async () => {
-    navigate.push('/update', { storyId: id });
+    navigate.push('/update-story', { story });
   };
 
   useEffect(() => {
