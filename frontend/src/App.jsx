@@ -17,6 +17,7 @@ import StepStoryContent from './pages/MultiStepCreateStoryForm/StepStoryContent/
 import StoryDetails from './pages/StoryDetails/StoryDetails';
 import Trending from './pages/Trending/Trending';
 import Engagements from './pages/Engagements/Engagements';
+import UpdateStory from './pages/UpdateStory/UpdateStory';
 
 export const globalContext = createContext();
 
@@ -84,6 +85,12 @@ function App() {
               <ProtectedRoute exact path="/story">
                 <div className="main">
                   <StoryDetails />
+                </div>
+              </ProtectedRoute>
+
+              <ProtectedRoute exact path="/update-story">
+                <div className="main">
+                  <UpdateStory />
                 </div>
               </ProtectedRoute>
 
