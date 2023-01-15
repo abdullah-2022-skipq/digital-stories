@@ -5,7 +5,7 @@ function LeaderboardCard({ username, avatar, numStories, numUpVotes }) {
   return (
     <div className={styles.leaderboardCardWrapper}>
       <div className={styles.avatarWrapper}>
-        <img className={styles.avataImager} src={avatar} alt="avatar" />
+        <img className={styles.avatarImage} src={avatar} alt="avatar" />
       </div>
       <div className={styles.data}>
         <span className={styles.username}>{username}</span>
