@@ -1,0 +1,66 @@
+.videoPromptHeading {
+  color: #c4c5c5;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.videoWrapper {
+  /* width: 250px;
+    height: 250px; */
+  padding: 15px;
+  border-radius: 10px;
+  border: 3px solid #0077ff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+
+.video {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  display: block;
+  object-fit: cover; /* maintain aspect ratio */
+}
+
+.videoSelection {
+  display: none;
+}
+
+.videoLabel {
+  color: #0077ff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.videoLabelWrapper {
+  margin-left: 10px;
+  font-size: medium;
+}
+
+.cardFlex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.caption {
+  background-color: #2a292a;
+  outline: none;
+  border: none;
+  color: #e9e9ea;
+  width: 70%;
+  font-family: Montserrat;
+  height: 70px;
+  font-size: 16px;
+  padding: 20px;
+  resize: none;
+  border-radius: 10px;
+  margin: 10px 0;
+}
