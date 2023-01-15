@@ -1,5 +1,4 @@
 class StoryDetailsDTO {
- 
   constructor(story) {
     this._id = story._id;
     this.caption = story.caption;
