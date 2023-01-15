@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import Card from '../../components/shared/Card/Card';
@@ -8,6 +8,7 @@ import { signInSchema } from '../../schemas';
 import { login } from '../../api';
 import { setAuth } from '../../store/authSlice';
 import { setUser } from '../../store/userSlice';
+import styles from './SignIn.module.css';
 
 function SignIn() {
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
@@ -21,16 +22,22 @@ function SignIn() {
 
   const dispatch = useDispatch();
 
+  const [error, setError] = useState('');
+
   const loginHandler = async () => {
     const response = await login({
       username: values.username,
       password: values.password,
     });
+
     if (response.status === 200) {
       dispatch(setAuth(response.data));
       dispatch(setUser(response.data));
+    } else if (response.code === 'ERR_BAD_REQUEST') {
+      setError('Email or password is wrong!');
     }
   };
+
   return (
     <div className="cardWrapper" data-testid="cardWrapper">
       <Card cardHeading="Welcome back" cardLogo="lock_key_sign_in">
@@ -67,6 +74,7 @@ function SignIn() {
               errors.password
             }
           />
+          {error !== '' && <div className={styles.errorWrapper}>{error}</div>}
         </div>
       </Card>
     </div>
