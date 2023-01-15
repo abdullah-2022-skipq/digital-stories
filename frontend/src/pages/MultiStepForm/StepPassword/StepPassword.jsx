@@ -12,8 +12,8 @@ import formStyles from '../MultiStepForm.module.css';
 function StepPassword() {
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
     initialValues: {
-      password: 'myPassword1', // todo []
-      confirmPassword: 'myPassword1',
+      password: '',
+      confirmPassword: '',
     },
 
     validationSchema: passwordSchema,
