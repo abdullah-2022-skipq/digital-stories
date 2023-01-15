@@ -130,7 +130,7 @@ function StoryDetails() {
             <div className={styles.storyHeaderFlex}>
               <div
                 className={styles.avatarWrapper}
-                style={{ border: `4px solid ${randomColor}` }}
+                style={{ border: `3.5px solid ${randomColor}` }}
               >
                 <img
                   className={styles.avatarImage}
