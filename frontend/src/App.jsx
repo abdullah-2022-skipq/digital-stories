@@ -14,7 +14,7 @@ import Leaderboard from './pages/Leaderboard/Leaderboard';
 import MultiStepCreateStoryEntry from './pages/MultiStepCreateStoryForm/MultiStepCreateStoryEntry';
 import StepChooseMediaType from './pages/MultiStepCreateStoryForm/StepChooseMediaType/StepChooseMediaType';
 import StepStoryContent from './pages/MultiStepCreateStoryForm/StepStoryContent/StepStoryContent';
-import StoryDetails from './pages/Story/StoryDetails';
+import StoryDetails from './pages/StoryDetails/StoryDetails';
 import Trending from './pages/Trending/Trending';
 import Engagements from './pages/Engagements/Engagements';
 
