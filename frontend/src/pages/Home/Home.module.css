@@ -109,14 +109,20 @@
 }
 
 .storyCustomization {
-  margin: 20px 0;
+  margin: 20px 20px;
   display: flex;
+  justify-content: flex-start;
+}
+
+.storyCustomization {
+  display: flex;
+  align-items: center;
   justify-content: flex-end;
 }
 
 .storyCustomization img {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   margin: 0 5px;
   cursor: pointer;
 }

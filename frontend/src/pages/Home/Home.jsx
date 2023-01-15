@@ -119,6 +119,7 @@ function Home() {
           alt="grid"
           role="button"
           onClick={() => setActiveView('grid')}
+          title="View as grid"
         />
 
         <img
@@ -127,6 +128,7 @@ function Home() {
           alt="list"
           role="button"
           onClick={() => setActiveView('list')}
+          title="View as list"
         />
       </div>
       <div
