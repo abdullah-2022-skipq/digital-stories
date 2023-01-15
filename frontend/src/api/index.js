@@ -111,13 +111,12 @@ export const updateStory = async (story) => {
 
   if (story.mediaType === 'text') {
     try {
-      const { mediaType, caption, font, fontColor, postedBy, storyId } = story;
+      const { mediaType, caption, font, fontColor, storyId } = story;
       response = await api.put('/api/stories', {
         mediaType,
         caption,
         font,
         fontColor,
-        postedBy,
         storyId,
       });
     } catch (error) {
@@ -128,12 +127,11 @@ export const updateStory = async (story) => {
 
   if (story.mediaType === 'image') {
     try {
-      const { mediaType, caption, image, postedBy, storyId } = story;
+      const { mediaType, caption, image, storyId } = story;
       response = await api.put('/api/stories', {
         mediaType,
         caption,
         image,
-        postedBy,
         storyId,
       });
     } catch (error) {
@@ -143,12 +141,11 @@ export const updateStory = async (story) => {
   }
 
   try {
-    const { mediaType, caption, video, postedBy, storyId } = story;
+    const { mediaType, caption, video, storyId } = story;
     response = await api.put('/api/stories', {
       mediaType,
       caption,
       video,
-      postedBy,
       storyId,
     });
   } catch (error) {
@@ -210,6 +207,7 @@ export const getNumUsers = async () => api.get('/api/num-users');
 export const getLeaderboard = async () => api.get('/api/leaderboard');
 
 export const getEngagements = async (id) => api.get(`/api/engagements/${id}`);
+
 // interceptor for auto token refresh
 api.interceptors.response.use(
   (config) => config,
