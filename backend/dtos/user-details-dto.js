@@ -1,12 +1,4 @@
 class UserDetailsDTO {
-  _id;
-
-  name;
-
-  username;
-
-  createdAt;
-
   constructor(user) {
     this._id = user._id;
     this.name = user.name;

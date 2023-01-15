@@ -1,14 +1,4 @@
 class PostCommentsDTO {
-  text;
-
-  username;
-
-  avatarPath;
-
-  postedAt;
-
-  _id;
-
   constructor(comment) {
     this.text = comment.text;
     this.username =
