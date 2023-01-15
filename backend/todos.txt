@@ -2,3 +2,8 @@
 [] rename as -
 [] refactor
 [] remove logs
+
+[] for post req of creating a comment we aint checking for user record in db so
+we save 1 query but we can essentially have a comment by some alien 
+
+argue -> we get data from frontend

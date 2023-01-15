@@ -3,3 +3,38 @@ https://stackoverflow.com/a/68918177
 The Jest library provides the jest. fn() function for creating a “mock” function. An optional implementation function may be passed to jest. fn() to define the mock function's behavior and return value. The mock function's behavior may be further specified using various methods provided to the mock function such as .
 
 https://www.designcise.com/web/tutorial/whats-the-difference-between-findby-getby-and-queryby-in-react-testing-library
+
+https://stackoverflow.com/questions/71975948/how-to-test-textinput-in-react-native-with-testing-library-reat-native
+
+https://www.codecademy.com/learn/learn-react-testing/modules/jest/cheatsheet
+
+https://css-tricks.com/css-modules-part-1-need/
+
+https://www.educative.io/answers/what-is-the-data-testid-attribute-in-testing
+
+https://www.moesif.com/blog/technical/api-design/Which-HTTP-Status-Code-To-Use-For-Every-CRUD-App/#:~:text=200%20OK%20-%20This%20is%20the,this%20code%20can%20be%20used.
+
+
+ a variable called cleanup is defined in the useEffect scope and set to false. Then in the cleanup function, we set cleanup to true. This can be used to cancel any ongoing requests or clear any timers, etc.
+
+Keep in mind that cleanup functions only run when the component is unmounting or when one of the dependency values change.
+If you want to re-run the effect when a certain state or props change, you need to include that state or props in the dependency array of the useEffect function.
+
+
+
+credits for animations
+
+<a href="https://iconscout.com/lotties/camera" target="_blank">Camera Animated Icon</a> by <a href="https://iconscout.com/contributors/iconscout">IconScout Store</a> on <a href="https://iconscout.com">IconScout</a>
+<a href="https://iconscout.com/lotties/facetime" target="_blank">Facetime Logo Animated Icon</a> by <a href="https://iconscout.com/contributors/thaophan210" target="_blank">Thao Phan</a>
+
+In Jest, test and it are both functions that are used to define a test case. They are equivalent and can be used interchangeably.
+
+test is the default and most commonly used function to define a test case. It is recommended to use test over it as it's more expressive and makes the intent of the code clear.
+
+rootReducer is the top-level reducer that combines all the individual slice reducers into a single reducer that can be passed to the store. The store uses this single reducer to update the state of the entire application in response to actions.
+
+In other words, the rootReducer is responsible for taking in all the actions dispatched by the application, and updating the corresponding slice of the state that the action corresponds to. The shape of the state tree is determined by the shape of the root reducer.
+
+For example, in the code you provided, you are using createSlice from the @reduxjs/toolkit to create a userSlice with an initial state and a set of reducers. The rootReducer would import this slice, and combine it with any other slices you have in your application, creating a single reducer that can be passed to the store.
+
+It is also worth mentioning that you can use the createAsyncThunk and createSlice in the same file and use the configureStore that inbuilt in the @reduxjs/toolkit to create the store and reducer in one step.
