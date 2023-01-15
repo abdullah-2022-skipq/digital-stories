@@ -34,7 +34,7 @@ function SignIn() {
       dispatch(setAuth(response.data));
       dispatch(setUser(response.data));
     } else if (response.code === 'ERR_BAD_REQUEST') {
-      setError('Email or password is wrong!');
+      setError('username or password is wrong!');
     }
   };
 
