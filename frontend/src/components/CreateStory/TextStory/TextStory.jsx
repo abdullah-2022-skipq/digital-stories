@@ -45,6 +45,7 @@ function TextStory() {
       navigate.push('/');
     }
   };
+
   return (
     <>
       {' '}
