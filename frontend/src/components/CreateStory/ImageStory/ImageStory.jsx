@@ -2,23 +2,24 @@ import React, { useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Lottie from 'react-lottie';
-import videoAnimationData from '../../../../lotties/facetime.json';
-import styles from './VideoStory.module.css';
-import Button from '../../../shared/Button/Button';
-import { globalContext } from '../../../../App';
-import { createStory } from '../../../../api';
+import cameraAnimationData from '../../../lotties/camera.json';
 
-function VideoStory() {
+import styles from './ImageStory.module.css';
+import Button from '../../shared/Button/Button';
+import { createStory } from '../../../api';
+import { globalContext } from '../../../App';
+
+function ImageStory() {
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData: videoAnimationData,
+    animationData: cameraAnimationData,
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
 
-  const [video, setVideo] = useState('');
+  const [image, setImage] = useState('');
 
   const [caption, setCaption] = useState('');
 
@@ -32,9 +33,9 @@ function VideoStory() {
 
   const createStoryHandler = async () => {
     const story = {
-      mediaType: 'video',
+      mediaType: 'image',
       caption,
-      video,
+      image,
       postedBy,
     };
 
@@ -45,40 +46,37 @@ function VideoStory() {
     }
   };
 
-  const getUserVideo = (e) => {
-    const videoFile = e.target.files[0];
-
+  const getUserImage = (e) => {
+    const imgFile = e.target.files[0];
     const reader = new FileReader();
 
-    reader.onloadend = () => {
-      const base64 = reader.result;
-      setVideo(base64);
-    };
+    reader.readAsDataURL(imgFile);
 
-    reader.readAsDataURL(videoFile);
+    reader.onloadend = () => {
+      setImage(reader.result);
+    };
   };
 
   return (
     <>
       <div className={styles.cardFlex}>
-        <p className={styles.videoPromptHeading}>
-          <span className={styles.videoWrapper}>
-            {video === '' ? (
+        <p className={styles.imagePromptHeading}>
+          <span className={styles.imageWrapper}>
+            {image === '' ? (
               <Lottie options={defaultOptions} height={400} width={400} />
             ) : (
-              <iframe className={styles.video} src={video} alt="video" />
+              <img className={styles.imageImage} src={image} alt="story" />
             )}
           </span>
-
-          <span className={styles.videoLabelWrapper}>
+          <span className={styles.imageLabelWrapper}>
             <input
-              className={styles.videoSelection}
-              id="videoSelection"
+              className={styles.imageSelection}
+              id="imageSelection"
               type="file"
-              onChange={getUserVideo}
+              onChange={getUserImage}
             />
-            <label className={styles.videoLabel} htmlFor="videoSelection">
-              Choose video (below 5mb)
+            <label className={styles.imageLabel} htmlFor="imageSelection">
+              Choose image
             </label>
           </span>
         </p>
@@ -97,10 +95,12 @@ function VideoStory() {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         style={{ backgroundColor: hover ? '#1b8445' : '#20BD5F' }}
-        disabled={video === 'https://www.youtube.com/embed/ScMzIvxBSi4'}
+        disabled={
+          image === 'http://localhost:5544/storage/default_image_story.png'
+        }
       />
     </>
   );
 }
 
-export default VideoStory;
+export default ImageStory;
