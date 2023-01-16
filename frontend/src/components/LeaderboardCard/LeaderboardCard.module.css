@@ -35,12 +35,16 @@
   margin: 0 15px;
 }
 
-.data {
+.dataWrapper {
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  gap: 20px;
+}
+
+.data {
+  width: 30%;
+  text-align: left;
 }
 
 .numStories {

@@ -7,11 +7,18 @@ function LeaderboardCard({ username, avatar, numStories, numUpVotes }) {
       <div className={styles.avatarWrapper}>
         <img className={styles.avatarImage} src={avatar} alt="avatar" />
       </div>
-      <div className={styles.data}>
-        <span className={styles.username}>{username}</span>
-        <span className={styles.numStories}> {numStories} Stories</span>
+      <div className={styles.dataWrapper}>
+        <div className={styles.data}>
+          <span className={styles.username}>{username}</span>
+        </div>
 
-        <span className={styles.numUpVotes}>{numUpVotes} Upvotes</span>
+        <div className={styles.data}>
+          <span className={styles.numStories}> {numStories} Stories</span>
+        </div>
+
+        <div className={styles.data}>
+          <span className={styles.numUpVotes}>{numUpVotes} Upvotes</span>
+        </div>
       </div>
     </div>
   );
