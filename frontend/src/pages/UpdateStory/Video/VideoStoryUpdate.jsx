@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Lottie from 'react-lottie';
-import videoAnimationData from '../../../lotties/facetime.json';
 import styles from './VideoStoryUpdate.module.css';
 import Button from '../../../components/shared/Button/Button';
 import { updateStory } from '../../../api';
 
 function VideoStoryUpdate({ prevVideo, prevCaption, storyId }) {
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: videoAnimationData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
-
   const [video, setVideo] = useState(prevVideo);
 
   const [caption, setCaption] = useState(prevCaption);
@@ -56,11 +45,7 @@ function VideoStoryUpdate({ prevVideo, prevCaption, storyId }) {
       <div className={styles.cardFlex}>
         <p className={styles.videoPromptHeading}>
           <span className={styles.videoWrapper}>
-            {video === '' ? (
-              <Lottie options={defaultOptions} height={400} width={400} />
-            ) : (
-              <iframe className={styles.video} src={video} alt="video" />
-            )}
+            <iframe className={styles.video} src={video} alt="video" />
           </span>
 
           <span className={styles.videoLabelWrapper}>

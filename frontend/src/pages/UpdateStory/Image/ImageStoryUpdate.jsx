@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Lottie from 'react-lottie';
-import cameraAnimationData from '../../../lotties/camera.json';
 import styles from './ImageStoryUpdate.module.css';
 import Button from '../../../components/shared/Button/Button';
 import { updateStory } from '../../../api';
 
 function ImageStoryUpdate({ prevImage, prevCaption, storyId }) {
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: cameraAnimationData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
-
   const [image, setImage] = useState(prevImage);
 
   const [caption, setCaption] = useState(prevCaption);
@@ -54,11 +43,7 @@ function ImageStoryUpdate({ prevImage, prevCaption, storyId }) {
       <div className={styles.cardFlex}>
         <p className={styles.imagePromptHeading}>
           <span className={styles.imageWrapper}>
-            {image === '' ? (
-              <Lottie options={defaultOptions} height={400} width={400} />
-            ) : (
-              <img className={styles.imageImage} src={image} alt="story" />
-            )}
+            <img className={styles.imageImage} src={image} alt="story" />
           </span>
           <span className={styles.imageLabelWrapper}>
             <input
