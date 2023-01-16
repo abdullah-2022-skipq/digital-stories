@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './Navigation.module.css';
 import ProfileModal from '../../ProfileModal/ProfileModal';
 import { setActiveRoute } from '../../../store/navbarSlice';
+import { globalContext } from '../../../App';
 
 function Navigation() {
   const logoStyle = {
@@ -49,11 +50,18 @@ function Navigation() {
 
   const user = useSelector((state) => state.user);
 
+  const { clearContext } = useContext(globalContext);
+
   const activeRouteHandler = (route) => {
     dispatch(setActiveRoute(route));
   };
 
   const activeRouteStyle = '3px solid #0077ff';
+
+  const navBarClickHandler = (newActive) => {
+    activeRouteHandler(newActive);
+    clearContext();
+  };
 
   return (
     <>
@@ -61,7 +69,7 @@ function Navigation() {
         <Link
           style={logoStyle}
           to="/"
-          onClick={() => activeRouteHandler('home')}
+          onClick={() => navBarClickHandler('home')}
         >
           <span style={logoText}>Digital Stories</span>
         </Link>
@@ -70,7 +78,7 @@ function Navigation() {
           <Link
             style={navElementStyle}
             to="/home"
-            onClick={() => activeRouteHandler('home')}
+            onClick={() => navBarClickHandler('home')}
           >
             <span
               style={{
@@ -87,7 +95,7 @@ function Navigation() {
           <Link
             style={navElementStyle}
             to="/trending"
-            onClick={() => activeRouteHandler('trending')}
+            onClick={() => navBarClickHandler('trending')}
           >
             <span
               style={{
@@ -104,7 +112,7 @@ function Navigation() {
           <Link
             style={navElementStyle}
             to="/leaderboard"
-            onClick={() => activeRouteHandler('leaderboard')}
+            onClick={() => navBarClickHandler('leaderboard')}
           >
             <span
               style={{
@@ -121,7 +129,7 @@ function Navigation() {
           <Link
             style={navElementStyle}
             to="/engagements"
-            onClick={() => activeRouteHandler('engagements')}
+            onClick={() => navBarClickHandler('engagements')}
           >
             <span
               style={{

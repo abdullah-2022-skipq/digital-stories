@@ -27,16 +27,24 @@ function App() {
 
   // for context use in MultiStepCreateStoryForm
   const [mediaType, setMediaType] = useState('Text');
+
   const steps = {
     1: StepChooseMediaType,
     2: StepStoryContent,
   };
   const [step, setStep] = useState(1);
+
   const onNextHandler = () => {
     setStep(step + 1);
   };
+
   const onPrevHandler = () => {
     setStep(step - 1);
+  };
+
+  const clearContext = () => {
+    setStep(1);
+    setMediaType('text');
   };
 
   // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -48,6 +56,7 @@ function App() {
     setStep,
     onNextHandler,
     onPrevHandler,
+    clearContext,
   };
 
   return loading ? (

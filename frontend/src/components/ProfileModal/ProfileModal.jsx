@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './ProfileModal.module.css';
 import Button from '../shared/Button/Button';
@@ -7,8 +7,11 @@ import { setAuth } from '../../store/authSlice';
 import { resetStep } from '../../store/multiStepFormSlice';
 import { resetUserReg } from '../../store/userRegistrationSlice';
 import { resetActiveRoute } from '../../store/navbarSlice';
+import { globalContext } from '../../App';
 
 function ProfileModal({ closeModalHandler }) {
+  const { clearContext } = useContext(globalContext);
+
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -19,6 +22,8 @@ function ProfileModal({ closeModalHandler }) {
     dispatch(resetStep());
     dispatch(resetActiveRoute());
     dispatch(resetUserReg());
+
+    clearContext();
 
     closeModalHandler();
   };
