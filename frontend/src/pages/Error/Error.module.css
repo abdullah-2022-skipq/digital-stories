@@ -1,8 +1,9 @@
-.errorWrapper {
-  display: flex;
-}
 .errorHeader {
   font-size: 86px;
   color: #de1b55;
+  font-weight: bold;
+}
+
+.error {
   font-weight: bold;
 }

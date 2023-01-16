@@ -23,7 +23,9 @@ function Error() {
     <div className="cardWrapper">
       <Card cardLogo="error">
         <p className={styles.errorHeader}>404</p>
-        <p>The page you are looking for does not exist</p>
+        <p className={styles.error}>
+          The page you are looking for does not exist
+        </p>
         <Link style={homeStyle} to="/home">
           Go back to the home page
         </Link>
