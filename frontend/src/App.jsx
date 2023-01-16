@@ -44,7 +44,7 @@ function App() {
 
   const clearContext = () => {
     setStep(1);
-    setMediaType('text');
+    setMediaType('Text');
   };
 
   // eslint-disable-next-line react/jsx-no-constructed-context-values
