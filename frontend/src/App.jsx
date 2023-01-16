@@ -18,6 +18,7 @@ import StoryDetails from './pages/StoryDetails/StoryDetails';
 import Trending from './pages/Trending/Trending';
 import Engagements from './pages/Engagements/Engagements';
 import UpdateStory from './pages/UpdateStory/UpdateStory';
+import Error from './pages/Error/Error';
 
 export const globalContext = createContext();
 
@@ -117,6 +118,12 @@ function App() {
                   <SignIn />
                 </div>
               </PublicRoute>
+
+              <Route>
+                <div className="main">
+                  <Error />
+                </div>
+              </Route>
             </Switch>
             <Footer />
           </div>
