@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  activeRoute: 'home',
+  activeRoute: '',
 };
 
 export const navbarSlice = createSlice({
@@ -13,7 +13,7 @@ export const navbarSlice = createSlice({
     },
     // eslint-disable-next-line no-unused-vars
     resetActiveRoute: (state, action) => {
-      state.activeRoute = 'home';
+      state.activeRoute = '';
     },
   },
 });
