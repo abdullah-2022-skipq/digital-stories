@@ -1,8 +1,8 @@
-import multer from 'multer';
+import multer from "multer";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'storage');
+    cb(null, "storage");
   },
 
   // using original name to keep file extension
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage,
   limits: {
-    fieldSize: '25mb',
+    fieldSize: "25mb",
   },
 });
 

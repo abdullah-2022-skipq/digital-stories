@@ -1,7 +1,7 @@
-import CustomErrorHandler from '../services/CustomErrorHandler';
-import { TokenService } from '../services';
-import { User } from '../models';
-import { UserDetailsDTO } from '../dtos';
+import CustomErrorHandler from "../services/CustomErrorHandler";
+import { TokenService } from "../services";
+import { User } from "../models";
+import { UserDetailsDTO } from "../dtos";
 
 // eslint-disable-next-line consistent-return
 const auth = async (req, res, next) => {

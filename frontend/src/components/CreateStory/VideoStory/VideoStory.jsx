@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -23,8 +22,6 @@ function VideoStory() {
   const createStoryHandler = async (e) => {
     e.preventDefault();
 
-    console.log('hekki');
-
     const formData = new FormData();
 
     formData.append('video', video);
@@ -39,7 +36,6 @@ function VideoStory() {
       },
     };
 
-    console.log(formData.get('video'));
     const response = await createVideoStory(formData, config);
 
     if (response.status === 201) {

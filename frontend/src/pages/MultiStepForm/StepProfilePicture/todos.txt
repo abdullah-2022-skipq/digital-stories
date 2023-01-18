@@ -1,1 +1,3 @@
 [x] handle empty avatar path
+[] handle state cleanup in story create stuff
+[] fix button disable thing
