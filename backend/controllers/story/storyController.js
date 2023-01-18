@@ -1,10 +1,10 @@
-import Joi from "joi";
-import Jimp from "jimp";
-import path from "path";
-import fs from "fs";
-import { Comment, Engagement, Story } from "../../models";
-import { CustomErrorHandler } from "../../services";
-import { StoryDTO, StoryDetailsDTO } from "../../dtos";
+import Joi from 'joi';
+import Jimp from 'jimp';
+import path from 'path';
+import fs from 'fs';
+import { Comment, Engagement, Story } from '../../models';
+import { CustomErrorHandler } from '../../services';
+import { StoryDTO, StoryDetailsDTO } from '../../dtos';
 
 const storyController = {
   async create(req, res, next) {
@@ -32,7 +32,7 @@ const storyController = {
 
     const { mediaType } = req.body;
 
-    if (mediaType === "text") {
+    if (mediaType === 'text') {
       const { font, fontColor, caption, postedBy } = req.body;
       const newStory = new Story({
         mediaType,
@@ -45,14 +45,14 @@ const storyController = {
       await newStory.save();
     }
 
-    if (mediaType === "image") {
+    if (mediaType === 'image') {
       const { caption, postedBy, image } = req.body;
 
       // preprocess the image
 
       const buffer = Buffer.from(
-        image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
-        "base64"
+        image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''),
+        'base64'
       );
 
       const imgPath = `${Date.now()}-${Math.round(Math.random() * 100000)}.png`;
@@ -76,39 +76,20 @@ const storyController = {
       await newStory.save();
     }
 
-    if (mediaType === "video") {
-      const { caption, postedBy, video } = req.body;
+    if (mediaType === 'video') {
+      const { caption, postedBy } = req.body;
 
-      // preprocess the video
-
-      const buffer = Buffer.from(
-        video.replace(/^data:video\/(webm);base64,/, ""),
-        "base64"
-      );
-
-      const videoPath = `${Date.now()}-${Math.round(
-        Math.random() * 100000
-      )}.webm`;
-
-      try {
-        fs.writeFileSync(
-          path.resolve(__dirname, `../../storage/${videoPath}`),
-          buffer
-        );
-      } catch (err) {
-        return next(err);
-      }
       const newStory = new Story({
         mediaType,
         caption,
-        video: `http://localhost:5544/storage/${videoPath}`,
+        video: `http://localhost:5544/storage/${req.file.filename}`,
         postedBy,
       });
 
       await newStory.save();
     }
 
-    return res.status(201).json({ message: "story created successfully" });
+    return res.status(201).json({ message: 'story created successfully' });
   },
 
   async getAll(req, res, next) {
@@ -118,7 +99,7 @@ const storyController = {
 
       const stories = await Story.paginate(
         {},
-        { page, limit, populate: "postedBy", sort: { createdAt: -1 } }
+        { page, limit, populate: 'postedBy', sort: { createdAt: -1 } }
       );
 
       if (!stories) {
@@ -160,7 +141,7 @@ const storyController = {
     let story;
 
     try {
-      story = await Story.findOne({ _id: req.params.id }).populate("postedBy");
+      story = await Story.findOne({ _id: req.params.id }).populate('postedBy');
 
       if (!story) {
         return next(CustomErrorHandler.notFound());
@@ -179,7 +160,7 @@ const storyController = {
           commentCount: -1,
         })
         .limit(20)
-        .populate("postedBy");
+        .populate('postedBy');
 
       const storiesDto = [];
 
@@ -228,7 +209,7 @@ const storyController = {
         return next(CustomErrorHandler.notFound());
       }
 
-      return res.status(200).json({ message: "story deleted successfully" });
+      return res.status(200).json({ message: 'story deleted successfully' });
     } catch (err) {
       return next(err);
     }
@@ -240,8 +221,8 @@ const storyController = {
       font: Joi.string(),
       fontColor: Joi.string(),
       caption: Joi.optional(),
-      image: Joi.string().allow(""),
-      video: Joi.string().allow(""),
+      image: Joi.string().allow(''),
+      video: Joi.string().allow(''),
       storyId: Joi.string()
         .regex(/^[0-9a-fA-F]{24}$/)
         .required(),
@@ -255,7 +236,7 @@ const storyController = {
 
     const { mediaType, storyId } = req.body;
 
-    if (mediaType === "text") {
+    if (mediaType === 'text') {
       const { font, fontColor, caption } = req.body;
 
       await Story.updateOne(
@@ -271,10 +252,10 @@ const storyController = {
       );
     }
 
-    if (mediaType === "image") {
+    if (mediaType === 'image') {
       const { caption, image } = req.body;
 
-      if (image === "") {
+      if (image === '') {
         await Story.updateOne(
           { _id: storyId },
           {
@@ -288,8 +269,8 @@ const storyController = {
         // preprocess the image
 
         const buffer = Buffer.from(
-          image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
-          "base64"
+          image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''),
+          'base64'
         );
 
         const imgPath = `${Date.now()}-${Math.round(
@@ -319,10 +300,10 @@ const storyController = {
       }
     }
 
-    if (mediaType === "video") {
+    if (mediaType === 'video') {
       const { caption, video } = req.body;
 
-      if (video === "") {
+      if (video === '') {
         await Story.updateOne(
           { _id: storyId },
           {
@@ -336,8 +317,8 @@ const storyController = {
         // preprocess the video
 
         const buffer = Buffer.from(
-          video.replace(/^data:video\/(webm);base64,/, ""),
-          "base64"
+          video.replace(/^data:video\/(webm);base64,/, ''),
+          'base64'
         );
 
         const videoPath = `${Date.now()}-${Math.round(
@@ -365,7 +346,24 @@ const storyController = {
         );
       }
     }
-    return res.status(200).json({ message: "story updated successfully" });
+    return res.status(200).json({ message: 'story updated successfully' });
+  },
+
+  async createVideoStory(req, res, next) {
+    console.log(req.files);
+
+    // const { caption, postedBy } = req.body;
+
+    //   const newStory = new Story({
+    //     mediaType,
+    //     caption,
+    //     video: `http://localhost:5544/storage/${videoPath}`,
+    //     postedBy,
+    //   });
+
+    //   await newStory.save();
+
+    return res.status(201).json({ message: 'story created successfully' });
   },
 };
 
