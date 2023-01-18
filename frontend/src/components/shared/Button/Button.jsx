@@ -9,7 +9,8 @@ function Button(props) {
       className={styles.button}
       {...props}
       data-testid="button"
-      type="button"
+      // eslint-disable-next-line react/button-has-type
+      type={props.type || 'button'}
     >
       <span className={styles.buttonTitle}>{props.buttontitle}</span>
       <img
