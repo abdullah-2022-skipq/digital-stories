@@ -1,11 +1,13 @@
 .videoWrapper video {
-  width: 640px;
-  height: 280px;
+  width: 100%;
+  height: auto;
+  object-fit: fill;
   border-radius: 10px;
-  object-fit: cover;
-  border-radius: 1px;
 }
 
 .videoWrapper {
   overflow: hidden;
+  margin: auto;
+  width: 500px;
+  height: fit-content;
 }
