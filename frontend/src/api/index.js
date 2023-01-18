@@ -49,7 +49,6 @@ export const login = async (data) => {
 };
 
 // https://stackoverflow.com/a/44806250
-
 export const logout = async () => api.post('/api/logout');
 
 export const getAllStories = async (page) =>
@@ -101,6 +100,16 @@ export const createStory = async (story) => {
       video,
       postedBy,
     });
+  } catch (error) {
+    return error;
+  }
+  return response;
+};
+
+export const createVideoStory = async (data, config) => {
+  let response;
+  try {
+    response = await api.post('/api/stories/video', data, config);
   } catch (error) {
     return error;
   }
