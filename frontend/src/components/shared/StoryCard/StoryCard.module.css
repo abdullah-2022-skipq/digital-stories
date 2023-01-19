@@ -23,7 +23,8 @@
   align-items: center;
 }
 
-.card img {
+.card img,
+.cardList img {
   border-radius: 10px;
 }
 
