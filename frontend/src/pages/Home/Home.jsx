@@ -56,7 +56,6 @@ function Home() {
     setDataMask(filteredData);
   };
 
-  // eslint-disable-next-line no-unused-vars
   const [sortBy, setSortBy] = useState('date');
 
   const sortData = (by) => {
@@ -74,9 +73,9 @@ function Home() {
     }
   };
 
-  const handleSortByChange = (event) => {
-    setSortBy(event.target.value);
-    sortData(event.target.value);
+  const handleSortByChange = (value) => {
+    setSortBy(value);
+    sortData(value);
   };
 
   if (!data) {
@@ -120,15 +119,47 @@ function Home() {
           </Link>
         </div>
       </div>
-      <div className={styles.storyCustomization}>
-        <div className={styles.selectWrapper}>
-          <select onChange={handleSortByChange}>
-            <option value="date">Sort by date</option>
-            <option value="upvotes">Sort by upvotes</option>
-            <option value="downvotes">Sort by downvotes</option>
-          </select>
-        </div>
 
+      <div className={styles.storyCustomization}>
+        <div className={styles.sortByHeader}>
+          {/* <img src="/images/sort-by.png" alt="sort-by" /> */}
+          <p>Sort By</p>
+          <div className={styles.buttonGroup}>
+            <button
+              className={`${styles.groupButton} ${
+                sortBy === 'date' ? styles.sortByActive : ''
+              }`}
+              type="button"
+              onClick={() => {
+                handleSortByChange('date');
+              }}
+            >
+              Date
+            </button>
+            <button
+              className={`${styles.groupButton} ${
+                sortBy === 'upvotes' ? styles.sortByActive : ''
+              }`}
+              type="button"
+              onClick={() => {
+                handleSortByChange('upvotes');
+              }}
+            >
+              Upvotes
+            </button>
+            <button
+              className={`${styles.groupButton} ${
+                sortBy === 'downvotes' ? styles.sortByActive : ''
+              }`}
+              type="button"
+              onClick={() => {
+                handleSortByChange('downvotes');
+              }}
+            >
+              Downvotes
+            </button>
+          </div>
+        </div>
         <img
           className={activeView === 'grid' ? styles.activeView : ''}
           src="/images/grid.png"

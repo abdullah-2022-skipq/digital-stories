@@ -132,41 +132,6 @@
   border-radius: 5px;
 }
 
-.selectWrapper select {
-  background-color: #2a292a;
-  width: 240px;
-  outline: none;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px; /* top-bottom left right */
-  color: #bebcc0;
-  font-size: 15px;
-  font-weight: bold;
-  margin: 0px 5px;
-  cursor: pointer;
-  /* https://stackoverflow.com/a/14218448 */
-  appearance: none;
-  -moz-appearance: none; /* mozilla */
-  -webkit-appearance: none; /* chrome and safari */
-  background-image: url('~/public/images/sort-by.png');
-  background-repeat: no-repeat;
-  background-position-x: 95%;
-  background-position-y: 50%;
-}
-
-.selectWrapper option {
-  border: 1px solid #2a292a;
-  background: #2a292a;
-  width: 150px;
-
-  color: #bebcc0;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-}
-
-.selectWrapper option:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
 .paginationWrapper {
   display: flex;
   align-items: center;
@@ -194,4 +159,47 @@
 .paginationWrapper button:disabled {
   background-color: #014a9c;
   color: #c4c5c5;
+}
+
+.buttonGroup {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.groupButton {
+  /* https://stackoverflow.com/questions/37386244/what-does-flex-1-mean#:~:text=If%20an%20element%20has%20flex,See%20the%20illustration%20below. */
+  flex: 1;
+  background-color: #2a292a;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: medium;
+  cursor: pointer;
+}
+
+.groupButton:hover {
+  background-color: #3d3b3e;
+  cursor: pointer;
+}
+
+.sortByActive {
+  background-color: #4d4b4e;
+  color: #0077ff;
+}
+
+.sortByHeader {
+  margin: 15px 5px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sortByHeader p {
+  margin-right: 10px;
+  font-weight: bold;
 }
