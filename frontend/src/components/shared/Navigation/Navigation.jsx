@@ -143,6 +143,23 @@ function Navigation() {
         )}
 
         {isAuth && (
+          <Link
+            style={navElementStyle}
+            to="/you"
+            onClick={() => navBarClickHandler('you')}
+          >
+            <span
+              style={{
+                ...navElementText,
+                borderBottom: active === 'you' ? activeRouteStyle : '',
+              }}
+            >
+              Your Stories
+            </span>
+          </Link>
+        )}
+
+        {isAuth && (
           <div className={styles.navRight}>
             <button
               className={styles.avatarWrapper}
