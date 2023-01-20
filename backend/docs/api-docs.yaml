@@ -1,0 +1,330 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: Digital Stories API
+  description: This is an API made with Express for the MERN stack Digital Stories application.
+  contact:
+    email: abdullah.tahir.skipq@gmail.com
+host: localhost:5544
+basePath: /api
+schemes:
+  - http
+paths:
+  /me:
+    get:
+      tags: ["users"]
+      summary: returns the details of currently logged-in user
+      produces:
+        - application/json
+      parameters:
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/UserDetails"
+        401:
+          description: Expired JSON Web Token (JWT)
+        500:
+          description: Internal server error
+  /getNumUsers:
+    get:
+      tags: ["users"]
+      summary: returns the number of users registered in the app
+      produces:
+        - application/json
+      parameters:
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              numUsers:
+                type: number
+                description: number of users registered in the app
+        401:
+          description: Expired JSON Web Token (JWT)
+        500:
+          description: Internal server error
+  /comment:
+    post:
+      tags: ["comments"]
+      summary: create a new comment
+      produces:
+        - application/json
+      parameters:
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication 
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              text:
+                type: string
+                required: true
+              user:
+                type: string
+                pattern: "^[0-9a-fA-F]{24}$"
+                required: true
+              story:
+                type: string
+                pattern: "^[0-9a-fA-F]{24}$"
+                required: true
+      responses:
+        201:
+          description: Comment posted successfully
+        401:
+          description: Expired JSON Web Token (JWT)
+        422:
+          description: Invalid request body
+        500:
+          description: Internal server error
+  /comments/{id}:
+    get:
+      tags: ["comments"]
+      summary: get comments by Story ID
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          pattern: "^[0-9a-fA-F]{24}$"
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication 
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              text:
+                type: string
+                required: true
+              user:
+                type: string
+                pattern: "^[0-9a-fA-F]{24}$"
+                required: true
+              story:
+                type: string
+                pattern: "^[0-9a-fA-F]{24}$"
+                required: true
+      responses:
+        200:
+          description: Successfully retrieved comments
+          schema:
+            $ref: "#/definitions/PostComments"
+        401:
+          description: Expired JSON Web Token (JWT)
+        404:
+          description: Comment not found
+        500:
+          description: Internal server error
+  
+  /register:
+    post:
+      tags:
+        - ["auth"]
+      summary: "register a new user"
+      produces:
+        - application/json
+      parameters:
+          - name: "name"
+            in: "body"
+            type: "string"
+            maxLength: 30
+            required: true
+          - name: "username"
+            in: "body"
+            type: "string"
+            maxLength: 20
+            required: true
+          - name: "email"
+            in: "body"
+            type: "string"
+            format: "email"
+            required: true
+          - name: "password"
+            in: "body"
+            type: "string"
+            pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+            required: true
+          - name: "confirmPassword"
+            in: "body"
+            type: "string"
+            required: true
+          - name: "avatarPath"
+            in: "body"
+            type: "string"
+      responses:
+        201:
+          description: "user registered successfully"
+          schema:
+            $ref: "#/definitions/UserDetails"
+        422:
+          description: Invalid request body
+        500:
+          description: Internal server error
+  /login:
+    post:
+      tags:
+        - ["auth"]
+      summary: "login a user"
+      produces: "application/json"
+      parameters:
+        - username:
+          type: "string"
+          minLength: 5
+          maxLength: 15
+          required: true
+        - password:
+          type: "string"
+          pattern: "^[a-zA-Z0-9]{8,25}$"
+          required: true
+      responses:
+        200:
+          description: "user logged in successfully"
+          schema:
+            $ref: "#/definitions/UserDetails"
+        422:
+          description: "Invalid request body"
+        401:
+          description: "Wrong credentials"
+        500:
+          description: "Internal server error"
+  /refresh:
+    post:
+      summary: refresh access token
+      description: Use the refresh token to get a new access token
+      tags:
+      - ["auth"]
+      parameters:
+          - name: accessToken
+            in: cookie
+            required: true
+            schema:
+              type: object
+              properties:
+                accessToken:
+                  type: string
+                  description: Valid JSON Web Token (JWT) for authentication
+      responses:
+          200:
+            description: "user logged in successfully"
+            schema:
+              $ref: "#/definitions/UserDetails"
+          401:
+            description: "Expired JSON Web Token (JWT)"
+          500:
+            description: "Internal server error"
+  /logout:
+    post:
+      tags:
+      - ["auth"]
+      summary: logout the user
+      parameters:
+          - name: accessToken
+            in: cookie
+            required: true
+            schema:
+              type: object
+              properties:
+                accessToken:
+                  type: string
+                  description: Valid JSON Web Token (JWT) for authentication  
+      responses:
+        200:
+          description: Successful logout
+          schema:
+            $ref: "#/definitions/LogOutUser"  
+        500:
+          description: Internal server error
+          
+
+definitions:
+  UserDetails:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: Unique identifier for the user
+      name:
+        type: string
+        description: User's name
+      username:
+        type: string
+        description: User's username
+      avatar:
+        type: string
+        description: URL to user's avatar
+      memberSince:
+        type: string
+        description: Time passed since the user joined the app
+      auth:
+        type: boolean
+        default: true
+        description: Authentication status of user
+  PostComments:
+    type: object
+    properties:
+      comments:
+        type: array
+        items:
+          type: object
+          properties:
+            _id:
+              type: string
+              pattern: "^[0-9a-fA-F]{24}$"
+            text:
+              type: string
+            username:
+              type: string
+            avatarPath:
+              type: string
+            postedAt:
+              type: string
+              format: "date-time"
+  LogOutUser:
+    type: object
+    properties:
+      user:
+        type: null
+        default: null
+      auth:
+        type: boolean
+        default: false
