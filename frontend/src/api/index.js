@@ -116,6 +116,16 @@ export const createVideoStory = async (data, config) => {
   return response;
 };
 
+export const updateVideoStory = async (data, config) => {
+  let response;
+  try {
+    response = await api.put('/api/stories/video', data, config);
+  } catch (error) {
+    return error;
+  }
+  return response;
+};
+
 export const updateStory = async (story) => {
   let response;
 
