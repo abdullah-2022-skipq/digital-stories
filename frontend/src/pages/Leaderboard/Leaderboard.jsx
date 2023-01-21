@@ -29,6 +29,7 @@ function Leaderboard() {
             avatar={user.avatar}
             numStories={user.storyCount}
             numUpVotes={user.upVoteCount}
+            key={user.username}
           />
         ))}
       </div>

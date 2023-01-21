@@ -29,7 +29,8 @@ function StepProfilePicture() {
     if (response.status === 201) {
       dispatch(setAuth(response.data));
       dispatch(setUser(response.data));
-    } else if (response.code === 'ERR_BAD_REQUEST') {
+    } else {
+      setLoading(false);
       setError(response.response.data.message);
     }
 

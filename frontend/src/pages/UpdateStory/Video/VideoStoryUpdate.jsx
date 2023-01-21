@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './VideoStoryUpdate.module.css';
 import Button from '../../../components/shared/Button/Button';
-import { updateStory } from '../../../api';
+import { updateVideoStory } from '../../../api';
 
 function VideoStoryUpdate({ prevVideo, prevCaption, storyId }) {
   const [video, setVideo] = useState(prevVideo);
+
+  const [videoPreview, setVideoPreview] = useState(prevVideo);
 
   const [caption, setCaption] = useState(prevCaption);
 
@@ -13,53 +15,61 @@ function VideoStoryUpdate({ prevVideo, prevCaption, storyId }) {
 
   const navigate = useHistory();
 
-  const updateStoryHandler = async () => {
-    const story = {
-      mediaType: 'video',
-      caption,
-      video: video === prevVideo ? '' : video,
-      storyId,
+  const updateStoryHandler = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append('video', video);
+
+    formData.append('storyId', storyId);
+    formData.append('caption', caption);
+    formData.append('mediaType', 'video');
+
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
     };
 
-    const response = await updateStory(story);
+    const response = await updateVideoStory(formData, config);
+
     if (response.status === 200) {
       navigate.push('/');
     }
   };
-
-  const getUserVideo = (e) => {
-    const videoFile = e.target.files[0];
-
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      const base64 = reader.result;
-      setVideo(base64);
-    };
-
-    reader.readAsDataURL(videoFile);
-  };
-
   return (
     <>
       <div className={styles.cardFlex}>
-        <p className={styles.videoPromptHeading}>
+        <div className={styles.videoPromptHeading}>
           <span className={styles.videoWrapper}>
-            <iframe className={styles.video} src={video} alt="video" />
+            <video
+              className={styles.video}
+              src={videoPreview}
+              controls
+              autoPlay
+              muted
+            />
           </span>
 
           <span className={styles.videoLabelWrapper}>
             <input
               className={styles.videoSelection}
-              id="videoSelection"
               type="file"
-              onChange={getUserVideo}
+              name="video"
+              accept="video/*"
+              id="videoSelectionInput"
+              onChange={(e) => {
+                setVideo(e.target.files[0]);
+                setVideoPreview(URL.createObjectURL(e.target.files[0]));
+              }}
             />
-            <label className={styles.videoLabel} htmlFor="videoSelection">
-              Choose video (below 5mb)
+
+            <label className={styles.videoLabel} htmlFor="videoSelectionInput">
+              Choose video
             </label>
           </span>
-        </p>
+        </div>
       </div>
       <textarea
         className={styles.caption}

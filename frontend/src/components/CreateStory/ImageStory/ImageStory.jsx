@@ -7,7 +7,7 @@ import { createStory } from '../../../api';
 import { globalContext } from '../../../App';
 
 function ImageStory() {
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState('/images/default-image-story.png');
 
   const [caption, setCaption] = useState('');
 
@@ -79,9 +79,7 @@ function ImageStory() {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         style={{ backgroundColor: hover ? '#1b8445' : '#20BD5F' }}
-        disabled={
-          image === 'http://localhost:5544/storage/default_image_story.png'
-        }
+        disabled={image === '/images/default-image-story.png'}
       />
     </>
   );

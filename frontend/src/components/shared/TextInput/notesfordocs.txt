@@ -38,3 +38,6 @@ In other words, the rootReducer is responsible for taking in all the actions dis
 For example, in the code you provided, you are using createSlice from the @reduxjs/toolkit to create a userSlice with an initial state and a set of reducers. The rootReducer would import this slice, and combine it with any other slices you have in your application, creating a single reducer that can be passed to the store.
 
 It is also worth mentioning that you can use the createAsyncThunk and createSlice in the same file and use the configureStore that inbuilt in the @reduxjs/toolkit to create the store and reducer in one step.
+
+
+<a href="https://iconscout.com/3ds/image-folder" target="_blank">Image Folder 3D Icon</a> by <a href="https://iconscout.com/contributors/flowicon" target="_blank">Flowicon</a>

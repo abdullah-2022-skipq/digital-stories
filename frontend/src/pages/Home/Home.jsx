@@ -122,7 +122,6 @@ function Home() {
 
       <div className={styles.storyCustomization}>
         <div className={styles.sortByHeader}>
-          {/* <img src="/images/sort-by.png" alt="sort-by" /> */}
           <p>Sort By</p>
           <div className={styles.buttonGroup}>
             <button

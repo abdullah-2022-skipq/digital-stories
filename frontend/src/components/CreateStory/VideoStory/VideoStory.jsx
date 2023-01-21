@@ -7,7 +7,11 @@ import { globalContext } from '../../../App';
 import { createVideoStory } from '../../../api';
 
 function VideoStory() {
+  const videoPlaceholderImage = '/images/default-video-story.png';
+
   const [video, setVideo] = useState('');
+
+  const [videoPreview, setVideoPreview] = useState('');
 
   const [caption, setCaption] = useState('');
 
@@ -50,7 +54,22 @@ function VideoStory() {
       <div className={styles.cardFlex}>
         <div className={styles.videoPromptHeading}>
           <span className={styles.videoWrapper}>
-            <iframe className={styles.video} src="" alt="video" />
+            {video === '' ? (
+              <img
+                src={videoPlaceholderImage}
+                alt="video-placeholder"
+                className={styles.video}
+              />
+            ) : (
+              <video
+                src={videoPreview}
+                controls
+                autoPlay
+                loop
+                muted
+                className={styles.video}
+              />
+            )}
           </span>
 
           <span className={styles.videoLabelWrapper}>
@@ -62,6 +81,7 @@ function VideoStory() {
               id="videoSelectionInput"
               onChange={(e) => {
                 setVideo(e.target.files[0]);
+                setVideoPreview(URL.createObjectURL(e.target.files[0]));
               }}
             />
 

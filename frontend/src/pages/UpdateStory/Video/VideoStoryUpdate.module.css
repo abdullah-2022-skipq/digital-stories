@@ -24,6 +24,8 @@
   border-radius: 10px;
   display: block;
   object-fit: cover; /* maintain aspect ratio */
+  width: 400px;
+  height: 300px;
 }
 
 .videoSelection {

@@ -17,10 +17,6 @@
   height: 40%;
   margin-bottom: auto;
   margin-top: auto;
-  display: flex;
-  justify-content: space-evenly;
-  gap: 30px;
-  align-items: center;
 }
 
 .card img,
@@ -48,12 +44,12 @@
 }
 
 .mediaWrapper {
-  margin: 10px 0;
+  margin: 15px auto;
   display: flex;
   gap: 15px;
+  width: inherit;
 }
 
 .mediaWrapperText {
   align-items: center;
-  justify-content: center;
 }

@@ -5,6 +5,8 @@ import styles from './Navigation.module.css';
 import ProfileModal from '../../ProfileModal/ProfileModal';
 import { setActiveRoute } from '../../../store/navbarSlice';
 import { globalContext } from '../../../App';
+import { resetUserReg } from '../../../store/userRegistrationSlice';
+import { resetStep } from '../../../store/multiStepFormSlice';
 
 function Navigation() {
   const logoStyle = {
@@ -69,7 +71,11 @@ function Navigation() {
         <Link
           style={logoStyle}
           to="/"
-          onClick={() => navBarClickHandler('home')}
+          onClick={() => {
+            dispatch(resetUserReg());
+            dispatch(resetStep());
+            navBarClickHandler('home');
+          }}
         >
           <span style={logoText}>Digital Stories</span>
         </Link>

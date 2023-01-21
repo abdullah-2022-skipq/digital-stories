@@ -11,14 +11,42 @@ function StepChooseMediaType() {
     <div className="cardWrapper">
       <Card cardHeading="What do you want to post?" cardLogo="media-type">
         <div className={styles.selectWrapper}>
-          <select
-            value={mediaType}
-            onChange={(e) => setMediaType(e.target.value)}
-          >
-            <option value="Text">Text</option>
-            <option value="Image">Image</option>
-            <option value="Video">Video</option>
-          </select>
+          <div className={styles.buttonGroup}>
+            <button
+              className={`${styles.groupButton} ${
+                mediaType === 'Text' ? styles.active : ''
+              }`}
+              type="button"
+              onClick={() => {
+                setMediaType('Text');
+              }}
+            >
+              Text
+            </button>
+            <button
+              className={`${styles.groupButton} ${
+                mediaType === 'Image' ? styles.active : ''
+              }`}
+              type="button"
+              onClick={() => {
+                setMediaType('Image');
+              }}
+            >
+              Image
+            </button>
+            <button
+              className={`${styles.groupButton} ${
+                mediaType === 'Video' ? styles.active : ''
+              }`}
+              type="button"
+              onClick={() => {
+                setMediaType('Video');
+              }}
+            >
+              Video
+            </button>
+          </div>
+
           <Button
             buttontitle="Next"
             buttonimage="arrow_right"

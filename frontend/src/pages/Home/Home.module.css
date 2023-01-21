@@ -174,9 +174,10 @@
   /* https://stackoverflow.com/questions/37386244/what-does-flex-1-mean#:~:text=If%20an%20element%20has%20flex,See%20the%20illustration%20below. */
   flex: 1;
   background-color: #2a292a;
-  color: white;
+  color: #c4c5c5;
   border: none;
   padding: 8px 14px;
+  font-weight: bold;
   font-size: medium;
   cursor: pointer;
 }
@@ -187,7 +188,7 @@
 }
 
 .sortByActive {
-  background-color: #4d4b4e;
+  background-color: #3a393b;
   color: #0077ff;
 }
 
@@ -201,5 +202,4 @@
 
 .sortByHeader p {
   margin-right: 10px;
-  font-weight: bold;
 }
