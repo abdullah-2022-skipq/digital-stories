@@ -12,7 +12,7 @@ schemes:
 paths:
   /me:
     get:
-      tags: ["users"]
+      tags: ["Users"]
       summary: returns the details of currently logged-in user
       produces:
         - application/json
@@ -37,7 +37,7 @@ paths:
           description: Internal server error
   /getNumUsers:
     get:
-      tags: ["users"]
+      tags: ["Users"]
       summary: returns the number of users registered in the app
       produces:
         - application/json
@@ -66,7 +66,7 @@ paths:
           description: Internal server error
   /comment:
     post:
-      tags: ["comments"]
+      tags: ["Comments"]
       summary: create a new comment
       produces:
         - application/json
@@ -108,7 +108,7 @@ paths:
           description: Internal server error
   /comments/{id}:
     get:
-      tags: ["comments"]
+      tags: ["Comments"]
       summary: get comments by Story ID
       produces:
         - application/json
@@ -146,7 +146,7 @@ paths:
                 required: true
       responses:
         200:
-          description: Successfully retrieved comments
+          description: Successful response
           schema:
             $ref: "#/definitions/PostComments"
         401:
@@ -159,7 +159,7 @@ paths:
   /register:
     post:
       tags:
-        - ["auth"]
+        - ["Auth"]
       summary: "register a new user"
       produces:
         - application/json
@@ -203,7 +203,7 @@ paths:
   /login:
     post:
       tags:
-        - ["auth"]
+        - ["Auth"]
       summary: "login a user"
       produces: "application/json"
       parameters:
@@ -232,7 +232,7 @@ paths:
       summary: refresh access token
       description: Use the refresh token to get a new access token
       tags:
-      - ["auth"]
+      - ["Auth"]
       parameters:
           - name: accessToken
             in: cookie
@@ -255,7 +255,7 @@ paths:
   /logout:
     post:
       tags:
-      - ["auth"]
+      - ["Auth"]
       summary: logout the user
       parameters:
           - name: accessToken
@@ -274,6 +274,54 @@ paths:
             $ref: "#/definitions/LogOutUser"  
         500:
           description: Internal server error
+  /engagements/{id}:
+    get:
+      tags:
+        - [Engagements]
+      summary: Retrieve engagement details by user ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user
+          required: true
+          type: string
+
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/Engagement"
+        404:
+          description: User not found
+  /leaderboard:
+    get:
+      tags:
+        - Leaderboard
+      summary: Retrieve leaderboard data
+      parameters:
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/Leaderboard"
           
 
 definitions:
@@ -328,3 +376,81 @@ definitions:
       auth:
         type: boolean
         default: false
+  EngagementDTOYou:
+    type: object
+    properties:
+      action:
+        type: string
+        example: commented
+      username:
+        type: string
+        example: primalTraits
+      onStory:
+        type: string
+        format: ObjectId
+        example: 63c4eb887a63b31be48cff87
+      date:
+        type: string
+        format: date-time
+        example: "2023-01-16T06:17:00.961Z"
+      key:
+        type: string
+        format: ObjectId
+        example: 63c4ebdc7a63b31be48d00da
+      goal:
+        type: string
+        example: anotherUser
+  EngagementDTOOthers:
+    type: object
+    properties:
+      action:
+        type: string
+        example: downvoted
+      username:
+        type: string
+        example: john
+      onStory:
+        type: string
+        format: ObjectId
+        example: 63bae0ff4f44f7ff64a7ae75
+      date:
+        type: string
+        format: date-time
+        example: "2023-01-14T21:07:48.534Z"
+      key:
+        type: string
+        format: ObjectId
+        example: 63c319a44907cc28be6bb5a2
+      goal:
+        type: string
+        example: primalTraits
+  Engagement:
+    type: object
+    properties:
+      you:
+        type: array
+        items:
+          $ref: "#/definitions/EngagementDTOYou"
+      others:
+        type: array
+        items:
+          $ref: "#/definitions/EngagementDTOOthers"
+  LeaderboardDTO:
+    type: object
+    properties:
+      username:
+        type: string
+      avatar:
+        type: string
+      storyCount:
+        type: integer
+      upVoteCount:
+        type: integer
+  Leaderboard:
+    type: object
+    properties:
+      leaderboard:
+        type: array
+        items:
+          $ref: "#/definitions/LeaderboardDTO"
+
