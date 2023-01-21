@@ -1,9 +1,9 @@
-import Joi from "joi";
-import bcrypt from "bcrypt";
-import { RefreshToken, User } from "../../models";
-import { CustomErrorHandler, TokenService } from "../../services";
-import { REFRESH_TOKEN_SECRET } from "../../config";
-import { UserDetailsDTO } from "../../dtos";
+import Joi from 'joi';
+import bcrypt from 'bcrypt';
+import { RefreshToken, User } from '../../models';
+import { CustomErrorHandler, TokenService } from '../../services';
+import { REFRESH_TOKEN_SECRET } from '../../config';
+import { UserDetailsDTO } from '../../dtos';
 
 const loginController = {
   async login(req, res, next) {
@@ -46,7 +46,7 @@ const loginController = {
 
       const refreshToken = TokenService.sign(
         { _id: user._id },
-        "1y",
+        '1y',
         REFRESH_TOKEN_SECRET
       );
 
@@ -59,12 +59,12 @@ const loginController = {
         { upsert: true }
       );
 
-      res.cookie("accessToken", accessToken, {
+      res.cookie('accessToken', accessToken, {
         maxAge: 1000 * 60 * 60 * 24 * 30,
         httpOnly: true,
       });
 
-      res.cookie("refreshToken", refreshToken, {
+      res.cookie('refreshToken', refreshToken, {
         maxAge: 1000 * 60 * 60 * 24 * 30,
         httpOnly: true,
       });

@@ -1,4 +1,4 @@
-import { RefreshToken } from "../../models";
+import { RefreshToken } from '../../models';
 
 const logoutController = {
   async logout(req, res, next) {
@@ -10,8 +10,8 @@ const logoutController = {
       await RefreshToken.deleteOne({ refreshToken });
 
       // delete cookies
-      res.clearCookie("refreshToken");
-      res.clearCookie("accessToken");
+      res.clearCookie('refreshToken');
+      res.clearCookie('accessToken');
 
       res.json({ user: null, auth: false });
     } catch (error) {

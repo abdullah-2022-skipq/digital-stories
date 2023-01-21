@@ -1,3 +1,3 @@
-import dbConnect from "./db";
+import dbConnect from './db';
 
 export default dbConnect;

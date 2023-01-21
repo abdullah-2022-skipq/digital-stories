@@ -1,28 +1,28 @@
-import LeaderboardDTO from "../../dtos/leaderboard-dto";
-import { Story } from "../../models";
+import LeaderboardDTO from '../../dtos/leaderboard-dto';
+import { Story } from '../../models';
 
 const leaderboardController = {
   async getLeaderboard(req, res, next) {
     Story.aggregate([
       {
         $lookup: {
-          from: "users",
-          localField: "postedBy",
-          foreignField: "_id",
-          as: "postedBy",
+          from: 'users',
+          localField: 'postedBy',
+          foreignField: '_id',
+          as: 'postedBy',
         },
       },
       {
         $addFields: {
-          postedBy: { $arrayElemAt: ["$postedBy", 0] },
+          postedBy: { $arrayElemAt: ['$postedBy', 0] },
         },
       },
       {
         $group: {
-          _id: "$postedBy._id",
-          upVoteCount: { $sum: "$upVoteCount" },
+          _id: '$postedBy._id',
+          upVoteCount: { $sum: '$upVoteCount' },
           storiesPosted: { $sum: 1 },
-          postedBy: { $first: "$postedBy" },
+          postedBy: { $first: '$postedBy' },
         },
       },
     ])
