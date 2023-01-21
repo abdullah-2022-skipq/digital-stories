@@ -198,6 +198,8 @@ paths:
             $ref: "#/definitions/UserDetails"
         422:
           description: Invalid request body
+        409:
+          description: Username or email already taken
         500:
           description: Internal server error
   /login:
