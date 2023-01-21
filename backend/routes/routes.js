@@ -30,11 +30,22 @@ router.get('/num-users', auth, userController.getNumUsers);
 // stories
 router.get('/stories', auth, storyController.getAll);
 router.post('/stories', auth, storyController.create);
-router.post('/stories/video', upload.single('video'), storyController.create);
+router.post(
+  '/stories/video',
+  auth,
+  upload.single('video'),
+  storyController.create
+);
 router.get('/trending', auth, storyController.getTrending);
 router.get('/stories/:id', auth, storyController.getById);
 router.delete('/stories/:id', auth, storyController.deleteById);
 router.put('/stories', auth, storyController.update);
+router.put(
+  '/stories/video',
+  auth,
+  upload.single('video'),
+  storyController.update
+);
 
 // comments
 router.post('/comment', auth, commentController.createComment);
