@@ -1,7 +1,6 @@
 import Joi from 'joi';
 import Jimp from 'jimp';
 import path from 'path';
-import fs from 'fs';
 import { Comment, Engagement, Story } from '../../models';
 import { CustomErrorHandler } from '../../services';
 import { StoryDTO, StoryDetailsDTO } from '../../dtos';
@@ -301,51 +300,34 @@ const storyController = {
     }
 
     if (mediaType === 'video') {
-      const { caption, video } = req.body;
+      const { caption } = req.body;
 
-      if (video === '') {
+      // if video middleware sends a filename then video should be updated
+      // otherwise only caption should be updated
+      if (req.file) {
         await Story.updateOne(
           { _id: storyId },
           {
             $set: {
               mediaType,
               caption,
+              video: `http://localhost:5544/storage/${req.file.filename}`,
             },
           }
         );
       } else {
-        // preprocess the video
-
-        const buffer = Buffer.from(
-          video.replace(/^data:video\/(webm);base64,/, ''),
-          'base64'
-        );
-
-        const videoPath = `${Date.now()}-${Math.round(
-          Math.random() * 100000
-        )}.webm`;
-
-        try {
-          fs.writeFileSync(
-            path.resolve(__dirname, `../../storage/${videoPath}`),
-            buffer
-          );
-        } catch (err) {
-          return next(err);
-        }
-
         await Story.updateOne(
           { _id: storyId },
           {
             $set: {
               mediaType,
               caption,
-              video: `http://localhost:5544/storage/${videoPath}`,
             },
           }
         );
       }
     }
+
     return res.status(200).json({ message: 'story updated successfully' });
   },
 };
