@@ -40,6 +40,7 @@ router.get('/trending', auth, storyController.getTrending);
 router.get('/stories/:id', auth, storyController.getById);
 router.delete('/stories/:id', auth, storyController.deleteById);
 router.put('/stories', auth, storyController.update);
+router.put('/stories/mode', auth, storyController.updateAccessMode);
 router.put(
   '/stories/video',
   auth,

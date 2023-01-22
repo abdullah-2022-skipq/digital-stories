@@ -345,6 +345,36 @@ const storyController = {
 
     return res.status(200).json({ message: 'story updated successfully' });
   },
+
+  async updateAccessMode(req, res, next) {
+    const updateAccessModeSchema = Joi.object({
+      isPrivate: Joi.boolean().required(),
+      storyId: Joi.string()
+        .regex(/^[0-9a-fA-F]{24}$/)
+        .required(),
+    });
+
+    const { error } = updateAccessModeSchema.validate(req.body);
+
+    if (error) {
+      return next(error);
+    }
+
+    const { storyId, isPrivate } = req.body;
+
+    await Story.updateOne(
+      { _id: storyId },
+      {
+        $set: {
+          isPrivate,
+        },
+      }
+    );
+
+    return res
+      .status(200)
+      .json({ message: 'story access mode updated successfully' });
+  },
 };
 
 export default storyController;
