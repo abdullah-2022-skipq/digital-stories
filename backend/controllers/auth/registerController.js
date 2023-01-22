@@ -15,7 +15,7 @@ const registerController = {
       username: Joi.string().max(20).required(),
       email: Joi.string().email().required(),
       password: Joi.string()
-        .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
+        .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,25}$/)
         .required(),
       confirmPassword: Joi.ref('password'),
       avatarPath: Joi.string().default('default'),
@@ -56,11 +56,17 @@ const registerController = {
       return next(err);
     }
 
-    const { name, username, email, password, avatarPath } = req.body;
+    const { name, username, email, password } = req.body;
+
+    let { avatarPath } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     let imgPath = DEFAULTAVATAR;
+
+    if (!avatarPath) {
+      avatarPath = imgPath;
+    }
 
     if (avatarPath !== DEFAULTAVATAR) {
       const buffer = Buffer.from(
