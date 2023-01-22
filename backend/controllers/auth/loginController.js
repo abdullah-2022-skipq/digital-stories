@@ -9,7 +9,7 @@ const loginController = {
   async login(req, res, next) {
     // validation
     const loginSchema = Joi.object({
-      username: Joi.string().min(5).max(15).required(),
+      username: Joi.string().max(20).required(),
       password: Joi.string()
         .pattern(/^[a-zA-Z0-9]{8,25}$/)
         .required(),
