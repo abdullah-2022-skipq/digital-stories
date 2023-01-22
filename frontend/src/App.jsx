@@ -19,6 +19,7 @@ import Trending from './pages/Trending/Trending';
 import Engagements from './pages/Engagements/Engagements';
 import UpdateStory from './pages/UpdateStory/UpdateStory';
 import Error from './pages/Error/Error';
+import MyStories from './pages/MyStories/MyStories';
 
 export const globalContext = createContext();
 
@@ -27,6 +28,7 @@ function App() {
 
   // for context use in MultiStepCreateStoryForm
   const [mediaType, setMediaType] = useState('Text');
+  const [isPrivate, setIsPrivate] = useState(true);
 
   const steps = {
     1: StepChooseMediaType,
@@ -45,6 +47,7 @@ function App() {
   const clearContext = () => {
     setStep(1);
     setMediaType('Text');
+    setIsPrivate(true);
   };
 
   // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -57,6 +60,8 @@ function App() {
     onNextHandler,
     onPrevHandler,
     clearContext,
+    isPrivate,
+    setIsPrivate,
   };
 
   return loading ? (
@@ -101,6 +106,12 @@ function App() {
               <ProtectedRoute exact path="/update-story">
                 <div className="main">
                   <UpdateStory />
+                </div>
+              </ProtectedRoute>
+
+              <ProtectedRoute exact path="/my-stories">
+                <div className="main">
+                  <MyStories />
                 </div>
               </ProtectedRoute>
 

@@ -1,0 +1,98 @@
+.storyList {
+  margin: 50px 0;
+  display: flex;
+  gap: 50px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.storyCustomization {
+  margin: 20px 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.storyCustomization {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.storyCustomization img {
+  width: 35px;
+  height: 35px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.paginationWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginationWrapper button {
+  margin: 0 5px;
+  background-color: #0077ff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  display: flex;
+  align-items: center;
+  margin: 15px auto;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: white;
+}
+
+.paginationWrapper button:hover,
+.paginationWrapper button:disabled {
+  background-color: #014a9c;
+  color: #c4c5c5;
+}
+
+.buttonGroup {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.groupButton {
+  /* https://stackoverflow.com/questions/37386244/what-does-flex-1-mean#:~:text=If%20an%20element%20has%20flex,See%20the%20illustration%20below. */
+  flex: 1;
+  background-color: #2a292a;
+  color: #c4c5c5;
+  border: none;
+  padding: 8px 14px;
+  font-weight: bold;
+  font-size: medium;
+  cursor: pointer;
+}
+
+.groupButton:hover {
+  background-color: #3d3b3e;
+  cursor: pointer;
+}
+
+.sortByActive {
+  background-color: #3a393b;
+  color: #0077ff;
+}
+
+.sortByHeader {
+  margin: 15px 5px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sortByHeader p {
+  margin-right: 10px;
+}
