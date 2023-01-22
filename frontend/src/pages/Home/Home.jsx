@@ -10,21 +10,8 @@ function Home() {
   const [dataMask, setDataMask] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasNextPage, sethasNextPage] = useState(true);
-  const [hasPrevPage, sethasPrevPage] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const response = await getAllStories(currentPage);
-
-      const dataFromApi = response.data.stories;
-
-      sethasNextPage(response.data.hasNextPage);
-      sethasPrevPage(response.data.hasPrevPage);
-
-      setData(dataFromApi);
-      setDataMask(dataFromApi);
-    })();
-  }, [currentPage]);
+  const inputRef = useRef(null);
 
   // pagination
   const onPreviousPageHandler = () => {
@@ -37,24 +24,6 @@ function Home() {
   };
 
   const [activeView, setActiveView] = useState('grid');
-
-  const inputRef = useRef(null);
-
-  const onSearchHandler = () => {
-    let searchQuery = inputRef.current.value;
-
-    if (searchQuery === '') {
-      setDataMask(data);
-    }
-
-    searchQuery = searchQuery.toLowerCase();
-
-    const filteredData = data.filter((story) =>
-      story.caption.toLowerCase().includes(searchQuery)
-    );
-
-    setDataMask(filteredData);
-  };
 
   const [sortBy, setSortBy] = useState('date');
 
@@ -77,6 +46,45 @@ function Home() {
     setSortBy(value);
     sortData(value);
   };
+
+  const onSearchHandler = () => {
+    let searchQuery = inputRef.current.value;
+    console.log('ran with ', searchQuery);
+
+    if (searchQuery === '') {
+      setDataMask(data);
+    }
+
+    searchQuery = searchQuery.toLowerCase();
+
+    const filteredData = data.filter((story) =>
+      story.caption.toLowerCase().includes(searchQuery)
+    );
+
+    setDataMask(filteredData);
+  };
+
+  const [hasPrevPage, sethasPrevPage] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const response = await getAllStories(currentPage);
+
+      const dataFromApi = response.data.stories;
+
+      sethasNextPage(response.data.hasNextPage);
+      sethasPrevPage(response.data.hasPrevPage);
+
+      setData(dataFromApi);
+
+      setDataMask(dataFromApi);
+
+      // if some search keyword is set previously
+      if (response.data.hasPrevPage) {
+        onSearchHandler();
+      }
+    })();
+  }, [currentPage]);
 
   if (!data) {
     return <Spinner message="Loading stories, please wait" />;
