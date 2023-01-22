@@ -151,16 +151,16 @@ function Navigation() {
         {isAuth && (
           <Link
             style={navElementStyle}
-            to="/you"
-            onClick={() => navBarClickHandler('you')}
+            to="/my-stories"
+            onClick={() => navBarClickHandler('me')}
           >
             <span
               style={{
                 ...navElementText,
-                borderBottom: active === 'you' ? activeRouteStyle : '',
+                borderBottom: active === 'me' ? activeRouteStyle : '',
               }}
             >
-              Your Stories
+              My Stories
             </span>
           </Link>
         )}
