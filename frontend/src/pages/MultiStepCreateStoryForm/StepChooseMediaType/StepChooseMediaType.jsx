@@ -5,12 +5,43 @@ import Button from '../../../components/shared/Button/Button';
 import { globalContext } from '../../../App';
 
 function StepChooseMediaType() {
-  const { mediaType, setMediaType, onNextHandler } = useContext(globalContext);
+  const { mediaType, setMediaType, isPrivate, setIsPrivate, onNextHandler } =
+    useContext(globalContext);
 
   return (
     <div className="cardWrapper">
       <Card cardHeading="What do you want to post?" cardLogo="media-type">
         <div className={styles.selectWrapper}>
+          {/* set story access mode  */}
+          <div className={styles.buttonGroup}>
+            <button
+              className={`${styles.groupButton} ${isPrivate && styles.active}`}
+              type="button"
+              onClick={() => {
+                setIsPrivate(true);
+              }}
+              style={{
+                color: '#de1b55',
+              }}
+            >
+              Private
+            </button>
+
+            <button
+              className={`${styles.groupButton} ${!isPrivate && styles.active}`}
+              type="button"
+              onClick={() => {
+                setIsPrivate(false);
+              }}
+              style={{
+                color: '#33b357',
+              }}
+            >
+              Public
+            </button>
+          </div>
+
+          {/* set media type  */}
           <div className={styles.buttonGroup}>
             <button
               className={`${styles.groupButton} ${
