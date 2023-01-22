@@ -15,7 +15,7 @@ function ImageStory() {
 
   const postedBy = useSelector((state) => state.user._id);
 
-  const { onPrevHandler } = useContext(globalContext);
+  const { isPrivate, clearContext, onPrevHandler } = useContext(globalContext);
 
   const navigate = useHistory();
 
@@ -25,9 +25,11 @@ function ImageStory() {
       caption,
       image,
       postedBy,
+      isPrivate,
     };
 
     const response = await createStory(story);
+    clearContext();
     if (response.status === 201) {
       onPrevHandler(); // reset the create story form to step 1
       navigate.push('/');

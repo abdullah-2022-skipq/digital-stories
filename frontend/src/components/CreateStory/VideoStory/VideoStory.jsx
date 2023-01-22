@@ -19,7 +19,7 @@ function VideoStory() {
 
   const postedBy = useSelector((state) => state.user._id);
 
-  const { onPrevHandler, clearContext } = useContext(globalContext);
+  const { isPrivate, onPrevHandler, clearContext } = useContext(globalContext);
 
   const navigate = useHistory();
 
@@ -33,6 +33,7 @@ function VideoStory() {
     formData.append('postedBy', postedBy);
     formData.append('caption', caption);
     formData.append('mediaType', 'video');
+    formData.append('isPrivate', isPrivate);
 
     const config = {
       headers: {
@@ -41,6 +42,8 @@ function VideoStory() {
     };
 
     const response = await createVideoStory(formData, config);
+
+    clearContext();
 
     if (response.status === 201) {
       onPrevHandler(); // reset the create story form to step 1

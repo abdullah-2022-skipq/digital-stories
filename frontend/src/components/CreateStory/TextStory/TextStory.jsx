@@ -7,7 +7,7 @@ import { createStory } from '../../../api';
 import { globalContext } from '../../../App';
 
 function TextStory() {
-  const { onPrevHandler } = useContext(globalContext);
+  const { isPrivate, onPrevHandler, clearContext } = useContext(globalContext);
 
   const postedBy = useSelector((state) => state.user._id);
 
@@ -36,9 +36,11 @@ function TextStory() {
           ? 'green'
           : 'pink',
       postedBy,
+      isPrivate,
     };
 
     const response = await createStory(story);
+    clearContext();
 
     if (response.status === 201) {
       onPrevHandler(); // reset the create story form to step 1
