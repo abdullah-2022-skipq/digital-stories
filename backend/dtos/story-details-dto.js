@@ -14,6 +14,7 @@ class StoryDetailsDTO {
     this.commentCount = story.commentCount;
     this.username = story.postedBy.username;
     this.postedBy = story.postedBy._id;
+    this.isPrivate = story.isPrivate;
   }
 }
 
