@@ -7,9 +7,10 @@
 }
 
 .videoWrapper video {
-  width: inherit;
-  height: 300px;
   border-radius: 10px;
+  width: inherit;
+  max-width: 500px;
+  height: 300px;
   display: flex;
   padding: 20px;
   outline: none;
