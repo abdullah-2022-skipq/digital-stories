@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { resetActiveRoute } from '../../../store/navbarSlice';
 import styles from './VideoStoryUpdate.module.css';
 import Button from '../../../components/shared/Button/Button';
 import { updateVideoStory } from '../../../api';
 
 function VideoStoryUpdate({ prevVideo, prevCaption, storyId }) {
+  const dispatch = useDispatch();
+
   const [video, setVideo] = useState(prevVideo);
 
   const [videoPreview, setVideoPreview] = useState(prevVideo);
@@ -35,6 +39,7 @@ function VideoStoryUpdate({ prevVideo, prevCaption, storyId }) {
     const response = await updateVideoStory(formData, config);
 
     if (response.status === 200) {
+      dispatch(resetActiveRoute());
       navigate.push('/');
     }
   };
