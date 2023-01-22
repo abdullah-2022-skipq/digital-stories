@@ -124,9 +124,40 @@
   gap: 10px;
 }
 
-.updateOrDeleteControls button {
+.updateStoryButton,
+.deleteStoryButton {
   border: none;
   outline: none;
   background-color: transparent;
+  cursor: pointer;
+}
+
+.updateOrDeleteControls {
+  display: flex;
+}
+
+.buttonGroup {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 1px;
+  align-items: center;
+  justify-content: center;
+}
+
+.groupButton {
+  /* https://stackoverflow.com/questions/37386244/what-does-flex-1-mean#:~:text=If%20an%20element%20has%20flex,See%20the%20illustration%20below. */
+  flex: 1;
+  background-color: #2a292a;
+  color: #c4c5c5;
+  border: none;
+  padding: 8px 14px;
+  font-weight: bold;
+  font-size: medium;
+  cursor: pointer;
+}
+
+.groupButton:hover {
+  background-color: #3d3b3e;
   cursor: pointer;
 }
