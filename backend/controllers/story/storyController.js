@@ -15,6 +15,7 @@ const storyController = {
       image: Joi.string(),
       video: Joi.string(),
       upVoteCount: Joi.number(),
+      isPrivate: Joi.boolean().required(),
       downVoteCount: Joi.number(),
       commentCount: Joi.number(),
       // https://stackoverflow.com/a/73638013
@@ -32,20 +33,21 @@ const storyController = {
     const { mediaType } = req.body;
 
     if (mediaType === 'text') {
-      const { font, fontColor, caption, postedBy } = req.body;
+      const { font, fontColor, caption, postedBy, isPrivate } = req.body;
       const newStory = new Story({
         mediaType,
         font,
         caption,
         fontColor,
         postedBy,
+        isPrivate,
       });
 
       await newStory.save();
     }
 
     if (mediaType === 'image') {
-      const { caption, postedBy, image } = req.body;
+      const { caption, postedBy, isPrivate, image } = req.body;
 
       // preprocess the image
 
@@ -70,19 +72,21 @@ const storyController = {
         caption,
         image: `http://localhost:5544/storage/${imgPath}`,
         postedBy,
+        isPrivate,
       });
 
       await newStory.save();
     }
 
     if (mediaType === 'video') {
-      const { caption, postedBy } = req.body;
+      const { caption, isPrivate, postedBy } = req.body;
 
       const newStory = new Story({
         mediaType,
         caption,
         video: `http://localhost:5544/storage/${req.file.filename}`,
         postedBy,
+        isPrivate,
       });
 
       await newStory.save();
@@ -94,12 +98,23 @@ const storyController = {
   async getAll(req, res, next) {
     try {
       const page = parseInt(req.query.page, 10) || 1;
+      const { userId } = req.query;
+
       const limit = 20;
 
-      const stories = await Story.paginate(
-        {},
-        { page, limit, populate: 'postedBy', sort: { createdAt: -1 } }
-      );
+      let stories;
+
+      if (userId) {
+        stories = await Story.paginate(
+          { postedBy: userId },
+          { page, limit, populate: 'postedBy', sort: { createdAt: -1 } }
+        );
+      } else {
+        stories = await Story.paginate(
+          { isPrivate: false },
+          { page, limit, populate: 'postedBy', sort: { createdAt: -1 } }
+        );
+      }
 
       if (!stories) {
         return next();

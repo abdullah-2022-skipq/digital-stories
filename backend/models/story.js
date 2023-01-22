@@ -14,6 +14,7 @@ const storySchema = new Schema(
     upVoteCount: { type: Number, default: 0 },
     downVoteCount: { type: Number, default: 0 },
     commentCount: { type: Number, default: 0 },
+    isPrivate: { type: Boolean, required: true },
     postedBy: { type: mongoose.SchemaTypes.ObjectId, ref: 'User' },
   },
   { timestamps: true }
