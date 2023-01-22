@@ -13,7 +13,7 @@ paths:
   /me:
     get:
       tags: ["Users"]
-      summary: returns the details of currently logged-in user
+      summary: Get the details of currently logged-in user
       produces:
         - application/json
       parameters:
@@ -35,10 +35,10 @@ paths:
           description: Expired JSON Web Token (JWT)
         500:
           description: Internal server error
-  /getNumUsers:
+  /num-users:
     get:
       tags: ["Users"]
-      summary: returns the number of users registered in the app
+      summary: Get the number of users registered in the app
       produces:
         - application/json
       parameters:
@@ -67,7 +67,7 @@ paths:
   /comment:
     post:
       tags: ["Comments"]
-      summary: create a new comment
+      summary: Create a comment
       produces:
         - application/json
       parameters:
@@ -109,7 +109,7 @@ paths:
   /comments/{id}:
     get:
       tags: ["Comments"]
-      summary: get comments by Story ID
+      summary: Get comments by Story ID
       produces:
         - application/json
       parameters:
@@ -160,37 +160,36 @@ paths:
     post:
       tags:
         - ["Auth"]
-      summary: "register a new user"
+      summary: "Register a new user"
       produces:
         - application/json
       parameters:
-          - name: "name"
-            in: "body"
-            type: "string"
-            maxLength: 30
-            required: true
-          - name: "username"
-            in: "body"
-            type: "string"
-            maxLength: 20
-            required: true
-          - name: "email"
-            in: "body"
-            type: "string"
-            format: "email"
-            required: true
-          - name: "password"
-            in: "body"
-            type: "string"
-            pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
-            required: true
-          - name: "confirmPassword"
-            in: "body"
-            type: "string"
-            required: true
-          - name: "avatarPath"
-            in: "body"
-            type: "string"
+          - in: "body"
+            name: user
+            description: The user to create
+            type: object
+            required:
+              - name
+              - username
+              - email
+              - password
+              - confirmPassword
+            properties:
+              name:
+                type: string
+                maxLength: 30
+              username:
+                type: string
+                maxLength: 20
+              email:
+                type: string
+                format: email
+              password:
+                type: string
+                pattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,25}$    
+              confirmPassword:
+                type: string
+                pattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,25}$    
       responses:
         201:
           description: "user registered successfully"
@@ -206,18 +205,25 @@ paths:
     post:
       tags:
         - ["Auth"]
-      summary: "login a user"
+      summary: "Login a user"
       produces: "application/json"
       parameters:
-        - username:
-          type: "string"
-          minLength: 5
-          maxLength: 15
-          required: true
-        - password:
-          type: "string"
-          pattern: "^[a-zA-Z0-9]{8,25}$"
-          required: true
+        - in: "body"
+          name: user
+          description: The user to login as
+          schema:
+            type: object
+            required:
+              - username
+              - password
+            properties:
+              username:
+                type: "string"
+                minLength: 5
+                maxLength: 15
+              password:
+                type: "string"
+                pattern: "^[a-zA-Z0-9]{8,25}$"
       responses:
         200:
           description: "user logged in successfully"
@@ -231,7 +237,7 @@ paths:
           description: "Internal server error"
   /refresh:
     post:
-      summary: refresh access token
+      summary: Renew the access token
       description: Use the refresh token to get a new access token
       tags:
       - ["Auth"]
@@ -258,7 +264,7 @@ paths:
     post:
       tags:
       - ["Auth"]
-      summary: logout the user
+      summary: Logout the user
       parameters:
           - name: accessToken
             in: cookie
@@ -273,14 +279,16 @@ paths:
         200:
           description: Successful logout
           schema:
-            $ref: "#/definitions/LogOutUser"  
+            $ref: "#/definitions/LogOutUser"
+        401:
+          description: Expired JSON Web Token (JWT)
         500:
           description: Internal server error
   /engagements/{id}:
     get:
       tags:
         - [Engagements]
-      summary: Retrieve engagement details by user ID
+      summary: Get engagement details by user ID
       parameters:
         - name: id
           in: path
@@ -302,13 +310,15 @@ paths:
           description: Successful response
           schema:
             $ref: "#/definitions/Engagement"
+        401:
+          description: Expired JSON Web Token (JWT)
         404:
           description: User not found
   /leaderboard:
     get:
       tags:
         - Leaderboard
-      summary: Retrieve leaderboard data
+      summary: Get the user leaderboard
       parameters:
         - name: accessToken
           in: cookie
@@ -324,7 +334,360 @@ paths:
           description: Successful response
           schema:
             $ref: "#/definitions/Leaderboard"
-          
+        401:
+          description: Expired JSON Web Token (JWT)
+        500:
+          description: Internal server error
+  /stories:
+    get:
+      summary: Get a paginated list of stories
+      tags:
+        - ['Stories']
+      produces:
+        - application/json
+      parameters:
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication
+        - in: query
+          name: page
+          type: integer
+          required: false
+          description: The page number of the stories to return
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              stories:
+                type: array
+                items:
+                  $ref: "#/definitions/Story"
+              totalPages:
+                type: number
+                description: Total number of pages of stories
+              page:
+                type: number
+                description: The current page number of the returned stories
+              hasNextPage:
+                type: boolean
+                description: Indicates whether there is a next page of stories
+              hasPrevPage:
+                type: boolean
+                description: Indicates whether there is a previous page of stories
+                example: false
+        401:
+          description: Expired JSON Web Token (JWT)
+        404:
+          description: No stories found
+        500:
+          description: Internal server error
+    post:
+      summary: Create a story
+      tags:
+        - ['Stories']
+      produces:
+        - application/json
+      parameters:
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              mediaType:
+                type: string
+                description: The type of the story(text, image)
+                enum: [text, image]
+                required: true
+              font:
+                type: string
+                description: The font of the text story
+              fontColor:
+                type: string
+                description: The font color of the text story
+              caption:
+                type: string
+                description: The caption of the story
+              image:
+                type: string
+                description: The image file for image story
+              postedBy:
+                type: string
+                description: The id of the user that posted the story
+                pattern: "^[0-9a-fA-F]{24}$"
+                required: true
+      responses:
+        201:
+          description: Story created successfully
+        400:
+          description: Invalid request body
+        401:
+          description: Expired JSON Web Token (JWT)
+        500:
+          description: Internal server error
+    put:
+      summary: Update a story
+      tags:
+        - [Stories]
+      produces:
+        - application/json
+      parameters:
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              mediaType:
+                type: string
+                description: The type of the story(text, image)
+                enum: [text, image]
+                required: true
+              font:
+                type: string
+                description: The font of the text story
+              fontColor:
+                type: string
+                description: The font color of the text story
+              caption:
+                type: string
+                description: The caption of the story
+              image:
+                type: string
+                description: The image file for image story
+              storyId:
+                type: string
+                description: The id of the story to update
+                pattern: "^[0-9a-fA-F]{24}$"
+                required: true
+      responses:
+        200:
+          description: Story updated successfully
+        400:
+          description: Invalid request body
+        401:
+          description: Expired JSON Web Token (JWT)
+        500:
+          description: Internal server error
+
+  /stories/video:
+    post:
+      summary: Create a story
+      tags:
+        - ['Stories']
+      produces:
+        - application/json
+      parameters:
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              mediaType:
+                type: string
+                description: The type of the story(video)
+                enum: [video]
+                required: true
+              video:
+                type: string
+                description: The video file for video story
+              postedBy:
+                type: string
+                description: The id of the user that posted the story
+                pattern: "^[0-9a-fA-F]{24}$"
+                required: true
+      responses:
+        201:
+          description: Story created successfully
+        400:
+          description: Invalid request body
+        401:
+          description: Expired JSON Web Token (JWT)
+        500:
+          description: Internal server error
+    put:
+      summary: Update a story
+      tags:
+        - [Stories]
+      produces:
+        - application/json
+      parameters:
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              mediaType:
+                type: string
+                description: The type of the story(video)
+                enum: [video]
+                required: true
+              video:
+                type: string
+                description: The video file for video story
+              storyId:
+                type: string
+                description: The id of the story to update
+                pattern: "^[0-9a-fA-F]{24}$"
+                required: true
+      responses:
+        200:
+          description: Story updated successfully
+        400:
+          description: Invalid request body
+        401:
+          description: Expired JSON Web Token (JWT)
+        500:
+          description: Internal server error
+  /getTrending:
+    get:
+      summary: Get trending stories
+      tags:
+        - ['Stories']
+      produces:
+        - application/json
+      parameters:
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              stories:
+                type: array
+                items:
+                  $ref: "#/definitions/Story"
+        401:
+          description: Expired JSON Web Token (JWT)
+        500:
+          description: Internal server error
+  /delete/{id}:
+    delete:
+      summary: Delete story by id
+      produces:
+        - application/json
+      tags:
+        - ['Stories']
+      parameters:
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            description: The id of the story
+            pattern: "^[0-9a-fA-F]{24}$"
+      responses:
+        200:
+          description: Story deleted successfully
+        400:
+          description: Invalid request body
+        401:
+          description: Expired JSON Web Token (JWT)
+        404:
+          description: Story not found
+        500:
+          description: Internal server error
+  /get/{id}:
+    get:
+      summary: Get story details by id
+      produces:
+        - application/json
+      tags:
+        - ['Stories']
+      parameters:
+        - name: accessToken
+          in: cookie
+          required: true
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+                description: Valid JSON Web Token (JWT) for authentication
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            description: The id of the story
+            pattern: "^[0-9a-fA-F]{24}$"
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/StoryDetails"
+        400:
+          description: Invalid request parameters
+        401:
+          description: Expired JSON Web Token (JWT)
+        404:
+          description: Story not found
+        500:
+          description: Internal server error
 
 definitions:
   UserDetails:
@@ -455,4 +818,84 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/LeaderboardDTO"
-
+  Story:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: The id of the story in database
+      caption:
+        type: string
+        description: The (optional) caption of the story
+      font:
+        type: string
+        description: The font family of the story (for text stories)
+      fontColor:
+        type: string
+        description: The font color of the story (for text stories)
+      mediaType:
+        type: string
+        description: The media type of the story (text, image or video)
+      image:
+        type: string
+        description: The image in the story (for image stories)
+      video:
+        type: string
+        description: The video in the story (for video stories)
+      avatarPath:
+        type: string
+        description: The path for the author's avatar
+      upVotes:
+        type: string
+        description: The upvote count for the story
+      downVotes:
+        type: string
+        description: The downvote count for the story
+      date:
+        type: string
+        description: The creation date for the story
+  StoryDetails:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: The id of the story in database
+      caption:
+        type: string
+        description: The (optional) caption of the story
+      font:
+        type: string
+        description: The font family of the story (for text stories)
+      fontColor:
+        type: string
+        description: The font color of the story (for text stories)
+      mediaType:
+        type: string
+        description: The media type of the story (text, image or video)
+      image:
+        type: string
+        description: The image in the story (for image stories)
+      video:
+        type: string
+        description: The video in the story (for video stories)
+      avatarPath:
+        type: string
+        description: The path for the author's avatar
+      upVoteCount:
+        type: string
+        description: The upvote count for the story
+      downVoteCount:
+        type: string
+        description: The downvote count for the story
+      commentCount:
+        type: string
+        description: The comment count for the story
+      createdAt:
+        type: string
+        description: The creation date for the story
+      username:
+        type: string
+        description: The username of the story author
+      postedBy:
+        type: string
+        description: The id date of the story author
