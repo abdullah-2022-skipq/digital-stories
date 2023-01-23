@@ -55,6 +55,7 @@ function ImageStoryUpdate({ prevImage, prevCaption, storyId }) {
               className={styles.imageSelection}
               id="imageSelection"
               type="file"
+              accept="image/jpeg, image/jpg, image/png"
               onChange={getUserImage}
             />
             <label className={styles.imageLabel} htmlFor="imageSelection">

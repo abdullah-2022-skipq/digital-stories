@@ -76,6 +76,7 @@ function StepProfilePicture() {
                   className={styles.avatarSelection}
                   id="avatarSelection"
                   type="file"
+                  accept="image/jpeg, image/jpg, image/png"
                   onChange={getUserImage}
                 />
                 <label className={styles.avatarLabel} htmlFor="avatarSelection">

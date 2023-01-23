@@ -49,7 +49,6 @@ function Home() {
 
   const onSearchHandler = () => {
     let searchQuery = inputRef.current.value;
-    console.log('ran with ', searchQuery);
 
     if (searchQuery === '') {
       setDataMask(data);
