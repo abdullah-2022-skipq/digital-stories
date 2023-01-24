@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -12,97 +12,21 @@ import usePersistentSession from './hooks/usePersistentSession';
 import Spinner from './components/shared/Spinner/Spinner';
 import Leaderboard from './pages/Leaderboard/Leaderboard';
 import MultiStepCreateStoryEntry from './pages/MultiStepCreateStoryForm/MultiStepCreateStoryEntry';
-import StepChooseMediaType from './pages/MultiStepCreateStoryForm/StepChooseMediaType/StepChooseMediaType';
-import StepStoryContent from './pages/MultiStepCreateStoryForm/StepStoryContent/StepStoryContent';
 import StoryDetails from './pages/StoryDetails/StoryDetails';
 import Trending from './pages/Trending/Trending';
 import Engagements from './pages/Engagements/Engagements';
 import UpdateStory from './pages/UpdateStory/UpdateStory';
 import Error from './pages/Error/Error';
 import MyStories from './pages/MyStories/MyStories';
-
-export const globalContext = createContext();
+import { GlobalContextProvider } from './context/globalContext';
 
 function App() {
   const { loading } = usePersistentSession();
 
-  // for context use in MultiStepCreateStoryForm
-  const [mediaType, setMediaType] = useState('Text');
-  const [isPrivate, setIsPrivate] = useState(true);
-
-  // for story content
-  const blue = '#0077ff';
-  const green = '#33b357';
-  const pink = '#de1b55';
-
-  const [font, setFont] = useState('Times New Roman');
-  const [fontColor, setFontColor] = useState(blue);
-  const [caption, setCaption] = useState('');
-
-  const [image, setImage] = useState('/images/default-image-story.png');
-
-  const [videoPreview, setVideoPreview] = useState('');
-  const [video, setVideo] = useState('');
-
-  const steps = {
-    1: StepChooseMediaType,
-    2: StepStoryContent,
-  };
-  const [step, setStep] = useState(1);
-
-  const onNextHandler = () => {
-    setStep(step + 1);
-  };
-
-  const onPrevHandler = () => {
-    setStep(step - 1);
-  };
-
-  const clearContext = () => {
-    setStep(1);
-    setMediaType('Text');
-    setIsPrivate(true);
-    setFont('Times New Roman');
-    setCaption('');
-    setFontColor(blue);
-    setImage('/images/default-image-story.png');
-    setVideoPreview('');
-    setVideo('');
-  };
-
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const value = {
-    mediaType,
-    setMediaType,
-    steps,
-    step,
-    setStep,
-    onNextHandler,
-    onPrevHandler,
-    clearContext,
-    isPrivate,
-    setIsPrivate,
-    caption,
-    font,
-    fontColor,
-    setCaption,
-    setFont,
-    setFontColor,
-    blue,
-    green,
-    pink,
-    video,
-    setVideo,
-    videoPreview,
-    setVideoPreview,
-    image,
-    setImage,
-  };
-
   return loading ? (
     <Spinner message="Loading, please wait" />
   ) : (
-    <globalContext.Provider value={value}>
+    <GlobalContextProvider>
       <div className="">
         <BrowserRouter>
           <div className="layout">
@@ -184,7 +108,7 @@ function App() {
           </div>
         </BrowserRouter>
       </div>
-    </globalContext.Provider>
+    </GlobalContextProvider>
   );
 }
 

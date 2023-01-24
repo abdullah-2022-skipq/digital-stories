@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styles from './VideoStory.module.css';
 import Button from '../../shared/Button/Button';
-import { globalContext } from '../../../App';
 import { createVideoStory } from '../../../api';
+import { globalContext } from '../../../context/globalContext';
 
 function VideoStory() {
   const videoPlaceholderImage = '/images/default-video-story.png';

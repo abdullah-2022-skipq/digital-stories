@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import styles from './TextStory.module.css';
 import Button from '../../shared/Button/Button';
 import { createStory } from '../../../api';
-import { globalContext } from '../../../App';
+import { globalContext } from '../../../context/globalContext';
 
 function TextStory() {
   const {

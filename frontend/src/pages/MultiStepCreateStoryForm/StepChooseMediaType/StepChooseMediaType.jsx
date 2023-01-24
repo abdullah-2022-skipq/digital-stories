@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Card from '../../../components/shared/Card/Card';
 import styles from './StepChooseMediaType.module.css';
 import Button from '../../../components/shared/Button/Button';
-import { globalContext } from '../../../App';
+import { globalContext } from '../../../context/globalContext';
 
 function StepChooseMediaType() {
   const { mediaType, setMediaType, isPrivate, setIsPrivate, onNextHandler } =
