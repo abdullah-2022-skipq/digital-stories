@@ -23,7 +23,7 @@ cd frontend
 10. set up the `.env` file according to `.env.example`
 11. run the frontend server `npm run start`
 
-### Acknowledgements
+# Acknowledgements
 
 1. SkipQ for the training 
 2. [Coder’s Gyan YouTube](https://www.youtube.com/channel/UCo9xTRmg1SqQ5JSsA2fAgJw) for awesome material on best practices and clean code
