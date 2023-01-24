@@ -12,13 +12,7 @@ Digital Stories is a MERN application for sharing user created memories
 5. set up the `.env` file according to `.env.example`
 6. set up the Mongo DB 
 7. run the backend server `npm run dev`
-8. cd to the frontend folder
-
-```bash
-cd ..
-cd frontend
-```
-
+8. cd to the frontend folder `cd ..\frontend`
 9. install dependencies `npm install`
 10. set up the `.env` file according to `.env.example`
 11. run the frontend server `npm run start`
