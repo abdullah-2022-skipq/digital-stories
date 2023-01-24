@@ -7,15 +7,19 @@ import { createStory } from '../../../api';
 import { globalContext } from '../../../App';
 
 function ImageStory() {
-  const [image, setImage] = useState('/images/default-image-story.png');
-
-  const [caption, setCaption] = useState('');
-
   const [hover, setHover] = useState(false);
 
   const postedBy = useSelector((state) => state.user._id);
 
-  const { isPrivate, clearContext, onPrevHandler } = useContext(globalContext);
+  const {
+    isPrivate,
+    clearContext,
+    onPrevHandler,
+    caption,
+    setCaption,
+    image,
+    setImage,
+  } = useContext(globalContext);
 
   const navigate = useHistory();
 

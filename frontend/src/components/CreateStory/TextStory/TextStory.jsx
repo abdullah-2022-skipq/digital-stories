@@ -7,18 +7,24 @@ import { createStory } from '../../../api';
 import { globalContext } from '../../../App';
 
 function TextStory() {
-  const { isPrivate, onPrevHandler, clearContext } = useContext(globalContext);
+  const {
+    isPrivate,
+    onPrevHandler,
+    clearContext,
+    caption,
+    setCaption,
+    font,
+    setFont,
+    fontColor,
+    setFontColor,
+    blue,
+    green,
+    pink,
+  } = useContext(globalContext);
 
   const postedBy = useSelector((state) => state.user._id);
 
-  const blue = '#0077ff';
-  const green = '#33b357';
-  const pink = '#de1b55';
-
-  const [font, setFont] = useState('Times New Roman');
-  const [fontColor, setFontColor] = useState(blue);
   const [hover, setHover] = useState(false);
-  const [caption, setCaption] = useState('');
 
   const activeColorWrapperStyle = { border: '4px solid #B6CDFF' };
 
@@ -56,12 +62,22 @@ function TextStory() {
         className={styles.caption}
         maxLength={200}
         value={caption}
-        onChange={(e) => setCaption(e.target.value)}
-        style={{ fontFamily: font, color: fontColor }}
+        onChange={(e) => {
+          setCaption(e.target.value);
+        }}
+        style={{
+          fontFamily: font,
+          color: fontColor,
+        }}
       />
       <div className={styles.customizationMenuWrapper}>
         <div className={styles.selectWrapper}>
-          <select value={font} onChange={(e) => setFont(e.target.value)}>
+          <select
+            value={font}
+            onChange={(e) => {
+              setFont(e.target.value);
+            }}
+          >
             <option value="Times New Roman">Times New Roman</option>
             <option value="Cursive">Cursive</option>
             <option value="Monospace">Monospace</option>
@@ -70,19 +86,25 @@ function TextStory() {
 
         <div className={styles.paletteWrapper}>
           <div
-            onClick={() => setFontColor(blue)}
+            onClick={() => {
+              setFontColor(blue);
+            }}
             className={`${styles.colorPalette} ${styles.blue}`}
             style={fontColor === blue ? activeColorWrapperStyle : {}}
           />
 
           <div
-            onClick={() => setFontColor(green)}
+            onClick={() => {
+              setFontColor(green);
+            }}
             className={`${styles.colorPalette} ${styles.green}`}
             style={fontColor === green ? activeColorWrapperStyle : {}}
           />
 
           <div
-            onClick={() => setFontColor(pink)}
+            onClick={() => {
+              setFontColor(pink);
+            }}
             className={`${styles.colorPalette} ${styles.pink}`}
             style={fontColor === pink ? activeColorWrapperStyle : {}}
           />

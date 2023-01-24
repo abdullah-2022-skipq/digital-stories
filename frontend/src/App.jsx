@@ -30,6 +30,20 @@ function App() {
   const [mediaType, setMediaType] = useState('Text');
   const [isPrivate, setIsPrivate] = useState(true);
 
+  // for story content
+  const blue = '#0077ff';
+  const green = '#33b357';
+  const pink = '#de1b55';
+
+  const [font, setFont] = useState('Times New Roman');
+  const [fontColor, setFontColor] = useState(blue);
+  const [caption, setCaption] = useState('');
+
+  const [image, setImage] = useState('/images/default-image-story.png');
+
+  const [videoPreview, setVideoPreview] = useState('');
+  const [video, setVideo] = useState('');
+
   const steps = {
     1: StepChooseMediaType,
     2: StepStoryContent,
@@ -48,6 +62,12 @@ function App() {
     setStep(1);
     setMediaType('Text');
     setIsPrivate(true);
+    setFont('Times New Roman');
+    setCaption('');
+    setFontColor(blue);
+    setImage('/images/default-image-story.png');
+    setVideoPreview('');
+    setVideo('');
   };
 
   // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -62,6 +82,21 @@ function App() {
     clearContext,
     isPrivate,
     setIsPrivate,
+    caption,
+    font,
+    fontColor,
+    setCaption,
+    setFont,
+    setFontColor,
+    blue,
+    green,
+    pink,
+    video,
+    setVideo,
+    videoPreview,
+    setVideoPreview,
+    image,
+    setImage,
   };
 
   return loading ? (

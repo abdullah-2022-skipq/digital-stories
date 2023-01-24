@@ -9,17 +9,21 @@ import { createVideoStory } from '../../../api';
 function VideoStory() {
   const videoPlaceholderImage = '/images/default-video-story.png';
 
-  const [video, setVideo] = useState('');
-
-  const [videoPreview, setVideoPreview] = useState('');
-
-  const [caption, setCaption] = useState('');
-
   const [hover, setHover] = useState(false);
 
   const postedBy = useSelector((state) => state.user._id);
 
-  const { isPrivate, onPrevHandler, clearContext } = useContext(globalContext);
+  const {
+    isPrivate,
+    onPrevHandler,
+    clearContext,
+    caption,
+    setCaption,
+    video,
+    setVideo,
+    videoPreview,
+    setVideoPreview,
+  } = useContext(globalContext);
 
   const navigate = useHistory();
 
@@ -42,8 +46,6 @@ function VideoStory() {
     };
 
     const response = await createVideoStory(formData, config);
-
-    clearContext();
 
     if (response.status === 201) {
       onPrevHandler(); // reset the create story form to step 1

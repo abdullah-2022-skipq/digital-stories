@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './Navigation.module.css';
 import ProfileModal from '../../ProfileModal/ProfileModal';
 import { setActiveRoute } from '../../../store/navbarSlice';
-import { globalContext } from '../../../App';
 import { resetUserReg } from '../../../store/userRegistrationSlice';
 import { resetStep } from '../../../store/multiStepFormSlice';
 
@@ -52,8 +51,6 @@ function Navigation() {
 
   const user = useSelector((state) => state.user);
 
-  const { clearContext } = useContext(globalContext);
-
   const activeRouteHandler = (route) => {
     dispatch(setActiveRoute(route));
   };
@@ -62,7 +59,6 @@ function Navigation() {
 
   const navBarClickHandler = (newActive) => {
     activeRouteHandler(newActive);
-    clearContext();
   };
 
   return (
