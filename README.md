@@ -25,6 +25,6 @@ cd frontend
 
 # Acknowledgements
 
-1. SkipQ for the training 
+1. [SkipQ](https://www.skipq.org) for the training 
 2. [Coder’s Gyan YouTube](https://www.youtube.com/channel/UCo9xTRmg1SqQ5JSsA2fAgJw) for awesome material on best practices and clean code
 3. [Icon Scout](https://www.iconscout.com) and [Icons 8](https://icons8.com/) for icons and other media assets
