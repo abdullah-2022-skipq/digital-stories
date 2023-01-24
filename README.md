@@ -17,6 +17,12 @@ Digital Stories is a MERN application for sharing user created memories
 10. set up the `.env` file according to `.env.example`
 11. run the frontend server `npm run start`
 
+![image](https://user-images.githubusercontent.com/111970567/214354455-351317f3-f01a-49d1-8e3a-7e33e927c490.png)
+
+![image](https://user-images.githubusercontent.com/111970567/214355684-0d0e2183-f13b-43f1-ab2b-5bed94575838.png)
+
+
+
 # Acknowledgements
 
 1. [SkipQ](https://www.skipq.org) for the training 
