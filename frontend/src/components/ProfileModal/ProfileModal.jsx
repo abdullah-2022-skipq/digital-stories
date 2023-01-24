@@ -7,7 +7,7 @@ import { setAuth } from '../../store/authSlice';
 import { resetStep } from '../../store/multiStepFormSlice';
 import { resetUserReg } from '../../store/userRegistrationSlice';
 import { resetActiveRoute } from '../../store/navbarSlice';
-import { globalContext } from '../../App';
+import { globalContext } from '../../context/globalContext';
 
 function ProfileModal({ closeModalHandler }) {
   const { clearContext } = useContext(globalContext);
@@ -46,7 +46,11 @@ function ProfileModal({ closeModalHandler }) {
           <h5 className={styles.username}>@{user.username}</h5>
           <div className={styles.memberSince}>
             You&apos;ve been a part of our community since:
-            {` ${user.memberSince} ❤️‍🔥`}
+            {` ${
+              user.memberSince.split(' ')[0] === '1'
+                ? user.memberSince.slice(0, -1)
+                : user.memberSince
+            } ❤️‍🔥`}
           </div>
           <div className={styles.signOutButton}>
             <Button
