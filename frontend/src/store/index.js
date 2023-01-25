@@ -12,4 +12,9 @@ const store = configureStore({
     getDefaultMiddleWare({ serializableCheck: false }),
 });
 
+// for cypress
+if (window.Cypress) {
+  window.store = store;
+}
+
 export default store;
