@@ -1,7 +1,6 @@
 # Getting started
 
-Digital Stories is a MERN application for sharing user created memories
-
+### Digital Stories is a MERN application for sharing user created memories
 
 # Setting up the project
 
@@ -17,14 +16,18 @@ Digital Stories is a MERN application for sharing user created memories
 10. set up the `.env` file according to `.env.example`
 11. run the frontend server `npm run start`
 
+# Documentation
+Documentation is available [here](https://www.notion.so/Documentation-Digital-Stories-7d0419baaff84814a072110aea7a7a70)
+
+
 ![image](https://user-images.githubusercontent.com/111970567/214354455-351317f3-f01a-49d1-8e3a-7e33e927c490.png)
 
 ![image](https://user-images.githubusercontent.com/111970567/214356118-d5be3842-3d45-4dc5-b910-497c1b5a9001.png)
-
-
 
 # Acknowledgements
 
 1. [SkipQ](https://www.skipq.org) for the training 
 2. [Coder’s Gyan YouTube](https://www.youtube.com/channel/UCo9xTRmg1SqQ5JSsA2fAgJw) for awesome material on best practices and clean code
 3. [Icon Scout](https://www.iconscout.com) and [Icons 8](https://icons8.com/) for icons and other media assets
+
+![poweredBy 1 (2)](https://user-images.githubusercontent.com/111970567/214841637-f169cef4-7704-42a5-a25f-f2a09f30dc95.svg)
