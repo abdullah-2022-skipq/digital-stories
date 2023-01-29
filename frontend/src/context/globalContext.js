@@ -38,6 +38,8 @@ export function GlobalContextProvider({ children }) {
     setStep(step - 1);
   };
 
+  const [isDraft, setIsDraft] = useState(false);
+
   const clearContext = () => {
     setStep(1);
     setMediaType('Text');
@@ -48,6 +50,7 @@ export function GlobalContextProvider({ children }) {
     setImage('/images/default-image-story.png');
     setVideoPreview('');
     setVideo('');
+    setIsDraft(false);
   };
 
   // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -77,6 +80,8 @@ export function GlobalContextProvider({ children }) {
     setVideoPreview,
     image,
     setImage,
+    isDraft,
+    setIsDraft,
   };
 
   return (

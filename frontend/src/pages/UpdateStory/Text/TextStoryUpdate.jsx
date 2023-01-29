@@ -94,7 +94,11 @@ function TextStoryUpdate({ prevFont, prevFontColor, prevCaption, storyId }) {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         style={{ backgroundColor: hover ? '#1b8445' : '#20BD5F' }}
-        disabled={caption === prevCaption}
+        disabled={
+          caption === prevCaption &&
+          font === prevFont &&
+          fontColor === prevFontColor
+        }
       />
     </>
   );
