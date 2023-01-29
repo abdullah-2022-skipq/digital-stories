@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from '../../../components/shared/Card/Card';
 import TextInput from '../../../components/shared/TextInput/TextInput';
 import Button from '../../../components/shared/Button/Button';
@@ -11,9 +11,11 @@ import { setStep, delStep } from '../../../store/multiStepFormSlice';
 import formStyles from '../MultiStepForm.module.css';
 
 function StepUsername() {
+  const userName = useSelector((state) => state.userRegistration.username);
+  console.log(userName);
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
     initialValues: {
-      username: '',
+      username: userName,
     },
     validationSchema: usernameSchema,
   });
@@ -48,7 +50,7 @@ function StepUsername() {
             <TextInput
               type="text"
               placeholder="username"
-              value={values.name}
+              value={values.username}
               onChange={handleChange}
               name="username"
               onBlur={handleBlur}

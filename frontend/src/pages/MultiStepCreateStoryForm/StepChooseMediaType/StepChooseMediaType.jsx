@@ -5,8 +5,16 @@ import Button from '../../../components/shared/Button/Button';
 import { globalContext } from '../../../context/globalContext';
 
 function StepChooseMediaType() {
-  const { mediaType, setMediaType, isPrivate, setIsPrivate, onNextHandler } =
-    useContext(globalContext);
+  const {
+    mediaType,
+    setMediaType,
+    isPrivate,
+    setIsPrivate,
+    onNextHandler,
+    setIsDraft,
+  } = useContext(globalContext);
+
+  setIsDraft(true);
 
   return (
     <div className="cardWrapper">
