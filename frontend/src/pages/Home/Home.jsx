@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import styles from './Home.module.css';
 import StoryCard from '../../components/shared/StoryCard/StoryCard';
 import Spinner from '../../components/shared/Spinner/Spinner';
 import { getAllStories } from '../../api';
+import { globalContext } from '../../context/globalContext';
 
 function Home() {
+  const { isDraft } = useContext(globalContext);
+
   const [data, setData] = useState(null);
   const [dataMask, setDataMask] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -121,7 +124,7 @@ function Home() {
             <button className={styles.createStoryButton} type="button">
               <img src="/images/create_story.png" alt="create story" />
 
-              <span>Create a story</span>
+              <span>{isDraft ? 'Resume Draft' : 'Create a story'}</span>
             </button>
           </Link>
         </div>
