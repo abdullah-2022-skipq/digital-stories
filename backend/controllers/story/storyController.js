@@ -100,7 +100,7 @@ const storyController = {
       const page = parseInt(req.query.page, 10) || 1;
       const { userId } = req.query;
 
-      const limit = 20;
+      const limit = 5;
 
       let stories;
 
