@@ -6,7 +6,7 @@ const api = axios.create({
   headers: {
     'Content-type': 'application/json',
     Accept: 'application/json',
-    "Access-Control-Allow-Headers" : "X-UserSession" 
+    'Access-Control-Allow-Headers': 'X-UserSession',
   },
 });
 
