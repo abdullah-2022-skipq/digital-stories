@@ -59,7 +59,7 @@ function ProfileModal({ closeModalHandler }) {
               buttonimage="sign_out"
               onMouseEnter={() => setHover(true)}
               onMouseLeave={() => setHover(false)}
-              style={{ backgroundColor: hover ? '#a60938' : '#DE1B55' }}
+              style={{ backgroundColor: hover ? '#a60938' : '#de1b55' }}
             />
           </div>
         </div>
