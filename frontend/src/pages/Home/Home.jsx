@@ -14,8 +14,6 @@ function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [hasNextPage, sethasNextPage] = useState(true);
 
-  const inputRef = useRef(null);
-
   // pagination
   const onPreviousPageHandler = () => {
     if (currentPage > 0) {
@@ -45,6 +43,8 @@ function Home() {
     }
   };
 
+  const inputRef = useRef(null);
+
   const handleSortByChange = (value) => {
     setSortBy(value);
     sortData(value);
@@ -54,7 +54,7 @@ function Home() {
     let searchQuery = inputRef.current.value;
 
     if (searchQuery === '') {
-      setDataMask(data);
+      return;
     }
 
     searchQuery = searchQuery.toLowerCase();
@@ -74,6 +74,7 @@ function Home() {
 
       const dataFromApi = response.data.stories;
 
+      // console.log(dataFromApi);
       sethasNextPage(response.data.hasNextPage);
       sethasPrevPage(response.data.hasPrevPage);
 
@@ -81,10 +82,7 @@ function Home() {
 
       setDataMask(dataFromApi);
 
-      // if some search keyword is set previously
-      if (response.data.hasPrevPage) {
-        onSearchHandler();
-      }
+      inputRef.current.value = null;
     })();
   }, [currentPage]);
 
