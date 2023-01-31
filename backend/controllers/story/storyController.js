@@ -98,9 +98,10 @@ const storyController = {
   async getAll(req, res, next) {
     try {
       const page = parseInt(req.query.page, 10) || 1;
+
       const { userId } = req.query;
 
-      const limit = 5;
+      const limit = 7;
 
       let stories;
 
