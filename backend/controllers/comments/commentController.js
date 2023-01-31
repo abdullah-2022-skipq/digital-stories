@@ -1,7 +1,7 @@
-import Joi from "joi";
-import { Comment, Engagement, Story } from "../../models";
-import { CustomErrorHandler } from "../../services";
-import { PostCommentsDTO } from "../../dtos";
+import Joi from 'joi';
+import { Comment, Engagement, Story } from '../../models';
+import { CustomErrorHandler } from '../../services';
+import { PostCommentsDTO } from '../../dtos';
 
 const commentController = {
   async createComment(req, res, next) {
@@ -48,7 +48,7 @@ const commentController = {
 
       // create doc in engagements
       const newEngagement = new Engagement({
-        action: "comment",
+        action: 'comment',
         byUser: user,
         onPost: story,
         forUser: storyRes.postedBy,
@@ -58,7 +58,7 @@ const commentController = {
     } catch (err) {
       return next(err);
     }
-    return res.status(201).json("comment posted successfully");
+    return res.status(201).json('comment posted successfully');
   },
 
   async getCommentsByPostId(req, res, next) {
@@ -74,7 +74,7 @@ const commentController = {
 
     try {
       const comments = await Comment.find({ story: req.params.id }).populate(
-        "user"
+        'user'
       );
 
       if (!comments) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from '../../../components/shared/Card/Card';
 import TextInput from '../../../components/shared/TextInput/TextInput';
 import Button from '../../../components/shared/Button/Button';
@@ -9,11 +9,14 @@ import { setName, setEmail } from '../../../store/userRegistrationSlice';
 import { setStep } from '../../../store/multiStepFormSlice';
 
 function StepContactDetails() {
+  const nameGlobal = useSelector((state) => state.userRegistration.name);
+  const emailGlobal = useSelector((state) => state.userRegistration.email);
+
   const { values, handleBlur, handleChange, errors, touched } = useFormik({
     // handleBlur will validate the field once its out of focus
     initialValues: {
-      name: '',
-      email: '',
+      name: nameGlobal,
+      email: emailGlobal,
     },
     validationSchema: contactDetailsSchema,
   });

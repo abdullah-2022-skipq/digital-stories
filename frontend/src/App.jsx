@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -12,57 +12,21 @@ import usePersistentSession from './hooks/usePersistentSession';
 import Spinner from './components/shared/Spinner/Spinner';
 import Leaderboard from './pages/Leaderboard/Leaderboard';
 import MultiStepCreateStoryEntry from './pages/MultiStepCreateStoryForm/MultiStepCreateStoryEntry';
-import StepChooseMediaType from './pages/MultiStepCreateStoryForm/StepChooseMediaType/StepChooseMediaType';
-import StepStoryContent from './pages/MultiStepCreateStoryForm/StepStoryContent/StepStoryContent';
 import StoryDetails from './pages/StoryDetails/StoryDetails';
 import Trending from './pages/Trending/Trending';
 import Engagements from './pages/Engagements/Engagements';
 import UpdateStory from './pages/UpdateStory/UpdateStory';
 import Error from './pages/Error/Error';
-
-export const globalContext = createContext();
+import MyStories from './pages/MyStories/MyStories';
+import { GlobalContextProvider } from './context/globalContext';
 
 function App() {
   const { loading } = usePersistentSession();
 
-  // for context use in MultiStepCreateStoryForm
-  const [mediaType, setMediaType] = useState('Text');
-
-  const steps = {
-    1: StepChooseMediaType,
-    2: StepStoryContent,
-  };
-  const [step, setStep] = useState(1);
-
-  const onNextHandler = () => {
-    setStep(step + 1);
-  };
-
-  const onPrevHandler = () => {
-    setStep(step - 1);
-  };
-
-  const clearContext = () => {
-    setStep(1);
-    setMediaType('Text');
-  };
-
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const value = {
-    mediaType,
-    setMediaType,
-    steps,
-    step,
-    setStep,
-    onNextHandler,
-    onPrevHandler,
-    clearContext,
-  };
-
   return loading ? (
     <Spinner message="Loading, please wait" />
   ) : (
-    <globalContext.Provider value={value}>
+    <GlobalContextProvider>
       <div className="">
         <BrowserRouter>
           <div className="layout">
@@ -104,6 +68,12 @@ function App() {
                 </div>
               </ProtectedRoute>
 
+              <ProtectedRoute exact path="/my-stories">
+                <div className="main">
+                  <MyStories />
+                </div>
+              </ProtectedRoute>
+
               <ProtectedRoute exact path="/engagements">
                 <div className="main">
                   <Engagements />
@@ -138,7 +108,7 @@ function App() {
           </div>
         </BrowserRouter>
       </div>
-    </globalContext.Provider>
+    </GlobalContextProvider>
   );
 }
 

@@ -4,18 +4,22 @@ import { useHistory } from 'react-router-dom';
 import styles from './ImageStory.module.css';
 import Button from '../../shared/Button/Button';
 import { createStory } from '../../../api';
-import { globalContext } from '../../../App';
+import { globalContext } from '../../../context/globalContext';
 
 function ImageStory() {
-  const [image, setImage] = useState('');
-
-  const [caption, setCaption] = useState('');
-
   const [hover, setHover] = useState(false);
 
   const postedBy = useSelector((state) => state.user._id);
 
-  const { onPrevHandler } = useContext(globalContext);
+  const {
+    isPrivate,
+    clearContext,
+    onPrevHandler,
+    caption,
+    setCaption,
+    image,
+    setImage,
+  } = useContext(globalContext);
 
   const navigate = useHistory();
 
@@ -25,9 +29,11 @@ function ImageStory() {
       caption,
       image,
       postedBy,
+      isPrivate,
     };
 
     const response = await createStory(story);
+    clearContext();
     if (response.status === 201) {
       onPrevHandler(); // reset the create story form to step 1
       navigate.push('/');
@@ -57,6 +63,7 @@ function ImageStory() {
               className={styles.imageSelection}
               id="imageSelection"
               type="file"
+              accept="image/jpeg, image/jpg, image/png"
               onChange={getUserImage}
             />
             <label className={styles.imageLabel} htmlFor="imageSelection">
@@ -79,9 +86,7 @@ function ImageStory() {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         style={{ backgroundColor: hover ? '#1b8445' : '#20BD5F' }}
-        disabled={
-          image === 'http://localhost:5544/storage/default_image_story.png'
-        }
+        disabled={image === '/images/default-image-story.png'}
       />
     </>
   );

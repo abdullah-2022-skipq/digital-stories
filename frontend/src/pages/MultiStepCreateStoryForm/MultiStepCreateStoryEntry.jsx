@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { globalContext } from '../../App';
+import { globalContext } from '../../context/globalContext';
 
 function MultiStepCreateStoryEntry() {
   const { steps, step, onNextHandler } = useContext(globalContext);

@@ -3,19 +3,27 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styles from './VideoStory.module.css';
 import Button from '../../shared/Button/Button';
-import { globalContext } from '../../../App';
 import { createVideoStory } from '../../../api';
+import { globalContext } from '../../../context/globalContext';
 
 function VideoStory() {
-  const [video, setVideo] = useState('');
-
-  const [caption, setCaption] = useState('');
+  const videoPlaceholderImage = '/images/default-video-story.png';
 
   const [hover, setHover] = useState(false);
 
   const postedBy = useSelector((state) => state.user._id);
 
-  const { onPrevHandler, clearContext } = useContext(globalContext);
+  const {
+    isPrivate,
+    onPrevHandler,
+    clearContext,
+    caption,
+    setCaption,
+    video,
+    setVideo,
+    videoPreview,
+    setVideoPreview,
+  } = useContext(globalContext);
 
   const navigate = useHistory();
 
@@ -29,6 +37,7 @@ function VideoStory() {
     formData.append('postedBy', postedBy);
     formData.append('caption', caption);
     formData.append('mediaType', 'video');
+    formData.append('isPrivate', isPrivate);
 
     const config = {
       headers: {
@@ -50,7 +59,22 @@ function VideoStory() {
       <div className={styles.cardFlex}>
         <div className={styles.videoPromptHeading}>
           <span className={styles.videoWrapper}>
-            <iframe className={styles.video} src="" alt="video" />
+            {video === '' ? (
+              <img
+                src={videoPlaceholderImage}
+                alt="video-placeholder"
+                className={styles.video}
+              />
+            ) : (
+              <video
+                src={videoPreview}
+                controls
+                autoPlay
+                loop
+                muted
+                className={styles.video}
+              />
+            )}
           </span>
 
           <span className={styles.videoLabelWrapper}>
@@ -62,6 +86,7 @@ function VideoStory() {
               id="videoSelectionInput"
               onChange={(e) => {
                 setVideo(e.target.files[0]);
+                setVideoPreview(URL.createObjectURL(e.target.files[0]));
               }}
             />
 

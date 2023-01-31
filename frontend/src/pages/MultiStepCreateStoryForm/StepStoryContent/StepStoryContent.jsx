@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Card from '../../../components/shared/Card/Card';
 import styles from './StepStoryContent.module.css';
-import { globalContext } from '../../../App';
+import { globalContext } from '../../../context/globalContext';
 import TextStory from '../../../components/CreateStory/TextStory/TextStory';
 import ImageStory from '../../../components/CreateStory/ImageStory/ImageStory';
 import VideoStory from '../../../components/CreateStory/VideoStory/VideoStory';

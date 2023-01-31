@@ -5,7 +5,7 @@ function VideoStoryCard({ caption, video }) {
   return (
     <div className={styles.videoWrapper}>
       <video src={video} controls autoPlay muted />
-      <p>{caption}</p>
+      <p style={{ marginTop: '20px' }}>{caption}</p>
     </div>
   );
 }

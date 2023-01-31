@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { resetActiveRoute } from '../../../store/navbarSlice';
 import styles from './TextStoryUpdate.module.css';
 import Button from '../../../components/shared/Button/Button';
 import { updateStory } from '../../../api';
 
 function TextStoryUpdate({ prevFont, prevFontColor, prevCaption, storyId }) {
+  const dispatch = useDispatch();
+
   const blue = '#0077ff';
   const green = '#33b357';
   const pink = '#de1b55';
@@ -38,6 +42,7 @@ function TextStoryUpdate({ prevFont, prevFontColor, prevCaption, storyId }) {
     const response = await updateStory(story);
 
     if (response.status === 200) {
+      dispatch(resetActiveRoute());
       navigate.push('/');
     }
   };
@@ -89,7 +94,11 @@ function TextStoryUpdate({ prevFont, prevFontColor, prevCaption, storyId }) {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         style={{ backgroundColor: hover ? '#1b8445' : '#20BD5F' }}
-        disabled={caption === prevCaption}
+        disabled={
+          caption === prevCaption &&
+          font === prevFont &&
+          fontColor === prevFontColor
+        }
       />
     </>
   );

@@ -2,10 +2,10 @@ class PostCommentsDTO {
   constructor(comment) {
     this.text = comment.text;
     this.username =
-      comment.user === null ? "Deleted User" : comment.user.username;
+      comment.user === null ? 'Deleted User' : comment.user.username;
     this.avatarPath =
       comment.user === null
-        ? "http://localhost:5544/storage/user-not-found.png"
+        ? 'http://localhost:5544/storage/user-not-found.png'
         : comment.user.avatarPath;
     this.postedAt = comment.createdAt;
     this._id = comment._id;

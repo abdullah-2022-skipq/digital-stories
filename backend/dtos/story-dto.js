@@ -11,6 +11,7 @@ class StoryDTO {
     this.upVotes = story.upVoteCount;
     this.downVotes = story.downVoteCount;
     this.date = story.createdAt;
+    this.isPrivate = story.isPrivate;
   }
 }
 

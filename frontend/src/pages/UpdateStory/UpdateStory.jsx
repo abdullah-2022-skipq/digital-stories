@@ -12,7 +12,7 @@ function UpdateStory() {
   return (
     <div className="cardWrapper">
       <Card cardHeading="Update story">
-        <div>
+        <div style={{ width: '90%' }}>
           {story.mediaType === 'text' && (
             <TextStoryUpdate
               storyId={story._id}

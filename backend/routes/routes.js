@@ -1,4 +1,4 @@
-import express from "express";
+import express from 'express';
 import {
   registerController,
   loginController,
@@ -10,36 +10,59 @@ import {
   votesController,
   engagementController,
   leaderboardController,
-} from "../controllers";
+} from '../controllers';
 
-import { auth } from "../middlewares";
-import upload from "../middlewares/video";
+import { auth } from '../middlewares';
+import upload from '../middlewares/video';
 
 const router = express.Router();
 
-router.post("/register", registerController.register);
-router.post("/login", loginController.login);
-router.get("/me", auth, userController.myDetails);
-router.get("/refresh", refreshController.refresh);
-router.post("/logout", auth, logoutController.logout);
-router.get("/stories", auth, storyController.getAll);
-router.post("/stories", auth, storyController.create);
-router.post("/stories/video", upload.single("video"), storyController.create);
-router.get("/trending", auth, storyController.getTrending);
-router.get("/stories/:id", auth, storyController.getById);
-router.delete("/stories/:id", auth, storyController.deleteById);
-router.post("/comment", auth, commentController.createComment);
-router.get("/comments/:id", auth, commentController.getCommentsByPostId);
-router.post("/upvote", auth, votesController.upVote);
-router.post("/downvote", auth, votesController.downVote);
-router.get("/engagements/:id", auth, engagementController.getEngagements);
-router.get("/leaderboard", auth, leaderboardController.getLeaderboard);
-router.post("/vote-status", auth, votesController.getVoteStatus);
-router.get("/num-users", auth, userController.getNumUsers);
-router.put("/stories", auth, storyController.update);
+// auth
+router.post('/register', registerController.register);
+router.post('/login', loginController.login);
+router.get('/refresh', refreshController.refresh);
+router.post('/logout', auth, logoutController.logout);
+
+// user
+router.get('/me', auth, userController.myDetails);
+router.get('/num-users', auth, userController.getNumUsers);
+
+// stories
+router.get('/stories', auth, storyController.getAll);
+router.post('/stories', auth, storyController.create);
+router.post(
+  '/stories/video',
+  auth,
+  upload.single('video'),
+  storyController.create
+);
+router.get('/trending', auth, storyController.getTrending);
+router.get('/stories/:id', auth, storyController.getById);
+router.delete('/stories/:id', auth, storyController.deleteById);
+router.put('/stories', auth, storyController.update);
+router.put('/stories/mode', auth, storyController.updateAccessMode);
+router.put(
+  '/stories/video',
+  auth,
+  upload.single('video'),
+  storyController.update
+);
+
+// comments
+router.post('/comment', auth, commentController.createComment);
+router.get('/comments/:id', auth, commentController.getCommentsByPostId);
+
+// votes
+router.post('/upvote', auth, votesController.upVote);
+router.post('/downvote', auth, votesController.downVote);
+router.post('/vote-status', auth, votesController.getVoteStatus);
+
+// engagements
+router.get('/engagements/:id', auth, engagementController.getEngagements);
+
+// leaderboard
+router.get('/leaderboard', auth, leaderboardController.getLeaderboard);
 
 // single('video') -> html will have a field named video
-
-// [] todo fix this i mean refactor this after it works
 
 export default router;

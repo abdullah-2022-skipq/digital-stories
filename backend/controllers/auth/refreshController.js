@@ -1,7 +1,7 @@
-import { TokenService } from "../../services";
-import { REFRESH_TOKEN_SECRET } from "../../config";
-import { RefreshToken, User } from "../../models";
-import { UserDetailsDTO } from "../../dtos";
+import { TokenService } from '../../services';
+import { REFRESH_TOKEN_SECRET } from '../../config';
+import { RefreshToken, User } from '../../models';
+import { UserDetailsDTO } from '../../dtos';
 
 const refreshController = {
   async refresh(req, res, next) {
@@ -20,7 +20,7 @@ const refreshController = {
     try {
       userDetails = await TokenService.verifyRefreshToken(originalRefreshToken);
     } catch (error) {
-      return res.status(401).json({ message: "Invalid token" });
+      return res.status(401).json({ message: 'Invalid token' });
     }
 
     try {
@@ -30,7 +30,7 @@ const refreshController = {
       });
 
       if (!token) {
-        return res.status(401).json({ message: "Invalid token" });
+        return res.status(401).json({ message: 'Invalid token' });
       }
     } catch (error) {
       return next(error);
@@ -43,7 +43,7 @@ const refreshController = {
         {
           _id: userDetails._id,
         },
-        "1y",
+        '1y',
         REFRESH_TOKEN_SECRET
       );
 
@@ -52,12 +52,12 @@ const refreshController = {
         { refreshToken }
       );
 
-      res.cookie("accessToken", accessToken, {
+      res.cookie('accessToken', accessToken, {
         maxAge: 1000 * 60 * 60 * 24 * 30,
         httpOnly: true,
       });
 
-      res.cookie("refreshToken", refreshToken, {
+      res.cookie('refreshToken', refreshToken, {
         maxAge: 1000 * 60 * 60 * 24 * 30,
         httpOnly: true,
       });

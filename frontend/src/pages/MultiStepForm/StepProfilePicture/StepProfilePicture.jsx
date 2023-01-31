@@ -29,7 +29,8 @@ function StepProfilePicture() {
     if (response.status === 201) {
       dispatch(setAuth(response.data));
       dispatch(setUser(response.data));
-    } else if (response.code === 'ERR_BAD_REQUEST') {
+    } else {
+      setLoading(false);
       setError(response.response.data.message);
     }
 
@@ -75,6 +76,7 @@ function StepProfilePicture() {
                   className={styles.avatarSelection}
                   id="avatarSelection"
                   type="file"
+                  accept="image/jpeg, image/jpg, image/png"
                   onChange={getUserImage}
                 />
                 <label className={styles.avatarLabel} htmlFor="avatarSelection">

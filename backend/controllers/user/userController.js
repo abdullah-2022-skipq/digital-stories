@@ -1,6 +1,6 @@
-import { User } from "../../models"; // note this aint importing a default exported thing, its destructuring probably
-import { CustomErrorHandler } from "../../services";
-import { UserDetailsDTO } from "../../dtos";
+import { User } from '../../models'; // note this aint importing a default exported thing, its destructuring probably
+import { CustomErrorHandler } from '../../services';
+import { UserDetailsDTO } from '../../dtos';
 
 const userController = {
   async myDetails(req, res, next) {
@@ -17,7 +17,7 @@ const userController = {
     } catch (error) {
       return next(error);
     }
-    return res.json(responseDto);
+    return res.status(200).json(responseDto);
   },
 
   async getNumUsers(req, res, next) {

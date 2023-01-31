@@ -1,13 +1,14 @@
-import { ValidationError } from "joi";
-import { DEBUG_MODE } from "../config";
-import CustomErrorHandler from "../services/CustomErrorHandler";
+import { ValidationError } from 'joi';
+import { DEBUG_MODE } from '../config';
+import CustomErrorHandler from '../services/CustomErrorHandler';
 
 // eslint-disable-next-line no-unused-vars
 const errorHandler = (err, req, res, next) => {
   let statusCode = 500;
+
   let data = {
-    message: "Internal Server Error",
-    ...(DEBUG_MODE === "true" && { errorMessage: err.message }),
+    message: 'Internal Server Error',
+    ...(DEBUG_MODE === 'true' && { errorMessage: err.message }),
   };
 
   if (err instanceof ValidationError) {
@@ -24,7 +25,7 @@ const errorHandler = (err, req, res, next) => {
     };
   }
 
-  if (err.message === "jwt expired") {
+  if (err.message === 'jwt expired') {
     statusCode = 401;
   }
   return res.status(statusCode).json(data);

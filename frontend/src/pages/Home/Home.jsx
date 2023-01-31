@@ -1,30 +1,18 @@
 import { Link } from 'react-router-dom';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import styles from './Home.module.css';
 import StoryCard from '../../components/shared/StoryCard/StoryCard';
 import Spinner from '../../components/shared/Spinner/Spinner';
 import { getAllStories } from '../../api';
+import { globalContext } from '../../context/globalContext';
 
 function Home() {
+  const { isDraft } = useContext(globalContext);
+
   const [data, setData] = useState(null);
   const [dataMask, setDataMask] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasNextPage, sethasNextPage] = useState(true);
-  const [hasPrevPage, sethasPrevPage] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      const response = await getAllStories(currentPage);
-
-      const dataFromApi = response.data.stories;
-
-      sethasNextPage(response.data.hasNextPage);
-      sethasPrevPage(response.data.hasPrevPage);
-
-      setData(dataFromApi);
-      setDataMask(dataFromApi);
-    })();
-  }, [currentPage]);
 
   // pagination
   const onPreviousPageHandler = () => {
@@ -37,24 +25,6 @@ function Home() {
   };
 
   const [activeView, setActiveView] = useState('grid');
-
-  const inputRef = useRef(null);
-
-  const onSearchHandler = () => {
-    let searchQuery = inputRef.current.value;
-
-    if (searchQuery === '') {
-      setDataMask(data);
-    }
-
-    searchQuery = searchQuery.toLowerCase();
-
-    const filteredData = data.filter((story) =>
-      story.caption.toLowerCase().includes(searchQuery)
-    );
-
-    setDataMask(filteredData);
-  };
 
   const [sortBy, setSortBy] = useState('date');
 
@@ -73,10 +43,48 @@ function Home() {
     }
   };
 
+  const inputRef = useRef(null);
+
   const handleSortByChange = (value) => {
     setSortBy(value);
     sortData(value);
   };
+
+  const onSearchHandler = () => {
+    let searchQuery = inputRef.current.value;
+
+    if (searchQuery === '') {
+      return;
+    }
+
+    searchQuery = searchQuery.toLowerCase();
+
+    const filteredData = data.filter((story) =>
+      story.caption.toLowerCase().includes(searchQuery)
+    );
+
+    setDataMask(filteredData);
+  };
+
+  const [hasPrevPage, sethasPrevPage] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const response = await getAllStories(currentPage);
+
+      const dataFromApi = response.data.stories;
+
+      // console.log(dataFromApi);
+      sethasNextPage(response.data.hasNextPage);
+      sethasPrevPage(response.data.hasPrevPage);
+
+      setData(dataFromApi);
+
+      setDataMask(dataFromApi);
+
+      inputRef.current.value = null;
+    })();
+  }, [currentPage]);
 
   if (!data) {
     return <Spinner message="Loading stories, please wait" />;
@@ -114,7 +122,7 @@ function Home() {
             <button className={styles.createStoryButton} type="button">
               <img src="/images/create_story.png" alt="create story" />
 
-              <span>Create a story</span>
+              <span>{isDraft ? 'Resume Draft' : 'Create a story'}</span>
             </button>
           </Link>
         </div>
@@ -122,7 +130,6 @@ function Home() {
 
       <div className={styles.storyCustomization}>
         <div className={styles.sortByHeader}>
-          {/* <img src="/images/sort-by.png" alt="sort-by" /> */}
           <p>Sort By</p>
           <div className={styles.buttonGroup}>
             <button

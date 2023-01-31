@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { resetActiveRoute } from '../../../store/navbarSlice';
 import styles from './ImageStoryUpdate.module.css';
 import Button from '../../../components/shared/Button/Button';
 import { updateStory } from '../../../api';
 
 function ImageStoryUpdate({ prevImage, prevCaption, storyId }) {
+  const dispatch = useDispatch();
+
   const [image, setImage] = useState(prevImage);
 
   const [caption, setCaption] = useState(prevCaption);
@@ -23,6 +27,7 @@ function ImageStoryUpdate({ prevImage, prevCaption, storyId }) {
 
     const response = await updateStory(story);
     if (response.status === 200) {
+      dispatch(resetActiveRoute());
       navigate.push('/');
     }
   };
@@ -50,6 +55,7 @@ function ImageStoryUpdate({ prevImage, prevCaption, storyId }) {
               className={styles.imageSelection}
               id="imageSelection"
               type="file"
+              accept="image/jpeg, image/jpg, image/png"
               onChange={getUserImage}
             />
             <label className={styles.imageLabel} htmlFor="imageSelection">

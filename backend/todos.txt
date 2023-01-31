@@ -1,7 +1,15 @@
 [x] index.js for dtos
 [] rename as -
 [] refactor
-[] remove logs
+[x] remove logs
+[] update video story
+[] handle video story create/ update more cleanly
+// [] todo remove default in path registerController line 22
+
+
+F.E.
+[] story-details/:id works on the backend, how do we make it work on F.E.
+[] manual routing doesn't work
 
 [] for post req of creating a comment we aint checking for user record in db so
 we save 1 query but we can essentially have a comment by some alien 

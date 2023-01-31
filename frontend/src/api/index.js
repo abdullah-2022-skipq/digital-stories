@@ -6,6 +6,7 @@ const api = axios.create({
   headers: {
     'Content-type': 'application/json',
     Accept: 'application/json',
+    'Access-Control-Allow-Headers': 'X-UserSession',
   },
 });
 
@@ -54,6 +55,9 @@ export const logout = async () => api.post('/api/logout');
 export const getAllStories = async (page) =>
   api.get(`/api/stories?page=${page}`);
 
+export const getMyStories = async (page, id) =>
+  api.get(`/api/stories?page=${page}&userId=${id}`);
+
 export const getTrendingStories = async () => api.get('/api/trending');
 
 export const getStoryById = async (id) => api.get(`/api/stories/${id}`);
@@ -63,13 +67,15 @@ export const createStory = async (story) => {
 
   if (story.mediaType === 'text') {
     try {
-      const { mediaType, caption, font, fontColor, postedBy } = story;
+      const { mediaType, caption, font, fontColor, postedBy, isPrivate } =
+        story;
       response = await api.post('/api/stories', {
         mediaType,
         caption,
         font,
         fontColor,
         postedBy,
+        isPrivate,
       });
     } catch (error) {
       return error;
@@ -79,12 +85,13 @@ export const createStory = async (story) => {
 
   if (story.mediaType === 'image') {
     try {
-      const { mediaType, caption, image, postedBy } = story;
+      const { mediaType, caption, image, postedBy, isPrivate } = story;
       response = await api.post('/api/stories', {
         mediaType,
         caption,
         image,
         postedBy,
+        isPrivate,
       });
     } catch (error) {
       return error;
@@ -92,17 +99,6 @@ export const createStory = async (story) => {
     return response;
   }
 
-  try {
-    const { mediaType, caption, video, postedBy } = story;
-    response = await api.post('/api/stories', {
-      mediaType,
-      caption,
-      video,
-      postedBy,
-    });
-  } catch (error) {
-    return error;
-  }
   return response;
 };
 
@@ -110,6 +106,16 @@ export const createVideoStory = async (data, config) => {
   let response;
   try {
     response = await api.post('/api/stories/video', data, config);
+  } catch (error) {
+    return error;
+  }
+  return response;
+};
+
+export const updateVideoStory = async (data, config) => {
+  let response;
+  try {
+    response = await api.put('/api/stories/video', data, config);
   } catch (error) {
     return error;
   }
@@ -150,17 +156,15 @@ export const updateStory = async (story) => {
     return response;
   }
 
-  try {
-    const { mediaType, caption, video, storyId } = story;
-    response = await api.put('/api/stories', {
-      mediaType,
-      caption,
-      video,
-      storyId,
-    });
-  } catch (error) {
-    return error;
-  }
+  return response;
+};
+
+export const updateStoryAccessMode = async (storyId, isPrivate) => {
+  const response = await api.put('/api/stories/mode', {
+    storyId,
+    isPrivate,
+  });
+
   return response;
 };
 

@@ -16,13 +16,16 @@ import {
   deletePostById,
   getVoteStatus,
   getNumUsers,
+  updateStoryAccessMode,
 } from '../../api';
 import TextInput from '../../components/shared/TextInput/TextInput';
 import Button from '../../components/shared/Button/Button';
 
 function StoryDetails() {
   const location = useLocation();
+
   const { id } = location.state;
+
   const randomColor = location.state.randomColor || '#4B47DB';
 
   const [story, setStory] = useState(null);
@@ -74,6 +77,14 @@ function StoryDetails() {
 
     if (response.status === 200) {
       navigate.push('/');
+    }
+  };
+
+  const changeAccessModeHandler = async () => {
+    const response = await updateStoryAccessMode(id, !story.isPrivate);
+
+    if (response.status === 200) {
+      setReload(!reload);
     }
   };
 
@@ -147,7 +158,29 @@ function StoryDetails() {
             </div>
             {ownsStory && (
               <div className={styles.updateOrDeleteControls}>
-                <button type="button">
+                <div className={styles.buttonGroup}>
+                  <button
+                    className={`${styles.groupButton} ${
+                      story.isPrivate && styles.active
+                    }`}
+                    type="button"
+                    onClick={() => {
+                      changeAccessModeHandler();
+                    }}
+                    style={
+                      story.isPrivate
+                        ? {
+                            color: '#33b357',
+                          }
+                        : {
+                            color: '#de1b55',
+                          }
+                    }
+                  >
+                    Make {story.isPrivate ? 'Public' : 'Private'}
+                  </button>
+                </div>
+                <button className={styles.updateStoryButton} type="button">
                   <img
                     role="button"
                     src="/images/update-story.png"
@@ -156,7 +189,7 @@ function StoryDetails() {
                     onClick={updateStoryHandler}
                   />
                 </button>
-                <button type="button">
+                <button className={styles.deleteStoryButton} type="button">
                   <img
                     role="button"
                     src="/images/delete-story.png"
