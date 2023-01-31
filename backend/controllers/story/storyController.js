@@ -4,6 +4,16 @@ import path from 'path';
 import { Comment, Engagement, Story } from '../../models';
 import { CustomErrorHandler } from '../../services';
 import { StoryDTO, StoryDetailsDTO } from '../../dtos';
+import { CLOUD_NAME, API_SECRET, API_KEY } from '../../config';
+
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: CLOUD_NAME,
+  api_key: API_KEY,
+  api_secret: API_SECRET,
+  secure: true,
+});
 
 const storyController = {
   async create(req, res, next) {
@@ -49,28 +59,19 @@ const storyController = {
     if (mediaType === 'image') {
       const { caption, postedBy, isPrivate, image } = req.body;
 
-      // preprocess the image
-
-      const buffer = Buffer.from(
-        image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''),
-        'base64'
-      );
-
-      const imgPath = `${Date.now()}-${Math.round(Math.random() * 100000)}.png`;
+      let response;
 
       try {
-        const jimpRes = await Jimp.read(buffer);
-
-        jimpRes
-          //   .resize(200, Jimp.AUTO) i want to keep original res intact
-          .write(path.resolve(__dirname, `../../storage/${imgPath}`));
+        response = await cloudinary.uploader.upload(image, {
+          eager: [{ width: 200, crop: 'scale' }],
+        });
       } catch (err) {
         return next(err);
       }
       const newStory = new Story({
         mediaType,
         caption,
-        image: `http://localhost:5544/storage/${imgPath}`,
+        image: response.url,
         postedBy,
         isPrivate,
       });
@@ -281,23 +282,11 @@ const storyController = {
           }
         );
       } else {
-        // preprocess the image
-
-        const buffer = Buffer.from(
-          image.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''),
-          'base64'
-        );
-
-        const imgPath = `${Date.now()}-${Math.round(
-          Math.random() * 100000
-        )}.png`;
-
+        let response;
         try {
-          const jimpRes = await Jimp.read(buffer);
-
-          jimpRes
-            //   .resize(200, Jimp.AUTO) i want to keep original res intact
-            .write(path.resolve(__dirname, `../../storage/${imgPath}`));
+          response = await cloudinary.uploader.upload(image, {
+            eager: [{ width: 200, crop: 'scale' }],
+          });
         } catch (err) {
           return next(err);
         }
@@ -308,7 +297,7 @@ const storyController = {
             $set: {
               mediaType,
               caption,
-              image: `http://localhost:5544/storage/${imgPath}`,
+              image: response.url,
             },
           }
         );

@@ -1,11 +1,24 @@
 import Joi from 'joi';
 import bcrypt from 'bcrypt';
-import Jimp from 'jimp';
-import path from 'path';
 import { CustomErrorHandler, TokenService } from '../../services';
 import { User } from '../../models';
 import { UserDetailsDTO } from '../../dtos';
-import { REFRESH_TOKEN_SECRET, DEFAULTAVATAR } from '../../config';
+import {
+  REFRESH_TOKEN_SECRET,
+  DEFAULTAVATAR,
+  API_SECRET,
+  CLOUD_NAME,
+  API_KEY,
+} from '../../config';
+
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: CLOUD_NAME,
+  api_key: API_KEY,
+  api_secret: API_SECRET,
+  secure: true,
+});
 
 const registerController = {
   async register(req, res, next) {
@@ -62,26 +75,19 @@ const registerController = {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    let imgPath = DEFAULTAVATAR;
+    const imgPath = DEFAULTAVATAR;
 
     if (!avatarPath) {
       avatarPath = imgPath;
     }
 
+    let response;
+
     if (avatarPath !== DEFAULTAVATAR) {
-      const buffer = Buffer.from(
-        avatarPath.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''),
-        'base64'
-      );
-
-      imgPath = `${Date.now()}-${Math.round(Math.random() * 100000)}.png`;
-
       try {
-        const jimpRes = await Jimp.read(buffer);
-
-        jimpRes
-          .resize(200, Jimp.AUTO)
-          .write(path.resolve(__dirname, `../../storage/${imgPath}`));
+        response = await cloudinary.uploader.upload(avatarPath, {
+          eager: [{ width: 200, crop: 'scale' }],
+        });
       } catch (err) {
         return next(
           CustomErrorHandler.failedImageProcessing(
@@ -96,10 +102,7 @@ const registerController = {
       email,
       username,
       password: hashedPassword,
-      avatarPath:
-        imgPath === DEFAULTAVATAR
-          ? imgPath
-          : `http://localhost:5544/storage/${imgPath}`,
+      avatarPath: avatarPath === DEFAULTAVATAR ? imgPath : response.url,
     });
 
     let accessToken;

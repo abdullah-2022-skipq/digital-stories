@@ -1,8 +1,0 @@
-[x] validate the request => Yup + React
-[x] authorize the request -> required when deleting a story for eg
-[x] check if user already exists in db
-[x] prepare model
-[x] hash the password
-[x] store in db
-[x] generate jwt
-[x] send token

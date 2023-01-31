@@ -12,4 +12,7 @@ export const {
   REFRESH_TOKEN_SECRET,
   BASE_URL,
   DEFAULTAVATAR,
+  CLOUD_NAME,
+  API_KEY,
+  API_SECRET,
 } = process.env;

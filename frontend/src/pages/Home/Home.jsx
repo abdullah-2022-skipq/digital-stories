@@ -82,7 +82,7 @@ function Home() {
 
       setDataMask(dataFromApi);
 
-      inputRef.current.value = null;
+      if (inputRef.current) inputRef.current.value = null;
     })();
   }, [currentPage]);
 
