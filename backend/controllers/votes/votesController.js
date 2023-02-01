@@ -3,11 +3,15 @@ import { Engagement, Story } from '../../models';
 
 const votesController = {
   async upVote(req, res, next) {
+    console.log('fired');
     const upvoteSchema = Joi.object({
       user: Joi.string()
         .regex(/^[0-9a-fA-F]{24}$/)
         .required(),
       post: Joi.string()
+        .regex(/^[0-9a-fA-F]{24}$/)
+        .required(),
+      postedBy: Joi.string()
         .regex(/^[0-9a-fA-F]{24}$/)
         .required(),
     });
@@ -18,7 +22,7 @@ const votesController = {
       return next(error);
     }
 
-    const { post, user } = req.body;
+    const { post, user, postedBy } = req.body;
 
     // check already liked
     const voted = await Engagement.findOne({
@@ -28,6 +32,7 @@ const votesController = {
     });
 
     if (voted) {
+      console.log('1');
       // delete record
       await Engagement.deleteOne({
         action: 'upvote',
@@ -53,6 +58,7 @@ const votesController = {
     });
 
     if (downvoted) {
+      console.log('1');
       await Engagement.deleteOne({
         action: 'downvote',
         byUser: user,
@@ -63,6 +69,7 @@ const votesController = {
         action: 'upvote',
         byUser: user,
         onPost: post,
+        forUser: postedBy,
       });
 
       await newUpvote.save();
@@ -95,7 +102,7 @@ const votesController = {
       byUser: user,
       forUser: story.postedBy,
     });
-
+    console.log('3');
     await newUpvote.save();
 
     return res.status(200).json({ message: 'voted successfully' });
@@ -109,6 +116,9 @@ const votesController = {
       post: Joi.string()
         .regex(/^[0-9a-fA-F]{24}$/)
         .required(),
+      postedBy: Joi.string()
+        .regex(/^[0-9a-fA-F]{24}$/)
+        .required(),
     });
 
     const { error } = downVoteSchema.validate(req.body);
@@ -117,7 +127,7 @@ const votesController = {
       return next(error);
     }
 
-    const { post, user } = req.body;
+    const { post, user, postedBy } = req.body;
 
     // check already disliked
     const downvoted = await Engagement.findOne({
@@ -152,6 +162,7 @@ const votesController = {
     });
 
     if (voted) {
+      console.log('yehaw');
       await Engagement.deleteOne({
         action: 'upvote',
         byUser: user,
@@ -162,6 +173,7 @@ const votesController = {
         action: 'downvote',
         byUser: user,
         onPost: post,
+        forUser: postedBy,
       });
 
       await newDownvote.save();

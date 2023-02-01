@@ -182,8 +182,8 @@ export const createComment = async (data) => {
 export const upVoteStory = async (data) => {
   let response;
   try {
-    const { user, post } = data;
-    response = await api.post('/api/upvote', { user, post });
+    const { user, post, postedBy } = data;
+    response = await api.post('/api/upvote', { user, post, postedBy });
   } catch (error) {
     return error;
   }
@@ -193,8 +193,8 @@ export const upVoteStory = async (data) => {
 export const downVoteStory = async (data) => {
   let response;
   try {
-    const { user, post } = data;
-    response = await api.post('/api/downvote', { user, post });
+    const { user, post, postedBy } = data;
+    response = await api.post('/api/downvote', { user, post, postedBy });
   } catch (error) {
     return error;
   }

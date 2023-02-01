@@ -169,7 +169,7 @@ const storyController = {
 
   async getTrending(req, res, next) {
     try {
-      const stories = await Story.find({})
+      const stories = await Story.find({ isPrivate: false })
         .sort({
           upVoteCount: -1,
           commentCount: -1,

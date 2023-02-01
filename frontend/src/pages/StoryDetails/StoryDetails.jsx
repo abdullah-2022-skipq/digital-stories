@@ -43,13 +43,13 @@ function StoryDetails() {
   const navigate = useHistory();
 
   const upVoteHandler = async () => {
-    const data = { user, post: id };
+    const data = { user, post: id, postedBy: story.postedBy };
     await upVoteStory(data);
     setReload(!reload);
   };
 
   const downVoteHandler = async () => {
-    const data = { user, post: id };
+    const data = { user, post: id, postedBy: story.postedBy };
     await downVoteStory(data);
     setReload(!reload);
   };
