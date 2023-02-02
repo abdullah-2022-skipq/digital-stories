@@ -16,6 +16,11 @@
 10. set up the `.env` file according to `.env.example`
 11. run the frontend server `npm run start`
 
+# Setting up the project on Docker
+1. Clone the repo git clone `git clone https://github.com/abdullah-2022-skipq/digital-stories.git`
+2. cd to the cloned folder `cd digital-stories`
+3. run the command `docker-compose -f docker-compose.dev.yml up -d --build`
+
 # Documentation
 Documentation is available [here](https://www.notion.so/Documentation-Digital-Stories-7d0419baaff84814a072110aea7a7a70)
 
