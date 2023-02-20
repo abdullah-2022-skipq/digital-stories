@@ -30,7 +30,7 @@ A video demo for the app is available [here](https://drive.google.com/file/d/1c_
 # Documentation
 Documentation is available [here](https://www.notion.so/Documentation-Digital-Stories-7d0419baaff84814a072110aea7a7a70)
 
-
+# 📷
 ![image](https://user-images.githubusercontent.com/111970567/214354455-351317f3-f01a-49d1-8e3a-7e33e927c490.png)
 
 ![image](https://user-images.githubusercontent.com/111970567/214356118-d5be3842-3d45-4dc5-b910-497c1b5a9001.png)
