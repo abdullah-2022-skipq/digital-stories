@@ -8,3 +8,19 @@
   font-weight: bold;
   color: #c4c5c5;
 }
+
+@media only screen and (max-width: 768px) {
+  .errorHeader {
+    font-size: 64px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .errorHeader {
+    font-size: 48px;
+  }
+
+  .error {
+    color: #fff;
+  }
+}

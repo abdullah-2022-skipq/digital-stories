@@ -1,9 +1,11 @@
 .captionWrapper {
-  height: 70%;
+  height: 60%;
+  max-height: 200px;
   background-color: #101010;
   border-radius: 10px;
   padding: 10px;
   font-weight: bold;
   font-size: 20px;
   word-break: break-all;
+  overflow-y: auto;
 }

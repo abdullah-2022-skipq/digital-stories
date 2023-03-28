@@ -12,7 +12,8 @@
 
 .avatar {
   border-radius: 50%;
-  object-fit: cover; /*todo*/
+  object-fit: cover;
+  /*todo*/
   border: 3px solid #0077ff;
   margin: 0 20px;
   margin-right: 10px;
@@ -36,4 +37,48 @@
   border: none;
   outline: none;
   cursor: pointer;
+}
+
+/* Small screens */
+@media only screen and (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .navRight {
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .avatar {
+    margin: 0;
+    margin-right: 10px;
+  }
+
+  .logoutButton {
+    margin-left: 10px;
+  }
+}
+
+/* Medium screens */
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+  .navbar {
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .navRight {
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .avatar {
+    margin: 0;
+    margin-right: 10px;
+  }
+
+  .logoutButton {
+    margin-left: 10px;
+  }
 }

@@ -40,7 +40,8 @@
 .avatarImage {
   width: inherit;
   height: inherit;
-  object-fit: fill; /* maintain aspect ratio */
+  object-fit: fill;
+  /* maintain aspect ratio */
 }
 
 .mediaWrapper {
@@ -52,4 +53,48 @@
 
 .mediaWrapperText {
   align-items: center;
+}
+
+/* Media queries for responsiveness */
+
+@media only screen and (max-width: 768px) {
+  .cardList {
+    width: 90%;
+    height: 30%;
+  }
+
+  .mediaWrapper {
+    flex-direction: column;
+  }
+
+  .avatarWrapper {
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .cardList {
+    width: 95%;
+    height: 20%;
+    padding: 10px 10px;
+  }
+
+  .mediaWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .avatarWrapper {
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+  }
+
+  .mediaWrapperText {
+    font-size: 14px;
+  }
 }

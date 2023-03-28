@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   width: 90%;
+  margin: 0 auto;
+  /* center the element horizontally */
 }
 
 .commentList {
@@ -17,4 +19,16 @@
   justify-content: center;
   width: 100%;
   height: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+
+  /* styles for screens smaller than 768px */
+  .commentListWrapper {
+    width: 100%;
+  }
+
+  .commentList {
+    height: 50vh;
+  }
 }

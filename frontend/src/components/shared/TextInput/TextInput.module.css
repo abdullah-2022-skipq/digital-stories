@@ -2,7 +2,7 @@
   background-color: #323232;
   border: none;
   width: 240px;
-  padding: 10px 20px; /* top-bottom left right */
+  padding: 10px 20px;
   color: #bebcc0;
   font-size: 18px;
   border-radius: 10px;
@@ -20,4 +20,15 @@
 .fieldErrorMessage {
   color: #de1b55;
   text-align: left;
+}
+
+@media only screen and (max-width: 600px) {
+  .textInput {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .fieldErrorMessage {
+    font-size: 14px;
+  }
 }

@@ -26,7 +26,8 @@
 }
 
 .avatarImage {
-  object-fit: cover; /* maintain aspect ratio */
+  object-fit: cover;
+  /* maintain aspect ratio */
 }
 
 .username {
@@ -55,4 +56,25 @@
 .numUpVotes {
   color: #33b357;
   font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+
+  /* styles for screens smaller than 768px */
+  .leaderboardCardWrapper {
+    flex-direction: column;
+    padding-left: 0;
+    font-size: 20px;
+    margin: 20px;
+  }
+
+  .dataWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .data {
+    width: 100%;
+    margin-top: 10px;
+  }
 }

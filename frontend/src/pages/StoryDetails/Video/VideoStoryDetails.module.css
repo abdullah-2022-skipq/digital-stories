@@ -8,9 +8,11 @@
 
 .videoWrapper video {
   border-radius: 10px;
-  width: inherit;
+  width: 100%;
+  /* set width to 100% */
   max-width: 500px;
-  height: 300px;
+  height: auto;
+  /* set height to auto */
   display: flex;
   padding: 20px;
   outline: none;

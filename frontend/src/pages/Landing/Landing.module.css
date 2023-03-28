@@ -8,3 +8,10 @@
 .tagLine {
   font-weight: bold;
 }
+
+@media only screen and (max-width: 768px) {
+  .description {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+}

@@ -26,3 +26,26 @@
   margin: 0 5px;
   font-weight: bold;
 }
+
+@media only screen and (max-width: 768px) {
+
+  /* styles for screens smaller than 768px */
+  .engagementCardWrapper {
+    flex-direction: column;
+    padding-left: 0;
+    font-size: 20px;
+    margin: 20px;
+  }
+
+  .srcUser {
+    margin-bottom: 10px;
+  }
+
+  .goalUser {
+    margin-top: 10px;
+  }
+
+  .story {
+    margin: 10px 0;
+  }
+}

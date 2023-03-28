@@ -1,5 +1,6 @@
 .modalMask {
-  position: fixed; /* take full screen */
+  position: fixed;
+  /* take full screen */
   top: 0;
   bottom: 0;
   left: 0;
@@ -11,8 +12,9 @@
 }
 
 .modalBody {
-  width: 50%;
-  max-width: 600px; /* for huge screens*/
+  width: 90%;
+  max-width: 600px;
+  /* for huge screens*/
   background-color: #1d1d1d;
   border-radius: 20px;
   position: relative;
@@ -23,8 +25,25 @@
   padding: 15px 20px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* row wise */
+  align-items: center;
+  /* row wise */
   justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+
+  /* adjust width for medium-sized screens */
+  .modalBody {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+
+  /* adjust width for large screens */
+  .modalBody {
+    width: 50%;
+  }
 }
 
 .heading {
@@ -43,7 +62,8 @@
 
 .avatar {
   border-radius: 50%;
-  object-fit: cover; /*todo*/
+  object-fit: cover;
+  /*todo*/
   border: 5px solid #0077ff;
   margin: 5px 20px;
   margin-right: 10px;

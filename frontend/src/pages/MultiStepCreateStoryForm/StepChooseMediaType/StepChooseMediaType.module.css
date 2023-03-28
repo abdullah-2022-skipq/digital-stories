@@ -5,8 +5,8 @@
   margin: 0 5px;
   align-items: center;
   justify-content: center;
-  margin-top: 20%;
-  margin-bottom: 20%;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 .groupButton {
@@ -29,4 +29,16 @@
 .active {
   background-color: #3a393b;
   color: #0077ff;
+}
+
+@media screen and (max-width: 768px) {
+  .buttonGroup {
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .groupButton {
+    margin: 10px;
+  }
 }

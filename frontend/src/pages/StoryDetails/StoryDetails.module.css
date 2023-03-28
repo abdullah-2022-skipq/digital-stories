@@ -60,7 +60,8 @@
   display: flex;
   padding: 30px;
   font-size: 20px;
-  align-items: center; /* vertical */
+  align-items: center;
+  /* vertical */
   justify-content: space-around;
 }
 
@@ -88,7 +89,8 @@
 }
 
 .avatarImage {
-  object-fit: cover; /* maintain aspect ratio */
+  object-fit: cover;
+  /* maintain aspect ratio */
 }
 
 .storyHeader {
@@ -160,4 +162,32 @@
 .groupButton:hover {
   background-color: #3d3b3e;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .storyWrapper {
+    flex-direction: column;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+    max-width: unset;
+    min-width: unset;
+    margin: 20px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .left {
+    width: 50%;
+    max-width: 50%;
+    min-width: 50%;
+  }
+
+  .right {
+    width: 45%;
+    max-width: 45%;
+    min-width: 45%;
+  }
 }

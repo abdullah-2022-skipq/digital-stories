@@ -64,3 +64,28 @@
   border-radius: 10px;
   margin: 10px 0;
 }
+
+@media only screen and (max-width: 768px) {
+  .videoWrapper {
+    width: 100%;
+  }
+
+  .video {
+    width: 100%;
+    height: auto;
+  }
+
+  .videoPromptHeading {
+    font-size: 22px;
+  }
+
+  .caption {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .caption {
+    width: 100%;
+  }
+}

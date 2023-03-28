@@ -1,205 +1,123 @@
-.storiesHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 50px;
+/* Small devices (phones, 576px and up) */
+@media (min-width: 576px) {
+  .storiesHeader {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+
+  .searchBox {
+    margin-left: 0;
+    margin-right: 0;
+    min-width: unset;
+    width: 100%;
+  }
+
+  .searchInput {
+    font-size: 14px;
+  }
+
+  .searchButton,
+  .createStoryButton {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
 }
 
-.left {
-  display: flex;
-  align-items: center;
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .storiesHeader {
+    flex-direction: row;
+  }
+
+  .left,
+  .right {
+    width: auto;
+    margin-bottom: 0;
+    justify-content: flex-start;
+  }
+
+  .searchBox {
+    margin-left: 20px;
+    margin-right: 20px;
+    min-width: 300px;
+    width: auto;
+  }
+
+  .searchInput {
+    font-size: 18px;
+  }
+
+  .searchButton,
+  .createStoryButton {
+    font-size: 16px;
+    padding: 8px 20px;
+  }
 }
 
-.searchBox {
-  background-color: #262625;
-  margin-left: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3px 10px;
-  min-width: 300px;
-  border-radius: 20px;
+
+/* Small screens */
+@media only screen and (max-width: 600px) {
+
+  .storiesHeader {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .searchBox {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+
+  .right {
+    margin-top: 20px;
+  }
+
+  .storyGrid,
+  .storyList {
+    flex-direction: column;
+  }
+
+  .storyCustomization {
+    margin: 20px 0;
+    justify-content: space-between;
+  }
+
+  .buttonGroup {
+    margin-top: 20px;
+  }
+
 }
 
-.searchBox img {
-  width: 20px;
-  height: 20px;
+/* Medium screens */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+
+  .storiesHeader {
+    margin-top: 30px;
+  }
+
+  .searchBox {
+    min-width: 200px;
+  }
+
 }
 
-.searchInput {
-  background: transparent;
-  outline: none;
-  border: none;
-  color: #bebcc0;
-  padding: 5px 10px;
-  font-size: 18px;
-  width: 100%; /* Take 100% of its parent's width */
-}
+/* Large screens */
+@media only screen and (min-width: 1025px) {
 
-.searchButton {
-  color: #fff;
-  background-color: #0077ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 20px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  margin-left: 5px;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-  border: none;
-  outline: none;
-}
+  .storiesHeader {
+    margin-top: 50px;
+  }
 
-.right {
-  display: flex;
-  align-items: center;
-}
+  .searchBox {
+    min-width: 300px;
+  }
 
-.searchButton:hover,
-.searchButton:disabled {
-  background-color: #014a9c;
-}
-
-.createStoryButton {
-  display: flex;
-  align-items: center;
-  background-color: #20bd5f;
-  padding: 8px 20px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.createStoryButton:hover {
-  background: #1b8445;
-}
-
-.createStoryButton img {
-  width: 20px;
-  height: 20px;
-}
-
-.createStoryButton span {
-  margin-left: 5px;
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-/* grid gives some issues so moving back to flex */
-.storyGrid {
-  margin: 50px 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 50px;
-}
-
-.storyList {
-  margin: 50px 0;
-  display: flex;
-  gap: 50px;
-  flex-direction: column;
-  align-items: center;
-}
-
-.storyCustomization {
-  margin: 20px 20px;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.storyCustomization {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.storyCustomization img {
-  width: 35px;
-  height: 35px;
-  margin: 0 5px;
-  cursor: pointer;
-}
-
-.activeView {
-  background-color: #0077ff;
-  border-radius: 5px;
-}
-
-.paginationWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.paginationWrapper button {
-  margin: 0 5px;
-  background-color: #0077ff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 30px;
-  outline: none;
-  display: flex;
-  align-items: center;
-  margin: 15px auto;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  color: white;
-}
-
-.paginationWrapper button:hover,
-.paginationWrapper button:disabled {
-  background-color: #014a9c;
-  color: #c4c5c5;
-}
-
-.buttonGroup {
-  display: flex;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 0 5px;
-  align-items: center;
-  justify-content: center;
-}
-
-.groupButton {
-  /* https://stackoverflow.com/questions/37386244/what-does-flex-1-mean#:~:text=If%20an%20element%20has%20flex,See%20the%20illustration%20below. */
-  flex: 1;
-  background-color: #2a292a;
-  color: #c4c5c5;
-  border: none;
-  padding: 8px 14px;
-  font-weight: bold;
-  font-size: medium;
-  cursor: pointer;
-}
-
-.groupButton:hover {
-  background-color: #3d3b3e;
-  cursor: pointer;
-}
-
-.sortByActive {
-  background-color: #3a393b;
-  color: #0077ff;
-}
-
-.sortByHeader {
-  margin: 15px 5px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sortByHeader p {
-  margin-right: 10px;
 }

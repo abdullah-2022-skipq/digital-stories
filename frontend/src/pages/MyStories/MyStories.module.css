@@ -1,3 +1,5 @@
+/* Default styles for all screen sizes */
+
 .storyList {
   margin: 50px 0;
   display: flex;
@@ -95,4 +97,130 @@
 
 .sortByHeader p {
   margin-right: 10px;
+}
+
+/* Media queries for smaller screen sizes */
+
+@media only screen and (max-width: 768px) {
+  .storyList {
+    gap: 20px;
+  }
+
+  .storyCustomization {
+    margin: 10px 10px;
+    justify-content: center;
+  }
+
+  .paginationWrapper button {
+    padding: 8px 16px;
+    font-size: 16px;
+  }
+
+  .groupButton {
+    padding: 6px 12px;
+    font-size: small;
+  }
+
+  .sortByHeader {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .storyList {
+    gap: 10px;
+  }
+
+  .storyCustomization {
+    margin: 5px 5px;
+  }
+
+  .paginationWrapper button {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  .groupButton {
+    padding: 6px 10px;
+    font-size: small;
+  }
+
+  .sortByHeader {
+    margin: 10px 5px;
+    font-size: small;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .storyList {
+    gap: 20px;
+  }
+
+  .storyCustomization {
+    margin: 10px 10px;
+  }
+
+  .paginationWrapper button {
+    padding: 8px 16px;
+    font-size: 16px;
+  }
+
+  .groupButton {
+    padding: 8px 12px;
+    font-size: medium;
+  }
+
+  .sortByHeader {
+    margin: 12px 5px;
+    font-size: medium;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .storyList {
+    gap: 30px;
+  }
+
+  .storyCustomization {
+    margin: 15px 15px;
+  }
+
+  .paginationWrapper button {
+    padding: 10px 20px;
+    font-size: 18px;
+  }
+
+  .groupButton {
+    padding: 10px 16px;
+    font-size: large;
+  }
+
+  .sortByHeader {
+    margin: 14px 5px;
+    font-size: large;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .storyList {
+    gap: 40px;
+  }
+
+  .storyCustomization {
+    margin: 20px 20px;
+  }
+
+  .paginationWrapper button {
+    padding: 12px 24px;
+    font-size: 20px;
+  }
+
+  .groupButton {
+    padding: 12px 20px;
+  }
+
+  .sortByHeader {
+    margin: 16px 5px;
+    font-size: x-large;
+  }
 }

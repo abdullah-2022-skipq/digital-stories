@@ -1,2 +1,0 @@
-[] username validity check 
-[] error display based on above

@@ -1,4 +1,13 @@
 .errorWrapper {
   font-weight: bold;
   color: #de1b55;
+  font-size: 18px;
+  padding: 10px;
+}
+
+@media only screen and (max-width: 480px) {
+  .errorWrapper {
+    font-size: 14px;
+    padding: 5px;
+  }
 }

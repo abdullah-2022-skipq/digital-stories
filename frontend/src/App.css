@@ -53,10 +53,14 @@ body {
 }
 
 .container {
-  width: 1200px;
-  max-width: 90%;
+  width: 100%;
+  /* set width to 100% */
+  max-width: 1200px;
+  /* set maximum width */
   /* top-bottom left-right */
   margin: 0 auto;
+  padding: 0 20px;
+  /* add horizontal padding */
 }
 
 .cardWrapper {
@@ -87,4 +91,24 @@ body {
 
 ::-webkit-scrollbar-track {
   background-color: #2a292a;
+}
+
+/* media queries */
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 14px;
+    /* reduce font size for smaller screens */
+  }
+
+  .container {
+    padding: 0 10px;
+    /* reduce horizontal padding for smaller screens */
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  html {
+    font-size: 12px;
+    /* further reduce font size for smallest screens */
+  }
 }

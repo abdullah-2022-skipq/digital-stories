@@ -19,7 +19,8 @@
 .avatarImage {
   height: 98%;
   width: 98%;
-  object-fit: cover; /* maintain aspect ratio */
+  object-fit: cover;
+  /* maintain aspect ratio */
 }
 
 .avatarSelection {
@@ -49,4 +50,68 @@
 .errorWrapper {
   font-weight: bold;
   color: #de1b55;
+}
+
+/* For screens less than or equal to 768px wide */
+@media screen and (max-width: 768px) {
+  .description {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .tagLine {
+    font-size: 24px;
+  }
+
+  .backArrow {
+    margin-bottom: 10px;
+  }
+
+  .avatarPromptHeading {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .avatarWrapper {
+    width: 80px;
+    height: 80px;
+    border-width: 4px;
+    margin-bottom: 10px;
+  }
+
+  .avatarLabelWrapper {
+    font-size: 14px;
+  }
+}
+
+/* For screens greater than 768px wide */
+@media screen and (min-width: 769px) {
+  .description {
+    font-size: 22px;
+    margin-bottom: 30px;
+  }
+
+  .tagLine {
+    font-size: 28px;
+  }
+
+  .backArrow {
+    margin-bottom: 5px;
+  }
+
+  .avatarPromptHeading {
+    font-size: 22px;
+    margin-bottom: 5px;
+  }
+
+  .avatarWrapper {
+    width: 110px;
+    height: 110px;
+    border-width: 6px;
+    margin-bottom: 15px;
+  }
+
+  .avatarLabelWrapper {
+    font-size: medium;
+  }
 }

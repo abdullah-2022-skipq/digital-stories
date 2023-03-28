@@ -1,15 +1,14 @@
 .comment {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 20px;
+  flex-direction: column;
+  gap: 10px;
   margin: 10px;
   border-bottom: 2px solid #5b5b5b;
 }
 
 .commentAvatar {
   border-radius: 50%;
-  object-fit: cover; /*todo*/
+  object-fit: cover;
   border: 3px solid #0077ff;
   min-width: 45px;
   min-height: 45px;
@@ -42,4 +41,22 @@
 .commentText {
   font-size: 18px;
   padding: 5px 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .comment {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .commentAvatar {
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 60px;
+    max-height: 60px;
+  }
+
+  .username {
+    margin-right: 15px;
+  }
 }
